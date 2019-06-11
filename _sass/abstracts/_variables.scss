@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "MuseoSans_300";
+  src: url("/assets/fonts/MuseoSans_300.otf");
+}
+
+$primary: #ef7f24 !default;
+$secondary: #ff6161 !default;
+$border: #ededed !default;
+$primary-light: #f1a668;
+$reverse: #413e3c !default;
+$success: #8fd896 !default;
+$error: #ff6161 !default;
+
+$bg-color: #fff !default;
+$light-bg-color: #f9f9f9;
+$text-color: #514134;
+$heading-color: #373431;
+$link-color: $primary;
+$button-dark: #252322;
+$dark-light: #373431;
+$outline: #dbdbdb;
+$grey: #8d8883;
+
+$font-stack: "MuseoSans_300", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+
+// Breakpoints
+$xs: 0;
+$sm: 36em; //576px
+$md: 48em; //768px
+$lg: 62em; //992px
+$xl: 75em; //1200px
+
+// Code
+$code-bg-color: #faf8f6 !default;
+$code-text-color: #2e2925 !default;
+
+// Borders
+$border-color: #fee5dc !default;

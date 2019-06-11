@@ -1,0 +1,154 @@
+.hero {
+  margin: 3.75rem auto 0;
+  min-height: 16.25rem;
+  width: 100%;
+  position: relative;
+  background-color: #dde5ea;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+
+  @include breakpoint($lg) {
+    margin: 0 auto;
+    height: 36em;
+  }
+
+  &::before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(51, 41, 34, .8);
+  }
+
+  .titleleft {
+
+  }
+}
+
+/* Added by us */
+.hero.nooverlay {
+  &::before {
+    background: none;
+  }
+}
+
+/* Added by us.
+ * Fix image top-cropping when screen is wide. */
+.hero.nooverlay {
+  margin-top: 60px;
+}
+
+.hero--small {
+  margin: 3.75rem auto 0;
+  min-height: 8.75rem;
+  width: 100%;
+  position: relative;
+  background-color: $dark-light;
+
+  @include breakpoint($lg) {
+    height: 12.5em;
+  }
+
+  &::before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(51, 41, 34, .8);
+  }
+}
+
+.hero__wrap {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  max-width: 90%;
+  z-index: 1;
+
+  @include breakpoint($md) {
+    max-width: 40em;
+  }
+
+  .hero__title {
+    font-size: 1.8em;
+    color: $bg-color;
+
+
+    @include breakpoint($md) {
+      padding: 1rem 0;
+      font-size: 2.625em;
+      line-height: 3.125rem;
+    }
+  }
+}
+
+/* Added by us */
+.hero.titleleft {
+  .hero__wrap {
+    //transform: translate(0%, -50%);
+    @include breakpoint($sm) {
+      @include container(540px);
+    }
+  
+    @include breakpoint($md) {
+      @include container(720px);
+    }
+  
+    @include breakpoint($lg) {
+      @include container(960px);
+    }
+  
+    @include breakpoint($xl) {
+      @include container(1170px);
+    }
+
+    padding-left: 20px;
+  }
+  .hero__title {
+    color: black;
+    text-align: left;
+  }
+  p.hero__meta {
+    color: black;
+    text-align: left;
+    max-width: 50%;
+    font-size: 16pt;
+  }
+}
+
+.page-content {
+  max-width: 52.5rem;
+  margin: 0 auto;
+  padding: 2.5em 0;
+
+  @include breakpoint($md) {
+    padding: 3.75rem 0;
+  }
+}
+
+.blog {
+  background-color: #f9f9f9;
+}
+
+.post-list {
+  padding-top: 2.5em;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 0 auto;
+
+  @include breakpoint($md) {
+    padding-top: 5em;
+  }
+}
