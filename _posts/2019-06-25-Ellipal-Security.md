@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Extracting seed from Ellipal wallet
-summary: We found several vulnerabilities in the device. Some of them allow an attacker to re-activate the communication interfaces and to backdoor a device enabling supply chain or evil maid attacks. One of the vulnerabilities was especially critical since it allows an attacker with physical access to extract the seed from the device.
+summary: Ellipal is a hardware wallet based on air-gapped Android device, Our study showed that communication interfaces could be re-enabled
 featured-img: ellipal-wifi
 
 ---
@@ -23,7 +23,7 @@ As stated in Ellipal’s documentation, the device is “air-gapped”, meaning 
 <p align="center">
 <img src="/assets/ellipal/ellipal-interfaces.jpg">
 </p>
-<center> <i>Ellipal - An physically airgaped wallet</i> </center><br/>
+<center> <i>Ellipal - A physically airgaped wallet</i> </center><br/>
 
 
 There is also an upgrade mechanism using an SD card interface. The user has to download the upgrade file and put it on an SD card. The upgrades are encrypted and signed.
