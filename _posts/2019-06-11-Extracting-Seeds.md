@@ -16,4 +16,4 @@ We demonstrated that a physical access to the device would allow an attacker to 
 
 Finally, concerning **HTC Exodus**, we studied an interesting feature consisting in sharing the user seeds into 5 parts. These parts are shared to 5 trusted contacts. The mechanism was supposed to be designed such that the seeds can be reconstructed if and only if 3 parts are gathered. We found a bug allowing an attacker to retrieve the seeds with only one part. This is especially critical, since this attack is remote and can be generalized. All the vulnerabilities we found on HTC Exodus have been fixed by the vendor and our work triggered the creation of their bounty program.
 
-- [Ellipal Security]({% post_url 2019-06-12-Ellipal-Security %})
+- [Ellipal Security]({% post_url 2019-06-25-Ellipal-Security %})
