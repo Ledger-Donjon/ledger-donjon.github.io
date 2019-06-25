@@ -8,23 +8,22 @@ featured-img: ellipal-wifi
 
 # Security Analysis of Ellipal (Hardware) Wallet
 
-
-[The Donjon](https://www.ledger.com/introducing-ledger-donjon/), Ledger’s security team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem.
+[The Donjon]({% post_url 2018-12-11-Introducing-Ledger-Donjon %}), Ledger’s security research team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem.
 
 The Ellipal hardware wallet was one of our evaluation targets. We found this device especially interesting since the security model is quite special.
 
-_TL;DR_
+_TL;DR_: 
 We found several vulnerabilities in the device. Some of them allow an attacker to re-activate the communication interfaces and to backdoor a device enabling supply chain or evil maid attacks.
 One of the vulnerabilities was especially critical since it allows an attacker with physical access to extract the seed from the device.
 This work has been responsibly disclosed to the vendor allowing it to emit an upgrade.
-Ellipal security model
+
+## Ellipal security model
 As stated in Ellipal’s documentation, the device is “air-gapped”, meaning there are no communication interfaces: no USB, no WiFi, no GPRS… The only way for this device to communicate is by using QR codes. It has a touchscreen to display QR codes and a camera to scan them from the user’s phone.
 
 <p align="center">
 <img src="/assets/ellipal/ellipal-interfaces.jpg">
 </p>
 <center> <i>Ellipal - A physically airgaped wallet</i> </center><br/>
-
 
 There is also an upgrade mechanism using an SD card interface. The user has to download the upgrade file and put it on an SD card. The upgrades are encrypted and signed.
 
@@ -70,12 +69,11 @@ This clearly indicates that the file is encrypted in ECB mode which is definitel
 
 The statistics also indicate that the block cipher used is a 64-bits block cipher. It might be a single DES. So, we decided to launch a brute-force attack.
 
-<!--TODO Insert command here-->
+We launched it on a pretty efficient computer with 2x GTX1080. The full search takes around 10 days.
 
-We launched it on a pretty efficient computer with 2x GTX1080. The full search took around 10 days.
+Meanwhile, we received our Ellipal wallet. We quickly played with the software interface and then decided to have a look at the hardware.
 
-Meanwhile, we received our Ellipal wallet. We quickly played with the software interface and then decided to have a look atto the hardware.
-Hardware Study
+## Hardware Security Study
 The Ellipal device is quite similar to a low-end mobile phone. Once the plastic enclosure is opened and the battery has been removed, we can disconnect the buttons and screen and extract the motherboard of the device. The motherboard is a small multilayer PCB on which we can notice two metal passive shields, whose purpose is probably to enhance CEM properties of the electronics. We managed to remove the metal shiels using hot-air soldering station and a scalpel, without damaging the board to keep it functional.
 
 <p align="center">
@@ -210,7 +208,7 @@ Activate the WiFi and backdoor the app so that it sends the private key over the
 
 Supply chain attacks AND evil maid attacks can be implemented with this method. And as no genuineness check mechanism is implemented, it is impossible for users to be sure their device is not backdoored.
 
-## Software
+## Software Security Study
 
 A very quick analysis of the software has been performed.
 
@@ -254,6 +252,6 @@ On this kind of device, the security can be guaranteed only if:
 - The software is well written and flawless: We hope, we could help for this
 - The attacker has no physical access to the device - or a **very strong** password
 
-Consequently, the security model is very similar to [Bitfi wallet](https://cybergibbons.com/category/security-2/bitfi/)
+Consequently, the security model of the device is very similar to [Bitfi wallet](https://cybergibbons.com/category/security-2/bitfi/) one.
 
 
