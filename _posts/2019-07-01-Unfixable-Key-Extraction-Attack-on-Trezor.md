@@ -64,7 +64,7 @@ However, for the sake of transparency, here is a high-level description of the a
 
 <center>
 <iframe width="800" height="450" src="https://www.youtube.com/embed/q8jednQQFx4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br/> Seed extraction <br/>
+<br/> Seed extraction process: Extraktor board (the black box) connected to a laptop <br/>
 </center>
 
 
@@ -88,7 +88,7 @@ For these reasons, a passphrase of about 37 random characters is required to gua
 
 ## Responsible disclosure
 This attack has been disclosed to Trezor in december 2018 and the attack path has been fully explained to the security team. 
-We didn't get any bounty for this responsible disclosure. We obtained 2 other bounties for the [Side Channel Attack]({% post_url 2019-06-17-Breaking-Trezor-One-with-SCA %}) on the PIN verification and the vulnerability on the password manager.
+We didn't get any bounty for this responsible disclosure. We obtained 2 other small bounties for the [Side Channel Attack]({% post_url 2019-06-17-Breaking-Trezor-One-with-SCA %}) on the PIN verification and the vulnerability on the password manager.
 It seems Trezor was already aware that Physical seed extraction would be possible. Consequently, we only demonstrated the feasability.
 
 <p align="center">
