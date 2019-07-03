@@ -99,7 +99,8 @@ The design also embeds a touchscreen
 - eMMC external Flash
 
 Unfortunately, the LCD screen has been a little bit damaged when opening the device, and the “touch” feature was lost. However, this incident did not stop us from digging deeper...
-Finding #1: UART interface
+
+### Finding #1: UART interface
 In the industry, it is common and convenient to have debug UART interface on linux- based boards. We were quite confident that such an interface would be available on the board, and we found two test-points on the bottom layer of the PCB, right under the Mediatek SoC. 
 
 <p align="center">
@@ -252,6 +253,6 @@ On this kind of device, the security can be guaranteed only if:
 - The software is well written and flawless: We hope, we could help for this
 - The attacker has no physical access to the device - or a **very strong** password
 
-Consequently, the security model of the device is very similar to [Bitfi wallet](https://cybergibbons.com/category/security-2/bitfi/) one.
+Consequently, the security model of the device is very similar to the [Bitfi wallet](https://cybergibbons.com/category/security-2/bitfi/) one.
 
 
