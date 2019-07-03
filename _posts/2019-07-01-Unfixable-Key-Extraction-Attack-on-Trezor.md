@@ -12,7 +12,7 @@ Unfortunately, **this vulnerability cannot be patched** and, for this reason, we
 
 
 # Context
-The Donjon, Ledger’s security team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem. This blogpost is part of a series - cf [Extracting seeds]({% post_url 2019-06-11-Extracting-Seeds %})
+The Donjon, Ledger’s security team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem. This blogpost is part of a series - cf [Extracting seeds]({% post_url 2019-06-11-Extracting-Seeds %}).
 
 
 The Trezor-based hardware wallets were part of our evaluation targets. We found these devices to be especially interesting since **the firmware is open source**. The chip itself is **closed source as well as the low-level functions hidden in the flash**. 
