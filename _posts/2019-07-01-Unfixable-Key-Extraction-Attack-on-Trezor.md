@@ -12,7 +12,7 @@ Unfortunately, **this vulnerability cannot be patched** and, for this reason, we
 
 
 # Context
-The Donjon, Ledger’s security team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem. This blogpost is part of a series - cf [Extracting seeds]({% post_url 2019-06-11-Extracting-Seeds %})
+The Donjon, Ledger’s security team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem. This blogpost is part of a series - cf [Extracting seeds]({% post_url 2019-06-11-Extracting-Seeds %}).
 
 
 The Trezor-based hardware wallets were part of our evaluation targets. We found these devices to be especially interesting since **the firmware is open source**. The chip itself is **closed source as well as the low-level functions hidden in the flash**. 
@@ -87,9 +87,9 @@ Consequently the whole security relies on the passphrase. The mnemonics + passph
 For these reasons, a passphrase of about 37 random characters is required to guarantee the same security level as the 24 words seed.
 
 ## Responsible disclosure
-This attack has been disclosed to Trezor in december 2018 and the attack path has been fully explained to the security team. 
+This attack has been disclosed to Trezor in December 2018 and the attack path has been fully explained to the security team. 
 We didn't get any bounty for this responsible disclosure. We obtained 2 other small bounties for the [Side Channel Attack]({% post_url 2019-06-17-Breaking-Trezor-One-with-SCA %}) on the PIN verification and the vulnerability on the password manager.
-It seems Trezor was already aware that Physical seed extraction would be possible. Consequently, we only demonstrated the feasability.
+It seems Trezor was already aware that Physical seed extraction would be possible. Consequently, we only demonstrated the feasibility.
 
 <p align="center">
 <img src="/assets/trezor-extract/thankledger.png" >
