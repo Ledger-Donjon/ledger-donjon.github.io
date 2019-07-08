@@ -80,9 +80,9 @@ From our understanding, **there’s no way to patch it**, there is only one miti
 Consequently the whole security relies on the passphrase. The mnemonics + passphrase derivation follows the BIP39 standard. BIP39 uses PBKDF2 function to derive the mnemonics + passphrase into the seed.
 
 - PBKDF2 is a useful function allowing to derive a low-entropy password into a larger cryptographic key. The lack of entropy is balanced by a CPU intensive derivation function preventing brute-force.
-- The main problem in BIP39 is that the number of iterations is set to **only 2048**, which is far lower than the last NIST recommendation (from 2016) **which is 10.000** (https://pages.nist.gov/800-63-3/sp800-63b.html#sec5).
+- The main problem in BIP39 is that the number of iterations is set to **only 2048**, which is far lower than the last NIST recommendation (from 2016) **which is 10.000** ([NIST recommendation]("https://pages.nist.gov/800-63-3/sp800-63b.html#sec5")).
 - When the mnemonics are well-generated and can be kept secret, they represent 256-bits, consequently, the mere 2048 iterations are not a problem.
-- **In this case, where the 24-words can be considered to be public**, the mere 2048 iterations become a problem and brute-force is then possible (such attacks https://eprint.iacr.org/2016/273.pdf are then possible).
+- **In this case, where the 24-words can be considered to be public**, the mere 2048 iterations become a problem and brute-force is then possible ([such attacks]("https://eprint.iacr.org/2016/273.pdf are then possible")).
 
 For these reasons, a passphrase of about 37 random characters is required to guarantee the same security level as the 24 words seed.
 
