@@ -6,7 +6,6 @@ featured-img: ellipal-wifi
 
 ---
 
-**Edited on the 2019-07-11 after discussion with Ellipal**
 
 # Security Analysis of Ellipal (Hardware) Wallet
 
@@ -74,6 +73,7 @@ The statistics also indicate that the block cipher used is a 64-bits block ciphe
 We launched it on a pretty efficient computer with 2x GTX1080. The full search takes around 10 days.
 
 **Edited on the 2019-07-11 after discussion with Ellipal**
+
 <i> Ellipal acknowledge ECB mode is not the correct way to encrypt and told us that Integrity is more important than confidentiality for this specific mechanism </i>
 
 Meanwhile, we received our Ellipal wallet. We quickly played with the software interface and then decided to have a look at the hardware.
@@ -250,7 +250,8 @@ They finally gave us a bounty reward. We were happy to help improving the securi
 </p>
 <center> <i>Misleading security properties</i> </center><br/>
 
-* Edited on the 2019-07-11 after discussion with Ellipal *
+**Edited on the 2019-07-11 after discussion with Ellipal**
+
 <i> This image has been removed from Ellipal blogpost - they acknowledged it was inaccurate marketing materials </i>
 
 
@@ -268,10 +269,11 @@ Consequently, the security model of the device is very similar to the [Bitfi wal
 
 
 **Edited on the 2019-07-11 after discussion with Ellipal**
-<i> Ellipal recommandations are the following: 
-1) Upgrade to firmware V2 
-2) Prevent physical access to the device
-3) Use a long password
-</i>
+
+<i> Ellipal recommandations are the following: <br/>
+1) Upgrade to firmware V2 <br/>
+2) Prevent physical access to the device <br/>
+3) Use a long password <br/>
+</i> <br/>
 From our side, we didn't check the version 2. Preventing the physical access drastically reduces the attack surface while it's quite difficult to guarantee. Finally a *very* long password must be implemented especially since the password derivation is not very resource consuming. 
 
