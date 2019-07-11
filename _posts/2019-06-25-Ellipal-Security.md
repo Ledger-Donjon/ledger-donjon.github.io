@@ -6,6 +6,8 @@ featured-img: ellipal-wifi
 
 ---
 
+* Edited on the 2019-07-11 after discussion with Ellipal *
+
 # Security Analysis of Ellipal (Hardware) Wallet
 
 [The Donjon]({% post_url 2018-12-11-Introducing-Ledger-Donjon %}), Ledger’s security research team, recently spent some time and resources to analyse the security of hardware wallets. Our goal is to raise the bar for security in the ecosystem.
@@ -71,7 +73,13 @@ The statistics also indicate that the block cipher used is a 64-bits block ciphe
 
 We launched it on a pretty efficient computer with 2x GTX1080. The full search takes around 10 days.
 
+* Edited on the 2019-07-11 after discussion with Ellipal *
+<i> Ellipal acknowledge ECB mode is not the correct way to encrypt and told us that Integrity is more important than confidentiality for this specific mechanism </i>
+
 Meanwhile, we received our Ellipal wallet. We quickly played with the software interface and then decided to have a look at the hardware.
+
+
+
 
 ## Hardware Security Study
 The Ellipal device is quite similar to a low-end mobile phone. Once the plastic enclosure is opened and the battery has been removed, we can disconnect the buttons and screen and extract the motherboard of the device. The motherboard is a small multilayer PCB on which we can notice two metal passive shields, whose purpose is probably to enhance CEM properties of the electronics. We managed to remove the metal shiels using hot-air soldering station and a scalpel, without damaging the board to keep it functional.
@@ -242,6 +250,9 @@ They finally gave us a bounty reward. We were happy to help improving the securi
 </p>
 <center> <i>Misleading security properties</i> </center><br/>
 
+* Edited on the 2019-07-11 after discussion with Ellipal *
+<i> This image has been removed from Ellipal blogpost - they acknowledged it was inaccurate marketing materials </i>
+
 
 ## Summary
 
@@ -255,4 +266,12 @@ On this kind of device, the security can be guaranteed only if:
 
 Consequently, the security model of the device is very similar to the [Bitfi wallet](https://cybergibbons.com/category/security-2/bitfi/) one.
 
+
+* Edited on the 2019-07-11 after discussion with Ellipal *
+<i> Ellipal recommandations are the following: 
+1) Upgrade to firmware V2 
+2) Prevent physical access to the device
+3) Use a long password
+</i>
+From our side, we didn't check the version 2. Preventing the physical access drastically reduces the attack surface while it's quite difficult to guarantee. Finally a *very* long password must be implemented especially since the password derivation is not very resource consuming. 
 
