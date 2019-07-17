@@ -283,7 +283,9 @@ Let's write down the equations of the *shares* $(1, P(1)), (x, P(x)), (x+1, P(x+
 The first two *shares*  $P(1)$ and $P(x)$ are:
 
 \begin{eqnarray}
-P(1) &=& a_{0,2} + a_{0,1} + a_{0,0} || a_{1,2} + a_{1,1} + a_{1,0} || \ldots || a_{31,2} + a_{31,1} + a_{31,0} \\ 
+P(1) &=& a_{0,2} + a_{0,1} + a_{0,0} || a_{1,2} + a_{1,1} + a_{1,0} || \ldots || a_{31,2} + a_{31,1} + a_{31,0}
+\end{eqnarray}
+\begin{eqnarray}
 P(x) &=& a_{0,2}x^2 + a_{0,1}x + a_{0,0} || a_{1,2}x^2 + a_{1,1}x + a_{1,0} || \ldots || a_{31,2}x^2 + a_{31,1}x + a_{31,0}
 \end{eqnarray}
 
