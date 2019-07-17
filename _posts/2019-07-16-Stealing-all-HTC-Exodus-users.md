@@ -17,7 +17,7 @@ In 2018 HTC launched [EXODUS 1](https://www.htcexodus.com/), its first blockchai
 This ensures an attacker, even with root privileges, does not have access to the master seed - itâ€™s encrypted within the enclave.
 
 <p align="center">
-<img src = "/assets/htc-exodus/exodus1.jpg">
+<img src="/assets/htc-exodus/exodus1.jpg?cache=new">
 <br/>
 Fig. 1: HTC EXODUS 1 device
 </p>
@@ -42,7 +42,7 @@ But keeping this paper sheet safe is not an easy task, and some dedicated device
 
 
 <p align="center">
-<img src = "/assets/htc-exodus/cryptosteel.png">
+<img src="/assets/htc-exodus/cryptosteel.png?cache=new">
 <br/>
 Fig. 2: Cryptosteel - device to backup a seed
 </p>
@@ -51,7 +51,7 @@ An alternative solution could be to own a backup Hardware Wallet, initialized wi
 However, there is no perfect solution that would address all the problems.
 
 <p align="center">
-<img src = "/assets/htc-exodus/ledger-recovery-sheet.png">
+<img src="/assets/htc-exodus/ledger-recovery-sheet.png?cache=new">
 <br/>
 Fig. 3: Ledger Recovery Sheet
 </p>
@@ -59,7 +59,7 @@ Fig. 3: Ledger Recovery Sheet
 
 
 <p align="center">
-<img src="/assets/htc-exodus/gridplus.png">
+<img src="/assets/htc-exodus/gridplus.png?cache=new">
 <br/>
 Fig. 4: The recovery sheet storage in practice
 </p>
@@ -69,7 +69,7 @@ HTC EXODUS 1 comes with its own backup mechanism: Social Key Recovery. The userâ
 HTC Hardware Wallet takes the form of an Android application named Zion, along with a trustlet (a secured application which is executed within the smartphone _secure OS_) which stores the seed and performs sensitive operations (Fig. 5). The secret sharing is also computed within the trustlet: in the following, the studied mechanism is implemented in the _secure OS_.
 
 <p align="center">
-<img src = "/assets/htc-exodus/architecture.svg">
+<img src="/assets/htc-exodus/architecture.svg?cache=new">
 <br/>
 Fig. 5: Zion - Architecture overview 
 </p>
@@ -205,7 +205,7 @@ Here is how to generate $s_j, 0 \le i < n$ allowing to reconstruct $S$ from $k$ 
 During the first step, the $S$ interpretation into 32 elements in $\textrm{GF}(2^8)$ is performed by the `bitslice` function (Fig. 6), which can be considered as a transposition of a 32x8 matrix of elements in $\textrm{GF}(2)$. The first bits of each secret byte correspond to the first 32 bits of the bitsliced value, and so on.
 
 <p align="center">
-<img src="/assets/htc-exodus/bitslice.png">
+<img src="/assets/htc-exodus/bitslice.png?cache=new">
 <br/>
 Fig. 6: The bitslice function
 </p>
