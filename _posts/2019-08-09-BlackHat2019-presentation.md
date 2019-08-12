@@ -69,7 +69,7 @@ Indeed, the whole flash memory can be accessed thanks to some of the OS primitiv
 
 <center>
   <video width="640" controls="controls">
-    <source src="assets/hsm_bh2019/02-key-extraction.mp4" type="video/mp4">
+    <source src="/assets/hsm_bh2019/02-key-extraction.mp4" type="video/mp4">
   </video>
 </center>
 
