@@ -4,7 +4,7 @@ author: CharlesLedger
 description: > # Meta description of Homepage
    The whispers from the Donjon of Ledger. The latest news about security research at Ledger.
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://ledger-donjon.github.io"
+url: "https://ledger-donjon.github.io/"
 
 # SEO PLUGIN
 social:
