@@ -7,7 +7,7 @@ featured-img: hsm_bh19
 
 # Everybody be Cool, This is a Robbery!
 
-The Ledger Donjon spends significant time and effort to assess the security of every piece of Ledger technology — along with our industry’s. During a recent security audit we uncovered vulnerabilities in a vendor’s Hardware Security Module (HSM). Jean-Baptiste Bédrune and Gabriel Campana gave a talk at Black Hat USA 2019 about HSMs security. The [slides](http://i.blackhat.com/USA-19/Thursday/us-19-Campana-Everybody-Be-Cool-This-Is-A-Robbery.pdf) are already online and this blog post aims at providing a technical summary to impatient readers before the release of the talk video.
+The Ledger Donjon spends significant time and effort to assess the security of every piece of Ledger technology — along with our industry’s. During a recent security audit we uncovered vulnerabilities in a vendor’s Hardware Security Module (HSM). Jean-Baptiste Bédrune and Gabriel Campana gave a talk at Black Hat USA 2019 about HSMs security. The [slides](https://i.blackhat.com/USA-19/Thursday/us-19-Campana-Everybody-Be-Cool-This-Is-A-Robbery.pdf) are already online and this blog post aims at providing a technical summary to impatient readers before the release of the talk video.
 
 ## Takeaway
 
