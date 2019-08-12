@@ -69,7 +69,7 @@ Indeed, the whole flash memory can be accessed thanks to some of the OS primitiv
 
 <center>
   <video width="640" controls="controls">
-    <source src="/assets/hsm_bh2019/02-key-extraction.mp4" type="video/mp4">
+    <source src="/assets/hsm_bh2019/02-key-extraction.webm" type="video/webm">
   </video>
 </center>
 
@@ -83,7 +83,7 @@ The implant hooks the mechanism update to let the backdoor survive across reboot
 
 <center>
   <video width="640" controls="controls">
-    <source src="/assets/hsm_bh2019/03-random-backdoor.mp4" type="video/mp4">
+    <source src="/assets/hsm_bh2019/03-random-backdoor.webm" type="video/webm">
   </video>
 </center>
 
