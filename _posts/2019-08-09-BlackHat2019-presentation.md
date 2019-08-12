@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Everybody be Cool, This is a Robbery!
-summary: Summary of the HSM vulnerabilities exposed at BlackHat2019
+summary: Summary of the HSM vulnerabilities exposed at Black Hat 2019
+description: Summary of the HSM vulnerabilities exposed at Black Hat 2019
 featured-img: hsm_bh19 
 ---
 
