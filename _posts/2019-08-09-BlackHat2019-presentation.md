@@ -67,8 +67,11 @@ We developed a few proof-of-concept, highlighted by demos, to show that once cod
 
 Indeed, the whole flash memory can be accessed thanks to some of the OS primitives. This can be used to extract the data and also backdoor the system. All objects attributes marked as sensitive are encrypted with a single key, stored in a physical component of the HSM. The ability to execute code on the HSM allows to retrieve that key and also to dump the whole flash memory. The filesystem can then be reconstructed offline and the secrets decrypted with the encryption key.
 
-[key-extraction](/assets/hsm_bh2019/02-key-extraction.mp4)
-<!-- TODO: insert key-extraction.mp4 -->
+<center>
+  <video width="640" controls="controls">
+    <source src="assets/hsm_bh2019/02-key-extraction.mp4" type="video/mp4">
+  </video>
+</center>
 
 ### Firmware signature bypass
 
@@ -78,8 +81,11 @@ With the firmware signature bypass (or a write access to the filesystem thanks t
 
 The implant hooks the mechanism update to let the backdoor survive across reboot; and some of the PKCS #11 mechanisms are modified to compromise the random generator. The authentication mechanism could also have been modified to allow further access to the HSM without valid credentials.
 
-[backdoor](/assets/hsm_bh2019/03-random-backdoor.mp4)
-<!-- TODO: insert random-backdoor.mp4 -->
+<center>
+  <video width="640" controls="controls">
+    <source src="/assets/hsm_bh2019/03-random-backdoor.mp4" type="video/mp4">
+  </video>
+</center>
 
 ### Conclusion
 
