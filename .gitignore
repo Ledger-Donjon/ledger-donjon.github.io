@@ -19,6 +19,7 @@ maps
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.swp
 
 # SASS #
 ########
