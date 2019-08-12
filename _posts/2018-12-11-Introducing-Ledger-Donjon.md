@@ -2,6 +2,7 @@
 layout: post
 title: Introducing Ledger Donjon
 summary: A very high level description of Ledger Donjon - the security research at Ledger.
+description: A very high level description of Ledger Donjon - the security research at Ledger.
 featured-img: intro-donjon
 ---
 

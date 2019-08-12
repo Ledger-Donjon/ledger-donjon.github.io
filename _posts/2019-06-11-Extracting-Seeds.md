@@ -2,6 +2,7 @@
 layout: post
 title: Extracting seeds from Wallets
 summary: An executive summary of the Donjon findings during the research.
+description: An executive summary of the Donjon findings during the research.
 featured-img: seed-extract
 ---
 
