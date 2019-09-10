@@ -2,7 +2,7 @@
 layout: post
 title: Ledger's CTF 2018 and side-channels 
 summary: Solving Ledger's whitebox challenge with Side-Channel attacks
-description: Summary of the HSM vulnerabilities exposed at Black Hat 2019
+description: Solving Ledger's whitebox challenge with Side-Channel attacks 
 featured-img: unicorn
 ---
 
