@@ -49,7 +49,7 @@ Great! That means we can just fetch the sboxes (which hold a keybyte each) withi
 The only important information we need to start off can be seen from the AES output and comparison part, as well as the input scanning.
 
 <p align="center">
-<img src="assets/ctf2rainbow/input.png">
+<img src="/assets/ctf2rainbow/input.png">
 </p>
 
 In the image above, we can see `strtol` being called on a byte that comes from user input (the hexadecimal string argument) and copied 15 times in 15 different buffers. Why 15?
