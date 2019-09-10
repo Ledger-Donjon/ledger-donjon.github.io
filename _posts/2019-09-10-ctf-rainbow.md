@@ -5,7 +5,6 @@ summary: Solving Ledger's whitebox challenge with Side-Channel attacks
 description: Summary of the HSM vulnerabilities exposed at Black Hat 2019
 featured-img: unicorn
 ---
-_(Image : unicorn logo from [www.unicorn-engine.com]())_
 
 # Solving Ledger's CTF2 with Side-Channel attacks
 
