@@ -160,7 +160,7 @@ e.start(0x10ba, 0)
 
 This executes until the end of the program and will print `"**** Login Failed *********"` if we hook `puts`. Below is a very simple version:
 
-```
+```python
 def pyputs(emu):
   src = emu['rdi']
   i = 0
