@@ -5,7 +5,6 @@ summary: Solving Ledger's whitebox challenge with Side-Channel attacks
 description: Solving Ledger's whitebox challenge with Side-Channel attacks 
 featured-img: unicorn
 ---
-_(image: Big_Ryan on [getty](https://www.gettyimages.fr/detail/illustration/unicorn-illustration-libre-de-droits/165601541?et=9EGjhhr4RuFdkmti8QJL9w&referrer=https%3A%2F%2Fwww.gettyimages.fr%2F))_
 
 # Solving Ledger's CTF2 with Side-Channel attacks
 
