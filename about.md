@@ -18,6 +18,6 @@ The Donjon fields of expertise are quite wide:
 - Cryptography
 
 The Donjon also believes in open-source. It open-sources most of its internal attack tools. 
-[Github Donjon](https://github.com/ledger-donjon)
+[GitHub Donjon](https://github.com/ledger-donjon)
 Pull requests are welcome.
 
