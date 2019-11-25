@@ -17,7 +17,7 @@ social:
 navigation: # Navigation links
   - {name: 'Blog', link: '/'}
   - {name: 'Bounty', link: '/bounty'}
-  - {name: 'Bulletins', link: '/lsb'}
+  - {name: 'Security Bulletins', link: '/lsb'}
   - {name: 'About', link: '/about'}
   - {name: 'Contact', link: '/contact'}
 
