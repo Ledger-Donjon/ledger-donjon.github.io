@@ -4,6 +4,13 @@ title: Ledger Security Bulletins
 permalink: /lsb/
 ---
 
+Ledger believes in better security through openness. The Ledger Security
+Bulletins describe technical details of past security issues, their potential
+impact and available patches or workaround.
+
+If you believe that you have discovered a vulnerability, please report it
+through the [bug bounty program](/bounty/).
+
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
 | 2019-08-07 | [LSB 006: OLED screen side-channel vulnerability](006)          |
