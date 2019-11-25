@@ -15,9 +15,10 @@ social:
 
 # THEME SETTINGS
 navigation: # Navigation links
-  - {name: 'Home', link: '/'}
-  - {name: 'About', link: '/about'}
+  - {name: 'Blog', link: '/'}
   - {name: 'Bounty', link: '/bounty'}
+  - {name: 'Bulletins', link: '/lsb'}
+  - {name: 'About', link: '/about'}
   - {name: 'Contact', link: '/contact'}
 
 tagline: >
