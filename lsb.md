@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2019-10-04 | [LSB 007: Monero private key retrieval](007)                    |
 | 2019-08-07 | [LSB 006: OLED screen side-channel vulnerability](006)          |
 | 2018-12-27 | [LSB 005: MCU bootloader verification bypass](005)              |
 | 2018-11-28 | [LSB 004: Bitcoin change address injection](004)                |
