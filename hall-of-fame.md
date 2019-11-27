@@ -10,6 +10,7 @@ program:
 
 ### 2019
 
+- Peter Perešíni from [Vacuumlabs](https://vacuumlabs.com/)
 - Christian Reitter
 
 ### 2018
