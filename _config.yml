@@ -19,6 +19,7 @@ navigation: # Navigation links
   - {name: 'Bounty', link: '/bounty'}
   - {name: 'Security Bulletins', link: '/lsb'}
   - {name: 'About', link: '/about'}
+  - {name: 'Tech', link: 'https://ledgerhq.github.io'}
   - {name: 'Contact', link: '/contact'}
 
 tagline: >
