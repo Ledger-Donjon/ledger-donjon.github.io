@@ -4,7 +4,7 @@ title: Funds are SSSAFU - Stealing the funds of all HTC EXODUS 1 users
 summary: How a bad implementation of Shamir Secret Sharing allows to steal all the cryptocurrencies stored on a HTC EXODUS 1 phone.
 description: How a bad implementation of Shamir Secret Sharing allows to steal all the cryptocurrencies stored on a HTC EXODUS 1 phone.
 featured-img: htc-ssafu
-
+author: Jean-Baptiste Bédrune
 ---
 
 _TL;DR_: HTC EXODUS 1 phones come with an integrated hardware wallet. This wallet allows to backup its [master seed](https://bitcoin.org/en/glossary/hd-wallet-seed) by splitting it and sending it to "trusted contacts".

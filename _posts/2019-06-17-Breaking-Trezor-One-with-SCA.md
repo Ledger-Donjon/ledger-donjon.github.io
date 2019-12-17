@@ -4,7 +4,7 @@ title: Breaking Trezor One with Side Channel Attacks
 summary: A Side Channel Attack on PIN verification allows an attacker with a stolen Trezor One to retrieve the correct value of the PIN within a few minutes.
 description: A Side Channel Attack on PIN verification allows an attacker with a stolen Trezor One to retrieve the correct value of the PIN within a few minutes.
 featured-img: segascope
-
+author: Charles Guillemet, Manuel San Pedro, Victor Servant
 ---
 
 ## TL;DR

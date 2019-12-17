@@ -4,6 +4,7 @@ title: Unfixable Seed Extraction on Trezor - A practical and reliable attack
 summary: An attacker with a stolen device can extract the seed from the device. It takes less than 5 minutes and the necessary materials cost around 100$.
 description: An attacker with a stolen device can extract the seed from the device. It takes less than 5 minutes and the necessary materials cost around 100$.
 featured-img: trezor-cover
+author: Karim Abdellatif, Charles Guillemet, Olivier Hériveaux
 ---
 
 # TL;DR

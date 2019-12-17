@@ -4,6 +4,7 @@ title: Ledger's CTF 2018 and side-channels
 summary: Solving Ledger's whitebox challenge with Side-Channel attacks
 description: Solving Ledger's whitebox challenge with Side-Channel attacks 
 featured-img: unicorn
+author: Victor Servant
 ---
 
 # Solving Ledger's CTF2 with Side-Channel attacks

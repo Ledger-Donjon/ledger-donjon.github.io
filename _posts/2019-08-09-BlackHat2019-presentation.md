@@ -4,6 +4,7 @@ title: Everybody be Cool, This is a Robbery!
 summary: Summary of the HSM vulnerabilities exposed at Black Hat 2019
 description: Summary of the HSM vulnerabilities exposed at Black Hat 2019
 featured-img: hsm_bh19 
+author: Jean-Baptiste Bédrune, Gabriel Campana
 ---
 
 # Everybody be Cool, This is a Robbery!

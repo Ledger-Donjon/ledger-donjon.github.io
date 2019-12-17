@@ -4,7 +4,7 @@ title: Extracting seed from Ellipal wallet
 summary: Ellipal is a hardware wallet based on air-gapped Android device, Our study showed that communication interfaces could be re-enabled
 description: Ellipal is a hardware wallet based on air-gapped Android device, Our study showed that communication interfaces could be re-enabled
 featured-img: ellipal-wifi
-
+author: Charles Guillemet, Olivier Hériveaux
 ---
 
 
