@@ -52,6 +52,11 @@ layout: compress
             {% endif %} read
         </span>
       </p>
+      {% if page.author %}
+      <p class="hero__meta">
+        <span>By {% page.author %}</span>
+      </p>
+      {% endif %}
     </div>
   </div>
 

@@ -4,6 +4,7 @@ title: Introducing Ledger Donjon
 summary: A very high level description of Ledger Donjon - the security research at Ledger.
 description: A very high level description of Ledger Donjon - the security research at Ledger.
 featured-img: intro-donjon
+author: Charles Guillemet
 ---
 
 At Ledger, we believe in true security. Security is not a term that we take lightly. To build secure systems, it is necessary to use secure hardware bricks and implement a secure Operating System (OS) on top of these. Even with the best security coding practices and secure hardware, nothing beats an attack-oriented mindset when it comes to assessing security.
