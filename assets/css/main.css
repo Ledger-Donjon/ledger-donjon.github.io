@@ -610,6 +610,24 @@ pre {
   padding: .938rem 0;
   border-top: 1px solid #ededed; }
 
+.header__link_out {
+  padding: .938rem 0;
+  border-top: 1px solid #ededed; }
+
+.header__link_out, .header__link_out:focus {
+  padding: 1rem;
+  background: #f1a668;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin: auto;
+  margin-left: 20px;
+  height: 40px; }
+
+.header__link_out:hover {
+  color: white;
+  background: #ef7f24; }
+
 .header__toggle {
   display: flex;
   flex-direction: column;
