@@ -118,7 +118,7 @@ To be eligible for a reward, you must not:
 
 ## Hall of Fame
 
-In mutual consultation, we can, if you desire, display a researcher’s name or its pseudonym as the discoverer of the reported vulnerability on our website’s [Hall of Fame](/hall-of-fame/).
+In mutual consultation, we can, if you desire, display a researcher’s name or its pseudonym as the discoverer of the reported vulnerability on our website’s [Hall of Fame](/hall-of-fame/). Please note that the Hall of Fame is dedicated to the Devices Bug Bounty Program.
 
 
 *This is an experimental and discretionary rewards program. We may modify the terms of this program or terminate this program at any time without notice.*
