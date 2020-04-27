@@ -4,9 +4,8 @@ title: Bug Bounty Hall of Fame
 permalink: /hall-of-fame/
 ---
 
-Ledger thanks the following security researchers (in alphabetical order) for
-having contributed to the security of Ledger products through the Devices Bug
-Bounty program:
+Ledger thanks the following security researchers for having contributed to the
+security of Ledger products through the Devices Bug Bounty program:
 
 ### 2020
 
