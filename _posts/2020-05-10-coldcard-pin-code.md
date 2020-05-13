@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Hard times for Coldcard Mk2 PIN code
+title: Coldcard Mk2 PIN code recovery
 summary: How the Donjon performed a PIN code recovery on a Coldcard Mk2 wallet.
 description: How the Donjon performed a PIN code recovery on a Coldcard Mk2 wallet.
 featured-img: coldcard-pin-code
 author: Olivier Hériveaux
 ---
 
-# Hard times for Coldcard Mk2 PIN code
+# Coldcard Mk2 PIN code recovery
 
 ## Introduction
 
@@ -208,9 +208,9 @@ SHA256( SHA256( pairing_secret + 0h58184d33 + PIN ) )
 ```
 The pairing secret is 32 bytes long. This is the content of the ATECC508A data slot #1 and is shared secretly with the MCU. This secret is different for every Coldcard device. It is generated during the first boot of the wallet and locked definitively.
 
-5. The microcontroller then calls the “CheckMac” command to verify if the hash matches the content of the slot #3 (PIN1). If the hash matches, the PIN is correct and the new value of the monotonic counter is copied in the data slot #5 (Lastgood1) - this resets the number of invalid attempt to zero.
+5. The microcontroller then calls the “CheckMac” command to prove to the secure memory knowledge of the slot #3 (PIN1). This is done by hashing (one more time) the content of the slot #3 together with picked nonces to prevent replay attacks. If the verification succeeds, the secure memory will unlock further use of the key #3, which is required for accessing the slot #9 in the next step. Also, if the PIN is correct, the new value of the monotonic counter is copied in the data slot #5 (Lastgood1) - this resets the number of invalid attempt to zero.
 
-6. Finally, the microcontroller reads the data slot #9 (Secret1) and decrypts the data returned by the secure memory using the hash as key.
+6. Finally, the microcontroller reads the data slot #9 (Secret1) and decrypts the data returned by the secure memory using the hash as key (key #3).
 
 ## Breaking the Secure Memory
 
