@@ -202,7 +202,7 @@ The ATECC508A secure memory only supports cryptography on the secp256r1 curve. I
 
 3. The monotonic counter corresponding to the PIN1 is incremented. Note that decrementing this counter is not possible: this is guaranteed by the secure memory itself.
 
-4. Hash the PIN entered by the user together with the pairing secret : if the PIN is correct, this should match the content of the data slot #3. The content of the slot #3 is the following:
+4. Hash the PIN entered by the user together with the pairing secret: if the PIN is correct, this should match the content of the data slot #3. The content of the slot #3 is the following:
 ```
 SHA256( SHA256( pairing_secret + 0h58184d33 + PIN ) )
 ```
@@ -240,7 +240,7 @@ From left to right: 1. Scaffold board (red) under the laser microscope. 2. High-
 <i>Scaffold daughterboard PCB for ATECC508A</i>
 </center><br/>
 
-Both Pairing and PIN1 data slots meet the configuration requirements for being eligible to the vulnerability of the ATECC508A. Retrieving the content of those two data slots gives two options :
+Both Pairing and PIN1 data slots meet the configuration requirements for being eligible to the vulnerability of the ATECC508A. Retrieving the content of those two data slots gives two options:
 
 1. Run an offline bruteforce: try to hash each possible PIN combination until the content of the dataslot #3 is matched: this gives the user PIN which can then be entered in the wallet interface after soldering the secure memory back to the wallet PCB. This gives access to the funds, but not the seed though.
 
@@ -258,7 +258,7 @@ Hence, brute-force mitigation still relies on the STM32L4 microcontroller, which
 
 ## New mitigations
 
-This work was conducted on the Mk2 revision of the wallet, which is no more available. Coinkite recently released the new Mk3 version, which fixes the issues mentioned :
+This work was conducted on the Mk2 revision of the wallet, which is no more available. Coinkite recently released the new Mk3 version, which fixes the issues mentioned:
 
 - The ATECC508A secure memory has been replaced by the ATECC608A, an hardened version of this chip which has also many new features. Our single Fault Injection Attack does not apply to this new product.
 
