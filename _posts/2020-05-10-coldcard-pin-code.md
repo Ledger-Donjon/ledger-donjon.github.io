@@ -24,7 +24,7 @@ The Coldcard wallet runs its operating system on a STM32 microcontroller. It has
 <i>Coldcard hardware wallet</i>
 </center><br/>
 
-Recent research publications showed STM32F microcontrollers are vulnerable to hardware attacks, usually allowing recovering all the content of their Flash memory [1] [2] [3]. Therefore, storing the secret seed in the Flash memory of the microcontroller is highly discouraged, unless a strong passphrase is enabled and encrypts the seed. Protecting the seed behind PIN code authentication, Coinkite chose to store the sensitive data of the wallet inside a secure memory - the [ATECC508 from Microchip](https://www.microchip.com/wwwproducts/en/ATECC508A) - which is paired to the main microcontroller. The secure memory grants access to the seed once pairing is checked and knowledge of the PIN code is proven. This wallet design is stronger than wallets relying only on the vulnerable STM32F readout protection.
+Recent research publications showed STM32F microcontrollers are vulnerable to hardware attacks, usually allowing recovering all the content of their Flash memory [^1] [^2] [^3]. Therefore, storing the secret seed in the Flash memory of the microcontroller is highly discouraged, unless a strong passphrase is enabled and encrypts the seed. Protecting the seed behind PIN code authentication, Coinkite chose to store the sensitive data of the wallet inside a secure memory - the [ATECC508 from Microchip](https://www.microchip.com/wwwproducts/en/ATECC508A) - which is paired to the main microcontroller. The secure memory grants access to the seed once pairing is checked and knowledge of the PIN code is proven. This wallet design is stronger than wallets relying only on the vulnerable STM32F readout protection.
 
 The ATECC508A secure memory has 10 Kb of EEPROM memory, organized in three zones:
 - CONFIG: device configuration, monotonic counters, data slots / keys security parameters.
@@ -278,10 +278,9 @@ Our research lab found the ATECC508A vulnerability in May 2019. The full details
 
 ## References
 
-[1] Johannes Obermaier and Stefan Tatschner. [Shedding too much Light on a Micro-
-controller’s Firmware Protection](https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf) - 2017
+[^1]: Johannes Obermaier and Stefan Tatschner. [Shedding too much Light on a Micro-controller’s Firmware Protection](https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf) - 2017
 
-[2] Marc Schink & Johannes Obermaier. [Exception(al) Failure - Breaking the STM32F1 Read-Out Protection](https://blog.zapb.de/stm32f1-exceptional-failure/) - 2020
+[^2]: Marc Schink & Johannes Obermaier. [Exception(al) Failure - Breaking the STM32F1 Read-Out Protection](https://blog.zapb.de/stm32f1-exceptional-failure/) - 2020
 
-[3] Claudio Bozzato, Riccardo Focardi, and Francesco Palmarini. [Shaping the Glitch: Optimizing Voltage Fault Injection Attacks](https://tches.iacr.org/index.php/TCHES/article/view/7390) - 2019
+[^3]: Claudio Bozzato, Riccardo Focardi, and Francesco Palmarini. [Shaping the Glitch: Optimizing Voltage Fault Injection Attacks](https://tches.iacr.org/index.php/TCHES/article/view/7390) - 2019
 
