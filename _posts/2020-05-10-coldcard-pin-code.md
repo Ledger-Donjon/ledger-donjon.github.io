@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets
+title: "Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets"
 summary: How the Donjon performed a PIN code recovery on a Coldcard Mk2 wallet.
 description: How the Donjon performed a PIN code recovery on a Coldcard Mk2 wallet.
 featured-img: coldcard-pin-code
@@ -37,7 +37,7 @@ The device also features two monotonic 21 bits counters, used by the Coldcard wa
 
 The list of commands was fully documented in the datasheet accessible on the Microchip website, but it looks like they recently restricted this document under NDA and it’s no more available on their website. It can, however, be found [here on alternative websites](https://datasheetspdf.com/pdf-file/1297448/Microchip/ATECC508A/1). The ATECC508A firmware is stored in an internal ROM memory, which cannot be read nor updated. Our security assessment of this secure memory was therefore conducted in a black box approach.
 
-The data slots of the secure memory have very limited size. The Coldcard Mk2 wallet uses them as shown in the table below. The most relevant data slots have been highlighted.
+The data slots of the secure memory have very limited size. The Coldcard Mk2 wallet uses them as shown in the table below. The most relevant data slots have been highlighted. This configuration is defined in the [ae_config.h](https://github.com/Coldcard/firmware/blob/master/stm32/bootloader/ae_config.h) source file.
 
 <table>
   <tr>
@@ -248,7 +248,7 @@ Both Pairing and PIN1 data slots meet the configuration requirements for being e
 
 ## How bad is it?
 
-The security scheme of the Coldcard Mk2 wallet is well designed and relies mainly on the ATECC508A secure memory, which is a smart design decision. The equipment required to perform the physical attack of the ATECC508A is expensive: about 200 k€, which limits the potential attackers. It requires serious knowledge and expertise, and the exploitation is difficult.
+The security scheme of the Coldcard Mk2 wallet is well designed and relies mainly on the ATECC508A secure memory, which is a smart design decision. The equipment required to perform the physical attack of the ATECC508A is expensive: about $200k, which limits the potential attackers. It requires serious knowledge and expertise, and the exploitation is difficult.
 
 ## Online Brute-Force Attack
 
@@ -272,9 +272,9 @@ The updated Coldcard Mk3 version has stronger security, mainly enforced by the u
 
 Our attack is not applicable to every use of the ATECC508A. In particular, we are not able to retrieve a data slot declared as a P-256 private key. Many IoT applications relies on those P-256 keys and can still be considered somewhat safe. Additionally, this circuit is now considered deprecated and use of its successor - the ATECC608 - is recommended by Microchip for new designs.
 
-## Disclosure
+## Responsible disclosure
 
-Our research lab found the ATECC508A vulnerability in May 2019. The full details of our attack has been shared with Microchip in June 2019 to help them improve their design and fix those issues. As this is a hardware flaw which requires a silicon change, the process of fixing it can be much longer than patching a software vulnerability, and we agreed to give Microchip extra time to plan a new silicon release. Microchip has been really cooperative and we had constructive discussions, we feel they are really willing to improve the security of their solutions. Coinkite and Shiftcrypto manufacturers have been noticed about the vulnerability as well.
+Our research lab found the ATECC508A vulnerability in May 2019. The full details of our attack has been shared with Microchip in June 2019 to help them improve their design and fix those issues. As this is a hardware flaw which requires a silicon change, the process of fixing it can be much longer than patching a software vulnerability, and we agreed to give Microchip extra time to plan a new silicon release. Microchip has been really cooperative and we had constructive discussions, we feel they are really willing to improve the security of their solutions. Coinkite manufacturer has been noticed about the vulnerability as well.
 
 ## References
 
