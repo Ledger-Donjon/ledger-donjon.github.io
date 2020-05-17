@@ -11,7 +11,7 @@ author: Olivier Hériveaux
 
 ## Introduction
 
-Coldcard is a Bitcoin hardware wallet from [Coinkite](https://coinkite.com/) manufacturer. The platform runs on a standard STM32 microcontroller paired with a secure memory which provides secure storage of the seed behind authentication protection. Relying on a secure memory rather than a standard microcontroller, this wallet has a good security design. The firmware code is Open Source, available on their [GitHub repository](https://github.com/Coldcard/firmware). The project is active and well documented.
+[Coldcard](https://coldcardwallet.com/) is a Bitcoin hardware wallet from Coinkite manufacturer. The platform runs on a standard STM32 microcontroller paired with a secure memory which provides secure storage of the seed behind authentication protection. Relying on a secure memory rather than a standard microcontroller, this wallet has a good security design. The firmware code is Open Source, available on their [GitHub repository](https://github.com/Coldcard/firmware). The project is active and well documented.
 
 In early 2019, we evaluated the security of the [Microchip ATECC508A](https://www.microchip.com/wwwproducts/en/ATECC508A) secure memory. This circuit is commonly used in IoT applications as the root of trust, and also in the Coldcard wallet in its Mk2 version (latest version today is Mk3). This article explains how a vulnerability we identified in this secure memory can be used to recover the PIN code of a Coldcard Mk2 hardware wallet. The ATECC508A vulnerability is not detailed in this article: it will be presented soon during next [SSTIC 2020 conference](https://www.sstic.org/).
 
