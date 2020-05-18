@@ -120,7 +120,7 @@ From a side channel perspective, one PIN attempt results in a side-channel trace
 
 Given the fact that the PTC implements a timer, the side-channel robustness of the KeepKey PIN verification mechanism relies on two questions:
 
-- How many attempt are needed to extract the wrapped_key processed during the AES-256?
+- How many attempts are needed to extract the wrapped_key processed during the AES-256?
 
 - How many attempts are needed to extract the key_fingerprint during the `memcmp`?
 
