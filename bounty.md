@@ -86,11 +86,13 @@ When submitting a vulnerability report you agree that you may not publicly discl
 
 ## Remediation & Disclosure
 
-After triage, we will send an expected timeline, and commit to being as transparent as possible about the remediation timeline as well as on issues or challenges that may extend it. You may receive updates with significant events such as the validation of the vulnerability, requests for additional information or your qualification for a reward.
+After triage, we will send a quick acknowledgement and commit to being as transparent as possible about the remediation timeline as well as on issues or challenges that may extend it. You may receive updates with significant events such as the validation of the vulnerability, requests for additional information or your qualification for a reward.
 
 Bug reporters allow Ledger the opportunity to diagnose and offer fully tested updates, workarounds, or other corrective measures before any party discloses detailed vulnerability or exploit information to the public.
 
 Once the security issue is fixed or mitigated, the Ledger Security Team will contact you. Prior to any public announcement of a vulnerability, and to the extent permitted by the law, we will share the draft description of the vulnerability with you. In case of disagreement, we would explore mediation mechanisms.
+
+Ledger has a 90-day disclosure policy, which means that we do our best to fix issues within 90 days upon receipt of a vulnerability report. If the issue is fixed sooner and if there is mutual agreement between the security researcher and the Ledger Security Team, the disclosure might happen before the 90-day deadline.
 
 
 ## Reward
