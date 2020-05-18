@@ -17,7 +17,7 @@
   <meta name="msapplication-config" content="{{ '/assets/img/icons/browserconfig.xml?v=qA3OXqyw77' | relative_url }}" />
   <meta name="theme-color" content="#ffffff" />
 
-  <meta name="image" property="og:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/{{ page.featured-img }}.jpg" />
+  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/{{ page.featured-img }}.jpg" />
 
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -36,9 +36,9 @@
     <meta name="twitter:description" content="{{ site.description }}" />
   {% endif %}
   {% if page.featured-img %}
-    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/{{ page.featured-img }}.jpg" />
+    <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/{{ page.featured-img }}.jpg" />
   {% else %}
-    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/sleek_lg.jpg" />
+    <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/posts/sleek_lg.jpg" />
   {% endif %}
 
   {% if site.google_tag_manager %}
