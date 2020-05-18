@@ -64,5 +64,6 @@ compress_html:
   clippings: all
 
 plugins:
+  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
