@@ -206,7 +206,7 @@ Each one of these batches is passed through the classifiers computed just before
 
 **Reminder**: in the case of the KeepKey PIN verification mechanism, `input = wrapped_key`. Hence, every one of theses batches of 25 traces can be seen as traces acquired from a new KeepKey device PIN verification, where the `wrapped_key` is fixed.
 
-Extending this attack to the 64 bytes of ` wrapped_key` would then allow us to extract the whole value of `wrapped_key` within around 20 traces.
+Extending this attack to the 64 bytes of `wrapped_key` would then allow us to extract the whole value of `wrapped_key` within around 20 traces.
 
 Regarding theses results, one should argue that:
 
