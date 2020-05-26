@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2020-06-09 | [LSB 011: XRP account misuse and transaction malleability](011) |
 | 2020-06-03 | [LSB 010: Massive transaction fees in BTC app and derivative](010) |
 | 2020-04-30 | [LSB 009: Monero funds lock-up](009)                            |
 | 2020-04-27 | [LSB 008: Monero private key retrieval](008)                    |
