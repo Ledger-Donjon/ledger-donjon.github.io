@@ -11,6 +11,7 @@ security of Ledger products through the Devices Bug Bounty program:
 
 - Dušan Klinec
 - Sebastian Kung
+- Saleem Rashid
 
 ### 2019
 
