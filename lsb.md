@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2020-06-03 | [LSB 010: Massive transaction fees in BTC app and derivative](010) |
 | 2020-04-30 | [LSB 009: Monero funds lock-up](009)                            |
 | 2020-04-27 | [LSB 008: Monero private key retrieval](008)                    |
 | 2019-10-04 | [LSB 007: Monero private key retrieval](007)                    |
