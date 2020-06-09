@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: threat-model
 title: Threat Model - Confidentiality of Seed and Private Keys
 ---
 
