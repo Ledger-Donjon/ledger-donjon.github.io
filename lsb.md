@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2020-07-08 | [LSB 013: JTAG/SWD Protocols Enabled on STM32WB55 Unsecured Processor](013) |
 | 2020-07-02 | [LSB 012: Incorrect BTC balance in Ledger Live with RBF UTXOs](012) |
 | 2020-06-09 | [LSB 011: XRP account misuse and transaction malleability](011) |
 | 2020-06-03 | [LSB 010: Massive transaction fees in BTC app and derivative](010) |
