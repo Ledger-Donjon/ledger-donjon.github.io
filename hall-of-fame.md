@@ -12,6 +12,7 @@ security of Ledger products through the Devices Bug Bounty program:
 - Markus Alvila from [Towo Labs](https://towo.io/)
 - Tal Be'ery from [Zengo](https://zengo.com/)
 - Dušan Klinec
+- [Kraken](https://www.kraken.com/) Security Labs
 - Sebastian Kung
 - Oded Leiba from [Zengo](https://zengo.com/)
 - Saleem Rashid
