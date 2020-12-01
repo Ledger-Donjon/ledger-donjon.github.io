@@ -11,7 +11,7 @@ author: The Donjon
 
 ## Introduction
 
-After doing some research on [Transient execution CPU vulnerabilities](https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability) against Intel SGX enclaves, we wondered if these vulnerabilities were practical in real life, with fully patched operating systems and default mitigations. We took this opportunity to design a challenge ingeniously called *Ghostbuster* for the Ledger Donjon CTF, which targets the [Spectre vulnerability](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) in a cross-process scenario.
+After doing some research on [Transient execution CPU vulnerabilities](https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability) against Intel SGX enclaves, we wondered if these vulnerabilities were practical in real life, with fully patched operating systems and default mitigations. We took this opportunity to design a challenge ingeniously called *Ghostbuster* for the [Ledger Donjon CTF](https://donjon-ctf.io/), which targets the [Spectre vulnerability](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) in a cross-process scenario.
 
 In order to make it more handy, the source code and the whole architecture are given to the participants, allowing them to deploy the very same version of the challenge locally.
 
