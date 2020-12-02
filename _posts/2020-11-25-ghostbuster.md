@@ -308,7 +308,7 @@ Here are the steps of the final attack:
 While the exploit described here uses an almost perfect gadget, the xor operation allows less specific gadgets to be used. Indeed, the attacker can bruteforce bytes of the secret one by one.
 
 <p>Here is a recording of the exploit, which shows that the secret can be recovered in a few seconds:</p>
-<script src="https://asciinema.org/a/3Q5m1toHaki3UdcYbJSXfNiVy.js" id="asciicast-3Q5m1toHaki3UdcYbJSXfNiVy" async></script>
+<script src="https://asciinema.org/a/naE4igs1qZ7gWUCGaXfPMCRQT.js" id="asciicast-naE4igs1qZ7gWUCGaXfPMCRQT" async></script>
 
 The source code of the exploit can also be found [here](https://github.com/Ledger-Donjon/ledger-donjon-ctf-2020/tree/master/ghostbuster).
 
