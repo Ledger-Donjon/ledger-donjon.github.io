@@ -107,7 +107,13 @@ featured-img: sleek #optional - if you want you can include hero image
 
 #### Images
 
-In case you want to add a hero image to the post, apart from changing featured-img in YAML, you also need to add the image file to the project. To do so, just upload an image in .jpg format to `_img` folder. The name must before the .jpg file extension has to match with featured-img in YAML. Next, run `gulp img` from command line to generate optimized version of the image and all the thumbnails. You have to restart the jekyll server to see the changes.
+In case you want to add a hero image to the post, apart from changing featured-img in YAML, you also need to add the image file to the project. To do so, just upload an image in .jpg format to `_img/post/` folder. The name before the `.jpg` file extension has to match with featured-img in YAML. Next, run `gulp img` from command line to generate optimized version of the image and all the thumbnails. You have to restart the jekyll server to see the changes.
+
+On a system where [podman](https://podman.io/) is installed, this one-line command generates the images:
+
+```sh
+podman run --rm -v "$(pwd):/git" -it node:14-buster-slim bash -c 'apt-get update && apt-get install -y g++ make python2 python3 && npm install --global gulp-cli && cd /git && npm install && gulp img'
+```
 
 Sleek uses [Lazy Sizes](https://github.com/aFarkas/lazysizes). Lazy Loader for loading images. Check the link for more info. Lazy Sizes doesnt’t require any configuration and it’s going to be included in your bundled js file.
 
