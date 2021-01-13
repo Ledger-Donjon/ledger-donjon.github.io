@@ -53,6 +53,17 @@ These vulnerabilities are **out-of-scope**:
 - Editable Github wikis.
 - Outdated software without any noteworthy vulnerability.
 
+### Phishing Attempt Bounty Program 🌐
+
+We are also interested in any information allowing us to protect our users from attacks (Phishing, Smishing, Vishing, etc).
+
+Specifically we are interested in the following kinds of information:
+
+- We are interested in any new information, legally obtained, allowing us and law enforcement to identify and successfully prosecute those responsible attacks on Ledger and its customers.
+
+We have created a 10 BTC fund for any information leading to successful arrest and prosecution (bc1qappeev2uut3md3622wtmxllwtn7ctqdhwv0xsc).
+
+To submit your bounty information, please use **bounty-phishing - at - ledger.com**.
 
 ## Responsible Disclosure Policy
 
