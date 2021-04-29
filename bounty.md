@@ -65,6 +65,8 @@ We have created a 10 BTC fund for any information leading to successful arrest a
 
 To submit your bounty information, please use **bounty-phishing - at - ledger.com**.
 
+Payment will require meeting KYC requirements.
+
 ## Responsible Disclosure Policy
 
 At Ledger, we believe that Coordinated Vulnerability Disclosure is the right approach to better protect users. When submitting a vulnerability report, you enter a form of cooperation in which you allow Ledger the opportunity to diagnose and remedy the vulnerability before disclosing its details to third parties and/or the general public.
