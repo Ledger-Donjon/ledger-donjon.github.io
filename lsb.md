@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2021-05-17 | [LSB 016: Length-extension attack on SCP](016)                  |
 | 2021-01-13 | [LSB 015: TX data of unsupported crypto assets are not displayed by the Ethereum app 1.6.0](015) |
 | 2020-08-04 | [LSB 014: Path derivation too permissive in Bitcoin derivative apps](014) |
 | 2020-07-08 | [LSB 013: JTAG/SWD Protocols Enabled on STM32WB55 Unsecured Processor](013) |
