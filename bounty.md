@@ -61,7 +61,7 @@ Specifically we are interested in the following kinds of information:
 
 - We are interested in any new information, legally obtained, allowing us and law enforcement to identify and successfully prosecute those responsible attacks on Ledger and its customers.
 
-We have created a 10 BTC fund for any information leading to successful arrest and prosecution (`bc1qappeev2uut3md3622wtmxllwtn7ctqdhwv0xsc`).
+We have created a 10 BTC fund for any information leading to successful arrest and prosecution ([`zpub6reAqYxz5rB2ydBuj4mxmusUqiSu7TqkzATtE4DaYhTUuPzWmgTorTrPYygJa8A4aq1hSERQmwZT2KVH9Mc7Nn8amcPmTsqQgzkEBvjwDym`](https://blockpath.com/search/addr?q=zpub6reAqYxz5rB2ydBuj4mxmusUqiSu7TqkzATtE4DaYhTUuPzWmgTorTrPYygJa8A4aq1hSERQmwZT2KVH9Mc7Nn8amcPmTsqQgzkEBvjwDym)).
 
 To submit your bounty information, please use **bounty-phishing - at - ledger.com**.
 
