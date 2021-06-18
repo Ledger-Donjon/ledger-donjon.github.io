@@ -52,6 +52,7 @@ These vulnerabilities are **out-of-scope**:
 - Absence of rate limiting.
 - Editable Github wikis.
 - Outdated software without any noteworthy vulnerability.
+- Broken links.
 
 ### Phishing Attempt Bounty Program 🕵
 
