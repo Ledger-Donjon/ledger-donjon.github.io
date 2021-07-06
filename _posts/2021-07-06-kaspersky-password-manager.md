@@ -101,9 +101,9 @@ return charset[GetRandom32() % 10];
 
 Let's see how characters are generated:
 
-- "4" is returned if GetRandom32() returns 4, 14 or 24 (3 possible values)
-- "5" is returned if GetRandom32() returns 5, 15 or 25 (3 possible values)
-- But "1" is returned if GetRandom32() returns 1, 11, 21 and 31 (4 possible values!)
+- "4" is returned if `GetRandom32()` returns 4, 14 or 24 (3 possible values)
+- "5" is returned if `GetRandom32()` returns 5, 15 or 25 (3 possible values)
+- But "1" is returned if `GetRandom32()` returns 1, 11, 21 and 31 (4 possible values!)
 
 The distribution is given below:
 
@@ -285,14 +285,14 @@ We wrote a [proof of concept](/assets/kaspersky-password-manager/cve-2020-27020.
 
 1. Compile the provided PoC (pwlib.cpp). File must be compiled with Visual C++ (floating values in the source code have not the exact same values when compiled with Clang or gcc). I used Visual C++ 2017 for my tests. Using a command invite for Visual C++ 32 bits, enter:
 
-    ```shell
+    ```text
     cmake -Bbuild -H.
     msbuild build\pwbrute.vcxproj
     ```
 
 2. Run compiled executable to create a list of 1000 passwords.
 
-    ```shell
+    ```text
     Debug\pwbrute.exe > pass.txt
     ```
 
