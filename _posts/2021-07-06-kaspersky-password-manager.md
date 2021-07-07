@@ -111,7 +111,7 @@ The distribution is given below:
 
 So there is a bias with this method: as one can see from the outputs, digits 0 and 1 will be output more frequently than the other ones. It is commonly called the "modulo bias". You should check the excellent [Definitive guide to "modular bias" and how to avoid it](https://research.kudelskisecurity.com/2020/07/28/the-definitive-guide-to-modulo-bias-and-how-to-avoid-it/), by Kudelski Security, for more information.
 
-To remove this "modulo bias", a common method is to discard all the numbers greater than or equal to 30 (the biggest multiple of 10 lower than 16):
+To remove this "modulo bias", a common method is to discard all the numbers greater than or equal to 30 (the biggest multiple of 10 lower than 32):
 
 ```c#
 const string charset = "0123456789";
@@ -256,7 +256,7 @@ std::string pwlib::generatePassword(pwdlib::Policy policy, int seed)
 This is super interesting for two reasons:
 
 - The seed is just 32 bits. That means it can be bruteforced easily.
-- An instance of the PRNG is created every time a password is generated. It means Kaspersky Password Manager can generated at most $2^{32}$ passwords for a given charset.
+- An instance of the PRNG is created every time a password is generated. It means Kaspersky Password Manager can generate at most $2^{32}$ passwords for a given charset.
 
 `GetSystemTimeAsFileTime` is used as a seed only if a seed is not provided to the `generatePassword` method. How is called this method when a user requests a new password? The answer is:
 
