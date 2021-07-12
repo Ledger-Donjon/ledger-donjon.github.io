@@ -118,7 +118,7 @@ const string charset = "0123456789";
 do {
     uGen = GetRandom32();
 } while (uGen >= 30);
-return charset[uGen];
+return charset[uGen % 10];
 ```
 
 This is exactly what KeePass does, though the bias in KeePass would be much less significant than in the current example, because the `GetRandomUInt64` generates values much bigger than the size of the password character set.
