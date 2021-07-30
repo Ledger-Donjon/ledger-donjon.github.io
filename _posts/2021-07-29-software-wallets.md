@@ -19,7 +19,7 @@ This article is intended to be not very technical. To keep it relatively simple,
 
 What is stored in a crypto wallet?
 
-Wallets do not actually store the users' cryptocurrencies: they only store the secrets, notably the private keys, that allow to access the cryptocurrencies and the ability to spend them. These private keys are mostly ECC (elliptic curve cryptography) private keys on different curves depending on the blockchain. The most common curves are secp256k1 (Bitcoin, Ethereum...), Ed25516 (Monero), or BLS12-381 (Ethereum 2).
+Wallets do not actually store the users' cryptocurrencies: they only store the secrets, notably the private keys, that allow to access the cryptocurrencies and the ability to spend them. These private keys are mostly ECC (elliptic curve cryptography) private keys on different curves depending on the blockchain. The most common curves are secp256k1 (Bitcoin, Ethereum...), Ed25519 (Monero), or BLS12-381 (Ethereum 2).
 
 These keys are used to sign transactions, and more generally to interact with blockchain assets.
 
