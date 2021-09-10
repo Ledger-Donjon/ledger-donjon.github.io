@@ -13,7 +13,7 @@ A Side Channel Attack on PIN verification allows an attacker with a stolen Trezo
 
 ## Intro
 
-Following Trezor’s post detailing the latest firmware update’s security improvements, we can now present the side-channel analysis evaluation performed on the Trezor One. This was done at the [Ledger Donjon](https://medium.com/ledger-on-security-and-blockchain/ledger-donjon-3e04e0ce49a9) and has been [responsibly disclosed](https://medium.com/ledger-on-security-and-blockchain/our-shared-security-responsibly-disclosing-competitor-vulnerabilities-a3bc816d02e7). The conclusion of our analysis being that it is possible to mount two profiled side-channel attacks on the device leading to
+Following Trezor’s post detailing the latest firmware update’s security improvements, we can now present the side-channel analysis evaluation performed on the Trezor One. This was done at the [Ledger Donjon](https://medium.com/ledger-on-security-and-blockchain/ledger-donjon-3e04e0ce49a9) and has been [responsibly disclosed](https://www.ledger.com/our-shared-security-responsibly-disclosing-competitor-vulnerabilities). The conclusion of our analysis being that it is possible to mount two profiled side-channel attacks on the device leading to
 
 - **the retrieval of the PIN code of a stolen device.**
 - the retrieval of significant portions of the scalar used during an elliptic curve point multiplication (which leads to a private key recovery).

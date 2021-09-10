@@ -26,7 +26,7 @@ The Trezor-based hardware wallets were part of our evaluation targets. We found 
 
 We are experienced in physical attacks and because of the design of these wallets, we thought it was possible to extract the seeds from the devices. We just wanted to find out how difficult it is. In this blogpost, we only focus on the following attack scenario: the attacker steals a hardware wallet, what can he do?
 
-In a [previous blogpost]({% post_url 2019-06-17-Breaking-Trezor-One-with-SCA %}), we detailed a vulnerability consisting of retrieving the PIN value from a stolen device, using Side Channel Analysis. This vulnerability has been patched, and SatoshiLabs gave us a bounty for it. A more comprehensive study has been presented at a scientific conference: SSTIC (conference paper [here]("https://www.sstic.org/media/SSTIC2019/SSTIC-actes/side_channel_assessment_hardware_wallets/SSTIC2019-Article-side_channel_assessment_hardware_wallets-guillemet_san-pedro_servant.pdf")).
+In a [previous blogpost]({% post_url 2019-06-17-Breaking-Trezor-One-with-SCA %}), we detailed a vulnerability consisting of retrieving the PIN value from a stolen device, using Side Channel Analysis. This vulnerability has been patched, and SatoshiLabs gave us a bounty for it. A more comprehensive study has been presented at a scientific conference: SSTIC (conference paper [here](https://www.sstic.org/media/SSTIC2019/SSTIC-actes/side_channel_assessment_hardware_wallets/SSTIC2019-Article-side_channel_assessment_hardware_wallets-guillemet_san-pedro_servant.pdf)).
 
 In this post, we explain that a physical key extraction attack can be performed quickly with a low-cost setup and **must be considered as a real threat**.
 
@@ -82,9 +82,9 @@ From our understanding, **there’s no way to patch it**, there is only one miti
 Consequently the whole security relies on the passphrase. The mnemonics + passphrase derivation follows the BIP39 standard. BIP39 uses PBKDF2 function to derive the mnemonics + passphrase into the seed.
 
 - PBKDF2 is a useful function allowing to derive a low-entropy password into a larger cryptographic key. The lack of entropy is balanced by a CPU intensive derivation function preventing brute-force.
-- The main problem in BIP39 is that the number of iterations is set to **only 2048**, which is far lower than the last NIST recommendation (from 2016) **which is 10.000** ([NIST recommendation]("https://pages.nist.gov/800-63-3/sp800-63b.html#sec5")).
+- The main problem in BIP39 is that the number of iterations is set to **only 2048**, which is far lower than the last NIST recommendation (from 2016) **which is 10.000** ([NIST recommendation](https://pages.nist.gov/800-63-3/sp800-63b.html#sec5)).
 - When the mnemonics are well-generated and can be kept secret, they represent 256-bits, consequently, the mere 2048 iterations are not a problem.
-- **In this case, where the 24-words can be considered to be public**, the mere 2048 iterations become a problem and brute-force is then possible ([such attacks]("https://eprint.iacr.org/2016/273.pdf are then possible")).
+- **In this case, where the 24-words can be considered to be public**, the mere 2048 iterations become a problem and brute-force is then possible ([such attacks](https://eprint.iacr.org/2016/273.pdf) are then possible).
 
 For these reasons, a passphrase of about 37 random characters is required to guarantee the same security level as the 24 words seed.
 

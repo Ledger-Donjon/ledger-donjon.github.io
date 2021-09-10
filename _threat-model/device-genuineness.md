@@ -17,8 +17,8 @@ After manufacturing, this attestation allows the user (through Ledger Live) to v
 
 ### End User Physical Verification
 
-We have designed the Ledger Nano S to be easily openable, so users can check the integrity of their devices by themselves as detailed of [this support article](https://support.ledger.com/hc/en-us/articles/115005321449-Check-hardware-integrity).
-The Ledger Nano X uses a different architecture and the instructions that enable users to check the integrity of their devices by themselves is detailed [here](https://support.ledger.com/hc/en-us/articles/360019352834-Check-hardware-integrity).
+We have designed the Ledger Nano S to be easily openable, so users can check the integrity of their devices by themselves as detailed of [this support article](https://support.ledger.com/hc/en-us/articles/4404382029329-Check-hardware-integrity).
+The Ledger Nano X uses a different architecture and the instructions that enable users to check the integrity of their devices by themselves is detailed [here](https://support.ledger.com/hc/en-us/articles/4404382029329-Check-hardware-integrity).
 
 
 > **Associated Threats**: An attack allowing to extract a device is a major threat to device genuineness security mechanism. Generally speaking, any attack allowing a non genuine device to pass the genuine check is a valid attack.

@@ -53,7 +53,7 @@ In order to understand the link between SMPC and RenVM, let's see how gateways w
 
 RenVM's gateways are implemented using several components:
 
-* Several Ethereum smart contracts [documented by Ren Project](https://docs.renproject.io/developers/docs/deployed-contracts#mainnet) and [open source](https://github.com/renproject/darknode-sol/tree/v1.0.1/contracts).
+* Several Ethereum smart contracts [documented by Ren Project](https://renproject.github.io/ren-client-docs/contracts/deployments) and [open source](https://github.com/renproject/darknode-sol/tree/v1.0.1/contracts).
 * A Bitcoin address to receive Bitcoins and emit transactions, [19iqYbeATe4RxghQZJnYVFU4mjUUu76EA6](https://www.blockchain.com/en/btc/address/19iqYbeATe4RxghQZJnYVFU4mjUUu76EA6).
   In July 2020 this account held a bit more than 1000 BTC.
   In December 2020 this account held more than 16000 BTC.
