@@ -52,7 +52,7 @@ We designed the PCB using [KiCad](https://www.kicad.org/). To be honest, this de
 
 For the fun, and because we believe this is a very promising language, we developed the microcontroller firmware in Rust.
 
-We finally designed a simple plastic enclosure using [FreeCAD](https://www.freecadweb.org/?lang=fr), and printed it with [Sculpteo](https://www.sculpteo.com/fr/).
+We finally designed a simple plastic enclosure using [FreeCAD](https://www.freecadweb.org/), and printed it with [Sculpteo](https://www.sculpteo.com/).
 
 Unexpectedly, the most difficult part of this project was identifying the connector (reference 5710140 from Amphenol for the male side), and also purchase it as it is obsolete and not sold anymore by many suppliers. The part supplier search engine [Octopart](https://octopart.com/) can help.
 
