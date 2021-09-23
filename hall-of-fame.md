@@ -13,14 +13,14 @@ security of Ledger products through the Devices Bug Bounty program:
 
 ### 2020
 
-- Markus Alvila from [Towo Labs](https://towo.io/)
+- Markus Alvila from [Towo Labs](https://towolabs.com/)
 - Tal Be'ery from [Zengo](https://zengo.com/)
 - Dušan Klinec
 - [Kraken](https://www.kraken.com/) Security Labs
 - Sebastian Kung
 - Oded Leiba from [Zengo](https://zengo.com/)
 - Saleem Rashid
-- Patrik Sletmo from [Towo Labs](https://towo.io/)
+- Patrik Sletmo from [Towo Labs](https://towolabs.com/)
 
 ### 2019
 
