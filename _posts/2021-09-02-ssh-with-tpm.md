@@ -73,6 +73,12 @@ On Debian 11, here are the steps to generate and use a new SSH key stored secure
     * Check whether `/dev/tpm0` exists
     * Check whether the command `tpm2_getcap properties-fixed` displays some data
 
+1. Add the current user to the group which can access the TPM device `/dev/tpmrm0`. On Debian and Ubuntu, users need to belong to a group named `tss` (thanks to configuration provided by [`tpm-udev` package](https://packages.debian.org/bullseye/tpm-udev)). The following command adds the current user to this group:
+
+    ```shell
+    sudo usermod -a -G tss "$(id -nu)"
+    ```
+
 1. Initialize a user store, protected by a password and a *SOPIN* and create a key, for example an Elliptic Curve key on the curve named "NIST P-256" (also known as "secp256r1"):
 
     ```shell
