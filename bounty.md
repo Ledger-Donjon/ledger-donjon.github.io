@@ -44,7 +44,7 @@ These vulnerabilities are **out-of-scope**:
 
 - Presence/absence of SPF/DMARC records.
 - Lack of CSRF tokens.
-- Clickjacking issues.
+- Clickjacking and tabnagging issues.
 - Missing security headers which do not lead directly to a vulnerability.
 - Missing best practices (we require evidence of a security vulnerability).
 - Reports from automated tools or scans.
