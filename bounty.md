@@ -36,7 +36,7 @@ Examples of vulnerabilities that are in-scope:
 
 ### Web Bug Bounty Program 🌐
 
-We are interested in critical vulnerabilities in our infrastructure. In a nutshell, we are interested in real vulnerabilities, not in output of automated scanners. **Due tu the large amount of emails received daily, we might not be able to respond to all reports for out-of-scope vulnerabilities.**
+We are interested in critical vulnerabilities in our infrastructure. In a nutshell, we are interested in real vulnerabilities, not in output of automated scanners. **Due to the large amount of emails received daily, we might not be able to respond to all reports for out-of-scope vulnerabilities.**
 
 #### Out-of-scope Vulnerabilities
 
