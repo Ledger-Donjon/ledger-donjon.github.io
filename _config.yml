@@ -15,7 +15,6 @@ social:
 
 # THEME SETTINGS
 navigation: # Navigation links
-  - {name: 'Blog', link: '/'}
   - {name: 'Bounty', link: '/bounty'}
   - {name: 'Security Bulletins', link: '/lsb'}
   - {name: 'Threat Model', link: '/threat-model'}
