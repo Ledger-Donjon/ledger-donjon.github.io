@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2022-07-04 | [LSB 017: Keycard bypass on Ledger HW.1](017)                   |
 | 2021-05-17 | [LSB 016: Length-extension attack on SCP](016)                  |
 | 2021-01-13 | [LSB 015: TX data of unsupported crypto assets are not displayed by the Ethereum app 1.6.0](015) |
 | 2020-08-04 | [LSB 014: Path derivation too permissive in Bitcoin derivative apps](014) |

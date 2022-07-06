@@ -7,6 +7,10 @@ permalink: /hall-of-fame/
 Ledger thanks the following security researchers for having contributed to the
 security of Ledger products through the Devices Bug Bounty program:
 
+### 2022
+
+- Niv Yehezkel from Hexagate
+
 ### 2021
 
 - Timothée Isnard from [Tanker](https://tanker.io)
