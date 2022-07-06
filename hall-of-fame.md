@@ -9,7 +9,7 @@ security of Ledger products through the Devices Bug Bounty program:
 
 ### 2022
 
-- Niv Yehezkel from Hexagate
+- Niv Yehezkel from [Hexagate](https://www.hexagate.com/)
 
 ### 2021
 
