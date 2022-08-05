@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2022-08-05 | [LSB 018: Invalid command processing on HSM firmware](018)      |
 | 2022-07-04 | [LSB 017: Keycard bypass on Ledger HW.1](017)                   |
 | 2021-05-17 | [LSB 016: Length-extension attack on SCP](016)                  |
 | 2021-01-13 | [LSB 015: TX data of unsupported crypto assets are not displayed by the Ethereum app 1.6.0](015) |
