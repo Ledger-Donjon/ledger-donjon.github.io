@@ -18,8 +18,8 @@ We are mainly interested in vulnerabilities that would eventually allow attacker
 
 #### Scopes
 
-- Hardware attacks on the Ledger Nanos S, Ledger Nano X and Ledger Blue
-- Software attacks on the firmware of the Ledger Nanos S, Ledger Nano X and Ledger Blue
+- Hardware attacks on the Ledger Nanos S, Ledger Nano S+ and Ledger Nano X
+- Software attacks on the firmware of the Ledger Nanos S, Ledger Nano S+ and Ledger Nano X
 - Vulnerabilities in apps available through Ledger Live (vulnerabilities in apps developed by 3rd parties should also be reported to Ledger)
 
 #### In-Scope Vulnerabilities
