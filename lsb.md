@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2023-11-20 | [LSB 020: Ledger Live incorrectly parses some EIP-712 messages](020) |
 | 2023-05-11 | [LSB 019: Invalid addresses for certain miniscript policies](019) |
 | 2022-08-05 | [LSB 018: Invalid command processing on HSM firmware](018)      |
 | 2022-07-04 | [LSB 017: Keycard bypass on Ledger HW.1](017)                   |
