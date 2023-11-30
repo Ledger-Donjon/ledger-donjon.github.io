@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Introducing-Ledger-Donjon
+redirect: https://www.ledger.com/blog/Introducing-Ledger-Donjon
 layout: redirect
 ---

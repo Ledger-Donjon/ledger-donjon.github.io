@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/compact-em
+redirect: https://www.ledger.com/blog/compact-em
 layout: redirect
 ---

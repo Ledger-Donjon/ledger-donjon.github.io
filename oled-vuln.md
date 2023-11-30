@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/oled-vuln
+redirect: https://www.ledger.com/blog/oled-vuln
 layout: redirect
 ---

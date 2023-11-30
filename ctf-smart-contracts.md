@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/ctf-smart-contracts
+redirect: https://www.ledger.com/blog/ctf-smart-contracts
 layout: redirect
 ---

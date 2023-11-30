@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/ghostbuster
+redirect: https://www.ledger.com/blog/ghostbuster
 layout: redirect
 ---

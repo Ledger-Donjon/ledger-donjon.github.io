@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/laser-improvements
+redirect: https://www.ledger.com/blog/laser-improvements
 layout: redirect
 ---

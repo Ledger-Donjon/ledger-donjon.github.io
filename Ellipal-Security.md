@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Ellipal-Security
+redirect: https://www.ledger.com/blog/Ellipal-Security
 layout: redirect
 ---

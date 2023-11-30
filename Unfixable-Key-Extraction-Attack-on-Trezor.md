@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Unfixable-Key-Extraction-Attack-on-Trezor
+redirect: https://www.ledger.com/blog/Unfixable-Key-Extraction-Attack-on-Trezor
 layout: redirect
 ---

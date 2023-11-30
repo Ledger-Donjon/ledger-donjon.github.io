@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/picohsm
+redirect: https://www.ledger.com/blog/picohsm
 layout: redirect
 ---
