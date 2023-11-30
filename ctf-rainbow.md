@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/ctf-rainbow
+redirect: https://www.ledger.com/blog/ctf-rainbow
 layout: redirect
 ---

@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Capture-the-Fortress
+redirect: https://www.ledger.com/blog/Capture-the-Fortress
 layout: redirect
 ---

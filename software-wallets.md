@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/software-wallets
+redirect: https://www.ledger.com/blog/software-wallets
 layout: redirect
 ---

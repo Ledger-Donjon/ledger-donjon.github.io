@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Extracting-Seeds
+redirect: https://www.ledger.com/blog/Extracting-Seeds
 layout: redirect
 ---

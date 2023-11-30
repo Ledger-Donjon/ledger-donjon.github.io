@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/Breaking-Trezor-One-with-SCA
+redirect: https://www.ledger.com/blog/Breaking-Trezor-One-with-SCA
 layout: redirect
 ---

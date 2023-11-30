@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/ctf-smpc-signature
+redirect: https://www.ledger.com/blog/ctf-smpc-signature
 layout: redirect
 ---

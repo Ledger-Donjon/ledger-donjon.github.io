@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/booba_nft
+redirect: https://www.ledger.com/blog/booba_nft
 layout: redirect
 ---

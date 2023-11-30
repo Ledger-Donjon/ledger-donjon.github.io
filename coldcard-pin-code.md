@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/coldcard-pin-code
+redirect: https://www.ledger.com/blog/coldcard-pin-code
 layout: redirect
 ---

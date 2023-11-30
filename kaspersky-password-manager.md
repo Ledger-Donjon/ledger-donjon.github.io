@@ -1,4 +1,4 @@
 ---
-redirect: https://blog.ledger.com/kaspersky-password-manager
+redirect: https://www.ledger.com/blog/kaspersky-password-manager
 layout: redirect
 ---
