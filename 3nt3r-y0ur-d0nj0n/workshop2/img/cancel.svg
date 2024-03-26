@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="f" x1="15.737" x2="53.57" y1="10.504" y2="45.374" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ff8b8b" offset="0"/>
+   <stop stop-color="#ec1b1b" offset="1"/>
+  </linearGradient>
+  <linearGradient id="d" x1="23.996" x2="41.048" y1="18.105" y2="35.96" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#c00" offset="0"/>
+   <stop stop-color="#b30000" offset="1"/>
+  </linearGradient>
+  <linearGradient id="e" x1="21.75" x2="24.302" y1="13.802" y2="33.052" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ff0202" offset="0"/>
+   <stop stop-color="#ff9b9b" offset="1"/>
+  </linearGradient>
+  <radialGradient id="c" cx="25.125" cy="36.75" r="15.75" gradientTransform="matrix(1 0 0 .59524 -2.3007e-15 14.875)" gradientUnits="userSpaceOnUse">
+   <stop offset="0"/>
+   <stop stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <radialGradient id="b" cx="24.302" cy="33.302" r="12.302" gradientTransform="matrix(1.694 -5.7757e-16 5.7757e-16 1.694 -16.865 -25.111)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#dbdbdb" offset="1"/>
+  </radialGradient>
+  <radialGradient id="a" cx="16.75" cy="10.666" r="21.25" gradientTransform="matrix(4.155 -2.9792e-24 3.2557e-24 3.1987 -52.846 -23.509)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#fff" stop-opacity="0" offset="1"/>
+  </radialGradient>
+ </defs>
+ <path transform="matrix(1.1738 0 0 .6 -5.2659 19.575)" d="m40.875 36.75a15.75 9.375 0 1 1 -31.5 0 15.75 9.375 0 1 1 31.5 0z" fill="url(#c)" fill-rule="evenodd" opacity=".63068"/>
+ <path d="m15.591 0.49192h17.085l12.821 13.094v17.894l-12.649 12.017h-17.43l-12.924-12.839v-17.194l13.097-12.972z" fill="url(#d)" fill-rule="evenodd" stroke="#860000"/>
+ <path d="m16.021 1.5003h16.228l12.248 12.422v17.114l-11.858 11.451h-16.768l-12.361-12.279v-16.363l12.512-12.345z" fill="none" opacity=".81319" stroke="url(#f)"/>
+ <path d="m15.688 0.75-12.938 12.812v17l2.9375 2.9062c16.763 0.05755 16.477-13.019 39.562-11.875v-7.9062l-12.688-12.938h-16.875z" fill="url(#a)" fill-rule="evenodd" opacity=".28977"/>
+ <path d="m16.767 10.5-4.2672 4.2672 7.5351 7.5351-7.5351 7.5351 4.2672 4.2672 7.5351-7.5351 7.5351 7.5351 4.2672-4.2672-7.5351-7.5351 7.5351-7.5351-4.2672-4.2672-7.5351 7.5351-7.5351-7.5351z" fill="url(#b)" fill-rule="evenodd" stroke="url(#e)" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
