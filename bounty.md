@@ -6,11 +6,9 @@ permalink: /bounty/
 
 Ledger believes in better security through openness. We welcome and value technical reports of vulnerabilities that could substantially affect the confidentiality or integrity of user data on Ledger devices or the security of our infrastructure. If you believe that you have discovered such a vulnerability, please report it at `bounty -at- ledger.fr` ([GPG key](/assets/ledger-bounty.asc) if necessary). The Ledger Security Team will work with you to investigate, resolve the issue promptly and reward the first reporter of a vulnerability.
 
-
 ## Eligibility
 
 Ledger Bug Bounty Program covers our hardware devices as well as our web services.
-
 
 ### Devices Bug Bounty Program 📟
 
@@ -32,7 +30,6 @@ Examples of vulnerabilities that are in-scope:
 - Privilege escalation from an app
 - Bypass of user confirmation to issue a transaction
 - Sensitive memory leak
-
 
 ### Web Bug Bounty Program 🌐
 
@@ -62,7 +59,7 @@ Specifically we are interested in the following kinds of information:
 
 - We are interested in any new information, legally obtained, allowing us and law enforcement to identify and successfully prosecute those responsible for attacks on Ledger and its customers.
 
-We have created a 10 BTC fund for any information leading to successful arrest and prosecution ([`zpub6reAqYxz5rB2ydBuj4mxmusUqiSu7TqkzATtE4DaYhTUuPzWmgTorTrPYygJa8A4aq1hSERQmwZT2KVH9Mc7Nn8amcPmTsqQgzkEBvjwDym`](https://blockpath.com/search/addr?q=zpub6reAqYxz5rB2ydBuj4mxmusUqiSu7TqkzATtE4DaYhTUuPzWmgTorTrPYygJa8A4aq1hSERQmwZT2KVH9Mc7Nn8amcPmTsqQgzkEBvjwDym)).
+We have created a 10 BTC fund for any information leading to successful arrest and prosecution.
 
 To submit your bounty information, please use **bounty-phishing - at - ledger.com**.
 
@@ -82,7 +79,6 @@ In identifying potential vulnerabilities, we ask that all security researchers s
   - May impact Ledger users, such as denial of service, social engineering or spam.
 - Do not exploit vulnerabilities on our infrastructure. The Bounty Program is about improving security for Ledger users, not deliberately trying to put the community at risk.
 
-
 ## Submission Process
 
 Submission reports should include a detailed description of your discovery with clear, concise steps allowing us to reproduce the issue, or a working proof-of-concept.
@@ -97,7 +93,6 @@ The Ledger Security Team will be in touch, usually within 24 hours.
 
 When submitting a vulnerability report you agree that you may not publicly disclose your findings or the contents of your submission to any third parties in any way without Ledger’s prior written approval.
 
-
 ## Remediation & Disclosure
 
 After triage, we will send a quick acknowledgement and commit to being as transparent as possible about the remediation timeline as well as on issues or challenges that may extend it. You may receive updates with significant events such as the validation of the vulnerability, requests for additional information or your qualification for a reward.
@@ -107,7 +102,6 @@ Bug reporters allow Ledger the opportunity to diagnose and offer fully tested up
 Once the security issue is fixed or mitigated, the Ledger Security Team will contact you. Prior to any public announcement of a vulnerability, and to the extent permitted by the law, we will share the draft description of the vulnerability with you. In case of disagreement, we would explore mediation mechanisms.
 
 Ledger has a 90-day disclosure policy, which means that we do our best to fix issues within 90 days upon receipt of a vulnerability report. If the issue is fixed sooner and if there is mutual agreement between the security researcher and the Ledger Security Team, the disclosure might happen before the 90-day deadline.
-
 
 ## Reward
 
@@ -131,11 +125,9 @@ To be eligible for a reward, you must not:
 - Be an immediate family member of a person employed by Ledger or its subsidiaries or affiliates,
 - Be less than 18 years of age. If you are under 18 years old, or considered a minor in your place of residence, you must get your parents’ or legal guardian’s permission prior to participating in the program.
 
-
 ## Hall of Fame
 
 In mutual consultation, we can, if you desire, display a researcher’s name or its pseudonym as the discoverer of the reported vulnerability on our website’s [Hall of Fame](/hall-of-fame/). Please note that the Hall of Fame is dedicated to the Devices Bug Bounty Program.
-
 
 ## Code of Conduct
 
@@ -146,7 +138,6 @@ In mutual consultation, we can, if you desire, display a researcher’s name or 
 - Only contact the Ledger Security Team through the email address mentioned above. Unless the program has intentionally provided a contact method to the bug reporter, contacting the security team “out-of-band” (eg. Reddit or Twitter) is a violation of this Code of Conduct.
 
 Violations of this Code of Conduct can result in a warning and/or ban of this Bug Bounty Program.
-
 
 *This is an experimental and discretionary rewards program. We may modify the terms of this program or terminate this program at any time without notice.*
 
