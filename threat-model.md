@@ -4,11 +4,12 @@ title: Threat Model
 permalink: /threat-model/
 ---
 
-This page is intended to describe the threat model of Ledger Nano S and Nano X devices. It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
+This page is intended to describe the threat model of Ledger devices. It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
 
 ## Security Objectives
 
-The main security objective of the Ledger Nano devices is to provide a **physical and logical** security to users' funds. This objective can be divided in the following sub-objectives:
+The main security objective of the Ledger devices is to provide a **physical and logical** security to users' funds. This objective can be divided in the following sub-objectives:
+
 1. Guarantee the **confidentiality of user seeds and private keys**.
 2. Ensure the use of digital assets is performed under **user consent**. In particular, the device shall prevent attackers from misleading the end user (e.g. by displaying arbitrary data on the device screen).
 3. Provide a mechanism allowing the user to verify that her device is **genuine**.
@@ -21,9 +22,9 @@ For the sake of clarity, some basic definitions are recalled. In particular, the
 
 ### Roles
 
-- **End user**: The end user is the happy owner of a Ledger Nano S/X. She has physical access to the device.
-- **Firmware developer**: Only some Ledger employees can develop the Firmware of the Ledger Nano devices. They are in charge of developing the OS and its cryptographic library.
-- **App developer**: Anyone can develop an app running on top of the Ledger Nano S OS (BOLOS). Developing on Ledger Nano X requires Ledger authorization though.
+- **End user**: The end user is the happy owner of a Ledger device. She has physical access to the device.
+- **Firmware developer**: Only some Ledger employees can develop the Firmware of the Ledger devices. They are in charge of developing the OS and its cryptographic library.
+- **App developer**: Anyone can develop an app running on top of the Ledger devices' OS (BOLOS), at the execption of developing on Ledger Nano X which requires Ledger authorization though.
 - **HSM**: Hardware Security Modules are basically remote computers able to check the device genuineness and perform privileged operations (install/remove apps, update firmware) on the devices.
 
 ### Key Usage Scenarios
