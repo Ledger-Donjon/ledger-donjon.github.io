@@ -35,19 +35,26 @@ For the sake of clarity, some basic definitions are recalled. In particular, the
 
 ### High Level Architecture
 
-The Ledger Nano S and Nano X are composed of:
+The Ledger devices are composed of:
 
-- A Secure Element (ST31 for Nano S, ST33 for Nano X)
-- A general purpose MCU (STM32F042 for Nano S, STM32WB55 for Nano S)
+- A Secure Element (ST31 for Nano S, ST33 for Nano S Plus, Nano X, Stax and Flex)
+- A general purpose MCU (STM32F042 for Nano S and Nano S Plus, STM32WB55 for Nano X, STM32WB35 for Stax and Flex)
+- A NFC communication chip (ST25R3916 for Stax and Flex)
 - External peripherals: screen, buttons
 
-The following schema describes the architecture of the Nano S. On the Nano X,
-the buttons and the screen are directly connected to the Secure Element.
+The following schema describes the architecture of the Nano S.
 
-![Ledger Nano Architecture](architecture.png)
+![Ledger Nano Architecture](architecture_nanos.png)
 
+On the Nano S Plus and Nano X, the buttons and the screen are directly connected to the Secure Element.
 
-# Security Mechanisms
+![Ledger Nano Architecture](architecture_nanox.png)
+
+On the Stax and Flex, the touch screen and display are directly connected to the Secure Element.
+
+![Ledger Nano Architecture](architecture_stax.png)
+
+## Security Mechanisms
 
 Several security mechanisms are implemented at different levels. In the following we'll distinguish device security mechanisms, OS security mechanisms and app security mechanisms.
 
