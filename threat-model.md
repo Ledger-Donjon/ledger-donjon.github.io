@@ -46,7 +46,7 @@ The following schema describes the architecture of the Nano S.
 
 ![Ledger Nano Architecture](architecture_nanos.png)
 
-On the Nano S Plus and Nano X, the buttons and the screen are directly connected to the Secure Element.
+On the Nano S Plus and Nano X, the buttons and the screen are directly connected to the Secure Element. BLE is only present on Nano X.
 
 ![Ledger Nano Architecture](architecture_nanox.png)
 
