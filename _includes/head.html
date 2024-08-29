@@ -55,9 +55,7 @@
   {% feed_meta %}
 
   <style class="inlineCSS">
-    {
-      % include critical.css %
-    }
+    {% include critical.css %}
   </style>
   <link rel="preload" href="{{ '/assets/css/main.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
   <noscript>
