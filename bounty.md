@@ -16,7 +16,7 @@ We are mainly interested in vulnerabilities that would eventually allow attacker
 
 #### Scopes
 
-- Hardware attacks on the Ledger devices
+- Hardware attacks on the Ledger devices  (i.e. hardware products)
 - Software attacks on the firmware running on the devices
 - Vulnerabilities in apps available through Ledger Live (vulnerabilities in apps developed by 3rd parties should also be reported to Ledger)
 

@@ -4,7 +4,7 @@ title: Threat Model
 permalink: /threat-model/
 ---
 
-This page is intended to describe the threat model of Ledger devices. It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
+This page is intended to describe the threat model of Ledger devices (i.e. hardware products). It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
 
 ## Security Objectives
 
