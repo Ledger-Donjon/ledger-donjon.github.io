@@ -4,11 +4,12 @@ title: Threat Model
 permalink: /threat-model/
 ---
 
-This page is intended to describe the threat model of Ledger Nano S and Nano X devices. It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
+This page is intended to describe the threat model of Ledger devices (i.e. hardware products). It first lists the main security objectives the devices intend to fulfill. Then it describes the security mechanisms implemented in order to actually reach these objectives. The associated threats to these security mechanisms are also mentioned.
 
 ## Security Objectives
 
-The main security objective of the Ledger Nano devices is to provide a **physical and logical** security to users' funds. This objective can be divided in the following sub-objectives:
+The main security objective of the Ledger devices is to provide a **physical and logical** security to users' funds. This objective can be divided in the following sub-objectives:
+
 1. Guarantee the **confidentiality of user seeds and private keys**.
 2. Ensure the use of digital assets is performed under **user consent**. In particular, the device shall prevent attackers from misleading the end user (e.g. by displaying arbitrary data on the device screen).
 3. Provide a mechanism allowing the user to verify that her device is **genuine**.
@@ -21,9 +22,9 @@ For the sake of clarity, some basic definitions are recalled. In particular, the
 
 ### Roles
 
-- **End user**: The end user is the happy owner of a Ledger Nano S/X. She has physical access to the device.
-- **Firmware developer**: Only some Ledger employees can develop the Firmware of the Ledger Nano devices. They are in charge of developing the OS and its cryptographic library.
-- **App developer**: Anyone can develop an app running on top of the Ledger Nano S OS (BOLOS). Developing on Ledger Nano X requires Ledger authorization though.
+- **End user**: The end user is the happy owner of a Ledger device. She has physical access to the device.
+- **Firmware developer**: Only some Ledger employees can develop the Firmware of the Ledger devices. They are in charge of developing the OS and its cryptographic library.
+- **App developer**: Anyone can develop an app running on top of the Ledger devices' OS (BOLOS), at the execption of developing on Ledger Nano X which requires Ledger authorization though.
 - **HSM**: Hardware Security Modules are basically remote computers able to check the device genuineness and perform privileged operations (install/remove apps, update firmware) on the devices.
 
 ### Key Usage Scenarios
@@ -34,19 +35,26 @@ For the sake of clarity, some basic definitions are recalled. In particular, the
 
 ### High Level Architecture
 
-The Ledger Nano S and Nano X are composed of:
+The Ledger devices are composed of:
 
-- A Secure Element (ST31 for Nano S, ST33 for Nano X)
-- A general purpose MCU (STM32F042 for Nano S, STM32WB55 for Nano S)
+- A Secure Element (ST31 for Nano S, ST33 for Nano S Plus, Nano X, Stax and Flex)
+- A general purpose MCU (STM32F042 for Nano S and Nano S Plus, STM32WB55 for Nano X, STM32WB35 for Stax and Flex)
+- A NFC communication chip (ST25R3916 for Stax and Flex)
 - External peripherals: screen, buttons
 
-The following schema describes the architecture of the Nano S. On the Nano X,
-the buttons and the screen are directly connected to the Secure Element.
+The following schema describes the architecture of the Nano S.
 
-![Ledger Nano Architecture](architecture.png)
+![Ledger Nano Architecture](architecture_nanos.png)
 
+On the Nano S Plus and Nano X, the buttons and the screen are directly connected to the Secure Element. BLE is only present on Nano X.
 
-# Security Mechanisms
+![Ledger Nano Architecture](architecture_nanox.png)
+
+On the Stax and Flex, the touch screen and display are directly connected to the Secure Element.
+
+![Ledger Nano Architecture](architecture_stax.png)
+
+## Security Mechanisms
 
 Several security mechanisms are implemented at different levels. In the following we'll distinguish device security mechanisms, OS security mechanisms and app security mechanisms.
 
