@@ -18,6 +18,7 @@ navigation: # Navigation links
   - { name: "Bounty", link: "/bounty" }
   - { name: "Security Bulletins", link: "/lsb" }
   - { name: "Threat Model", link: "/threat-model" }
+  - { name: "Tools Suite", link: "/tools-suite" }
   - { name: "About", link: "/about" }
   - { name: "Contact", link: "/contact" }
 
@@ -28,6 +29,8 @@ collections:
   lsb:
     output: true
   threat-model:
+    output: true
+  tools-suite:
     output: true
 
 hero_img: posts/sleek_lg.jpg # Main background image: use the path from /assets/img/ => This will output /assets/img/posts/sleek_lg.jpg
