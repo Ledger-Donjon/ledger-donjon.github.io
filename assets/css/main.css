@@ -513,10 +513,10 @@ h6 {
 }
 
 a {
-  color: #ef7f24;
+  color: #ff5300;
   text-decoration: none;
   transition: all .2s linear;
-  border-bottom: 1px dashed #ef7f24;
+  border-bottom: 1px dashed #ff5300;
 }
 
 a:active,
@@ -526,8 +526,8 @@ a:focus {
 
 a:hover,
 a:focus {
-  color: #f1a668;
-  border-bottom: 1px solid #f1a668;
+  color: #ff7533;
+  border-bottom: 1px solid #ff7533;
 }
 
 hr {
@@ -726,7 +726,7 @@ pre>code {
 .header__link_out,
 .header__link_out:focus {
   padding: 1rem;
-  background: #f1a668;
+  background: #ff7533;
   color: white;
   border: none;
   border-radius: 4px;
@@ -737,7 +737,7 @@ pre>code {
 
 .header__link_out:hover {
   color: white;
-  background: #ef7f24;
+  background: #ff5300;
 }
 
 .header__toggle {
@@ -834,7 +834,7 @@ pre>code {
     height: 3px;
     width: 100%;
     transform: scaleX(0);
-    background: #ef7f24;
+    background: #ff5300;
     transition: color 0.2s ease-in-out, transform .2s ease-in-out;
   }
 
@@ -866,7 +866,7 @@ footer a {
 
 footer a:hover,
 footer a:focus {
-  color: #ef7f24;
+  color: #ff5300;
   border-bottom: 0;
 }
 
@@ -1077,8 +1077,8 @@ button:disabled :focus {
 .label:focus,
 .label:hover {
   color: #fff;
-  background-color: #ef7f24;
-  border: 2px solid #ef7f24;
+  background-color: #ff5300;
+  border: 2px solid #ff5300;
 }
 
 .pagination {
@@ -1101,7 +1101,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #ef7f24;
+  border-color: #ff5300;
   transition: border-color .25s;
 }
 
@@ -1119,7 +1119,7 @@ textarea:focus {
   left: 0;
   width: 0;
   height: 2px;
-  background: #ef7f24;
+  background: #ff5300;
   z-index: 5;
   transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
   transition-delay: .1s;
@@ -1132,7 +1132,7 @@ textarea:focus {
   left: 0;
   width: 0;
   height: 2px;
-  background: #ff6161;
+  background: #ff4000;
   z-index: 4;
   transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
 }
@@ -1162,15 +1162,15 @@ textarea:focus {
 }
 
 .error input {
-  border-bottom-color: #ff6161;
+  border-bottom-color: #ff4000;
 }
 
 .error textarea {
-  border-bottom-color: #ff6161;
+  border-bottom-color: #ff4000;
 }
 
 .error-data {
-  color: #ff6161;
+  color: #ff4000;
   font-size: 14px;
   position: absolute;
   left: 0;
@@ -1781,10 +1781,10 @@ table td {
 }
 
 .controls__item a:hover {
-  color: #ef7f24;
+  color: #ff5300;
   border-bottom: 0;
 }
 
 .controls__item a:hover svg {
-  fill: #ef7f24;
+  fill: #ff5300;
 }
