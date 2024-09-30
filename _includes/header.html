@@ -3,23 +3,23 @@
     <div class="header__inner">
       <a class="header__logo" href="{{ '/' | relative_url }}">
         <div class="header__logo--container">
-          <img class="site_logo" src="/assets/donjonlogo.png" style="height:40px;">
-        </div>
-        <div> 
-          <p style="margin-bottom:0;font-weight:500;font-size:1.25em;">Ledger <strong>Donjon</strong></p>
+          <img class="site_logo" src="/assets/ledgerdonjon_banner.png">
         </div>
       </a>
       <nav class="header__links">
         <div class="container header__links-wrapper">
           {% for item in site.navigation %}
-            <a class="header__link" href="{{ item.link | relative_url }}" itemprop="url">
-              <span itemprop="name">{{ item.name }}</span>
-            </a>
+          <a class="header__link" href="{{ item.link | relative_url }}" itemprop="url">
+            <span itemprop="name">{{ item.name }}</span>
+          </a>
           {% endfor %}
-          <a target="_blank" rel="noreferrer" rel="noopener" class="header__link_out" href="https://www.ledger.com/blog/category/donjon" itemprop="url">
+          <a target="_blank" rel="noreferrer" rel="noopener" class="header__link_out"
+            href="https://www.ledger.com/blog/category/donjon" itemprop="url">
             <span itemprop="name">Blog</span>
-            <svg style="margin-left: 8px" width="16" height="16" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-              <path d="m20 20h-16v-15.94l4-0.05952v-4h-8v24h24v-10h-4zm-8-20 4 4-6 6 4 4 6-6 4 4v-12z" stroke-width=".03125"/>
+            <svg style="margin-left: 8px" width="16" height="16" version="1.1" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <path d="m20 20h-16v-15.94l4-0.05952v-4h-8v24h24v-10h-4zm-8-20 4 4-6 6 4 4 6-6 4 4v-12z"
+                stroke-width=".03125" />
             </svg>
           </a>
         </div>
