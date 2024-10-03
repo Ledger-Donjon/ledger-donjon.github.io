@@ -44,14 +44,15 @@
     color: $heading-color;
     border-bottom: 0;
   }
+}
 
-  .header__logo--container {
-    width: 40px;
+.header__logo--container {
+  height: 40px;
+  width: 184px;
+}
 
-    .logo {
-      fill: currentColor;
-    }
-  }
+.logo {
+  fill: currentColor;
 }
 
 .header__inner {
@@ -129,7 +130,7 @@
   width: 0;
   height: 0;
   opacity: 0;
-  background-color: rgba(0, 0 , 0, .75);
+  background-color: rgba(0, 0, 0, .75);
   z-index: 2;
   transition: opacity 1s ease 0.1s;
 

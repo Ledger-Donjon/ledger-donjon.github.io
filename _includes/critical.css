@@ -231,7 +231,8 @@ a:focus {
 }
 
 .header__logo .header__logo--container {
-    width: 38px
+    height: 40px;
+    width: 184px;
 }
 
 .header__logo .header__logo--container .logo {
@@ -536,7 +537,6 @@ table {
 }
 
 .header__link_out {
-    padding: .938rem 0;
     border-top: 1px solid #ededed;
     padding: 1rem;
     background: #ff7533;
