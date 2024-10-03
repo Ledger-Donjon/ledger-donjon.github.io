@@ -58,8 +58,12 @@
     {% include critical.css %}
   </style>
   <link rel="preload" href="{{ '/assets/css/main.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="stylesheet" href="{{ '/assets/css/tools-suite.css' | relative_url }}">
   <noscript>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </noscript>
+  <noscript>
+    <link rel="stylesheet" href="{{ '/assets/css/tools-suite.css' | relative_url }}">
   </noscript>
   <script type="text/javascript">
     {% include loadCss.js %}
