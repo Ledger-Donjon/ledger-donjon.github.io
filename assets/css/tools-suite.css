@@ -1,0 +1,43 @@
+/* CSS Specific for tools-suite page */
+.tool-cards-container {
+    /* background: #ff7533; */
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    background: rgb(249, 249, 249);
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #c3c3c3;
+    width: 30%;
+    min-height: 200px;
+}
+
+.tool-card-separator {
+    content: "";
+    border: #c3c3c3;
+}
+
+.tool-card>*:last-child {
+    width: 100%;
+    flex: 0;
+    margin-bottom: 0;
+    /* border-top: 1px solid #c3c3c3; */
+}
+
+.tool-card>*:not(:last-child) {
+    flex: 2;
+}
+
+.tool-card-repo-link {
+    margin-bottom: 2px;
+    flex-grow: 0;
+}
