@@ -81,11 +81,11 @@ input source.
 
 #### Shutter Controller
 
-![Shutter Controller's photograph](/assets/img/tools-suite/shuttercontroller.png)
+![Shutter Controller's photograph](/assets/img/tools-suite/shutter-controller.png)
 
 A low-cost motorized add-on to control a mechanical shutter.
 
-[Repository](https://github.com/Ledger-Donjon/shuttercontroller/)
+[Repository](https://github.com/Ledger-Donjon/shutter-controller/)
 
 </div>
 </div>
