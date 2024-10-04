@@ -6,7 +6,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 10px;
 }
 
@@ -16,6 +16,14 @@
     align-items: center;
     width: 30%;
     min-height: 200px;
+    transition: transform .3s;
+}
+
+.tool-card:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    z-index: 5;
 }
 
 .tool-card>* {
@@ -51,11 +59,19 @@
 }
 
 .tool-card img {
-    padding: 2px;
+    padding: 5px;
+    max-width: 80%;
 }
 
+.tool-card p:has(img) {
+    text-align: center;
+}
 
 .tool-card ul {
     padding: revert;
     padding-inline-start: 20px;
+}
+
+* {
+    scroll-behavior: smooth;
 }
