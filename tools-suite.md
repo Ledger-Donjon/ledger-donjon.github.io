@@ -6,24 +6,31 @@ permalink: /tools-suite/
 
 ## Ledger Donjon's Tools Suite
 
-The Security Team working in the Donjon develops their own tools for their research and assessments.
-Most of these tools are intended to be shared with the community, by provinding their source code in
-order to permit people to contribute on their development.
+The Security Team working in the Donjon develops their own tools for
+their research and assessments. Most of these tools are intended to
+be shared with the community by providing their source code in
+order to allow people to contribute to their development.
 
-This page presents these tools in different categories, Software and Hardware related.
+This page presents these tools in different categories,
+[Software](#software-tools) and [Hardware](#hardware-attack-tools) related.
 
-You can also checkout the [Ledger-Donjon Git organization](https://github.com/Ledger-Donjon).
+You can also check out the [Ledger-Donjon Git organization](https://github.com/Ledger-Donjon).
 
 ### Software Tools
 
 <div class="tool-cards-container">
-    <div class="tool-card">
-        <h3>cargo-checkct</h3>
-        <p>Written in Rust, it verifies formarly if a code is compiled down to constant-time machine code.</p>
-        <p>More information on <a href="https://www.ledger.com/blog-cargo-checkct-our-home-made-tool-guarding-against-timing-attacks-is-now-open-source">this article</a>.</p>
-        <div class="tool-card-separator"></div>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/cargo-checkct/">Repository</a></p>
-    </div>
+<div class="tool-card" markdown="1">
+
+#### cargo-checkct
+
+Written in Rust, it verifies formally if a code is compiled down to
+constant-time machine code.
+
+More information in [this article](https://www.ledger.com/blog-cargo-checkct-our-home-made-tool-guarding-against-timing-attacks-is-now-open-source).
+
+[Repository](https://github.com/Ledger-Donjon/cargo-checkct).
+
+</div>
 </div>
 
 ### Hardware Attack Tools
@@ -31,68 +38,130 @@ You can also checkout the [Ledger-Donjon Git organization](https://github.com/Le
 #### Boards
 
 <div class="tool-cards-container">
-    <div class="tool-card">
-        <h3>Scaffold</h3>
-        <img alt="Scaffold photograph" class=""/>
-        <p>Multi-purpose board to control devices with embedded.</p>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/scaffold/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Curmea</h3>
-        <p>Simple board for differential current analysis.</p>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/curmea/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Silicon Toaster</h3>
-        <p>Board to inject electromagnetic pulses</p>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/curmea/">Repository</a></p>
-    </div>
+<div class="tool-card" markdown="1">
+
+#### Scaffold
+
+![Scaffold's photograph](/assets/img/tools-suite/board-anim.gif)
+Multi-purpose board to control devices with embedded features such as:
+
+- current consumption measurement,
+- multiple communication protocols (SPI, I<sup>2</sup>C, UART...),
+- command triggering,
+- pulse generators...
+
+[Repository](https://github.com/Ledger-Donjon/scaffold/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Curmea
+
+Simple board for differential current consumption measurement.
+
+[Repository](https://github.com/Ledger-Donjon/curmea/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Silicon Toaster
+
+Board to inject electromagnetic pulses from a bank of capacitors, that can be
+loaded to a programmable level of voltage, and discharged with a triggering
+input source.
+
+[Repository](https://github.com/Ledger-Donjon/curmea/)
+
+</div>
 </div>
 
 #### Software and utilities
 
-Usefull utilities while performing hardware attacks.
+Useful utilities while performing hardware attacks.
 
 <div class="tool-cards-container">
-    <div class="tool-card">
-        <h3>LaserStudio</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/laserstudio/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Pystages</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/pystages/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>PyPdm</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/pypdm/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Quicklog</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/quicklog/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Quicklog Explorer</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/quicklog-explorer/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Visplot</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/visplot/">Repository</a></p>
-    </div>
+<div class="tool-card" markdown="1">
+
+#### LaserStudio
+
+[Repository](https://github.com/Ledger-Donjon/laserstudio/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### pystages
+
+Python module for managing the positions of physical actuators,
+such as CNCs, Corvus, or Newport. Also provides a simple User Interface.
+
+[Repository](https://github.com/Ledger-Donjon/pystages/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### pyPDM
+
+[Repository](https://github.com/Ledger-Donjon/pypdm/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Quicklog
+
+Utility for creating logs during a fault injection campaign.
+
+[Repository](https://github.com/Ledger-Donjon/quicklog/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Quicklog Explorer
+
+GUI utility for observing logs generated by Quicklog.
+
+[Repository](https://github.com/Ledger-Donjon/quicklog-explorer/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Visplot
+
+.
+
+[Repository](https://github.com/Ledger-Donjon/visplot/)
+
+</div>
 </div>
 
-### Side Channel Tools
+#### Side-channel Tools
 
 <div class="tool-cards-container">
-    <div class="tool-card">
-        <h3>Muscat</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/muscat/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Scadl</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/scadl/">Repository</a></p>
-    </div>
-    <div class="tool-card">
-        <h3>Lascar</h3>
-        <p class="tool-card-repo-link"><a href="https://github.com/Ledger-Donjon/lascar/">Repository</a></p>
-    </div>
+<div class="tool-card" markdown="1">
+
+#### Muscat
+
+Side-channel analysis tool written in Rust for performance
+optimizations.
+
+[Repository](https://github.com/Ledger-Donjon/muscat/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Scadl
+
+Side-channel analysis tool with Deep-Learning features.
+
+[Repository](https://github.com/Ledger-Donjon/scadl/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Lascar
+
+Legacy side-channel tool.
+
+[Repository](https://github.com/Ledger-Donjon/lascar/)
+
+</div>
 </div>
