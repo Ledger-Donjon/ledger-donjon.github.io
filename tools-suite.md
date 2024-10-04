@@ -77,6 +77,17 @@ input source.
 [Repository](https://github.com/Ledger-Donjon/silicontoaster/)
 
 </div>
+<div class="tool-card" markdown="1">
+
+#### Shutter Controller
+
+![Shutter Controller's photograph](/assets/img/tools-suite/shuttercontroller.png)
+
+A low-cost motorized add-on to control a mechanical shutter.
+
+[Repository](https://github.com/Ledger-Donjon/shuttercontroller/)
+
+</div>
 </div>
 
 #### Software and utilities
@@ -149,6 +160,15 @@ GUI utility for viewing, filtering and plotting generated with [Quicklog](#quick
 A side-channel traces visualizer based on [vispy](https://github.com/vispy).
 
 [Repository](https://github.com/Ledger-Donjon/visplot/)
+
+</div>
+<div class="tool-card" markdown="1">
+
+#### Rainbow
+
+Makes Unicorn traces. Generic Side-Channel and Fault Injection simulator.
+
+[Repository](https://github.com/Ledger-Donjon/rainbow/)
 
 </div>
 </div>
