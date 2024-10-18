@@ -16,27 +16,12 @@ This page presents these tools in different categories,
 
 You can also check out the [Ledger-Donjon Git organization](https://github.com/Ledger-Donjon).
 
-### Software Attack & Analysis Tools {#software-tools}
-
-<div class="tool-cards-container">
-<div class="tool-card" markdown="1">
-
-#### cargo-checkct
-
-Written in Rust, it verifies formally if a software is compiled down to
-constant-time machine code.  
-More information in [this article](https://www.ledger.com/blog-cargo-checkct-our-home-made-tool-guarding-against-timing-attacks-is-now-open-source).
-
-[Repository](https://github.com/Ledger-Donjon/cargo-checkct).
-
-</div>
-</div>
-
 ### Hardware Attack & Analysis Tools {#hardware-tools}
 
 #### Boards
 
 <div class="tool-cards-container">
+
 <div class="tool-card" markdown="1">
 
 #### Scaffold
@@ -53,17 +38,19 @@ Multi-purpose board to control devices with embedded features such as:
 [Repository](https://github.com/Ledger-Donjon/scaffold/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Curmea
 
-![Curmea](/assets/img/tools-suite/curmeaH.png)
+![Curmea](/assets/img/tools-suite/curmea.png)
 
 Simple board for differential current consumption measurement.
 
 [Repository](https://github.com/Ledger-Donjon/curmea/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Silicon Toaster
@@ -77,13 +64,14 @@ input source.
 [Repository](https://github.com/Ledger-Donjon/silicontoaster/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Shutter Controller
 
 ![Shutter Controller's photograph](/assets/img/tools-suite/shutter-controller.png)
 
-A low-cost motorized add-on to control a mechanical shutter.
+A low-cost motorized add-on of optical tower on [ALPhA<sup>NOV</sup>](https://www.alphanov.com/)'s [Laser Microscope Station](https://www.alphanov.com/en/products-services/single-laser-fault-injection) to control a mechanical shutter.
 
 [Repository](https://github.com/Ledger-Donjon/shutter-controller/)
 
@@ -95,6 +83,7 @@ A low-cost motorized add-on to control a mechanical shutter.
 Useful utilities while performing hardware attacks.
 
 <div class="tool-cards-container">
+
 <div class="tool-card" markdown="1">
 
 #### Laser Studio
@@ -105,6 +94,7 @@ to conduct automatized evaluations.
 [Repository](https://github.com/Ledger-Donjon/laserstudio/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### pystages
@@ -114,11 +104,12 @@ to conduct automatized evaluations.
 Python module for managing the positions of physical actuators,
 such as CNCs, Corvus, or Newport.
 
-Also provides a simple User Interface.
+Also provides a simple User Interface to make easy and quick moves of actuators.
 
 [Repository](https://github.com/Ledger-Donjon/pystages/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### pyPDM
@@ -130,11 +121,12 @@ from [ALPhA<sup>NOV</sup>](https://www.alphanov.com/).
 [Repository](https://github.com/Ledger-Donjon/pypdm/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Quicklog
 
-Python module for creating logs during a fault injection campaign.
+Python module for creating log files during a fault injection campaign.
 
 It can link each entry to curve as binary data, for instance retrieved
 from an oscilloscope.
@@ -142,6 +134,7 @@ from an oscilloscope.
 [Repository](https://github.com/Ledger-Donjon/quicklog/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Quicklog Explorer
@@ -151,6 +144,7 @@ GUI utility for viewing, filtering and plotting generated with [Quicklog](#quick
 [Repository](https://github.com/Ledger-Donjon/quicklog-explorer/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Visplot
@@ -162,6 +156,7 @@ A side-channel traces visualizer based on [vispy](https://github.com/vispy).
 [Repository](https://github.com/Ledger-Donjon/visplot/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Rainbow
@@ -186,6 +181,7 @@ optimizations.
 [Repository](https://github.com/Ledger-Donjon/muscat/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Scadl
@@ -195,13 +191,30 @@ Side-channel analysis tool with Deep-Learning features.
 [Repository](https://github.com/Ledger-Donjon/scadl/)
 
 </div>
+
 <div class="tool-card" markdown="1">
 
 #### Lascar
 
-Side-channel python3 library.
+Our legacy side-channel python3 library.
 
 [Repository](https://github.com/Ledger-Donjon/lascar/)
+
+</div>
+</div>
+
+### Software Attack & Analysis Tools {#software-tools}
+
+<div class="tool-cards-container">
+<div class="tool-card" markdown="1">
+
+#### cargo-checkct
+
+Written in Rust, it verifies formally if a software is compiled down to
+constant-time machine code.  
+More information in [this article](https://www.ledger.com/blog-cargo-checkct-our-home-made-tool-guarding-against-timing-attacks-is-now-open-source).
+
+[Repository](https://github.com/Ledger-Donjon/cargo-checkct).
 
 </div>
 </div>

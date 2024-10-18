@@ -838,12 +838,12 @@ pre>code {
   }
 
   .header__link:hover {
-    color: #a14f0c;
+    color: #ff5300;
   }
 
   .header__link:hover::after,
-  .header__link :active::after,
-  .header__link :focus::after {
+  .header__link:active::after,
+  .header__link:focus::after {
     transform: scaleX(1);
     color: #a14f0c;
     transition: transform .2s ease-in-out;
