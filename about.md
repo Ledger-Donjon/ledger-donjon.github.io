@@ -13,11 +13,11 @@ From time to time, the team also works on improving the security of the ecosyste
 Punctually, the Donjon runs external security audit/consultancy.
 
 The Donjon fields of expertise are quite wide:
+
 - Software security
 - Hardware security
 - Cryptography
 
-The Donjon also believes in open-source. It open-sources most of its internal attack tools. 
+The Donjon also believes in open-source. It open-sources most of its internal attack tools.
 [GitHub Donjon](https://github.com/ledger-donjon)
 Pull requests are welcome.
-

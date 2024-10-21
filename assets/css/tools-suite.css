@@ -1,0 +1,77 @@
+/* CSS Specific for tools-suite page */
+.tool-cards-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: flex-start;
+    margin: 10px;
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    min-height: 200px;
+    transition: transform .3s;
+}
+
+.tool-card:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    z-index: 5;
+}
+
+.tool-card>* {
+    width: 100%;
+    padding-left: 5px;
+    background: rgb(249, 249, 249);
+    padding-right: 5px;
+    border-left: 1px solid #c3c3c3;
+    border-right: 1px solid #c3c3c3;
+    margin: 0;
+    font-size: small;
+    flex: 1;
+}
+
+.tool-card>*:last-child {
+    padding-bottom: 5px;
+    border: 1px solid #c3c3c3;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    flex: 0;
+    text-align: center;
+}
+
+.tool-card>*:first-child {
+    padding-top: 5px;
+    border: 1px solid #c3c3c3;
+    background: #ffe0d1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    flex: 0;
+    text-align: center;
+    font-size: initial;
+}
+
+.tool-card img {
+    padding: 10px;
+    max-height: 200px;
+}
+
+.tool-card p:has(img) {
+    text-align: center;
+}
+
+.tool-card ul {
+    padding: revert;
+    padding-inline-start: 20px;
+}
+
+* {
+    scroll-behavior: smooth;
+}

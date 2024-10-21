@@ -1,8 +1,8 @@
 # SITE CONFIGURATION
 title: Donjon # your site title
-author: CharlesLedger 
+author: CharlesLedger
 description: > # Meta description of Homepage
-   The whispers from the Donjon of Ledger. The latest news about security research at Ledger.
+  The whispers from the Donjon of Ledger. The latest news about security research at Ledger.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://donjon.ledger.com"
 
@@ -15,28 +15,30 @@ social:
 
 # THEME SETTINGS
 navigation: # Navigation links
-  - {name: 'Bounty', link: '/bounty'}
-  - {name: 'Security Bulletins', link: '/lsb'}
-  - {name: 'Threat Model', link: '/threat-model'}
-  - {name: 'About', link: '/about'}
-  - {name: 'Contact', link: '/contact'}
+  - { name: "Bounty", link: "/bounty" }
+  - { name: "Security Bulletins", link: "/lsb" }
+  - { name: "Threat Model", link: "/threat-model" }
+  - { name: "Tools Suite", link: "/tools-suite" }
+  - { name: "About", link: "/about" }
+  - { name: "Contact", link: "/contact" }
 
 tagline: >
-   The security research at Ledger
+  The security research at Ledger
 
 collections:
   lsb:
     output: true
   threat-model:
     output: true
+  tools-suite:
+    output: true
 
 hero_img: posts/sleek_lg.jpg # Main background image: use the path from /assets/img/ => This will output /assets/img/posts/sleek_lg.jpg
 
 email: donjon@ledger.fr # email for form submission
 
-twitter_username: donjonledger
-github_username:  ledger-donjon
-
+x_username: donjonledger
+github_username: ledger-donjon
 
 # google_tag_manager: GTM-XXXXXXX # Uncomment to enable GTM. Replace GTM-XXXXXXX with your GTM container ID
 
@@ -59,7 +61,7 @@ exclude:
   - gulpfile.js
   - sleek.jpg
 
-include: ['_pages']
+include: ["_pages"]
 permalink: /:title/
 
 compress_html:
