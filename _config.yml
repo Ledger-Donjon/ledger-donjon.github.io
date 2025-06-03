@@ -33,7 +33,7 @@ collections:
   tools-suite:
     output: true
 
-hero_img: posts/sleek_lg.jpg # Main background image: use the path from /assets/img/ => This will output /assets/img/posts/sleek_lg.jpg
+hero_img: posts/donjon-home_lg.jpg # Main background image: use the path from /assets/img/ => This will output /assets/img/posts/sleek_lg.jpg
 
 email: donjon@ledger.fr # email for form submission
 

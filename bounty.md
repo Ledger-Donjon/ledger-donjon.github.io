@@ -135,7 +135,7 @@ In mutual consultation, we can, if you desire, display a researcher’s name or 
 - Be respectful and professional in your communications and behavior.
 - Interactions should be at all times respectful and communicated in a professional manner and tone with a view to being beneficial to the report validation process. Creating unnecessary noise, sending rude emails, or spamming for an update are some examples which can be considered unprofessional behavior. These actions decrease triage efficiency and are not beneficial to you as the bug reporter or the program.
 - Hate speech, profanity, or any aggressive threats will not be tolerated in any form.
-- Only contact the Ledger Security Team through the email address mentioned above. Unless the program has intentionally provided a contact method to the bug reporter, contacting the security team “out-of-band” (eg. Reddit or Twitter) is a violation of this Code of Conduct.
+- Only contact the Ledger Security Team through the email address mentioned above. Unless the program has intentionally provided a contact method to the bug reporter, contacting the security team “out-of-band” (eg. Reddit or X) is a violation of this Code of Conduct.
 
 Violations of this Code of Conduct can result in a warning and/or ban of this Bug Bounty Program.
 
