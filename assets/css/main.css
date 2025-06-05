@@ -483,7 +483,7 @@ figure {
 
 body {
   background-color: #fff;
-  font-family: "MuseoSans_300", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Inter", "MuseoSans_300", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #514134;
@@ -1094,7 +1094,7 @@ textarea {
   border: 0;
   border-bottom: 2px solid #ededed;
   outline: none;
-  font-family: "MuseoSans_300", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Inter", "MuseoSans_300", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   background: transparent;
 }
 
