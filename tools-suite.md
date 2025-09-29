@@ -61,7 +61,7 @@ Board to inject electromagnetic pulses from a bank of capacitors, that can be
 loaded to a programmable level of voltage, and discharged with a triggering
 input source.
 
-[Repository](https://github.com/Ledger-Donjon/silicontoaster/)
+[Repository](https://github.com/Ledger-Donjon/silicon-toaster/)
 
 </div>
 
@@ -142,6 +142,18 @@ from an oscilloscope.
 GUI utility for viewing, filtering and plotting generated with [Quicklog](#quicklog).
 
 [Repository](https://github.com/Ledger-Donjon/quicklog-explorer/)
+
+</div>
+
+<div class="tool-card" markdown="1">
+
+#### Turboplot
+
+![Visplot](/assets/img/tools-suite/turboplot.png)
+
+A blazingly fast waveform renderer made for visualizing huge traces.
+
+[Repository](https://github.com/Ledger-Donjon/turboplot/)
 
 </div>
 

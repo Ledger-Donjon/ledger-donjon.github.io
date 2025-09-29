@@ -8,7 +8,8 @@ Ledger thanks the following security researchers for having contributed to the
 security of Ledger products through the Devices Bug Bounty program:
 
 ### 2025
- - Guanxing Wen from [Certik](https://www.certik.com/)
+
+- Guanxing Wen from [Certik](https://www.certik.com/)
 
 ### 2022
 
