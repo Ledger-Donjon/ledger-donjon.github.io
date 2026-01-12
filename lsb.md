@@ -13,6 +13,7 @@ through the [bug bounty program](/bounty/).
 
 | Date       | Title                                                           |
 |------------|-----------------------------------------------------------------|
+| 2025-01-25 | [LSB 021: Missing parameter validation during MCU firmware update](021) |
 | 2023-11-20 | [LSB 020: Ledger Live incorrectly parses some EIP-712 messages](020) |
 | 2023-05-11 | [LSB 019: Invalid addresses for certain miniscript policies](019) |
 | 2022-08-05 | [LSB 018: Invalid command processing on HSM firmware](018)      |
