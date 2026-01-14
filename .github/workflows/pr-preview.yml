@@ -36,8 +36,12 @@ jobs:
         if: github.event.action != 'closed'
         run: npm run build
         env:
-          PREVIEW_BASE: "/ledger-donjon-preview.github.io/pr-preview/pr-${{ github.event.number }}/"
+          PREVIEW_BASE: "/pr-preview/pr-${{ github.event.number }}/"
           PREVIEW_SITE: "https://ledger-donjon.github.io"
+
+      - name: Add .nojekyll for GitHub Pages
+        if: github.event.action != 'closed'
+        run: touch dist/.nojekyll
 
       - name: Deploy PR Preview
         if: github.event.action != 'closed'

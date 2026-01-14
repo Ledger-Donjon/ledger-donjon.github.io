@@ -1,11 +1,14 @@
 ---
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+
 const navigation = [
-  { name: 'Bounty', href: '/bounty/' },
-  { name: 'Security Bulletins', href: '/lsb/' },
-  { name: 'Threat Model', href: '/threat-model/' },
-  { name: 'Tools Suite', href: '/tools-suite/' },
-  { name: 'About', href: '/about/' },
-  { name: 'Contact', href: '/contact/' },
+  { name: 'Bounty', href: withBase('/bounty/') },
+  { name: 'Security Bulletins', href: withBase('/lsb/') },
+  { name: 'Threat Model', href: withBase('/threat-model/') },
+  { name: 'Tools Suite', href: withBase('/tools-suite/') },
+  { name: 'About', href: withBase('/about/') },
+  { name: 'Contact', href: withBase('/contact/') },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -13,8 +16,8 @@ const currentPath = Astro.url.pathname;
 
 <header class="header">
   <div class="header__container">
-    <a href="/" class="header__logo" aria-label="Ledger Donjon Home">
-      <img src="/ledgerdonjon_banner.png" alt="Ledger Donjon" class="header__logo-img" />
+    <a href={base} class="header__logo" aria-label="Ledger Donjon Home">
+      <img src={withBase('/ledgerdonjon_banner.png')} alt="Ledger Donjon" class="header__logo-img" />
     </a>
     
     <nav class="header__nav" aria-label="Main navigation">
