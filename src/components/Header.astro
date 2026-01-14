@@ -1,0 +1,209 @@
+---
+const navigation = [
+  { name: 'Bounty', href: '/bounty/' },
+  { name: 'Security Bulletins', href: '/lsb/' },
+  { name: 'Threat Model', href: '/threat-model/' },
+  { name: 'Tools Suite', href: '/tools-suite/' },
+  { name: 'About', href: '/about/' },
+  { name: 'Contact', href: '/contact/' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="header__container">
+    <a href="/" class="header__logo" aria-label="Ledger Donjon Home">
+      <img src="/ledgerdonjon_banner.png" alt="Ledger Donjon" class="header__logo-img" />
+    </a>
+    
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list">
+        {navigation.map((item) => (
+          <li>
+            <a 
+              href={item.href} 
+              class:list={['header__nav-link', { 'is-active': currentPath.startsWith(item.href) }]}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a 
+            href="https://www.ledger.com/blog/category/donjon" 
+            class="header__nav-link header__nav-link--external"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Blog
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <button class="header__toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style lang="scss">
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: rgba(10, 14, 20, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    
+    &__container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+    
+    &__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      
+      &-img {
+        height: 32px;
+        width: auto;
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+    
+    &__nav {
+      @media (max-width: 960px) {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--color-bg-primary);
+        padding: var(--space-6);
+        transform: translateX(100%);
+        transition: transform var(--transition-normal);
+        
+        &.is-open {
+          transform: translateX(0);
+        }
+      }
+    }
+    
+    &__nav-list {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      @media (max-width: 960px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-2);
+      }
+    }
+    
+    &__nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      
+      &:hover {
+        color: var(--color-text-primary);
+        background: var(--color-bg-hover);
+        text-decoration: none;
+      }
+      
+      &.is-active {
+        color: var(--color-accent-primary);
+        background: var(--color-accent-glow);
+      }
+      
+      &--external svg {
+        opacity: 0.5;
+        transition: opacity var(--transition-fast);
+      }
+      
+      &--external:hover svg {
+        opacity: 1;
+      }
+      
+      @media (max-width: 960px) {
+        padding: var(--space-4);
+        font-size: var(--text-base);
+      }
+    }
+    
+    &__toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      
+      span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--color-text-primary);
+        border-radius: 2px;
+        transition: all var(--transition-fast);
+      }
+      
+      &[aria-expanded="true"] {
+        span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+        span:nth-child(2) {
+          opacity: 0;
+        }
+        span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+      }
+      
+      @media (max-width: 960px) {
+        display: flex;
+      }
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.header__toggle');
+  const nav = document.querySelector('.header__nav');
+  
+  toggle?.addEventListener('click', () => {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+    nav?.classList.toggle('is-open');
+  });
+</script>
