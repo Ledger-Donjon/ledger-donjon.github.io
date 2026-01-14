@@ -42,6 +42,7 @@ const hardwareSoftware = [
     name: 'pystages',
     description: 'Python module for managing the positions of physical actuators, such as CNCs, Corvus, or Newport. Also provides a simple User Interface to make easy and quick moves of actuators.',
     image: withBase('/img/tools-suite/pystages.png'),
+    imageFit: 'contain',
     repo: 'https://github.com/Ledger-Donjon/pystages/'
   },
   {
@@ -132,7 +133,12 @@ const softwareTools = [
             <article class="tool-card">
               {tool.image && (
                 <div class="tool-card__image">
-                  <img src={tool.image} alt={tool.name} loading="lazy" />
+                  <img
+                    src={tool.image}
+                    alt={tool.name}
+                    loading="lazy"
+                    class:list={['tool-card__img', { 'tool-card__img--contain': tool.imageFit === 'contain' }]}
+                  />
                 </div>
               )}
               <div class="tool-card__content">
@@ -156,7 +162,12 @@ const softwareTools = [
             <article class="tool-card">
               {tool.image && (
                 <div class="tool-card__image">
-                  <img src={tool.image} alt={tool.name} loading="lazy" />
+                  <img
+                    src={tool.image}
+                    alt={tool.name}
+                    loading="lazy"
+                    class:list={['tool-card__img', { 'tool-card__img--contain': tool.imageFit === 'contain' }]}
+                  />
                 </div>
               )}
               <div class="tool-card__content">
@@ -302,6 +313,11 @@ const softwareTools = [
         object-fit: cover;
         transition: transform var(--transition-slow);
       }
+    }
+
+    &__img--contain {
+      object-fit: contain;
+      padding: var(--space-3);
     }
     
     &:hover &__image img {
