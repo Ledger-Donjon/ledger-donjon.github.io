@@ -1,17 +1,19 @@
 ---
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const currentYear = new Date().getFullYear();
 
 const links = {
   resources: [
-    { name: 'Security Bulletins', href: '/lsb/' },
-    { name: 'Threat Model', href: '/threat-model/' },
-    { name: 'Tools Suite', href: '/tools-suite/' },
-    { name: 'Bug Bounty', href: '/bounty/' },
+    { name: 'Security Bulletins', href: withBase('/lsb/') },
+    { name: 'Threat Model', href: withBase('/threat-model/') },
+    { name: 'Tools Suite', href: withBase('/tools-suite/') },
+    { name: 'Bug Bounty', href: withBase('/bounty/') },
   ],
   company: [
-    { name: 'About Donjon', href: '/about/' },
-    { name: 'Hall of Fame', href: '/hall-of-fame/' },
-    { name: 'Contact', href: '/contact/' },
+    { name: 'About Donjon', href: withBase('/about/') },
+    { name: 'Hall of Fame', href: withBase('/hall-of-fame/') },
+    { name: 'Contact', href: withBase('/contact/') },
     { name: 'Ledger.com', href: 'https://www.ledger.com', external: true },
   ],
   social: [
@@ -25,7 +27,7 @@ const links = {
   <div class="footer__container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <img src="/ledgerdonjon_banner.png" alt="Ledger Donjon" class="footer__logo" />
+        <img src={withBase('/ledgerdonjon_banner.png')} alt="Ledger Donjon" class="footer__logo" />
         <p class="footer__tagline">
           The security research team at Ledger.<br />
           Protecting your crypto assets.
