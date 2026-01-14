@@ -1,0 +1,260 @@
+---
+const currentYear = new Date().getFullYear();
+
+const links = {
+  resources: [
+    { name: 'Security Bulletins', href: '/lsb/' },
+    { name: 'Threat Model', href: '/threat-model/' },
+    { name: 'Tools Suite', href: '/tools-suite/' },
+    { name: 'Bug Bounty', href: '/bounty/' },
+  ],
+  company: [
+    { name: 'About Donjon', href: '/about/' },
+    { name: 'Hall of Fame', href: '/hall-of-fame/' },
+    { name: 'Contact', href: '/contact/' },
+    { name: 'Ledger.com', href: 'https://www.ledger.com', external: true },
+  ],
+  social: [
+    { name: 'GitHub', href: 'https://github.com/ledger-donjon', icon: 'github' },
+    { name: 'X (Twitter)', href: 'https://x.com/donjonledger', icon: 'twitter' },
+  ],
+};
+---
+
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/ledgerdonjon_banner.png" alt="Ledger Donjon" class="footer__logo" />
+        <p class="footer__tagline">
+          The security research team at Ledger.<br />
+          Protecting your crypto assets.
+        </p>
+      </div>
+      
+      <div class="footer__links">
+        <div class="footer__column">
+          <h4>Resources</h4>
+          <ul>
+            {links.resources.map((link) => (
+              <li><a href={link.href}>{link.name}</a></li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="footer__column">
+          <h4>Company</h4>
+          <ul>
+            {links.company.map((link) => (
+              <li>
+                <a 
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {link.name}
+                  {link.external && (
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="footer__column">
+          <h4>Connect</h4>
+          <div class="footer__social">
+            {links.social.map((link) => (
+              <a 
+                href={link.href} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                class="footer__social-link"
+              >
+                {link.icon === 'github' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                )}
+                {link.icon === 'twitter' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer__bottom">
+      <p>&copy; {currentYear} Ledger. All rights reserved.</p>
+      <p class="footer__legal">
+        <a href="https://www.ledger.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        <span>&middot;</span>
+        <a href="https://www.ledger.com/terms-and-conditions" target="_blank" rel="noopener">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  .footer {
+    margin-top: var(--space-24);
+    padding: var(--space-16) 0 var(--space-8);
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    
+    &__container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+    
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-16);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+      }
+    }
+    
+    &__brand {
+      max-width: 280px;
+    }
+    
+    &__logo {
+      height: 28px;
+      width: auto;
+      margin-bottom: var(--space-4);
+      filter: invert(1) hue-rotate(180deg);
+    }
+    
+    &__tagline {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+      line-height: var(--leading-relaxed);
+      margin: 0;
+    }
+    
+    &__links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      
+      @media (max-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    &__column {
+      h4 {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin-bottom: var(--space-4);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      li {
+        margin-bottom: var(--space-2);
+      }
+      
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        transition: color var(--transition-fast);
+        
+        &:hover {
+          color: var(--color-accent-primary);
+          text-decoration: none;
+        }
+        
+        svg {
+          opacity: 0.5;
+        }
+      }
+    }
+    
+    &__social {
+      display: flex;
+      gap: var(--space-3);
+    }
+    
+    &__social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+      
+      &:hover {
+        background: var(--color-accent-glow);
+        color: var(--color-accent-primary);
+      }
+    }
+    
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-12);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border);
+      
+      p {
+        font-size: var(--text-sm);
+        color: var(--color-text-tertiary);
+        margin: 0;
+      }
+      
+      @media (max-width: 640px) {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+      }
+    }
+    
+    &__legal {
+      display: flex;
+      gap: var(--space-3);
+      
+      a {
+        color: var(--color-text-tertiary);
+        
+        &:hover {
+          color: var(--color-text-secondary);
+        }
+      }
+    }
+  }
+</style>

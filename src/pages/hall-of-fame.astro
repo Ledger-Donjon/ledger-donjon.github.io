@@ -1,0 +1,283 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+
+const hallOfFame = [
+  {
+    year: 2025,
+    researchers: [
+      { name: 'Guanxing Wen', org: 'Certik', url: 'https://www.certik.com/' }
+    ]
+  },
+  {
+    year: 2022,
+    researchers: [
+      { name: 'Niv Yehezkel', org: 'Hexagate', url: 'https://www.hexagate.com/' }
+    ]
+  },
+  {
+    year: 2021,
+    researchers: [
+      { name: 'Timothée Isnard', org: 'Tanker', url: 'https://tanker.io' }
+    ]
+  },
+  {
+    year: 2020,
+    researchers: [
+      { name: 'Markus Alvila', org: 'Towo Labs', url: 'https://towolabs.com/' },
+      { name: "Tal Be'ery", org: 'Zengo', url: 'https://zengo.com/' },
+      { name: 'Dušan Klinec', org: null, url: null },
+      { name: 'Kraken Security Labs', org: 'Kraken', url: 'https://www.kraken.com/' },
+      { name: 'Sebastian Kung', org: null, url: null },
+      { name: 'Oded Leiba', org: 'Zengo', url: 'https://zengo.com/' },
+      { name: 'Saleem Rashid', org: null, url: null },
+      { name: 'Patrik Sletmo', org: 'Towo Labs', url: 'https://towolabs.com/' }
+    ]
+  },
+  {
+    year: 2019,
+    researchers: [
+      { name: 'Peter Perešíni', org: 'Vacuumlabs', url: 'https://vacuumlabs.com/' },
+      { name: 'Christian Reitter', org: null, url: null }
+    ]
+  },
+  {
+    year: 2018,
+    researchers: [
+      { name: 'Timothée Isnard', org: null, url: null },
+      { name: 'Sergey Lappo', org: 'Mycelium', url: 'https://mycelium.com/' },
+      { name: 'Saleem Rashid', org: null, url: null },
+      { name: 'Sergei Volokitin', org: null, url: null }
+    ]
+  }
+];
+---
+
+<Base title="Hall of Fame" description="Recognizing security researchers who have contributed to the security of Ledger products.">
+  <Hero 
+    title="Hall of Fame" 
+    subtitle="Recognizing the security researchers who have helped make Ledger products more secure."
+    size="sm" 
+  />
+  
+  <section class="content">
+    <div class="container">
+      <p class="intro">
+        Ledger thanks the following security researchers for having contributed to the
+        security of Ledger products through the Devices Bug Bounty program.
+      </p>
+      
+      <div class="timeline">
+        {hallOfFame.map((yearGroup) => (
+          <div class="timeline-year">
+            <div class="timeline-year__marker">
+              <span class="timeline-year__label">{yearGroup.year}</span>
+            </div>
+            <div class="timeline-year__content">
+              <ul class="researcher-list">
+                {yearGroup.researchers.map((researcher) => (
+                  <li class="researcher">
+                    <span class="researcher__name">{researcher.name}</span>
+                    {researcher.org && (
+                      <span class="researcher__org">
+                        {researcher.url ? (
+                          <a href={researcher.url} target="_blank" rel="noopener noreferrer">
+                            {researcher.org}
+                          </a>
+                        ) : (
+                          researcher.org
+                        )}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="cta-section">
+        <h2>Want to be featured here?</h2>
+        <p>
+          Discover vulnerabilities in Ledger products and get recognized for your contribution 
+          to the security of the crypto ecosystem.
+        </p>
+        <a href="/bounty/" class="btn-primary">
+          Join the Bug Bounty Program
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style lang="scss">
+  .content {
+    padding: var(--space-12) 0;
+  }
+  
+  .intro {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin-bottom: var(--space-12);
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 60px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--color-accent-primary), var(--color-border));
+      
+      @media (max-width: 640px) {
+        left: 30px;
+      }
+    }
+  }
+  
+  .timeline-year {
+    display: flex;
+    gap: var(--space-8);
+    margin-bottom: var(--space-10);
+    
+    @media (max-width: 640px) {
+      gap: var(--space-6);
+    }
+    
+    &__marker {
+      flex-shrink: 0;
+      width: 120px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding-right: var(--space-6);
+      position: relative;
+      
+      @media (max-width: 640px) {
+        width: 60px;
+        padding-right: var(--space-4);
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        right: -6px;
+        top: 8px;
+        width: 14px;
+        height: 14px;
+        background: var(--color-bg-primary);
+        border: 3px solid var(--color-accent-primary);
+        border-radius: 50%;
+      }
+    }
+    
+    &__label {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-accent-primary);
+      font-family: var(--font-mono);
+    }
+    
+    &__content {
+      flex: 1;
+      padding-top: var(--space-1);
+    }
+  }
+  
+  .researcher-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .researcher {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      border-color: var(--color-border-hover);
+      background: var(--color-bg-tertiary);
+    }
+    
+    &__name {
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+    
+    &__org {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+      
+      a {
+        color: var(--color-text-secondary);
+        
+        &:hover {
+          color: var(--color-accent-primary);
+        }
+      }
+      
+      &::before {
+        content: '·';
+        margin-right: var(--space-3);
+      }
+    }
+  }
+  
+  .cta-section {
+    margin-top: var(--space-16);
+    padding: var(--space-10);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    max-width: 600px;
+    
+    h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-3);
+    }
+    
+    p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+    }
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ledger-orange);
+    color: white;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    
+    &:hover {
+      background: var(--color-ledger-orange-hover);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+  }
+</style>

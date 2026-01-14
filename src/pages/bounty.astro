@@ -1,0 +1,349 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base title="Bug Bounty Program" description="Report security vulnerabilities in Ledger products and earn rewards.">
+  <Hero 
+    title="Bug Bounty Program" 
+    subtitle="Help us secure the future of digital assets. Report vulnerabilities and earn rewards."
+    size="sm" 
+  />
+  
+  <section class="content">
+    <div class="container">
+      <p class="lead">
+        Ledger believes in better security through openness. We welcome and value technical reports 
+        of vulnerabilities that could substantially affect the confidentiality or integrity of user 
+        data on Ledger devices or the security of our infrastructure.
+      </p>
+      
+      <div class="contact-box">
+        <p>
+          If you believe that you have discovered such a vulnerability, please report it at 
+          <strong>bounty -at- ledger.fr</strong> 
+          (<a href="/ledger-bounty.asc">GPG key</a> if necessary).
+        </p>
+        <p>
+          The Ledger Security Team will work with you to investigate, resolve the issue promptly 
+          and reward the first reporter of a vulnerability.
+        </p>
+      </div>
+      
+      <h2>Eligibility</h2>
+      
+      <p class="section-intro">Ledger Bug Bounty Program covers our hardware devices as well as our web services.</p>
+      
+      <div class="program-cards">
+          <div class="program-card">
+            <div class="program-card__icon">📟</div>
+            <h3>Devices Bug Bounty</h3>
+            <p>We are mainly interested in vulnerabilities that would eventually allow attackers to steal crypto assets from Ledger devices.</p>
+            
+            <h4>Scopes</h4>
+            <ul>
+              <li>Hardware attacks on the Ledger devices (i.e. hardware products)</li>
+              <li>Software attacks on the firmware running on the devices</li>
+              <li>Vulnerabilities in apps available through Ledger Live</li>
+            </ul>
+            
+            <h4>In-Scope Vulnerabilities</h4>
+            <ul>
+              <li>Bypass of the PIN</li>
+              <li>Arbitrary code execution on the SE</li>
+              <li>Arbitrary code execution on the MCU (without physical access)</li>
+              <li>Privilege escalation from an app</li>
+              <li>Bypass of user confirmation to issue a transaction</li>
+              <li>Sensitive memory leak</li>
+            </ul>
+          </div>
+          
+          <div class="program-card">
+            <div class="program-card__icon">🌐</div>
+            <h3>Web Bug Bounty</h3>
+            <p>We are interested in critical vulnerabilities in our infrastructure. In a nutshell, we are interested in real vulnerabilities, not in output of automated scanners.</p>
+            
+            <h4>Out-of-scope Vulnerabilities</h4>
+            <ul class="out-of-scope">
+              <li>Presence/absence of SPF/DMARC records</li>
+              <li>Lack of CSRF tokens</li>
+              <li>Clickjacking and tabnagging issues</li>
+              <li>Missing security headers which do not lead directly to a vulnerability</li>
+              <li>Missing best practices (we require evidence of a security vulnerability)</li>
+              <li>Reports from automated tools or scans</li>
+              <li>Reports of insecure SSL/TLS ciphers (unless you have a working proof of concept)</li>
+              <li>Absence of rate limiting</li>
+              <li>Editable Github wikis</li>
+              <li>Outdated software without any noteworthy vulnerability</li>
+              <li>Broken links</li>
+            </ul>
+          </div>
+          
+          <div class="program-card program-card--full">
+            <div class="program-card__icon">🕵</div>
+            <h3>Phishing Attempt Bounty</h3>
+            <p>We are also interested in any information allowing us to protect our users from attacks (Phishing, Smishing, Vishing, etc).</p>
+            <p>We have created a <strong>10 BTC fund</strong> for any information leading to successful arrest and prosecution.</p>
+            <p>To submit your bounty information, please use <strong>bounty-phishing - at - ledger.com</strong>.</p>
+            <p class="note">Payment will require meeting KYC requirements.</p>
+          </div>
+      </div>
+      
+      <div class="prose-section">
+        <h2>Responsible Disclosure Policy</h2>
+        
+        <p>
+          At Ledger, we believe that Coordinated Vulnerability Disclosure is the right approach to 
+          better protect users. When submitting a vulnerability report, you enter a form of cooperation 
+          in which you allow Ledger the opportunity to diagnose and remedy the vulnerability before 
+          disclosing its details to third parties and/or the general public.
+        </p>
+        
+        <p>
+          In return, Ledger commits that security researchers reporting bugs will be protected from 
+          legal liability, so long as they follow responsible disclosure guidelines and principles.
+        </p>
+        
+        <h3>Guidelines</h3>
+        
+        <ul>
+          <li>Do not engage in testing that degrades Ledger's information systems and products</li>
+          <li>Do not access, store, share or destroy Ledger or user data</li>
+          <li>Do not impact Ledger users, such as denial of service, social engineering or spam</li>
+          <li>Do not exploit vulnerabilities on our infrastructure — the Bounty Program is about improving security, not deliberately putting the community at risk</li>
+        </ul>
+        
+        <h2>Submission Process</h2>
+        
+        <p>
+          Submission reports should include a detailed description of your discovery with clear, 
+          concise steps allowing us to reproduce the issue, or a working proof-of-concept.
+        </p>
+        
+        <p>
+          Low quality reports, such as those that include inadequate information to investigate, 
+          may incur significant delays in the disclosure process. Please only submit one report per issue.
+        </p>
+        
+        <p>
+          All communications between you and Ledger should go through <strong>bounty -at- ledger.fr</strong>. 
+          Please use our <a href="/ledger-bounty.asc">GPG key</a> as necessary.
+        </p>
+        
+        <p>The Ledger Security Team will be in touch, usually within 24 hours.</p>
+        
+        <h2>Remediation & Disclosure</h2>
+        
+        <p>
+          After triage, we will send a quick acknowledgement and commit to being as transparent 
+          as possible about the remediation timeline as well as on issues or challenges that may extend it.
+        </p>
+        
+        <p>
+          Ledger has a <strong>90-day disclosure policy</strong>, which means that we do our best to 
+          fix issues within 90 days upon receipt of a vulnerability report.
+        </p>
+        
+        <h2>Reward</h2>
+        
+        <p>You may be eligible to receive a reward if:</p>
+        
+        <ul>
+          <li>You are the first person to submit a given vulnerability</li>
+          <li>That vulnerability is determined to be a valid security issue by the Ledger Security Team</li>
+          <li>You have complied with the Ledger Bug Bounty program policy and guidelines</li>
+        </ul>
+        
+        <p>
+          The decision to grant a reward for the discovery of a valid security issue is at Ledger's 
+          sole discretion. The amount of each bounty is based on the classification and sensitivity 
+          of the data impacted, the completeness of your Submission report, ease of exploit and 
+          overall risk for Ledger's users and brand.
+        </p>
+        
+        <p><strong>Bounties will be paid directly to the researcher using Bitcoin.</strong></p>
+        
+        <h3>Eligibility Requirements</h3>
+        
+        <p>To be eligible for a reward, you must not:</p>
+        
+        <ul>
+          <li>Be a resident of, or make your vulnerability submission from, a country against which France has issued export sanctions or other trade restrictions</li>
+          <li>Be in violation of any national, state, or local law or regulation</li>
+          <li>Be employed by Ledger or its subsidiaries or affiliates</li>
+          <li>Be an immediate family member of a person employed by Ledger or its subsidiaries or affiliates</li>
+          <li>Be less than 18 years of age (if under 18, you must get your parents' or legal guardian's permission)</li>
+        </ul>
+        
+        <h2>Hall of Fame</h2>
+        
+        <p>
+          In mutual consultation, we can, if you desire, display a researcher's name or its pseudonym 
+          as the discoverer of the reported vulnerability on our website's 
+          <a href="/hall-of-fame/">Hall of Fame</a>. Please note that the Hall of Fame is dedicated 
+          to the Devices Bug Bounty Program.
+        </p>
+        
+        <h2>Code of Conduct</h2>
+        
+        <ul>
+          <li>Be kind</li>
+          <li>Be respectful and professional in your communications and behavior</li>
+          <li>Hate speech, profanity, or any aggressive threats will not be tolerated</li>
+          <li>Only contact the Ledger Security Team through the email address mentioned above</li>
+        </ul>
+        
+        <p class="note">
+          Violations of this Code of Conduct can result in a warning and/or ban of this Bug Bounty Program.
+        </p>
+        
+        <p class="disclaimer">
+          <em>This is an experimental and discretionary rewards program. We may modify the terms of 
+          this program or terminate this program at any time without notice.</em>
+        </p>
+        
+        <p class="disclaimer">
+          <em>Parts of the program are inspired by 
+          <a href="https://hackerone.com/dropbox">Dropbox Bug Bounty Program</a> and 
+          <a href="https://www.hackerone.com/policies/code-of-conduct">HackerOne Code of Conduct</a>.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style lang="scss">
+  .content {
+    padding: var(--space-12) 0;
+  }
+  
+  .lead {
+    font-size: var(--text-xl);
+    color: var(--color-text-primary);
+    max-width: 800px;
+    margin-bottom: var(--space-6);
+  }
+  
+  h2 {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+  }
+  
+  .section-intro {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+  
+  .contact-box {
+    padding: var(--space-6);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-accent-primary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-10);
+    max-width: 800px;
+    
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .program-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    margin: var(--space-8) 0;
+    
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .prose-section {
+    max-width: 800px;
+    
+    p, ul {
+      color: var(--color-text-secondary);
+    }
+    
+    ul {
+      padding-left: var(--space-6);
+      
+      li {
+        margin-bottom: var(--space-2);
+      }
+    }
+  }
+  
+  .program-card {
+    padding: var(--space-6);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    
+    &--full {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(255, 83, 0, 0.1), transparent);
+      border-color: var(--color-ledger-orange);
+    }
+    
+    &__icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-4);
+    }
+    
+    h3 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+    
+    h4 {
+      font-size: var(--text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-5);
+      margin-bottom: var(--space-3);
+    }
+    
+    ul {
+      padding-left: var(--space-5);
+      margin: 0;
+      
+      li {
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-2);
+      }
+    }
+    
+    .out-of-scope li {
+      color: var(--color-text-tertiary);
+    }
+  }
+  
+  .note {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+  
+  .disclaimer {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+    margin-top: var(--space-8);
+  }
+</style>

@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base title="Contact" description="Get in touch with the Ledger Donjon security research team.">
+  <Hero title="Contact Us" size="sm" />
+  
+  <section class="content">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h2>Email</h2>
+          <p>For general inquiries, research collaboration, or security consultancy:</p>
+          <a href="mailto:donjon@ledger.fr" class="contact-link">
+            donjon@ledger.fr
+          </a>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </div>
+          <h2>X (Twitter)</h2>
+          <p>Follow us for the latest security research updates. Our DMs are open!</p>
+          <a href="https://x.com/donjonledger" class="contact-link" target="_blank" rel="noopener noreferrer">
+            @donjonledger
+          </a>
+        </div>
+        
+        <div class="contact-card contact-card--highlight">
+          <div class="contact-icon contact-icon--warning">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+          </div>
+          <h2>Security Vulnerabilities</h2>
+          <p>
+            If you believe you have found a security vulnerability on Ledger's products, 
+            please visit our dedicated bounty program page.
+          </p>
+          <a href="/bounty/" class="btn-primary">
+            Bug Bounty Program
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style lang="scss">
+  .content {
+    padding: var(--space-12) 0;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+    max-width: 1000px;
+  }
+  
+  .contact-card {
+    padding: var(--space-8);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    
+    h2 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+    
+    p {
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+    
+    &--highlight {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+      border-color: var(--color-ledger-orange);
+    }
+  }
+  
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-glow);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-5);
+    
+    svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-accent-primary);
+    }
+    
+    &--warning {
+      background: rgba(255, 83, 0, 0.15);
+      
+      svg {
+        color: var(--color-ledger-orange);
+      }
+    }
+  }
+  
+  .contact-link {
+    display: inline-block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ledger-orange);
+    color: white;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    
+    &:hover {
+      background: var(--color-ledger-orange-hover);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+  }
+</style>

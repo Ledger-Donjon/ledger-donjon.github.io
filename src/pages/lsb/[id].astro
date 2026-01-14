@@ -1,0 +1,193 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const bulletins = await getCollection('lsb');
+  return bulletins.map((bulletin) => ({
+    params: { id: bulletin.id.replace('.md', '') },
+    props: { bulletin },
+  }));
+}
+
+const { bulletin } = Astro.props;
+const { Content } = await render(bulletin);
+const id = bulletin.id.replace('.md', '');
+
+// Get adjacent bulletins for navigation
+const allBulletins = await getCollection('lsb');
+const sortedBulletins = allBulletins.sort((a, b) => {
+  const numA = parseInt(a.id.replace('.md', ''));
+  const numB = parseInt(b.id.replace('.md', ''));
+  return numA - numB;
+});
+
+const currentIndex = sortedBulletins.findIndex(b => b.id === bulletin.id);
+const prevBulletin = currentIndex > 0 ? sortedBulletins[currentIndex - 1] : null;
+const nextBulletin = currentIndex < sortedBulletins.length - 1 ? sortedBulletins[currentIndex + 1] : null;
+---
+
+<Base 
+  title={bulletin.data.title}
+  description={bulletin.data.summary || `Ledger Security Bulletin ${id}`}
+>
+  <article class="bulletin">
+    <div class="container">
+      <header class="bulletin__header">
+        <a href="/lsb/" class="bulletin__back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          All Bulletins
+        </a>
+        <span class="bulletin__badge">LSB {id}</span>
+        <h1>{bulletin.data.title}</h1>
+        {bulletin.data.summary && (
+          <p class="bulletin__summary">{bulletin.data.summary}</p>
+        )}
+      </header>
+      
+      <div class="bulletin__content prose">
+        <Content />
+      </div>
+      
+      <nav class="bulletin__nav">
+        {prevBulletin && (
+          <a href={`/lsb/${prevBulletin.id.replace('.md', '')}/`} class="bulletin__nav-link bulletin__nav-link--prev">
+            <span class="bulletin__nav-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              Previous
+            </span>
+            <span class="bulletin__nav-title">LSB {prevBulletin.id.replace('.md', '')}</span>
+          </a>
+        )}
+        {nextBulletin && (
+          <a href={`/lsb/${nextBulletin.id.replace('.md', '')}/`} class="bulletin__nav-link bulletin__nav-link--next">
+            <span class="bulletin__nav-label">
+              Next
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+            <span class="bulletin__nav-title">LSB {nextBulletin.id.replace('.md', '')}</span>
+          </a>
+        )}
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style lang="scss">
+  .bulletin {
+    padding: var(--space-12) 0;
+    
+    &__header {
+      max-width: var(--max-width-prose);
+      margin-bottom: var(--space-10);
+      
+      h1 {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-4);
+        
+        @media (max-width: 768px) {
+          font-size: var(--text-3xl);
+        }
+      }
+    }
+    
+    &__back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+      
+      &:hover {
+        color: var(--color-accent-primary);
+      }
+    }
+    
+    &__badge {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--color-accent-primary);
+      background: var(--color-accent-glow);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-4);
+    }
+    
+    &__summary {
+      font-size: var(--text-xl);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    
+    &__content {
+      max-width: var(--max-width-prose);
+    }
+    
+    &__nav {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-6);
+      max-width: var(--max-width-prose);
+      margin-top: var(--space-16);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+      
+      @media (max-width: 640px) {
+        flex-direction: column;
+      }
+    }
+    
+    &__nav-link {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-4);
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      min-width: 0;
+      flex: 1;
+      
+      &:hover {
+        border-color: var(--color-accent-primary);
+        background: var(--color-bg-tertiary);
+        text-decoration: none;
+      }
+      
+      &--prev {
+        align-items: flex-start;
+      }
+      
+      &--next {
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+    
+    &__nav-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-tertiary);
+    }
+    
+    &__nav-title {
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+  }
+</style>
