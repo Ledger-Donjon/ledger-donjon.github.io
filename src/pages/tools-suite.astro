@@ -2,29 +2,32 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+
 const hardwareBoards = [
   {
     name: 'Scaffold',
     description: 'Multi-purpose board to control devices with embedded features such as: current consumption measurement, multiple communication protocols (SPI, I²C, UART...), command triggering, pulse generators...',
-    image: '/img/tools-suite/scaffold-board.png',
+    image: withBase('/img/tools-suite/scaffold-board.png'),
     repo: 'https://github.com/Ledger-Donjon/scaffold/'
   },
   {
     name: 'Curmea',
     description: 'Simple board for differential current consumption measurement.',
-    image: '/img/tools-suite/curmea.png',
+    image: withBase('/img/tools-suite/curmea.png'),
     repo: 'https://github.com/Ledger-Donjon/curmea/'
   },
   {
     name: 'Silicon Toaster',
     description: 'Board to inject electromagnetic pulses from a bank of capacitors, that can be loaded to a programmable level of voltage, and discharged with a triggering input source.',
-    image: '/img/tools-suite/silicontoaster.png',
+    image: withBase('/img/tools-suite/silicontoaster.png'),
     repo: 'https://github.com/Ledger-Donjon/silicon-toaster/'
   },
   {
     name: 'Shutter Controller',
     description: "A low-cost motorized add-on of optical tower on ALPhANOV's Laser Microscope Station to control a mechanical shutter.",
-    image: '/img/tools-suite/shutter-controller.png',
+    image: withBase('/img/tools-suite/shutter-controller.png'),
     repo: 'https://github.com/Ledger-Donjon/shutter-controller/'
   }
 ];
@@ -38,7 +41,7 @@ const hardwareSoftware = [
   {
     name: 'pystages',
     description: 'Python module for managing the positions of physical actuators, such as CNCs, Corvus, or Newport. Also provides a simple User Interface to make easy and quick moves of actuators.',
-    image: '/img/tools-suite/pystages.png',
+    image: withBase('/img/tools-suite/pystages.png'),
     repo: 'https://github.com/Ledger-Donjon/pystages/'
   },
   {
@@ -59,13 +62,13 @@ const hardwareSoftware = [
   {
     name: 'Turboplot',
     description: 'A blazingly fast waveform renderer made for visualizing huge traces.',
-    image: '/img/tools-suite/turboplot.png',
+    image: withBase('/img/tools-suite/turboplot.png'),
     repo: 'https://github.com/Ledger-Donjon/turboplot/'
   },
   {
     name: 'Visplot',
     description: 'A side-channel traces visualizer based on vispy.',
-    image: '/img/tools-suite/visplot.gif',
+    image: withBase('/img/tools-suite/visplot.gif'),
     repo: 'https://github.com/Ledger-Donjon/visplot/'
   },
   {

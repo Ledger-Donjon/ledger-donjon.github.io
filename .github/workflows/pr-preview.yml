@@ -39,10 +39,6 @@ jobs:
           PREVIEW_BASE: "/pr-preview/pr-${{ github.event.number }}/"
           PREVIEW_SITE: "https://ledger-donjon.github.io"
 
-      - name: Add .nojekyll for GitHub Pages
-        if: github.event.action != 'closed'
-        run: touch dist/.nojekyll
-
       - name: Deploy PR Preview
         if: github.event.action != 'closed'
         uses: JamesIves/github-pages-deploy-action@v4
@@ -54,6 +50,24 @@ jobs:
           target-folder: pr-preview/pr-${{ github.event.number }}
           clean: false
           commit-message: "Deploy preview for PR #${{ github.event.number }}"
+
+      - name: Ensure .nojekyll at preview root
+        if: github.event.action != 'closed'
+        run: |
+          mkdir -p preview-root
+          touch preview-root/.nojekyll
+
+      - name: Deploy .nojekyll to preview root
+        if: github.event.action != 'closed'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.PREVIEW_DEPLOY_TOKEN }}
+          repository-name: Ledger-Donjon/ledger-donjon-preview.github.io
+          branch: gh-pages
+          folder: ./preview-root
+          target-folder: .
+          clean: false
+          commit-message: "Ensure .nojekyll at preview root"
 
       - name: Checkout preview repo for cleanup
         if: github.event.action == 'closed'
