@@ -15,6 +15,7 @@ concurrency:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    environment: preview
     steps:
       - name: Checkout
         if: github.event.action != 'closed'
@@ -35,13 +36,38 @@ jobs:
         if: github.event.action != 'closed'
         run: npm run build
         env:
-          PREVIEW_BASE: "/pr-preview/pr-${{ github.event.number }}/"
-          PREVIEW_SITE: "https://${{ github.repository_owner }}.github.io"
+          PREVIEW_BASE: "/ledger-donjon-preview.github.io/pr-preview/pr-${{ github.event.number }}/"
+          PREVIEW_SITE: "https://ledger-donjon.github.io"
 
       - name: Deploy PR Preview
-        uses: rossjrw/pr-preview-action@v1
+        if: github.event.action != 'closed'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          source-dir: ./dist
-          preview-branch: gh-pages
-          umbrella-dir: pr-preview
-          action: auto
+          token: ${{ secrets.PREVIEW_DEPLOY_TOKEN }}
+          repository-name: Ledger-Donjon/ledger-donjon-preview.github.io
+          branch: gh-pages
+          folder: ./dist
+          target-folder: pr-preview/pr-${{ github.event.number }}
+          clean: false
+          commit-message: "Deploy preview for PR #${{ github.event.number }}"
+
+      - name: Checkout preview repo for cleanup
+        if: github.event.action == 'closed'
+        uses: actions/checkout@v4
+        with:
+          repository: Ledger-Donjon/ledger-donjon-preview.github.io
+          ref: gh-pages
+          token: ${{ secrets.PREVIEW_DEPLOY_TOKEN }}
+          path: preview-repo
+
+      - name: Remove PR preview
+        if: github.event.action == 'closed'
+        run: |
+          rm -rf "preview-repo/pr-preview/pr-${{ github.event.number }}"
+          if [ -n "$(git -C preview-repo status --porcelain)" ]; then
+            git -C preview-repo config user.name "github-actions[bot]"
+            git -C preview-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C preview-repo add -A
+            git -C preview-repo commit -m "Remove preview for PR #${{ github.event.number }}"
+            git -C preview-repo push
+          fi
