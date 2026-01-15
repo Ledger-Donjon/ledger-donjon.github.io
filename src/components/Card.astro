@@ -5,27 +5,45 @@ interface Props {
   description?: string;
   date?: Date;
   badge?: string;
+  badgeTone?: 'default' | 'violet';
+  badges?: Array<{ text: string; tone?: 'default' | 'violet' }>;
   image?: string;
+  target?: string;
+  rel?: string;
 }
 
-const { title, href, description, date, badge, image } = Astro.props;
+const { title, href, description, date, badge, badgeTone, badges, image, target, rel } = Astro.props;
 
 const formattedDate = date ? new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
 }).format(date) : null;
+
+const badgeItems = badges?.length
+  ? badges
+  : badge
+    ? [{ text: badge, tone: badgeTone ?? 'default' }]
+    : [];
 ---
 
 <article class="card">
-  <a href={href} class="card__link">
+  <a href={href} class="card__link" target={target} rel={rel}>
     {image && (
       <div class="card__image">
         <img src={image} alt="" loading="lazy" />
       </div>
     )}
     <div class="card__content">
-      {badge && <span class="card__badge">{badge}</span>}
+      {badgeItems.length > 0 && (
+        <div class="card__badges">
+          {badgeItems.map((item) => (
+            <span class={`card__badge${item.tone === 'violet' ? ' card__badge--violet' : ''}`}>
+              {item.text}
+            </span>
+          ))}
+        </div>
+      )}
       <h3 class="card__title">{title}</h3>
       {description && <p class="card__description">{description}</p>}
       {formattedDate && <time class="card__date">{formattedDate}</time>}
@@ -87,6 +105,12 @@ const formattedDate = date ? new Intl.DateTimeFormat('en-US', {
       flex-direction: column;
       gap: var(--space-2);
     }
+
+    &__badges {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
     
     &__badge {
       display: inline-block;
@@ -99,6 +123,12 @@ const formattedDate = date ? new Intl.DateTimeFormat('en-US', {
       color: var(--color-accent-primary);
       background: var(--color-accent-glow);
       border-radius: var(--radius-full);
+    }
+
+    &__badge--violet {
+      color: var(--color-ledger-purple);
+      background: rgba(106, 55, 148, 0.2);
+      box-shadow: 0 0 12px rgba(106, 55, 148, 0.35);
     }
     
     &__title {

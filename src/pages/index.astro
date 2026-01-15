@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
+import articlesData from '../data/donjon-blog.json';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
@@ -14,7 +15,22 @@ const latestBulletins = allLsb
     const numB = parseInt(b.id.replace('.md', ''));
     return numB - numA;
   })
-  .slice(0, 6);
+  .slice(0, 3);
+
+const articles = Array.isArray(articlesData) ? articlesData : [];
+const latestArticles = articles
+  .map((article) => ({
+    ...article,
+    parsedDate: article?.date ? new Date(article.date) : null,
+  }))
+  .sort((a, b) => {
+    const dateA = a.parsedDate?.getTime() ?? 0;
+    const dateB = b.parsedDate?.getTime() ?? 0;
+    return dateB - dateA;
+  })
+  .slice(0, 3);
+
+const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
 ---
 
 <Base title="Home" description="The security research team at Ledger. Protecting your crypto assets through cutting-edge security research.">
@@ -108,6 +124,48 @@ const latestBulletins = allLsb
     </div>
   </section>
   
+  <section class="blog-highlights">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest Blog Posts</h2>
+        <a href={withBase('/blog/')} class="section-link">
+          View all posts
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      {latestArticles.length === 0 ? (
+        <div class="blog-highlights__fallback">
+          No Donjon blog posts are available yet.
+        </div>
+      ) : (
+        <div class="blog-highlights__grid">
+          {latestArticles.map((article) => {
+            const isNew = article.parsedDate
+              ? Date.now() >= article.parsedDate.getTime() &&
+                Date.now() - article.parsedDate.getTime() < recentCutoffMs
+              : false;
+            const badges = isNew ? [{ text: 'New', tone: 'violet' }] : [];
+
+            return (
+              <Card
+                title={article.title}
+                href={article.url}
+                description={article.excerpt}
+                date={article.parsedDate ?? undefined}
+                badges={badges}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </section>
+
   <section class="bulletins">
     <div class="container">
       <div class="section-header">
@@ -454,6 +512,35 @@ const latestBulletins = allLsb
     }
   }
   
+  .blog-highlights {
+    padding: var(--space-20) 0;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+
+      @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__fallback {
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      color: var(--color-text-secondary);
+    }
+  }
+
   .bulletins {
     padding: var(--space-20) 0;
     

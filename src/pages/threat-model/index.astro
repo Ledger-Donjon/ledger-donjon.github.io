@@ -43,11 +43,11 @@ const securityMechanisms = [
 
 <Base 
   title="Threat Model" 
-  description="Security objectives and mechanisms implemented in Ledger devices."
+  description="Security objectives and mechanisms implemented in Ledger signers."
 >
   <Hero 
     title="Threat Model" 
-    subtitle="Security objectives and mechanisms implemented in Ledger devices to protect your digital assets."
+    subtitle="Security objectives and mechanisms implemented in Ledger signers to protect your digital assets."
     size="sm"
   />
   
@@ -55,7 +55,7 @@ const securityMechanisms = [
     <div class="container">
       <div class="prose intro">
         <p>
-          This page describes the threat model of Ledger devices (i.e. hardware products). It lists the main 
+          This page describes the threat model of Ledger signers (i.e. hardware products). It lists the main 
           security objectives the devices intend to fulfill, then describes the security mechanisms implemented 
           to achieve these objectives.
         </p>
@@ -64,7 +64,7 @@ const securityMechanisms = [
       <section class="section">
         <h2>Security Objectives</h2>
         <p class="section-intro">
-          The main security objective of Ledger devices is to provide <strong>physical and logical</strong> 
+          The main security objective of Ledger signers is to provide <strong>physical and logical</strong> 
           security to users' funds.
         </p>
         
@@ -108,7 +108,7 @@ const securityMechanisms = [
         <div class="roles-grid">
           <div class="role-card">
             <h4>End User</h4>
-            <p>The owner of a Ledger device with physical access to it.</p>
+            <p>The owner of a Ledger signer with physical access to it.</p>
           </div>
           <div class="role-card">
             <h4>Firmware Developer</h4>
@@ -125,13 +125,14 @@ const securityMechanisms = [
         </div>
         
         <h3>High Level Architecture</h3>
-        <p>Ledger devices are composed of:</p>
+        <p>Ledger signers are composed of:</p>
         <ul>
-          <li>A <strong>Secure Element</strong> (ST33 for Nano S Plus, Nano X, Stax and Flex)</li>
-          <li>A general purpose <strong>MCU</strong> (STM32F042 for Nano S Plus, STM32WB55 for Nano X, STM32WB35 for Stax/Flex)</li>
+          <li>A <strong>Secure Element</strong> (ST33 for Nano S Plus, Nano X, Nano Gen5, Stax and Flex)</li>
+          <li>A general purpose <strong>MCU</strong> (STM32F042 for Nano S Plus, STM32WB55 for Nano X, STM32WB35 for Nano Gen5 and Stax/Flex)</li>
           <li>A <strong>NFC communication chip</strong> (ST25R3916 for Stax and Flex)</li>
           <li>External peripherals: screen, buttons</li>
         </ul>
+        <p>Current product models include Nano S Plus, Nano X, Nano Gen5, Stax, and Flex.</p>
         
         <div class="architecture-images">
           <figure>

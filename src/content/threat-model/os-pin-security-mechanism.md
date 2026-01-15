@@ -5,7 +5,7 @@ title: Threat Model - PIN Security Mechanism
 
 An attacker with a physical access to a device (e.g. stolen device) might get a full control over the device, meaning that sensitive operations can be processed.
 
-To prevent this, a PIN security mechanism is implemented. During the boot of Ledger devices, the end user must prove that she is the owner of her device thanks to her PIN (Personal Identification Number). This security function is the first interaction between the end user and the device and is critical because it gives access to all services. For instance, all cryptocurrency apps are available, meaning cryptocurrency transfer is available. Note that all other apps (for instance Password Manager, FIDO) are also available as soon as the PIN verification is successfully performed.
+To prevent this, a PIN security mechanism is implemented. During the boot of Ledger signers, the end user must prove that she is the owner of her device thanks to her PIN (Personal Identification Number). This security function is the first interaction between the end user and the device and is critical because it gives access to all services. For instance, all cryptocurrency apps are available, meaning cryptocurrency transfer is available. Note that all other apps (for instance Password Manager, FIDO) are also available as soon as the PIN verification is successfully performed.
 
 <p align="center">
 <img src="/oled-vuln/pin5invert-small.jpg">
