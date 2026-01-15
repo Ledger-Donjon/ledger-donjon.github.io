@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+
 const hallOfFame = [
   {
     year: 2025,
@@ -103,7 +106,7 @@ const hallOfFame = [
           Discover vulnerabilities in Ledger products and get recognized for your contribution 
           to the security of the crypto ecosystem.
         </p>
-        <a href="/bounty/" class="btn-primary">
+        <a href={withBase('/bounty/')} class="btn-primary">
           Join the Bug Bounty Program
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M5 12h14M12 5l7 7-7 7"/>

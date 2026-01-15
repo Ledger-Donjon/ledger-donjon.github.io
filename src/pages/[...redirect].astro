@@ -30,8 +30,8 @@ const target = redirect.to;
     <p>
       Redirecting to <a href={target}>{target}</a>.
     </p>
-    <script is:inline>
-      window.location.replace({JSON.stringify(target)});
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
     </script>
   </body>
 </html>

@@ -12,6 +12,8 @@ export async function getStaticPaths() {
     }));
 }
 
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const { page } = Astro.props;
 const { Content } = await render(page);
 ---
@@ -23,7 +25,7 @@ const { Content } = await render(page);
   <article class="threat-model-page">
     <div class="container">
       <header class="page__header">
-        <a href="/threat-model/#security-mechanisms" class="page__back">
+        <a href={withBase('/threat-model/#security-mechanisms')} class="page__back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
@@ -37,7 +39,7 @@ const { Content } = await render(page);
       </div>
       
       <footer class="page__footer">
-        <a href="/threat-model/#security-mechanisms" class="back-link">
+        <a href={withBase('/threat-model/#security-mechanisms')} class="back-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
