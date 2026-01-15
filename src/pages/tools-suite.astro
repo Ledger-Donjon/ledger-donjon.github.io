@@ -10,24 +10,28 @@ const hardwareBoards = [
     name: 'Scaffold',
     description: 'Multi-purpose board to control devices with embedded features such as: current consumption measurement, multiple communication protocols (SPI, I²C, UART...), command triggering, pulse generators...',
     image: withBase('/img/tools-suite/scaffold-board.png'),
+    imageFit: 'contain',
     repo: 'https://github.com/Ledger-Donjon/scaffold/'
   },
   {
     name: 'Curmea',
     description: 'Simple board for differential current consumption measurement.',
     image: withBase('/img/tools-suite/curmea.png'),
+    imageFit: 'contain',
     repo: 'https://github.com/Ledger-Donjon/curmea/'
   },
   {
     name: 'Silicon Toaster',
     description: 'Board to inject electromagnetic pulses from a bank of capacitors, that can be loaded to a programmable level of voltage, and discharged with a triggering input source.',
     image: withBase('/img/tools-suite/silicontoaster.png'),
+    imageFit: 'contain',
     repo: 'https://github.com/Ledger-Donjon/silicon-toaster/'
   },
   {
     name: 'Shutter Controller',
     description: "A low-cost motorized add-on of optical tower on ALPhANOV's Laser Microscope Station to control a mechanical shutter.",
     image: withBase('/img/tools-suite/shutter-controller.png'),
+    imageFit: 'contain',
     repo: 'https://github.com/Ledger-Donjon/shutter-controller/'
   }
 ];
@@ -37,6 +41,14 @@ const hardwareSoftware = [
     name: 'Laser Studio',
     description: 'Multi-environment python3 software controlling hardware benches to conduct automatized evaluations.',
     repo: 'https://github.com/Ledger-Donjon/laserstudio/'
+  },
+  {
+    name: 'Turboplot',
+    description: 'A blazingly fast waveform renderer made for visualizing huge traces.',
+    image: withBase('/img/tools-suite/turboplot.png'),
+    imageStyle: 'app',
+    imageFit: 'contain',
+    repo: 'https://github.com/Ledger-Donjon/turboplot/'
   },
   {
     name: 'pystages',
@@ -62,21 +74,17 @@ const hardwareSoftware = [
     repo: 'https://github.com/Ledger-Donjon/quicklog-explorer/'
   },
   {
-    name: 'Turboplot',
-    description: 'A blazingly fast waveform renderer made for visualizing huge traces.',
-    image: withBase('/img/tools-suite/turboplot.png'),
-    repo: 'https://github.com/Ledger-Donjon/turboplot/'
+    name: 'Rainbow',
+    description: 'Makes Unicorn traces. Generic Side-Channel and Fault Injection simulator.',
+    repo: 'https://github.com/Ledger-Donjon/rainbow/'
   },
   {
     name: 'Visplot',
     description: 'A side-channel traces visualizer based on vispy.',
     image: withBase('/img/tools-suite/visplot.gif'),
+    imageFit: 'contain',
+    imageStyle: 'app',
     repo: 'https://github.com/Ledger-Donjon/visplot/'
-  },
-  {
-    name: 'Rainbow',
-    description: 'Makes Unicorn traces. Generic Side-Channel and Fault Injection simulator.',
-    repo: 'https://github.com/Ledger-Donjon/rainbow/'
   }
 ];
 
