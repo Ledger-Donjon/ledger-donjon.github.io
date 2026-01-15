@@ -21,14 +21,45 @@ const parseDateValue = (value) => {
   return new Date(Date.UTC(year, month - 1, day)).toISOString();
 };
 
-const fetchWithTimeout = async (url, timeoutMs = REQUEST_TIMEOUT_MS) => {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    return await fetch(url, { signal: controller.signal });
-  } finally {
-    clearTimeout(timeout);
+const DEFAULT_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (compatible; DonjonBlogBot/1.0)',
+  Accept: 'text/plain, text/markdown;q=0.9, */*;q=0.8',
+};
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const fetchWithTimeout = async (url, timeoutMs = REQUEST_TIMEOUT_MS, retries = 3) => {
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { signal: controller.signal, headers: DEFAULT_HEADERS });
+      if (response.status === 429 && attempt < retries) {
+        const backoff = 1000 * (attempt + 1);
+        console.warn(`Rate limited (${response.status}) for ${url}. Retry ${attempt + 1}/${retries} in ${backoff}ms.`);
+        await delay(backoff);
+        continue;
+      }
+      if (!response.ok && attempt < retries) {
+        const backoff = 400 * (attempt + 1);
+        console.warn(`Fetch failed (${response.status}) for ${url}. Retry ${attempt + 1}/${retries} in ${backoff}ms.`);
+        await delay(backoff);
+        continue;
+      }
+      return response;
+    } catch (error) {
+      if (attempt >= retries) {
+        const message = error instanceof Error ? error.message : String(error);
+        throw new Error(`Fetch error for ${url}: ${message}`);
+      }
+      const backoff = 400 * (attempt + 1);
+      console.warn(`Fetch error for ${url}. Retry ${attempt + 1}/${retries} in ${backoff}ms.`);
+      await delay(backoff);
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+  throw new Error(`Failed to fetch after retries: ${url}`);
 };
 
 const extractArticles = (markdown, seen) => {
@@ -77,7 +108,9 @@ const extractArticles = (markdown, seen) => {
 const isExcerptPlaceholder = (excerpt) => {
   if (!excerpt) return true;
   const normalized = excerpt.replace(/\s+/g, '').trim();
-  return normalized === '***' || normalized === '...';
+  if (normalized === '***' || normalized === '...') return true;
+  if (excerpt.trim().toLowerCase() === 'tl;dr') return true;
+  return false;
 };
 
 const extractExcerptFromArticle = (markdown) => {
@@ -96,28 +129,6 @@ const extractExcerptFromArticle = (markdown) => {
     const cleaned = rawLine.replace(/^[_*]+/, '').replace(/[_*]+$/, '').trim();
     if (!cleaned) continue;
     return cleaned;
-  }
-
-  return '';
-};
-
-const extractAuthorFromArticle = (markdown) => {
-  const lines = markdown.split('\n');
-  const startIndex = lines.findIndex((line) => line.startsWith('Markdown Content:'));
-  if (startIndex === -1) return '';
-
-  const maxScan = Math.min(lines.length, startIndex + 120);
-  for (let i = startIndex + 1; i < maxScan; i += 1) {
-    const rawLine = lines[i].trim();
-    if (!rawLine) continue;
-    if (!/^By\s+/i.test(rawLine)) continue;
-
-    const cleaned = rawLine
-      .replace(/^By\s+/i, '')
-      .replace(/\*\*/g, '')
-      .replace(/,_?$/, '')
-      .trim();
-    if (cleaned) return cleaned;
   }
 
   return '';
@@ -199,18 +210,15 @@ const run = async () => {
 
     articles = articles.filter((article) => article.url && article.title);
 
-    const needsDetailFetch = articles.filter(
-      (article) => !article.author || isExcerptPlaceholder(article.excerpt),
-    );
+    const needsDetailFetch = articles.filter((article) => isExcerptPlaceholder(article.excerpt));
     if (needsDetailFetch.length > 0) {
       const detailResults = await mapWithConcurrency(needsDetailFetch, CONCURRENCY, async (article) => {
         const response = await fetchWithTimeout(toProxyUrl(article.url));
-        if (!response.ok) return { url: article.url, excerpt: '', author: '' };
+        if (!response.ok) return { url: article.url, excerpt: '' };
         const markdown = await response.text();
         return {
           url: article.url,
           excerpt: extractExcerptFromArticle(markdown),
-          author: extractAuthorFromArticle(markdown),
         };
       });
       const detailMap = new Map(detailResults.map((result) => [result.url, result]));
@@ -220,10 +228,11 @@ const run = async () => {
         return {
           ...article,
           excerpt: detail.excerpt || article.excerpt,
-          author: detail.author || article.author,
         };
       });
     }
+
+    articles = articles.map(({ author, ...rest }) => rest);
 
     articles.sort((a, b) => {
       const aTime = a.date ? Date.parse(a.date) : 0;
@@ -238,7 +247,8 @@ const run = async () => {
       await writeOutput(articles);
     }
   } catch (error) {
-    console.warn('Failed to refresh Donjon blog data, preserving existing data.');
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`Failed to refresh Donjon blog data, preserving existing data. ${message}`);
     if (fallback.length === 0) {
       await writeOutput([]);
     }

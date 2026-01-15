@@ -169,18 +169,23 @@ const hallOfFame = [
       @media (max-width: 640px) {
         width: 60px;
         padding-right: var(--space-4);
+
+        &::after {
+          left: 30px;
+        }
       }
       
       &::after {
         content: '';
         position: absolute;
-        right: -6px;
+        left: 60px;
         top: 8px;
         width: 14px;
         height: 14px;
         background: var(--color-bg-primary);
         border: 3px solid var(--color-accent-primary);
         border-radius: 50%;
+        transform: translateX(-50%);
       }
     }
     
