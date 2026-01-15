@@ -539,6 +539,26 @@ const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
       background: var(--color-bg-primary);
       color: var(--color-text-secondary);
     }
+
+    :global(.card__date) {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-full);
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    :global(.card__badge--violet) {
+      background: linear-gradient(135deg, var(--color-ledger-purple), #4f1b7a);
+      color: white;
+      box-shadow: 0 0 16px rgba(106, 55, 148, 0.6);
+      border: 1px solid rgba(106, 55, 148, 0.6);
+    }
   }
 
   .bulletins {
