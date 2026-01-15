@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const allPages = await getCollection('threat-model');
 
 // Organize pages by category
@@ -14,26 +16,26 @@ const securityMechanisms = [
   {
     level: 'Device',
     items: [
-      { title: 'Genuineness', href: '/threat-model/device-genuineness/', objectives: 'Genuineness' },
-      { title: 'Secure Display and Inputs', href: '/threat-model/device-secure-display-and-inputs/', objectives: 'Confidentiality of user seeds, User consent' },
-      { title: 'Physical Resistance', href: '/threat-model/device-physical-resistance/', objectives: 'Confidentiality of user seeds, Confidentiality of the firmware' },
+      { title: 'Genuineness', href: withBase('/threat-model/device-genuineness/'), objectives: 'Genuineness' },
+      { title: 'Secure Display and Inputs', href: withBase('/threat-model/device-secure-display-and-inputs/'), objectives: 'Confidentiality of user seeds, User consent' },
+      { title: 'Physical Resistance', href: withBase('/threat-model/device-physical-resistance/'), objectives: 'Confidentiality of user seeds, Confidentiality of the firmware' },
     ]
   },
   {
     level: 'OS',
     items: [
-      { title: 'PIN Security Mechanism', href: '/threat-model/os-pin-security-mechanism/', objectives: 'Confidentiality of user seeds' },
-      { title: 'Random Number Generation', href: '/threat-model/os-random-number-generation/', objectives: 'Confidentiality of user seeds' },
-      { title: 'Confidentiality of Seed and Private Keys', href: '/threat-model/os-seed-confidentiality/', objectives: 'Confidentiality of user seeds and private keys' },
-      { title: 'Confidentiality and Integrity', href: '/threat-model/os-confidentiality-and-integrity/', objectives: 'Confidentiality of the firmware' },
-      { title: 'Transport Security', href: '/threat-model/os-transport-security/', objectives: 'Confidentiality of the firmware' },
+      { title: 'PIN Security Mechanism', href: withBase('/threat-model/os-pin-security-mechanism/'), objectives: 'Confidentiality of user seeds' },
+      { title: 'Random Number Generation', href: withBase('/threat-model/os-random-number-generation/'), objectives: 'Confidentiality of user seeds' },
+      { title: 'Confidentiality of Seed and Private Keys', href: withBase('/threat-model/os-seed-confidentiality/'), objectives: 'Confidentiality of user seeds and private keys' },
+      { title: 'Confidentiality and Integrity', href: withBase('/threat-model/os-confidentiality-and-integrity/'), objectives: 'Confidentiality of the firmware' },
+      { title: 'Transport Security', href: withBase('/threat-model/os-transport-security/'), objectives: 'Confidentiality of the firmware' },
     ]
   },
   {
     level: 'App',
     items: [
-      { title: 'Isolation', href: '/threat-model/app-isolation/', objectives: 'Confidentiality of private keys, User consent' },
-      { title: 'User Consent', href: '/threat-model/app-user-consent/', objectives: 'User consent' },
+      { title: 'Isolation', href: withBase('/threat-model/app-isolation/'), objectives: 'Confidentiality of private keys, User consent' },
+      { title: 'User Consent', href: withBase('/threat-model/app-user-consent/'), objectives: 'User consent' },
     ]
   }
 ];
@@ -133,11 +135,11 @@ const securityMechanisms = [
         
         <div class="architecture-images">
           <figure>
-            <img src="/threat-model/architecture_nanox.png" alt="Ledger Nano X Architecture" loading="lazy" />
+            <img src={withBase('/threat-model/architecture_nanox.png')} alt="Ledger Nano X Architecture" loading="lazy" />
             <figcaption>Nano S Plus / Nano X Architecture</figcaption>
           </figure>
           <figure>
-            <img src="/threat-model/architecture_stax.png" alt="Ledger Stax Architecture" loading="lazy" />
+            <img src={withBase('/threat-model/architecture_stax.png')} alt="Ledger Stax Architecture" loading="lazy" />
             <figcaption>Stax / Flex Architecture</figcaption>
           </figure>
         </div>

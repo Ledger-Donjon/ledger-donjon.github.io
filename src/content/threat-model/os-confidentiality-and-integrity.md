@@ -5,7 +5,7 @@ title: Threat Model - Confidentiality and Integrity
 
 The confidentiality and integrity of the OS are also important mostly for IP (Intellectual Property) reasons. Using a Secure Element, Ledger must protect the IP of the Secure Element vendor, some parts being under NDA (Non-Disclosure Agreement).
 
-The confidentiality and the integrity of the code running on the Secure Element are ensured by leveraging the hardware security mechanisms provided by the Secure Element itself. Furthermore, even if third party code can be executed at the app level, apps can't read nor modify the OS private data (such as Ledger attestation) thanks to the [isolation](/threat-model/app-isolation) mechanisms.
+The confidentiality and the integrity of the code running on the Secure Element are ensured by leveraging the hardware security mechanisms provided by the Secure Element itself. Furthermore, even if third party code can be executed at the app level, apps can't read nor modify the OS private data (such as Ledger attestation) thanks to the [isolation](app-isolation) mechanisms.
 
 Integrity checks are also implemented as additional protection mechanisms against software and hardware attacks.
 

@@ -4,12 +4,17 @@ import Hero from '../../components/Hero.astro';
 import Card from '../../components/Card.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const allLsb = await getCollection('lsb');
-const bulletins = allLsb.sort((a, b) => {
-  const numA = parseInt(a.id.replace('.md', ''));
-  const numB = parseInt(b.id.replace('.md', ''));
-  return numB - numA;
-});
+const datePattern = /^\s*(\d{1,2} [A-Za-z]+ \d{4})/m;
+const bulletins = allLsb
+  .map((bulletin) => {
+    const id = bulletin.id.replace('.md', '');
+    const date = bulletin.body.match(datePattern)?.[1] ?? '';
+    return { bulletin, id, date };
+  })
+  .sort((a, b) => parseInt(b.id) - parseInt(a.id));
 ---
 
 <Base 
@@ -26,7 +31,7 @@ const bulletins = allLsb.sort((a, b) => {
     <div class="container">
       <p class="intro">
         Ledger believes in better security through openness. If you believe that you have discovered 
-        a vulnerability, please report it through the <a href="/bounty/">bug bounty program</a>.
+        a vulnerability, please report it through the <a href={withBase('/bounty/')}>bug bounty program</a>.
       </p>
       
       <div class="bulletins-table">
@@ -35,23 +40,26 @@ const bulletins = allLsb.sort((a, b) => {
             <tr>
               <th>ID</th>
               <th>Title</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            {bulletins.map((bulletin) => {
-              const id = bulletin.id.replace('.md', '');
+            {bulletins.map(({ bulletin, id, date }) => {
               return (
                 <tr>
                   <td>
                     <span class="bulletin-id">LSB {id}</span>
                   </td>
                   <td>
-                    <a href={`/lsb/${id}/`} class="bulletin-link">
+                    <a href={withBase(`/lsb/${id}/`)} class="bulletin-link">
                       {bulletin.data.title}
                       {bulletin.data.summary && (
                         <span class="bulletin-summary">{bulletin.data.summary}</span>
                       )}
                     </a>
+                  </td>
+                  <td>
+                    {date && <time class="bulletin-date">{date}</time>}
                   </td>
                 </tr>
               );
@@ -102,6 +110,10 @@ const bulletins = allLsb.sort((a, b) => {
       &:first-child {
         width: 120px;
       }
+      
+      &:last-child {
+        width: 160px;
+      }
     }
     
     td {
@@ -141,6 +153,12 @@ const bulletins = allLsb.sort((a, b) => {
     font-size: var(--text-sm);
     font-weight: 400;
     color: var(--color-text-tertiary);
+  }
+
+  .bulletin-date {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
   }
   
   .note {

@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 ---
 
 <Base title="Bug Bounty Program" description="Report security vulnerabilities in Ledger products and earn rewards.">
@@ -22,7 +25,7 @@ import Hero from '../components/Hero.astro';
         <p>
           If you believe that you have discovered such a vulnerability, please report it at 
           <strong>bounty -at- ledger.fr</strong> 
-          (<a href="/ledger-bounty.asc">GPG key</a> if necessary).
+          (<a href={withBase('/ledger-bounty.asc')}>GPG key</a> if necessary).
         </p>
         <p>
           The Ledger Security Team will work with you to investigate, resolve the issue promptly 
@@ -127,7 +130,7 @@ import Hero from '../components/Hero.astro';
         
         <p>
           All communications between you and Ledger should go through <strong>bounty -at- ledger.fr</strong>. 
-          Please use our <a href="/ledger-bounty.asc">GPG key</a> as necessary.
+          Please use our <a href={withBase('/ledger-bounty.asc')}>GPG key</a> as necessary.
         </p>
         
         <p>The Ledger Security Team will be in touch, usually within 24 hours.</p>
@@ -180,7 +183,7 @@ import Hero from '../components/Hero.astro';
         <p>
           In mutual consultation, we can, if you desire, display a researcher's name or its pseudonym 
           as the discoverer of the reported vulnerability on our website's 
-          <a href="/hall-of-fame/">Hall of Fame</a>. Please note that the Hall of Fame is dedicated 
+          <a href={withBase('/hall-of-fame/')}>Hall of Fame</a>. Please note that the Hall of Fame is dedicated 
           to the Devices Bug Bounty Program.
         </p>
         
