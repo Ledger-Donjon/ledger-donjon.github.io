@@ -248,7 +248,7 @@ const run = async () => {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn(`Failed to refresh Donjon blog data, preserving existing data. ${message}`);
+    console.warn(`Failed to refresh Our blog data, preserving existing data. ${message}`);
     if (fallback.length === 0) {
       await writeOutput([]);
     }
