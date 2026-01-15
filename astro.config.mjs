@@ -37,6 +37,11 @@ export default defineConfig({
   site: site,
   base: base,
   output: 'static',
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/noop'
+    }
+  },
   integrations: [sitemap()],
   build: {
     assets: '_astro'
