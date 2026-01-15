@@ -7,6 +7,7 @@ const navigation = [
   { name: 'Security Bulletins', href: withBase('/lsb/') },
   { name: 'Threat Model', href: withBase('/threat-model/') },
   { name: 'Tools Suite', href: withBase('/tools-suite/') },
+  { name: 'Blog', href: withBase('/blog/') },
   { name: 'About', href: withBase('/about/') },
   { name: 'Contact', href: withBase('/contact/') },
 ];
@@ -32,21 +33,6 @@ const currentPath = Astro.url.pathname;
             </a>
           </li>
         ))}
-        <li>
-          <a 
-            href="https://www.ledger.com/blog/category/donjon" 
-            class="header__nav-link header__nav-link--external"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Blog
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </a>
-        </li>
       </ul>
     </nav>
     
@@ -167,8 +153,9 @@ const currentPath = Astro.url.pathname;
       gap: 5px;
       width: 32px;
       height: 32px;
-      background: none;
-      border: none;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
       cursor: pointer;
       padding: 4px;
       

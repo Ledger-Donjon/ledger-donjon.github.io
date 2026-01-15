@@ -43,6 +43,7 @@ const hardwareSoftware = [
     description: 'Python module for managing the positions of physical actuators, such as CNCs, Corvus, or Newport. Also provides a simple User Interface to make easy and quick moves of actuators.',
     image: withBase('/img/tools-suite/pystages.png'),
     imageFit: 'contain',
+    imageStyle: 'app',
     repo: 'https://github.com/Ledger-Donjon/pystages/'
   },
   {
@@ -132,7 +133,12 @@ const softwareTools = [
           {hardwareBoards.map((tool) => (
             <article class="tool-card">
               {tool.image && (
-                <div class="tool-card__image">
+                <div
+                  class:list={[
+                    'tool-card__image',
+                    { 'tool-card__image--app': tool.imageStyle === 'app' }
+                  ]}
+                >
                   <img
                     src={tool.image}
                     alt={tool.name}
@@ -161,7 +167,12 @@ const softwareTools = [
           {hardwareSoftware.map((tool) => (
             <article class="tool-card">
               {tool.image && (
-                <div class="tool-card__image">
+                <div
+                  class:list={[
+                    'tool-card__image',
+                    { 'tool-card__image--app': tool.imageStyle === 'app' }
+                  ]}
+                >
                   <img
                     src={tool.image}
                     alt={tool.name}
@@ -306,12 +317,29 @@ const softwareTools = [
       aspect-ratio: 16 / 10;
       background: var(--color-bg-tertiary);
       overflow: hidden;
+      display: block;
       
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform var(--transition-slow);
+      }
+    }
+
+    &__image--app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 60%;
+        height: 60%;
+        object-fit: contain;
+        background: var(--color-bg-secondary);
+        padding: var(--space-3);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
       }
     }
 

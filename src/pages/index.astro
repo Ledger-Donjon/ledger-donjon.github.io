@@ -30,26 +30,22 @@ const latestBulletins = allLsb
           through cutting-edge security research, vulnerability discovery, and open-source tools.
         </p>
         <div class="hero__actions">
-          <a href={withBase('/bounty/')} class="btn btn--primary">
+          <a href={withBase('/bounty/')} class="btn btn--primary btn--with-icon">
             Bug Bounty Program
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href={withBase('/about/')} class="btn btn--secondary">
+          <a href={withBase('/about/')} class="btn btn--secondary btn--with-icon">
             About Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
-          <a
-            href="https://www.ledger.com/blog/category/donjon"
-            class="btn btn--primary btn--blog"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={withBase('/blog/')} class="btn btn--primary btn--blog btn--with-icon">
             Read the Donjon Blog
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
+              <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
         </div>
@@ -223,6 +219,7 @@ const latestBulletins = allLsb
     &__actions {
       display: flex;
       gap: var(--space-4);
+      flex-wrap: wrap;
       
       @media (max-width: 960px) {
         justify-content: center;
@@ -305,32 +302,42 @@ const latestBulletins = allLsb
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     padding: var(--space-3) var(--space-6);
     font-weight: 600;
+    min-height: 48px;
     border-radius: var(--radius-lg);
     transition: all var(--transition-fast);
     text-decoration: none;
+    border: 1px solid transparent;
+    
+    &:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--color-ledger-orange) 55%, white);
+      outline-offset: 2px;
+    }
     
     &--primary {
-      background: var(--color-ledger-orange);
+      background: linear-gradient(135deg, var(--color-ledger-orange), var(--color-ledger-orange-hover));
       color: white;
+      box-shadow: 0 12px 24px rgba(255, 83, 0, 0.2);
       
       &:hover {
-        background: var(--color-ledger-orange-hover);
+        background: linear-gradient(135deg, var(--color-ledger-orange-hover), var(--color-ledger-orange));
         transform: translateY(-2px);
         text-decoration: none;
       }
     }
     
     &--secondary {
-      background: var(--color-bg-tertiary);
+      background: var(--color-bg-secondary);
       color: var(--color-text-primary);
       border: 1px solid var(--color-border);
       
       &:hover {
         background: var(--color-bg-hover);
         border-color: var(--color-border-hover);
+        transform: translateY(-2px);
         text-decoration: none;
       }
     }
@@ -349,10 +356,20 @@ const latestBulletins = allLsb
     &--blog {
       padding: var(--space-4) var(--space-7);
       font-size: var(--text-base);
-      box-shadow: 0 12px 30px rgba(255, 83, 0, 0.2);
+      box-shadow: 0 16px 34px rgba(255, 83, 0, 0.28);
 
       &:hover {
         transform: translateY(-3px);
+      }
+    }
+    
+    &--with-icon {
+      svg {
+        transition: transform var(--transition-fast);
+      }
+      
+      &:hover svg {
+        transform: translateX(3px);
       }
     }
   }

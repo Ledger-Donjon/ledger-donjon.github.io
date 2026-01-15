@@ -1,0 +1,223 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import articlesData from '../../data/donjon-blog.json';
+
+const categoryUrl = 'https://www.ledger.com/blog/category/donjon';
+
+const articles = Array.isArray(articlesData) ? articlesData : [];
+
+const formatDateText = (value) => {
+  if (!value) return '';
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return '';
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }).format(parsed);
+};
+---
+
+<Base
+  title="Donjon Blog"
+  description="Articles from Ledger's Donjon security research team, curated from the Ledger corporate blog."
+>
+  <Hero
+    title="Donjon Blog"
+    subtitle="Find our latest security research and analyses from the Donjon team."
+    size="sm"
+  />
+
+  <section class="content">
+    <div class="container">
+      <div class="content__header">
+        <a class="content__cta" href={categoryUrl} target="_blank" rel="noopener noreferrer">
+          View all our articles on corporate blog
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      {articles.length === 0 && (
+        <div class="content__fallback">
+          No Donjon articles are available yet. Please use the Ledger blog link above to browse the
+          category if needed.
+        </div>
+      )}
+
+      {articles.length > 0 && (
+        <div class="articles">
+          {articles.map((article) => (
+            <article class="articles__card">
+              <a href={article.url} target="_blank" rel="noopener noreferrer" class="articles__link">
+                <div class="articles__meta">
+                  {article.date && (
+                    <time class="articles__date" datetime={article.date}>
+                      {formatDateText(article.date)}
+                    </time>
+                  )}
+                  {article.author && <span class="articles__author">{article.author}</span>}
+                </div>
+                <h3 class="articles__title">{article.title}</h3>
+                {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
+                <span class="articles__cta" aria-label="Opens on Ledger corporate blog">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M14 3h7v7" />
+                    <path d="M10 14L21 3" />
+                    <path d="M21 14v7h-7" />
+                    <path d="M3 10V3h7" />
+                    <path d="M3 21h7" />
+                    <path d="M3 21l11-11" />
+                  </svg>
+                </span>
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style lang="scss">
+  .content {
+    padding: var(--space-12) 0 var(--space-16);
+  }
+
+  .content__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: var(--space-6);
+    margin-bottom: var(--space-10);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .content__intro {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 680px;
+    margin: 0;
+  }
+
+  .content__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-accent-primary);
+    font-weight: 600;
+    text-decoration: none;
+
+    svg {
+      transition: transform var(--transition-fast);
+    }
+
+    &:hover svg {
+      transform: translateX(4px);
+    }
+  }
+
+  .content__fallback {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+  }
+
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .articles__card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+    position: relative;
+
+    &:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      transform: translateY(-2px);
+    }
+  }
+
+  .articles__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .articles__meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+
+  .articles__date {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    background: var(--color-accent-glow);
+    border-radius: var(--radius-full);
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .articles__author {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+  }
+
+  .articles__title {
+    font-size: var(--text-xl);
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .articles__excerpt {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .articles__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-accent-primary);
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+
+    svg {
+      transition: transform var(--transition-fast);
+    }
+  }
+
+  .articles__card:hover .articles__cta svg {
+    transform: translateX(4px);
+  }
+</style>
