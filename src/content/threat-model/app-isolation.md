@@ -3,7 +3,7 @@ layout: threat-model
 title: Threat Model - App Isolation
 ---
 
-One of the main features of Ledger devices is that anyone can load its own app on the Secure Element. Each app is isolated from each other thanks to BOLOS, the Operating System. That essentially means that:
+One of the main features of Ledger signers is that anyone can load its own app on the Secure Element. Each app is isolated from each other thanks to BOLOS, the Operating System. That essentially means that:
 
 - Apps cannot access to the OS memory.
 - Apps cannot read or write the volatile and non-volatile memory from another app.

@@ -19,6 +19,11 @@ const links = {
   social: [
     { name: 'GitHub', href: 'https://github.com/ledger-donjon', icon: 'github' },
     { name: 'X (Twitter)', href: 'https://x.com/donjonledger', icon: 'twitter' },
+    {
+      name: 'YouTube',
+      href: 'https://www.youtube.com/playlist?list=PL6VM0N695IhltwFfXCMwljk10c2psNiEI',
+      icon: 'youtube',
+    },
   ],
 };
 ---
@@ -87,6 +92,11 @@ const links = {
                 {link.icon === 'twitter' && (
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                )}
+                {link.icon === 'youtube' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.5 6.19a3.01 3.01 0 0 0-2.12-2.13C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.38.56A3.01 3.01 0 0 0 .5 6.19C0 8.06 0 12 0 12s0 3.94.5 5.81a3.01 3.01 0 0 0 2.12 2.13c1.86.56 9.38.56 9.38.56s7.52 0 9.38-.56a3.01 3.01 0 0 0 2.12-2.13c.5-1.87.5-5.81.5-5.81s0-3.94-.5-5.81ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z"/>
                   </svg>
                 )}
               </a>

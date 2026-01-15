@@ -305,6 +305,8 @@ const softwareTools = [
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
     
     &:hover {
       border-color: var(--color-border-hover);
@@ -359,6 +361,9 @@ const softwareTools = [
     
     &__content {
       padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
       
       h4 {
         font-size: var(--text-lg);
@@ -381,6 +386,7 @@ const softwareTools = [
       font-size: var(--text-sm);
       font-weight: 500;
       color: var(--color-accent-primary);
+      margin-top: auto;
       
       &:hover {
         text-decoration: underline;
