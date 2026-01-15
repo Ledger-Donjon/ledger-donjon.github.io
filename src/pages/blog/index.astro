@@ -58,7 +58,6 @@ const formatDateText = (value) => {
                       {formatDateText(article.date)}
                     </time>
                   )}
-                  {article.author && <span class="articles__author">{article.author}</span>}
                 </div>
                 <h3 class="articles__title">{article.title}</h3>
                 {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
@@ -180,11 +179,6 @@ const formatDateText = (value) => {
     background: var(--color-accent-glow);
     border-radius: var(--radius-full);
     padding: var(--space-1) var(--space-3);
-  }
-
-  .articles__author {
-    font-size: var(--text-sm);
-    color: var(--color-text-tertiary);
   }
 
   .articles__title {
