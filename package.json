@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "fetch:donjon-blog": "node scripts/fetch-donjon-blog.mjs",
+    "prebuild": "node scripts/fetch-donjon-blog.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

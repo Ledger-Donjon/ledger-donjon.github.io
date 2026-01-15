@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Is Your Smartphone’s Hardware Safe?",
+    "url": "https://www.ledger.com/blog-is-your-smartphones-hardware-safe",
+    "date": "2025-12-03T00:00:00.000Z",
+    "excerpt": "Smartphones are commonly lost or stolen, but could that impact your security? The Ledger Donjon targeted a recent SoC to find out exactly how secure today’s smartphones are."
+  },
+  {
+    "title": "The Vulnerability Exposing Tangem Cards to Brute-Force Attacks",
+    "url": "https://www.ledger.com/blog-brute-force-attack-tangem",
+    "date": "2025-09-17T00:00:00.000Z",
+    "excerpt": "The Vulnerability Exposing Tangem Cards to Brute-Force Attacks..."
+  },
+  {
+    "title": "Tangem Genuine Check Bypass on Android Application",
+    "url": "https://www.ledger.com/tangem-genuine-check-bypass-on-android-application",
+    "date": "2025-05-15T00:00:00.000Z",
+    "excerpt": "Tangem Genuine Check Bypass on Android Application"
+  },
+  {
+    "title": "Why Secure Elements make a crucial difference to Hardware Wallet…",
+    "url": "https://www.ledger.com/why-secure-elements-make-a-crucial-difference-to-hardware-wallet-security",
+    "date": "2025-03-12T00:00:00.000Z",
+    "excerpt": "Why Secure Elements make a crucial difference to Hardware Wallet ..."
+  },
+  {
+    "title": "TEE: When “Trusted” Doesn’t Mean “Secure”",
+    "url": "https://www.ledger.com/tee-when-trusted-doesnt-mean-secure",
+    "date": "2025-01-14T00:00:00.000Z",
+    "excerpt": "TEE: When “Trusted” Doesn’t Mean “Secure&..."
+  },
+  {
+    "title": "SCADL: A new side-channel attack tool using deep learning",
+    "url": "https://www.ledger.com/blog/scadl-a-new-side-channel-attack-tool-using-deep-learning",
+    "date": "2024-12-16T00:00:00.000Z",
+    "excerpt": "SCADL: A new side-channel attack tool using deep learning..."
+  },
+  {
+    "title": "Argo CD Security Misconfiguration Adventures",
+    "url": "https://www.ledger.com/argo-cd-security-misconfiguration-adventures",
+    "date": "2024-12-13T00:00:00.000Z",
+    "excerpt": "Argo CD Security Misconfiguration Adventures"
+  },
+  {
+    "title": "Cargo-checkct: our home-made tool guarding against timing attacks is now…",
+    "url": "https://www.ledger.com/blog-cargo-checkct-our-home-made-tool-guarding-against-timing-attacks-is-now-open-source",
+    "date": "2024-05-17T00:00:00.000Z",
+    "excerpt": "Cargo-checkct: our home-made tool guarding against timing attacks..."
+  },
+  {
+    "title": "Funds of Every Wallet Created With The Trust Wallet Browser…",
+    "url": "https://www.ledger.com/blog/funds-of-every-wallet-created-with-the-trust-wallet-browser-extension-could-have-been-stolen",
+    "date": "2023-04-25T00:00:00.000Z",
+    "excerpt": "Funds of Every Wallet Created With The Trust Wallet Browser Exten..."
+  },
+  {
+    "title": "Firmware Extraction: Evil-Maid Attacks on Blockstream Jade Hardware Wallet",
+    "url": "https://www.ledger.com/blog/firmware-extraction-evil-maid-attacks-on-blockstream-jade-hardware-wallet",
+    "date": "2023-02-15T00:00:00.000Z",
+    "excerpt": "Firmware Extraction: Evil-Maid Attacks on Blockstream Jade Hardwa..."
+  },
+  {
+    "title": "Prepping for Pwn2Own 2022",
+    "url": "https://www.ledger.com/blog/pwn2own-2022",
+    "date": "2023-01-30T00:00:00.000Z",
+    "excerpt": "Prepping for Pwn2Own 2022"
+  },
+  {
+    "title": "App Streaming: a New Development Paradigm for Environments with Constrained…",
+    "url": "https://www.ledger.com/blog/app-streaming",
+    "date": "2023-01-24T00:00:00.000Z",
+    "excerpt": "App Streaming: a New Development Paradigm for Environments with C..."
+  },
+  {
+    "title": "New PIN screen on Ledger Nano products",
+    "url": "https://www.ledger.com/blog/new-pin-screen",
+    "date": "2023-01-19T00:00:00.000Z",
+    "excerpt": "New PIN screen on Ledger Nano products"
+  },
+  {
+    "title": "Integrating fault injection in development workflows",
+    "url": "https://www.ledger.com/blog/fault-injection-simulation",
+    "date": "2022-08-10T00:00:00.000Z",
+    "excerpt": "Integrating fault injection in development workflows..."
+  },
+  {
+    "title": "Mounting a low-cost laser bench",
+    "url": "https://www.ledger.com/blog/laser-bench-low-price",
+    "date": "2022-07-13T00:00:00.000Z",
+    "excerpt": "Mounting a low-cost laser bench"
+  },
+  {
+    "title": "Black-box attacks on white-box ECDSA",
+    "url": "https://www.ledger.com/blog/whitebox_ecdsa",
+    "date": "2022-07-07T00:00:00.000Z",
+    "excerpt": "Black-box attacks on white-box ECDSA"
+  },
+  {
+    "title": "Donjon CTF 2021: Capture the Fortress!",
+    "url": "https://www.ledger.com/donjon-ctf-2021-capture-the-fortress",
+    "date": "2021-11-25T00:00:00.000Z",
+    "excerpt": "Donjon CTF 2021: Capture the Fortress!"
+  },
+  {
+    "title": "On the security of Booba’s music video and NFTs",
+    "url": "https://www.ledger.com/blog/booba_nft",
+    "date": "2021-11-22T00:00:00.000Z",
+    "excerpt": "On the security of Booba’s music video and NFTs..."
+  },
+  {
+    "title": "Remote laser faults injection during pandemic",
+    "url": "https://www.ledger.com/blog/laser-improvements",
+    "date": "2021-09-16T00:00:00.000Z",
+    "excerpt": "Remote laser faults injection during pandemic"
+  },
+  {
+    "title": "Protecting SSH keys with TPM 2.0, now available on Debian",
+    "url": "https://www.ledger.com/blog/ssh-with-tpm",
+    "date": "2021-09-02T00:00:00.000Z",
+    "excerpt": "Protecting SSH keys with TPM 2.0, now available on Debian..."
+  },
+  {
+    "title": "On the security model of software wallets",
+    "url": "https://www.ledger.com/blog/software-wallets",
+    "date": "2021-07-29T00:00:00.000Z",
+    "excerpt": "On the security model of software wallets"
+  },
+  {
+    "title": "Kaspersky Password Manager: All your passwords belong to us",
+    "url": "https://www.ledger.com/blog/kaspersky-password-manager",
+    "date": "2021-07-06T00:00:00.000Z",
+    "excerpt": "Kaspersky Password Manager: All your passwords belong to us..."
+  },
+  {
+    "title": "A Compact Electromagnetic Fault Injection Setup",
+    "url": "https://www.ledger.com/blog/compact-em",
+    "date": "2021-01-26T00:00:00.000Z",
+    "excerpt": "A Compact Electromagnetic Fault Injection Setup"
+  },
+  {
+    "title": "The Making of picoHSM Challenge",
+    "url": "https://www.ledger.com/blog/picohsm",
+    "date": "2020-12-15T00:00:00.000Z",
+    "excerpt": "The Making of picoHSM Challenge"
+  },
+  {
+    "title": "Discovering SMPC through CTF Challenges",
+    "url": "https://www.ledger.com/blog/ctf-smpc-signature",
+    "date": "2020-12-10T00:00:00.000Z",
+    "excerpt": "Discovering SMPC through CTF Challenges"
+  },
+  {
+    "title": "Exploiting Smart Contracts in CTF Challenges",
+    "url": "https://www.ledger.com/blog/ctf-smart-contracts",
+    "date": "2020-12-10T00:00:00.000Z",
+    "excerpt": "Exploiting Smart Contracts in CTF Challenges"
+  },
+  {
+    "title": "Ghostbuster: Spectre exploitation in real life",
+    "url": "https://www.ledger.com/blog/ghostbuster",
+    "date": "2020-11-25T00:00:00.000Z",
+    "excerpt": "Ghostbuster: Spectre exploitation in real life"
+  },
+  {
+    "title": "CTF 2020: Capture the Fortress",
+    "url": "https://www.ledger.com/blog/capture-the-fortress",
+    "date": "2020-10-21T00:00:00.000Z",
+    "excerpt": "CTF 2020: Capture the Fortress"
+  },
+  {
+    "title": "Follow-up on PIN verification against side-channel attack: KeepKey Hardware Wallet…",
+    "url": "https://www.ledger.com/blog/keepkey-side-channel-attack",
+    "date": "2020-05-18T00:00:00.000Z",
+    "excerpt": "Follow-up on PIN verification against side-channel attack: KeepKe..."
+  },
+  {
+    "title": "Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets",
+    "url": "https://www.ledger.com/blog/coldcard-pin-code",
+    "date": "2020-05-18T00:00:00.000Z",
+    "excerpt": "Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets..."
+  },
+  {
+    "title": "Ledger’s CTF 2018 and side-channels",
+    "url": "https://www.ledger.com/blog/ctf-rainbow",
+    "date": "2019-09-10T00:00:00.000Z",
+    "excerpt": "Ledger’s CTF 2018 and side-channels"
+  },
+  {
+    "title": "Everybody be Cool, This is a Robbery!",
+    "url": "https://www.ledger.com/blog/blackhat2019-presentation",
+    "date": "2019-08-09T00:00:00.000Z",
+    "excerpt": "Everybody be Cool, This is a Robbery!"
+  },
+  {
+    "title": "OLED screen (minor) vulnerability",
+    "url": "https://www.ledger.com/blog/oled-vuln",
+    "date": "2019-08-07T00:00:00.000Z",
+    "excerpt": "OLED screen (minor) vulnerability"
+  },
+  {
+    "title": "Unfixable Seed Extraction on Trezor – A practical and reliable…",
+    "url": "https://www.ledger.com/blog/unfixable-key-extraction-attack-on-trezor",
+    "date": "2019-07-01T00:00:00.000Z",
+    "excerpt": "Unfixable Seed Extraction on Trezor – A practical and relia..."
+  },
+  {
+    "title": "Extracting seed from Ellipal wallet",
+    "url": "https://www.ledger.com/blog/ellipal-security",
+    "date": "2019-06-25T00:00:00.000Z",
+    "excerpt": "Extracting seed from Ellipal wallet"
+  },
+  {
+    "title": "Breaking Trezor One with Side Channel Attacks",
+    "url": "https://www.ledger.com/blog/breaking-trezor-one-with-sca",
+    "date": "2019-06-17T00:00:00.000Z",
+    "excerpt": "Breaking Trezor One with Side Channel Attacks"
+  },
+  {
+    "title": "Extracting seeds from Wallets",
+    "url": "https://www.ledger.com/blog/extracting-seeds",
+    "date": "2019-06-11T00:00:00.000Z",
+    "excerpt": "Extracting seeds from Wallets"
+  },
+  {
+    "title": "Lascar: Donjon Side Channel Library",
+    "url": "https://www.ledger.com/lascar-donjon-side-channel-library",
+    "date": "2019-02-20T00:00:00.000Z",
+    "excerpt": "Lascar: Donjon Side Channel Library"
+  },
+  {
+    "title": "Rainbow",
+    "url": "https://www.ledger.com/blog/rainbow",
+    "date": "2019-02-14T00:00:00.000Z",
+    "excerpt": "Rainbow"
+  },
+  {
+    "title": "Introducing Ledger Donjon",
+    "url": "https://www.ledger.com/blog/introducing-ledger-donjon",
+    "date": "2018-12-11T00:00:00.000Z",
+    "excerpt": "Introducing Ledger Donjon"
+  }
+]

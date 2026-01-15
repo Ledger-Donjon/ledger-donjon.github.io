@@ -1,0 +1,47 @@
+name: Refresh Donjon blog data
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-donjon-blog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh blog data
+        run: npm run fetch:donjon-blog
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore: refresh Donjon blog data'
+          branch: automation/refresh-donjon-blog
+          delete-branch: true
+          title: 'chore: refresh Donjon blog data'
+          body: |
+            ## Summary
+            - Refresh Donjon blog article list from the Ledger blog category.
+
+            ## Test plan
+            - Not run (data refresh only).
