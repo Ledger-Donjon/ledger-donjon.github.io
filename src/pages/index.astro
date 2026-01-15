@@ -39,6 +39,19 @@ const latestBulletins = allLsb
           <a href={withBase('/about/')} class="btn btn--secondary">
             About Us
           </a>
+          <a
+            href="https://www.ledger.com/blog/category/donjon"
+            class="btn btn--primary btn--blog"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read the Donjon Blog
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
         </div>
       </div>
       <div class="hero__visual" aria-hidden="true">
@@ -330,6 +343,16 @@ const latestBulletins = allLsb
       &:hover {
         background: var(--color-bg-tertiary);
         text-decoration: none;
+      }
+    }
+
+    &--blog {
+      padding: var(--space-4) var(--space-7);
+      font-size: var(--text-base);
+      box-shadow: 0 12px 30px rgba(255, 83, 0, 0.2);
+
+      &:hover {
+        transform: translateY(-3px);
       }
     }
   }
