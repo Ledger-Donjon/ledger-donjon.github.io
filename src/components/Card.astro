@@ -35,8 +35,9 @@ const badgeItems = badges?.length
       </div>
     )}
     <div class="card__content">
-      {badgeItems.length > 0 && (
+      {(badgeItems.length > 0 || formattedDate) && (
         <div class="card__badges">
+          {formattedDate && <time class="card__date">{formattedDate}</time>}
           {badgeItems.map((item) => (
             <span class={`card__badge${item.tone === 'violet' ? ' card__badge--violet' : ''}`}>
               {item.text}
@@ -46,7 +47,6 @@ const badgeItems = badges?.length
       )}
       <h3 class="card__title">{title}</h3>
       {description && <p class="card__description">{description}</p>}
-      {formattedDate && <time class="card__date">{formattedDate}</time>}
     </div>
     <div class="card__arrow">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -153,7 +153,6 @@ const badgeItems = badges?.length
     &__date {
       font-size: var(--text-xs);
       color: var(--color-text-tertiary);
-      margin-top: auto;
     }
     
     &__arrow {

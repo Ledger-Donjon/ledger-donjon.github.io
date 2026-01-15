@@ -89,7 +89,10 @@ const currentPath = Astro.url.pathname;
         z-index: var(--z-sticky);
         isolation: isolate;
         transform: translateX(100%);
-        transition: transform var(--transition-normal);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform var(--transition-normal), opacity var(--transition-fast);
 
         &::before {
           content: '';
@@ -101,6 +104,9 @@ const currentPath = Astro.url.pathname;
         
         &.is-open {
           transform: translateX(0);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
         }
       }
     }

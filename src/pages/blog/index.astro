@@ -6,16 +6,30 @@ import articlesData from '../../data/donjon-blog.json';
 const categoryUrl = 'https://www.ledger.com/blog/category/donjon';
 
 const articles = Array.isArray(articlesData) ? articlesData : [];
+const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
+
+const parseDate = (value) => {
+  if (!value) return null;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed;
+};
 
 const formatDateText = (value) => {
-  if (!value) return '';
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return '';
+  const parsed = parseDate(value);
+  if (!parsed) return '';
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   }).format(parsed);
+};
+
+const isRecentArticle = (value) => {
+  const parsed = parseDate(value);
+  if (!parsed) return false;
+  const parsedMs = parsed.getTime();
+  return Date.now() >= parsedMs && Date.now() - parsedMs < recentCutoffMs;
 };
 ---
 
@@ -49,31 +63,35 @@ const formatDateText = (value) => {
 
       {articles.length > 0 && (
         <div class="articles">
-          {articles.map((article) => (
-            <article class="articles__card">
-              <a href={article.url} target="_blank" rel="noopener noreferrer" class="articles__link">
-                <div class="articles__meta">
-                  {article.date && (
-                    <time class="articles__date" datetime={article.date}>
-                      {formatDateText(article.date)}
-                    </time>
-                  )}
-                </div>
-                <h3 class="articles__title">{article.title}</h3>
-                {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
-                <span class="articles__cta" aria-label="Opens on Ledger corporate blog">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <path d="M14 3h7v7" />
-                    <path d="M10 14L21 3" />
-                    <path d="M21 14v7h-7" />
-                    <path d="M3 10V3h7" />
-                    <path d="M3 21h7" />
-                    <path d="M3 21l11-11" />
-                  </svg>
-                </span>
-              </a>
-            </article>
-          ))}
+          {articles.map((article) => {
+            const isNew = isRecentArticle(article.date);
+            return (
+              <article class="articles__card">
+                <a href={article.url} target="_blank" rel="noopener noreferrer" class="articles__link">
+                  <div class="articles__meta">
+                    {article.date && (
+                      <time class="articles__date" datetime={article.date}>
+                        {formatDateText(article.date)}
+                      </time>
+                    )}
+                    {isNew && <span class="articles__badge">New</span>}
+                  </div>
+                  <h3 class="articles__title">{article.title}</h3>
+                  {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
+                  <span class="articles__cta" aria-label="Opens on Ledger corporate blog">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                      <path d="M14 3h7v7" />
+                      <path d="M10 14L21 3" />
+                      <path d="M21 14v7h-7" />
+                      <path d="M3 10V3h7" />
+                      <path d="M3 21h7" />
+                      <path d="M3 21l11-11" />
+                    </svg>
+                  </span>
+                </a>
+              </article>
+            );
+          })}
         </div>
       )}
     </div>
@@ -179,6 +197,19 @@ const formatDateText = (value) => {
     background: var(--color-accent-glow);
     border-radius: var(--radius-full);
     padding: var(--space-1) var(--space-3);
+  }
+
+  .articles__badge {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    background: linear-gradient(135deg, var(--color-ledger-purple), #4f1b7a);
+    border: 1px solid rgba(106, 55, 148, 0.6);
+    border-radius: var(--radius-full);
+    padding: var(--space-1) var(--space-2);
+    box-shadow: 0 0 12px rgba(106, 55, 148, 0.4);
   }
 
   .articles__title {
