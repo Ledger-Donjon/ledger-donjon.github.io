@@ -1,5 +1,11 @@
 [
   {
+    "title": "Enforcing BIP32 Hardened Derivation Prefixes for Enhanced Security",
+    "url": "https://www.ledger.com/blog-enforcing-bip32-derivation",
+    "date": "2026-01-27T00:00:00.000Z",
+    "excerpt": "Enforcing BIP32 Hardened Derivation Prefixes for Enhanced Securit..."
+  },
+  {
     "title": "Is Your Smartphone’s Hardware Safe?",
     "url": "https://www.ledger.com/blog-is-your-smartphones-hardware-safe",
     "date": "2025-12-03T00:00:00.000Z",
