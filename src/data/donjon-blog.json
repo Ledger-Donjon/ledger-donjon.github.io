@@ -1,5 +1,29 @@
 [
   {
+    "title": "Security Isn’t Static: Why The Ledger Donjon Never Stops Testing",
+    "url": "https://www.ledger.com/security-isnt-static-why-the-ledger-donjon-never-stops-testing",
+    "date": "2026-04-02T00:00:00.000Z",
+    "excerpt": "Security Isn’t Static: Why The Ledger Donjon Never Stops Te..."
+  },
+  {
+    "title": "The Ledger Donjon Origin Story",
+    "url": "https://www.ledger.com/blog-the-ledger-donjon-origin-story",
+    "date": "2026-03-06T00:00:00.000Z",
+    "excerpt": "The Ledger Donjon Origin Story"
+  },
+  {
+    "title": "Quantum Computing’s Threat to Blockchain: The Enduring Need for Secure…",
+    "url": "https://www.ledger.com/blog-quantum-computing-threat-to-blockchain",
+    "date": "2026-02-26T00:00:00.000Z",
+    "excerpt": "Quantum Computing’s Threat to Blockchain: The Enduring Need..."
+  },
+  {
+    "title": "Enforcing BIP32 Hardened Derivation Prefixes for Enhanced Security",
+    "url": "https://www.ledger.com/blog-enforcing-bip32-derivation",
+    "date": "2026-01-27T00:00:00.000Z",
+    "excerpt": "Enforcing BIP32 Hardened Derivation Prefixes for Enhanced Securit..."
+  },
+  {
     "title": "Is Your Smartphone’s Hardware Safe?",
     "url": "https://www.ledger.com/blog-is-your-smartphones-hardware-safe",
     "date": "2025-12-03T00:00:00.000Z",
