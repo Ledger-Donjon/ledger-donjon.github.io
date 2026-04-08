@@ -1,5 +1,11 @@
 [
   {
+    "title": "Trade Different through Ledger Wallet™4.0",
+    "url": "https://www.ledger.com/blog-trade-different-ledger-wallet-4-0",
+    "date": "2026-04-08T00:00:00.000Z",
+    "excerpt": "Do you want to change language to ?"
+  },
+  {
     "title": "Security Isn’t Static: Why The Ledger Donjon Never Stops Testing",
     "url": "https://www.ledger.com/security-isnt-static-why-the-ledger-donjon-never-stops-testing",
     "date": "2026-04-02T00:00:00.000Z",
@@ -27,7 +33,7 @@
     "title": "Is Your Smartphone’s Hardware Safe?",
     "url": "https://www.ledger.com/blog-is-your-smartphones-hardware-safe",
     "date": "2025-12-03T00:00:00.000Z",
-    "excerpt": "Smartphones are commonly lost or stolen, but could that impact your security? The Ledger Donjon targeted a recent SoC to find out exactly how secure today’s smartphones are."
+    "excerpt": "Is Your Smartphone’s Hardware Safe?"
   },
   {
     "title": "The Vulnerability Exposing Tangem Cards to Brute-Force Attacks",
@@ -52,12 +58,6 @@
     "url": "https://www.ledger.com/tee-when-trusted-doesnt-mean-secure",
     "date": "2025-01-14T00:00:00.000Z",
     "excerpt": "TEE: When “Trusted” Doesn’t Mean “Secure&..."
-  },
-  {
-    "title": "SCADL: A new side-channel attack tool using deep learning",
-    "url": "https://www.ledger.com/blog/scadl-a-new-side-channel-attack-tool-using-deep-learning",
-    "date": "2024-12-16T00:00:00.000Z",
-    "excerpt": "SCADL: A new side-channel attack tool using deep learning..."
   },
   {
     "title": "Argo CD Security Misconfiguration Adventures",
