@@ -127,6 +127,22 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           Low quality reports, such as those that include inadequate information to investigate, 
           may incur significant delays in the disclosure process. Please only submit one report per issue.
         </p>
+
+        <div class="warning-box">
+          <h3>Regarding AI-Generated and Automated Reports</h3>
+          <p>
+            We do <strong>not</strong> accept vulnerability reports that are generated entirely or 
+            primarily by automated tools or AI systems without meaningful human analysis. Reports 
+            must demonstrate a genuine understanding of the vulnerability, including its root cause, 
+            impact, and a valid proof-of-concept or clear reproduction steps written by the reporter.
+          </p>
+          <p>
+            Submitting bulk, low-effort, or AI-generated reports without proper verification 
+            constitutes abuse of this program. <strong>Ledger reserves the right to discard such 
+            reports without response and to permanently ban any individual or entity that 
+            repeatedly submits unsolicited, low-quality, or spammy reports.</strong>
+          </p>
+        </div>
         
         <p>
           All communications between you and Ledger should go through <strong>bounty -at- ledger.fr</strong>. 
@@ -194,10 +210,14 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           <li>Be respectful and professional in your communications and behavior</li>
           <li>Hate speech, profanity, or any aggressive threats will not be tolerated</li>
           <li>Only contact the Ledger Security Team through the email address mentioned above</li>
+          <li>Do not send repeated, unsolicited, or follow-up messages pressuring for a response or reward</li>
+          <li>Do not submit multiple reports for the same issue or flood our inbox with bulk submissions</li>
         </ul>
         
         <p class="note">
-          Violations of this Code of Conduct can result in a warning and/or ban of this Bug Bounty Program.
+          Violations of this Code of Conduct can result in a warning, the permanent ban of the 
+          reporter from this Bug Bounty Program, and the unconditional rejection of all pending 
+          and future submissions from that reporter.
         </p>
         
         <p class="disclaimer">
@@ -333,6 +353,28 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
     
     .out-of-scope li {
       color: var(--color-text-tertiary);
+    }
+  }
+  
+  .warning-box {
+    padding: var(--space-6);
+    background: linear-gradient(135deg, rgba(255, 83, 0, 0.08), rgba(255, 83, 0, 0.02));
+    border: 1px solid var(--color-ledger-orange);
+    border-radius: var(--radius-lg);
+    margin: var(--space-8) 0;
+    
+    h3 {
+      color: var(--color-ledger-orange);
+      margin-top: 0;
+      margin-bottom: var(--space-4);
+    }
+    
+    p {
+      color: var(--color-text-secondary);
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   
