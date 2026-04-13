@@ -33,7 +33,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         </p>
       </div>
       
-      <h2>Eligibility</h2>
+      <h2 id="eligibility">Eligibility <a href="#eligibility" class="anchor-link">#</a></h2>
       
       <p class="section-intro">Ledger Bug Bounty Program covers our hardware devices as well as our web services.</p>
       
@@ -93,7 +93,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
       </div>
       
       <div class="prose-section">
-        <h2>Responsible Disclosure Policy</h2>
+        <h2 id="responsible-disclosure-policy">Responsible Disclosure Policy <a href="#responsible-disclosure-policy" class="anchor-link">#</a></h2>
         
         <p>
           At Ledger, we believe that Coordinated Vulnerability Disclosure is the right approach to 
@@ -107,7 +107,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           legal liability, so long as they follow responsible disclosure guidelines and principles.
         </p>
         
-        <h3>Guidelines</h3>
+        <h3 id="guidelines">Guidelines <a href="#guidelines" class="anchor-link">#</a></h3>
         
         <ul>
           <li>Do not engage in testing that degrades Ledger's information systems and products</li>
@@ -116,7 +116,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           <li>Do not exploit vulnerabilities on our infrastructure — the Bounty Program is about improving security, not deliberately putting the community at risk</li>
         </ul>
         
-        <h2>Submission Process</h2>
+        <h2 id="submission-process">Submission Process <a href="#submission-process" class="anchor-link">#</a></h2>
         
         <p>
           Submission reports should include a detailed description of your discovery with clear, 
@@ -151,7 +151,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         
         <p>The Ledger Security Team will be in touch, usually within 24 hours.</p>
         
-        <h2>Remediation & Disclosure</h2>
+        <h2 id="remediation-disclosure">Remediation & Disclosure <a href="#remediation-disclosure" class="anchor-link">#</a></h2>
         
         <p>
           After triage, we will send a quick acknowledgement and commit to being as transparent 
@@ -163,7 +163,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           fix issues within 90 days upon receipt of a vulnerability report.
         </p>
         
-        <h2>Reward</h2>
+        <h2 id="reward">Reward <a href="#reward" class="anchor-link">#</a></h2>
         
         <p>You may be eligible to receive a reward if:</p>
         
@@ -182,7 +182,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         
         <p><strong>Bounties will be paid directly to the researcher using Bitcoin.</strong></p>
         
-        <h3>Eligibility Requirements</h3>
+        <h3 id="eligibility-requirements">Eligibility Requirements <a href="#eligibility-requirements" class="anchor-link">#</a></h3>
         
         <p>To be eligible for a reward, you must not:</p>
         
@@ -194,7 +194,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           <li>Be less than 18 years of age (if under 18, you must get your parents' or legal guardian's permission)</li>
         </ul>
         
-        <h2>Hall of Fame</h2>
+        <h2 id="hall-of-fame">Hall of Fame <a href="#hall-of-fame" class="anchor-link">#</a></h2>
         
         <p>
           In mutual consultation, we can, if you desire, display a researcher's name or its pseudonym 
@@ -203,7 +203,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           to the Devices Bug Bounty Program.
         </p>
         
-        <h2>Code of Conduct</h2>
+        <h2 id="code-of-conduct">Code of Conduct <a href="#code-of-conduct" class="anchor-link">#</a></h2>
         
         <ul>
           <li>Be kind</li>
@@ -382,6 +382,24 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
     font-size: var(--text-sm);
     color: var(--color-text-tertiary);
     font-style: italic;
+  }
+  
+  .anchor-link {
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: var(--space-2);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      color: var(--color-accent-primary);
+    }
+  }
+  
+  h2:hover .anchor-link,
+  h3:hover .anchor-link {
+    opacity: 1;
   }
   
   .disclaimer {
