@@ -35,7 +35,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
       
       <h2 id="eligibility">Eligibility <a href="#eligibility" class="anchor-link">#</a></h2>
       
-      <p class="section-intro">Ledger Bug Bounty Program covers our hardware devices as well as our web services.</p>
+      <p class="section-intro">Ledger Bug Bounty Program covers our hardware devices, Ledger Wallet applications, as well as our web services.</p>
       
       <div class="program-cards">
           <div class="program-card">
@@ -79,6 +79,37 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
               <li>Editable Github wikis</li>
               <li>Outdated software without any noteworthy vulnerability</li>
               <li>Broken links</li>
+            </ul>
+          </div>
+          
+          <div class="program-card">
+            <div class="program-card__icon">📱</div>
+            <h3>Ledger Wallet Bug Bounty</h3>
+            <p>We are interested in vulnerabilities in Ledger Wallet (Desktop and Mobile) that could lead to loss of user funds, compromise of sensitive data, or bypass of security controls. We are looking for real security impact, not cosmetic or theoretical issues.</p>
+            
+            <h4>In-Scope Vulnerabilities</h4>
+            <ul>
+              <li>Unauthorized transaction crafting or signing bypass via Ledger Wallet</li>
+              <li>Compromise of the communication channel between Ledger Wallet and the device (USB/BLE)</li>
+              <li>Private data leakage (accounts, balances, xpubs) to unauthorized parties</li>
+              <li>Remote code execution in Ledger Wallet (Desktop or Mobile)</li>
+              <li>Supply-chain attacks on the Ledger Wallet update mechanism</li>
+              <li>Bypass of the genuine device check performed by Ledger Wallet</li>
+              <li>Man-in-the-middle attacks on Ledger Wallet backend communications</li>
+              <li>dApp privilege escalation: a compromised or malicious dApp accessing resources or permissions beyond what Ledger Wallet explicitly exposes to it (dApp sandbox escape)</li>
+            </ul>
+            
+            <h4>Out-of-scope Vulnerabilities</h4>
+            <ul class="out-of-scope">
+              <li>Attacks requiring prior local access to the computer or mobile device (e.g. malware already installed, physical access to an unlocked machine)</li>
+              <li>Vulnerabilities requiring physical access to an already-unlocked Ledger device</li>
+              <li>UI/UX bugs with no security impact (cosmetic glitches, typos, layout issues)</li>
+              <li>Outdated dependencies without a demonstrated exploitable vulnerability</li>
+              <li>Denial of service against Ledger Wallet (app crashes without security impact)</li>
+              <li>Issues already covered by the Devices or Web Bug Bounty scopes</li>
+              <li>Self-XSS or issues requiring unlikely user interaction chains</li>
+              <li>Vulnerabilities in third-party dApps themselves that do not impact Ledger Wallet or its users beyond the dApp's own scope</li>
+              <li>Reports from automated scanners without manual verification (see AI-generated reports policy)</li>
             </ul>
           </div>
           
