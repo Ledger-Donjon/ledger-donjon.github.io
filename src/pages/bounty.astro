@@ -47,7 +47,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
             <ul>
               <li>Hardware attacks on the Ledger devices (i.e. hardware products)</li>
               <li>Software attacks on the firmware running on the devices</li>
-              <li>Vulnerabilities in apps available through Ledger Wallet</li>
+              <li>Vulnerabilities in the in-scope apps listed below</li>
             </ul>
             
             <h4>In-Scope Vulnerabilities</h4>
@@ -58,6 +58,25 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
               <li>Privilege escalation from an app</li>
               <li>Bypass of user confirmation to issue a transaction</li>
               <li>Sensitive memory leak</li>
+            </ul>
+            
+            <h4>In-Scope Apps</h4>
+            <ul>
+              <li>app-bitcoin</li>
+              <li>app-bitcoin-new</li>
+              <li>app-cardano</li>
+              <li>app-stellar</li>
+              <li>app-sui</li>
+              <li>app-ethereum</li>
+              <li>app-exchange</li>
+              <li>app-monero</li>
+              <li>app-openpgp</li>
+              <li>app-recovery-check</li>
+              <li>app-security-key</li>
+              <li>app-solana</li>
+              <li>app-tron</li>
+              <li>app-xrp</li>
+              <li>app-hyperliquid <em>(coming soon)</em></li>
             </ul>
           </div>
           
@@ -316,11 +335,11 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
   
   .program-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
     margin: var(--space-8) 0;
     
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
       grid-template-columns: 1fr;
     }
   }
