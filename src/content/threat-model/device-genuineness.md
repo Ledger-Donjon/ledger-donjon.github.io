@@ -17,7 +17,7 @@ After manufacturing, this attestation allows the user (through Ledger Wallet) to
 
 ### End User Physical Verification
 
-Ledger signers are designed so users can check the integrity of their devices by themselves as detailed in [this support article](https://support.ledger.com/hc/en-us/articles/4404382029329-Check-hardware-integrity).
+Ledger signers are designed so users can check the integrity of their devices by themselves as detailed in [this support article](https://support.ledger.com/article/4404382029329-zd).
 
 
 > **Associated Threats**: An attack allowing to extract a device is a major threat to device genuineness security mechanism. Generally speaking, any attack allowing a non genuine device to pass the genuine check is a valid attack.
