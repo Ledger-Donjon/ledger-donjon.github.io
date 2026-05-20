@@ -5,8 +5,9 @@ import { fileURLToPath } from 'node:url';
 const CATEGORY_URL = 'https://www.ledger.com/blog/category/donjon';
 const PROXY_PREFIX = 'https://r.jina.ai/http://';
 const MAX_PAGES = 12;
-const REQUEST_TIMEOUT_MS = 6000;
-const CONCURRENCY = 3;
+const REQUEST_TIMEOUT_MS = 30_000;
+const CONCURRENCY = 1;
+const REQUEST_DELAY_MS = 800;
 
 const toProxyUrl = (url) => `${PROXY_PREFIX}${url.replace(/^https?:\/\//, '')}`;
 
@@ -28,7 +29,11 @@ const DEFAULT_HEADERS = {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+let lastFetchAt = 0;
 const fetchWithTimeout = async (url, timeoutMs = REQUEST_TIMEOUT_MS, retries = 3) => {
+  const waitMs = Math.max(0, REQUEST_DELAY_MS - (Date.now() - lastFetchAt));
+  if (waitMs > 0) await delay(waitMs);
+  lastFetchAt = Date.now();
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -105,11 +110,21 @@ const extractArticles = (markdown, seen) => {
   return entries;
 };
 
+const normalizeExcerpt = (value) => value.replace(/\s+/g, ' ').trim().toLowerCase();
+
 const isExcerptPlaceholder = (excerpt) => {
   if (!excerpt) return true;
   const normalized = excerpt.replace(/\s+/g, '').trim();
   if (normalized === '***' || normalized === '...') return true;
   if (excerpt.trim().toLowerCase() === 'tl;dr') return true;
+  return false;
+};
+
+const isBadExcerpt = (excerpt, title) => {
+  if (isExcerptPlaceholder(excerpt)) return true;
+  if (/change language/i.test(excerpt)) return true;
+  if (/yes, please/i.test(excerpt) || /no, thanks/i.test(excerpt)) return true;
+  if (title && normalizeExcerpt(excerpt) === normalizeExcerpt(title)) return true;
   return false;
 };
 
@@ -128,6 +143,8 @@ const extractExcerptFromArticle = (markdown) => {
 
     const cleaned = rawLine.replace(/^[_*]+/, '').replace(/[_*]+$/, '').trim();
     if (!cleaned) continue;
+    if (/change language/i.test(cleaned)) continue;
+    if (/yes, please/i.test(cleaned) || /no, thanks/i.test(cleaned)) continue;
     return cleaned;
   }
 
@@ -200,10 +217,16 @@ const run = async () => {
 
     if (pageUrls.length > 0) {
       const pageResults = await mapWithConcurrency(pageUrls, CONCURRENCY, async (url) => {
-        const response = await fetchWithTimeout(toProxyUrl(url));
-        if (!response.ok) return [];
-        const markdown = await response.text();
-        return extractArticles(markdown, seen);
+        try {
+          const response = await fetchWithTimeout(toProxyUrl(url));
+          if (!response.ok) return [];
+          const markdown = await response.text();
+          return extractArticles(markdown, seen);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.warn(`Skipping category page ${url}: ${message}`);
+          return [];
+        }
       });
       articles = articles.concat(...pageResults);
     }
@@ -213,26 +236,47 @@ const run = async () => {
     const needsDetailFetch = articles.filter((article) => isExcerptPlaceholder(article.excerpt));
     if (needsDetailFetch.length > 0) {
       const detailResults = await mapWithConcurrency(needsDetailFetch, CONCURRENCY, async (article) => {
-        const response = await fetchWithTimeout(toProxyUrl(article.url));
-        if (!response.ok) return { url: article.url, excerpt: '' };
-        const markdown = await response.text();
-        return {
-          url: article.url,
-          excerpt: extractExcerptFromArticle(markdown),
-        };
+        try {
+          const response = await fetchWithTimeout(toProxyUrl(article.url));
+          if (!response.ok) return { url: article.url, excerpt: '' };
+          const markdown = await response.text();
+          return {
+            url: article.url,
+            excerpt: extractExcerptFromArticle(markdown),
+          };
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.warn(`Skipping excerpt fetch for ${article.url}: ${message}`);
+          return { url: article.url, excerpt: '' };
+        }
       });
       const detailMap = new Map(detailResults.map((result) => [result.url, result]));
       articles = articles.map((article) => {
         const detail = detailMap.get(article.url);
         if (!detail) return article;
+        const candidates = [detail.excerpt, article.excerpt].filter(Boolean);
+        const excerpt = candidates.find((value) => !isBadExcerpt(value, article.title));
         return {
           ...article,
-          excerpt: detail.excerpt || article.excerpt,
+          excerpt: excerpt || article.title,
         };
       });
     }
 
     articles = articles.map(({ author, ...rest }) => rest);
+
+    const existingByUrl = new Map(fallback.map((article) => [article.url, article]));
+    articles = articles.map((article) => {
+      const previous = existingByUrl.get(article.url);
+      if (
+        previous?.excerpt &&
+        isBadExcerpt(article.excerpt, article.title) &&
+        !isBadExcerpt(previous.excerpt, article.title)
+      ) {
+        return { ...article, excerpt: previous.excerpt };
+      }
+      return article;
+    });
 
     articles.sort((a, b) => {
       const aTime = a.date ? Date.parse(a.date) : 0;

@@ -1,5 +1,23 @@
 [
   {
+    "title": "The Hidden Risk of Side-Channel Attacks on Post Quantum Cryptography",
+    "url": "https://www.ledger.com/blog-risk-side-channel-attacks-post-quantum-cryptography",
+    "date": "2026-04-29T00:00:00.000Z",
+    "excerpt": "The Hidden Risk of Side-Channel Attacks on Post Quantum Cryptogra..."
+  },
+  {
+    "title": "Inside the Ledger Donjon: How a White-Hat Hacker Lab Works",
+    "url": "https://www.ledger.com/inside-the-ledger-donjon-how-a-white-hat-hacker-lab-works",
+    "date": "2026-04-25T00:00:00.000Z",
+    "excerpt": "Inside the Ledger Donjon: How a White-Hat Hacker Lab Works..."
+  },
+  {
+    "title": "Trade Different through Ledger Wallet™4.0",
+    "url": "https://www.ledger.com/blog-trade-different-ledger-wallet-4-0",
+    "date": "2026-04-08T00:00:00.000Z",
+    "excerpt": "Products"
+  },
+  {
     "title": "Security Isn’t Static: Why The Ledger Donjon Never Stops Testing",
     "url": "https://www.ledger.com/security-isnt-static-why-the-ledger-donjon-never-stops-testing",
     "date": "2026-04-02T00:00:00.000Z",
