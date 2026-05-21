@@ -30,22 +30,28 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 <Base title={entry.data.title} description={entry.data.excerpt}>
   <article class="blog-post">
     <div class="container">
-      <header class="blog-post__header">
+      <nav class="blog-post__nav">
         <a href={withBase('/blog/')} class="blog-post__back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
           All posts
         </a>
-        <span class="blog-post__badge">Donjon blog</span>
-        <time class="blog-post__date" datetime={entry.data.date.toISOString()}>
-          {formattedDate}
-        </time>
-        <h1>{entry.data.title}</h1>
+      </nav>
+
+      <header class="blog-post__header">
+        <div class="blog-post__meta">
+          <time class="blog-post__date" datetime={entry.data.date.toISOString()}>
+            {formattedDate}
+          </time>
+          <span class="blog-post__separator" aria-hidden="true"></span>
+          <span class="blog-post__label">Donjon blog</span>
+        </div>
+        <h1 class="blog-post__title">{entry.data.title}</h1>
         <p class="blog-post__excerpt">{entry.data.excerpt}</p>
       </header>
 
-      <div class="blog-post__content prose">
+      <div class="blog-post__body prose">
         <Content />
       </div>
 
@@ -63,90 +69,110 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 <style lang="scss">
   .blog-post {
-    padding: var(--space-12) 0;
+    padding: var(--space-8) 0 var(--space-16);
+  }
 
-    &__header {
-      max-width: var(--max-width-prose);
-      margin-bottom: var(--space-10);
+  .blog-post__nav {
+    max-width: var(--max-width-prose);
+    margin-bottom: var(--space-10);
+  }
 
-      h1 {
-        font-size: var(--text-4xl);
-        margin-bottom: var(--space-4);
+  .blog-post__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    transition: color var(--transition-fast);
 
-        @media (max-width: 768px) {
-          font-size: var(--text-3xl);
-        }
-      }
-    }
-
-    &__back {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: var(--text-sm);
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-6);
-
-      &:hover {
-        color: var(--color-accent-primary);
-      }
-    }
-
-    &__badge {
-      display: inline-block;
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--text-sm);
-      font-weight: 600;
+    &:hover {
       color: var(--color-accent-primary);
-      background: var(--color-accent-glow);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-3);
-      margin-right: var(--space-3);
+      text-decoration: none;
     }
+  }
 
-    &__date {
-      display: block;
-      font-size: var(--text-sm);
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-4);
+  .blog-post__header {
+    max-width: var(--max-width-prose);
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .blog-post__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .blog-post__date {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+  }
+
+  .blog-post__separator {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-text-tertiary);
+  }
+
+  .blog-post__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .blog-post__title {
+    font-size: var(--text-5xl);
+    line-height: 1.15;
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: var(--text-3xl);
     }
+  }
 
-    &__excerpt {
-      font-size: var(--text-xl);
-      color: var(--color-text-secondary);
-      line-height: var(--leading-relaxed);
-      margin: 0;
-    }
+  .blog-post__excerpt {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+  }
 
-    &__content {
-      max-width: var(--max-width-prose);
-    }
+  .blog-post__body {
+    max-width: var(--max-width-prose);
+  }
 
-    &__footer {
-      max-width: var(--max-width-prose);
-      margin-top: var(--space-12);
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--color-border);
-    }
+  .blog-post__footer {
+    max-width: var(--max-width-prose);
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
 
-    &__back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      background: var(--color-bg-secondary);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      transition: all var(--transition-fast);
+  .blog-post__back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
 
-      &:hover {
-        color: var(--color-accent-primary);
-        border-color: var(--color-accent-primary);
-        text-decoration: none;
-      }
+    &:hover {
+      color: var(--color-accent-primary);
+      border-color: var(--color-accent-primary);
+      text-decoration: none;
     }
   }
 </style>
