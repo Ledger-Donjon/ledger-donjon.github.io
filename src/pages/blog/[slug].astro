@@ -27,7 +27,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(entry.data.date);
 ---
 
-<Base title={entry.data.title} description={entry.data.excerpt}>
+<Base title={entry.data.title} description={entry.data.excerpt} bodyClass="clean-bg">
   <article class="blog-post">
     <div class="container">
       <nav class="blog-post__nav">

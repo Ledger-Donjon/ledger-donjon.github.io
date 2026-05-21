@@ -141,6 +141,10 @@ body::before {
   z-index: -1;
 }
 
+body.clean-bg::before {
+  background-image: none;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
