@@ -280,11 +280,11 @@ img {
 .prose {
   max-width: var(--max-width-prose);
   font-size: var(--text-lg);
-  line-height: 1.8;
+  line-height: 1.6;
   color: var(--color-text-secondary);
 
   > * + * {
-    margin-top: var(--space-6);
+    margin-top: var(--space-3);
   }
 
   h2, h3, h4 {
@@ -294,24 +294,24 @@ img {
 
   h2 {
     font-size: var(--text-3xl);
-    margin-top: var(--space-16);
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-4);
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
     border-bottom: 1px solid var(--color-border);
     letter-spacing: -0.01em;
   }
 
   h3 {
     font-size: var(--text-2xl);
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-4);
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-2);
     color: var(--color-text-primary);
   }
 
   h4 {
     font-size: var(--text-xl);
-    margin-top: var(--space-10);
-    margin-bottom: var(--space-3);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
     color: var(--color-text-secondary);
     font-weight: 600;
   }
@@ -340,7 +340,7 @@ img {
     margin-bottom: 0;
 
     li {
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
       padding-left: var(--space-2);
     }
 
@@ -357,12 +357,12 @@ img {
     border: none;
     height: 1px;
     background: var(--color-border);
-    margin: var(--space-12) 0;
+    margin: var(--space-6) 0;
   }
 
   blockquote {
-    margin: var(--space-8) 0;
-    padding: var(--space-5) var(--space-6);
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-5);
     border-left: 3px solid var(--color-accent-primary);
     background: var(--color-bg-secondary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -375,10 +375,10 @@ img {
   }
 
   pre {
-    margin: var(--space-8) 0;
-    padding: var(--space-5) var(--space-6);
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-5);
     font-size: var(--text-sm);
-    line-height: 1.7;
+    line-height: 1.55;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
     background: var(--color-bg-secondary);
@@ -409,7 +409,7 @@ img {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: var(--space-10) 0;
+    margin: var(--space-6) 0;
     border-radius: var(--radius-xl);
     border: 1px solid var(--color-border);
     box-shadow:
