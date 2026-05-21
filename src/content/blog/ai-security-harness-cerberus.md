@@ -5,7 +5,13 @@ excerpt: "The Ledger Donjon's journey from AI-assisted development to an AI secu
 draft: false
 ---
 
-AI is changing the economics of offensive security: more scale, lower cost, and faster iteration for attackers. AI coding assistants are useful, but they are not enough to detect and verify security issues at scale. A prompt is not an agent — real agents need iteration loops, memory, tools, task management, auditability, and constraints.
+## Key Takeaways
+
+- AI is changing the economics of offensive security: more scale, lower cost, and faster iteration for attackers.
+- AI coding assistants are useful, but they are not enough to detect and verify security issues at scale.
+- A prompt is not an agent. Real agents need iteration loops, memory, tools, task management, auditability, and constraints.
+- Agentic security systems are still software systems: cost, scalability, resilience, and non-determinism must be engineered.
+- The goal is not to replace security experts. The goal is to give them a team of agents that can explore, challenge, verify, patch, and learn with them.
 
 Over the last few months, the Ledger Donjon has not only been watching the AI wave from the side. We have been transforming the way we work into something closer to a **hybrid human and AI security team**.
 
@@ -25,7 +31,7 @@ This is the story of how we started building an AI security harness at Ledger.
 
 ## The long road to an AI security harness
 
-### An assistant assists, it does not drive
+### 1. An assistant assists, it does not drive
 
 If you think your favorite IDE with an AI coding assistant will save you, you are probably wrong.
 
@@ -41,7 +47,7 @@ First, **assistants tend to stop early**. They are optimized to help, answer, an
 
 Second, **context matters**. The best development assistants are not good only because of the underlying model. They are good because they inject the right context at the right time: files, symbols, dependencies, diffs, build errors, documentation, and developer intent. But their core task remains development, inside a source repository, with a toolset designed for coding.
 
-### A prompt is not an agent
+### 2. A prompt is not an agent
 
 Once you realize that the best AI coding assistant was not designed for your security workflows, it is tempting to jump directly to "autonomous agents." The good news is that the ecosystem is full of frameworks, APIs, orchestration libraries, and examples. The bad news is that a large language model is still, at its core, a function: input in, output out.
 
@@ -55,7 +61,7 @@ The agent stopped after a few minutes. With no meaningful result. Of course. Bec
 
 An agent needs ways to discover, decide, try, fail, remember, listen, analyze, and continue. Just like a human security engineer would need tools, notes, hypotheses, a target, a scope, and feedback from the environment.
 
-### Prompt engineering, context engineering, tooling engineering
+### 3. Prompt engineering, context engineering, tooling engineering
 
 After this first failure, we iterated. The most important lesson was that building useful security agents is not only prompt engineering. It is **prompt engineering, context engineering, and tooling engineering**.
 
@@ -89,7 +95,7 @@ This is where our first two agents emerged inside Cerberus:
 
 ![Sentinel — Code Review Pipeline Manager](/blog/cerberus/sentinel-card.png)
 
-### Agentic systems are still software systems
+### 4. Agentic systems are still software systems
 
 After playing with Striker for a few hours, another obvious truth came back very quickly: agentic systems are still software systems.
 
@@ -115,7 +121,7 @@ Do not give up there. Use the model's strength to repair its own output. Build r
 
 ![Repair loop — validation fails, the agent receives the errors and self-corrects](/blog/cerberus/repair-loop.png)
 
-### Mastering non-determinism
+### 5. Mastering non-determinism
 
 For people used to relational databases, business logic, and deterministic workflows, integrating LLMs can be surprising.
 
@@ -149,7 +155,7 @@ Adversarial agents matter. Not adversarial in the "malicious" sense, but adversa
 
 Cross-checks, adversarial review, deduplication, prioritization, verification scans, and audit trails are not optional add-ons. They are the control plane of the system.
 
-## Reaching the last mile
+### 6. Reaching the last mile
 
 A security hypothesis is not a finding. "This looks vulnerable" is not enough. A finding has value only when you go to the end.
 
@@ -157,7 +163,7 @@ You need to reproduce it. Exploit it. Understand the impact. Verify the precondi
 
 This is the last mile. It is the hardest part. For that, we created three agents:
 
-### Vecna: the end-to-end exploitation agent
+#### Vecna: the end-to-end exploitation agent
 
 Vecna is designed to push a finding as far as possible technically. It must:
 
@@ -168,7 +174,7 @@ Vecna is designed to push a finding as far as possible technically. It must:
 - Measure impact
 - Verify whether the finding technically holds — or it is simply an internal function that is vulnerable
 
-### Hopper: the live challenge assistant
+#### Hopper: the live challenge assistant
 
 Hopper's role is more interactive. It supports the analysis in real time, challenges hypotheses, asks the right questions, explores deeper paths, and can help requalify the finding. It helps avoid two traps:
 
@@ -179,7 +185,7 @@ Verification needs both: an agent able to execute until the end, and an assistan
 
 ![Hopper — interactive finding analyst, browsing code and challenging hypotheses in real time](/blog/cerberus/hopper-chat.png)
 
-### Merlin: the patch wizard
+#### Merlin: the patch wizard
 
 When Vecna delivers a PoC without modifying the main codebase and returns the status "exploitable," there is no doubt anymore. With the progress of LLMs in code generation, the last mile cannot stop at reporting. It must also cover remediation.
 
@@ -189,7 +195,7 @@ Merlin can patch. Of course, we ask its friend Sentinel, the code-review agent, 
 
 The loop becomes complete: **Detect. Verify. Exploit. Patch. Review. Monitor.**
 
-## Turning specialized agents into a team
+### 7. Turning specialized agents into a team
 
 A team is not a collection of experts sitting next to each other. A team is the ability to discuss, delegate, synchronize, disagree, commit, and communicate. Agents need the same kind of structure.
 
@@ -208,7 +214,7 @@ But it also creates a new problem: how do you write the prompt of a manager? Two
 
 The real challenge is finding the right level of abstraction. It is almost like managing engineers — don't micromanage, give autonomy, but clarify the cap.
 
-## Integrating the agent team into the human team
+### 8. Integrating the agent team into the human team
 
 An agentic security team cannot live alone. If it stays outside the company workflow, it is just a demo. Maybe an impressive demo. But still a demo.
 
