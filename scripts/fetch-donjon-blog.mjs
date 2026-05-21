@@ -1,6 +1,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  filterVisibleDonjonBlogArticles,
+  readHiddenDonjonBlogUrls,
+} from './donjon-blog-hidden.mjs';
 
 const CATEGORY_URL = 'https://www.ledger.com/blog/category/donjon';
 const PROXY_PREFIX = 'https://r.jina.ai/http://';
@@ -199,6 +203,7 @@ const writeOutput = async (articles) => {
 
 const run = async () => {
   const fallback = await readExisting();
+  const hiddenUrls = await readHiddenDonjonBlogUrls();
   const seen = new Set();
   let articles = [];
 
@@ -284,11 +289,17 @@ const run = async () => {
       return bTime - aTime;
     });
 
-    if (articles.length === 0) {
+    const visibleArticles = filterVisibleDonjonBlogArticles(articles, hiddenUrls);
+    const hiddenCount = articles.length - visibleArticles.length;
+    if (hiddenCount > 0) {
+      console.log(`Excluded ${hiddenCount} hidden article(s) (see src/data/donjon-blog-hidden.json).`);
+    }
+
+    if (visibleArticles.length === 0) {
       console.warn('No articles detected, preserving existing data if available.');
-      await writeOutput(fallback);
+      await writeOutput(filterVisibleDonjonBlogArticles(fallback, hiddenUrls));
     } else {
-      await writeOutput(articles);
+      await writeOutput(visibleArticles);
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://www.ledger.com/inside-the-ledger-donjon-how-a-white-hat-hacker-lab-works",
+    "note": "Corporate profile piece; not shown on donjon.ledger.com"
+  },
+  {
+    "url": "https://www.ledger.com/blog-trade-different-ledger-wallet-4-0",
+    "note": "Product marketing; not security research"
+  },
+  {
+    "url": "https://www.ledger.com/security-isnt-static-why-the-ledger-donjon-never-stops-testing",
+    "note": "Product marketing; not security research"
+  },
+  {
+    "url": "https://www.ledger.com/blog-the-ledger-donjon-origin-story",
+    "note": "Marketing; not security research"
+  }
+]

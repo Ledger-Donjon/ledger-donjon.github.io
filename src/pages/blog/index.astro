@@ -2,10 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import articlesData from '../../data/donjon-blog.json';
+import { filterVisibleDonjonBlogArticles } from '../../lib/donjon-blog';
 
 const categoryUrl = 'https://www.ledger.com/blog/category/donjon';
 
-const articles = Array.isArray(articlesData) ? articlesData : [];
+const articles = filterVisibleDonjonBlogArticles(Array.isArray(articlesData) ? articlesData : []);
 const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
 
 const parseDate = (value) => {

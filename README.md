@@ -67,6 +67,12 @@ summary: Brief description of the issue
 
 Threat model documentation is in `src/content/threat-model/`.
 
+### Donjon blog (curated from Ledger corporate blog)
+
+Articles are fetched from the [Donjon category](https://www.ledger.com/blog/category/donjon) into `src/data/donjon-blog.json` (`npm run fetch:donjon-blog`, also runs before `npm run build`).
+
+To **hide** a post from donjon.ledger.com without deleting it from the Ledger blog, add its URL to `src/data/donjon-blog-hidden.json` (optional `note` for maintainers). Hidden URLs are excluded on refresh and at build time. Do not remove entries from `donjon-blog.json` by hand—they will reappear on the next fetch unless they are listed as hidden.
+
 ## Deployment
 
 The site automatically deploys to GitHub Pages when changes are pushed to the `main` or `master` branch. The deployment workflow is defined in `.github/workflows/deploy.yml`.
