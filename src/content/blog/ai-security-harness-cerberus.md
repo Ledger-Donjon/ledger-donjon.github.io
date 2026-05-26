@@ -13,6 +13,8 @@ draft: false
 - Agentic security systems are still software systems: cost, scalability, resilience, and non-determinism must be engineered.
 - The goal is not to replace security experts. The goal is to give them a team of agents that can explore, challenge, verify, patch, and learn with them.
 
+---
+
 Over the last few months, the Ledger Donjon has not only been watching the AI wave from the side. We have been transforming the way we work into something closer to a **hybrid human and AI security team**.
 
 The first signals were easy to dismiss. A flood of low-quality AI-generated bug bounty submissions here. A few spectacular announcements about AI models finding vulnerabilities there. A lot of noise, a few real results, and many people waiting for the next frontier model as if access to the model alone would solve everything.
