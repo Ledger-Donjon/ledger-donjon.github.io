@@ -77,7 +77,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
             
             <h4>Proof-of-Concept Requirements</h4>
             <ul>
-              <li>For embedded app vulnerabilities, the PoC <strong>must</strong> demonstrate exploitation through APDUs sent to the device. This can be reproduced using the <a href="https://github.com/LedgerHQ/speculos">Speculos</a> emulator and the <a href="https://github.com/LedgerHQ/ragger">Ragger</a> Python testing framework.</li>
+              <li>For embedded app vulnerabilities, the PoC <strong>must</strong> demonstrate exploitation through APDUs sent to the device. This can be reproduced using either the <a href="https://github.com/LedgerHQ/speculos">Speculos</a> emulator and the <a href="https://github.com/LedgerHQ/ragger">Ragger</a> Python testing framework or an actual device.</li>
               <li>For display / clear signing issues, the PoC must show that incorrect or misleading information is rendered <strong>on the device screen</strong> without any warning to the user.</li>
             </ul>
             
