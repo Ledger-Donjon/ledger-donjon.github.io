@@ -48,7 +48,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
           <span class="blog-post__label">Donjon blog</span>
         </div>
         <h1 class="blog-post__title">{entry.data.title}</h1>
-        <p class="blog-post__excerpt">{entry.data.excerpt}</p>
+        <p class="blog-post__excerpt" set:html={entry.data.excerpt} />
       </header>
 
       <div class="blog-post__body prose">
@@ -145,6 +145,12 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     margin: 0;
+
+    :global(mark) {
+      background: transparent;
+      color: var(--color-accent-primary);
+      font-weight: 600;
+    }
   }
 
   .blog-post__body {

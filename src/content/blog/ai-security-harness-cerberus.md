@@ -1,7 +1,7 @@
 ---
 title: "No Fight, No Chance: Security Teams Must Become Hybrid AI Teams"
 date: 2026-05-21
-excerpt: "The Ledger Donjon's journey from AI-assisted development to an AI security harness — and why offense is no longer only the best defense, but a required security capability."
+excerpt: "The Ledger Donjon's journey from AI-assisted development to an AI security harness — and why <mark>offense is no longer only the best defense, but a required security capability.</mark>"
 draft: false
 ---
 
