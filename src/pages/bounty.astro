@@ -33,6 +33,15 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         </p>
       </div>
       
+      <div class="security-model-box">
+        <h2 id="security-model">Understanding Ledger's Security Model <a href="#security-model" class="anchor-link">#</a></h2>
+        <p>
+          Before submitting a report, researchers <strong>must</strong> understand Ledger's 
+          <a href={withBase('/threat-model/')}>security model and threat model</a>.
+          Reports that do not account for this model will be considered out of scope.
+        </p>
+      </div>
+      
       <h2 id="eligibility">Eligibility <a href="#eligibility" class="anchor-link">#</a></h2>
       
       <p class="section-intro">Ledger Bug Bounty Program covers our hardware devices, Ledger Wallet applications, as well as our web services.</p>
@@ -58,6 +67,18 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
               <li>Privilege escalation from an app</li>
               <li>Bypass of user confirmation to issue a transaction</li>
               <li>Sensitive memory leak</li>
+            </ul>
+            
+            <h4>Out-of-Scope Vulnerabilities</h4>
+            <ul class="out-of-scope">
+              <li>Displaying wrong information in Ledger Wallet / Ledger Live when the device correctly displays the transaction details or shows a warning to the user</li>
+              <li>Theoretical vulnerabilities without a working proof-of-concept demonstrating actual exploitation on the device</li>
+            </ul>
+            
+            <h4>Proof-of-Concept Requirements</h4>
+            <ul>
+              <li>For embedded app vulnerabilities, the PoC <strong>must</strong> demonstrate exploitation through APDUs sent to the device. This can be reproduced using the <a href="https://github.com/LedgerHQ/speculos">Speculos</a> emulator and the <a href="https://github.com/LedgerHQ/ragger">Ragger</a> Python testing framework.</li>
+              <li>For display / clear signing issues, the PoC must show that incorrect or misleading information is rendered <strong>on the device screen</strong> without any warning to the user.</li>
             </ul>
             
             <h4>In-Scope Apps</h4>
@@ -105,6 +126,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
             <div class="program-card__icon">📱</div>
             <h3>Ledger Wallet Bug Bounty</h3>
             <p>We are interested in vulnerabilities in Ledger Wallet (Desktop and Mobile) that could lead to loss of user funds, compromise of sensitive data, or bypass of security controls. We are looking for real security impact, not cosmetic or theoretical issues.</p>
+            <p class="program-card__note">Ledger Wallet is <strong>not</strong> considered a source of truth for validating transactions — this is the role of the signer (the hardware device). Transaction display discrepancies in Ledger Wallet that are correctly displayed or flagged by the device are not in scope.</p>
             
             <h4>In-Scope Vulnerabilities</h4>
             <ul>
@@ -128,6 +150,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
               <li>Issues already covered by the Devices or Web Bug Bounty scopes</li>
               <li>Self-XSS or issues requiring unlikely user interaction chains</li>
               <li>Vulnerabilities in third-party dApps themselves that do not impact Ledger Wallet or its users beyond the dApp's own scope</li>
+              <li>Transaction display discrepancies in Ledger Wallet when the hardware device correctly shows the transaction details or warns the user</li>
               <li>Reports from automated scanners without manual verification (see AI-generated reports policy)</li>
             </ul>
           </div>
@@ -168,7 +191,19 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         
         <p>
           Submission reports should include a detailed description of your discovery with clear, 
-          concise steps allowing us to reproduce the issue, or a working proof-of-concept.
+          concise steps allowing us to reproduce the issue, and a working proof-of-concept that 
+          demonstrates real exploitation within the scope of our 
+          <a href={withBase('/threat-model/')}>threat model</a>.
+        </p>
+        
+        <p>
+          For device and embedded app vulnerabilities, the PoC must demonstrate exploitation through 
+          APDUs sent to the device — reproducible using either
+          <a href="https://github.com/LedgerHQ/speculos">Speculos</a> (Ledger device emulator) and 
+          <a href="https://github.com/LedgerHQ/ragger">Ragger</a> (Python testing framework) or 
+          an actual device. 
+          Reports that only describe a theoretical attack without an APDU-level demonstration will 
+          not be considered.
         </p>
         
         <p>
@@ -331,6 +366,39 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
     }
   }
   
+  .security-model-box {
+    padding: var(--space-6);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-ledger-orange);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-10);
+    max-width: 800px;
+    
+    h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    ul {
+      padding-left: var(--space-6);
+      
+      li {
+        margin-bottom: var(--space-4);
+        color: var(--color-text-secondary);
+      }
+    }
+    
+    p {
+      color: var(--color-text-secondary);
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
   .program-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -401,6 +469,15 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
     
     .out-of-scope li {
       color: var(--color-text-tertiary);
+    }
+    
+    &__note {
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-4);
+      background: rgba(255, 83, 0, 0.06);
+      border-left: 3px solid var(--color-ledger-orange);
+      border-radius: var(--radius-sm);
+      margin-top: var(--space-3);
     }
   }
   
