@@ -103,7 +103,9 @@ After playing with Striker for a few hours, another obvious truth came back very
 
 They have cost. They need to scale. They fail. They need observability, queues, retries, budgets, access control, audit trails, and product decisions. The only difference is that a large part of the logic is now non-deterministic.
 
-**Cost: we are reliving the cloud moment.** A colleague described it perfectly. Remember the first wave of pay-as-you-go cloud services. Suddenly, every action could have a cost. Every environment, every log, every forgotten instance could become a bill. With AI agents, the dynamic is even more aggressive. If you pay more, you can potentially explore more, reason more, verify more, and generate more. But without discipline, you can also burn the budget while producing noise.
+#### Cost: we are reliving the cloud moment
+
+A colleague described it perfectly. Remember the first wave of pay-as-you-go cloud services. Suddenly, every action could have a cost. Every environment, every log, every forgotten instance could become a bill. With AI agents, the dynamic is even more aggressive. If you pay more, you can potentially explore more, reason more, verify more, and generate more. But without discipline, you can also burn the budget while producing noise.
 
 ![Cost breakdown by service — Sentinel and Jarvis dominate, Striker is nearly free](/blog/cerberus/cost-by-service.png)
 
@@ -113,11 +115,15 @@ They have cost. They need to scale. They fail. They need observability, queues, 
 
 ![Model configuration — each agent sub-task has its own provider, model, and reasoning level](/blog/cerberus/model-configuration.png)
 
-**Scalability: use the boring recipes.** There is no magic here either. Start with an orchestrator. Use message queues. Split large workflows into smaller tasks. Run agents in parallel when possible. Use more capable agents only when aggregation, arbitration, or deep reasoning is required.
+#### Scalability: use the boring recipes
+
+There is no magic here either. Start with an orchestrator. Use message queues. Split large workflows into smaller tasks. Run agents in parallel when possible. Use more capable agents only when aggregation, arbitration, or deep reasoning is required.
 
 ![Activity dashboard — Sentinel, Striker, Vecna, Merlin, Jarvis, and Hopper running in parallel](/blog/cerberus/activity-dashboard.png)
 
-**Resilience: repair the boundary between AI and deterministic systems.** Modern LLM APIs provide structured outputs, often backed by JSON schemas. This helps a lot. But not every business rule can be expressed perfectly in a schema. Sometimes the model returns something that is close, but not acceptable.
+#### Resilience: repair the boundary between AI and deterministic systems
+
+Modern LLM APIs provide structured outputs, often backed by JSON schemas. This helps a lot. But not every business rule can be expressed perfectly in a schema. Sometimes the model returns something that is close, but not acceptable.
 
 Do not give up there. Use the model's strength to repair its own output. Build repair loops. Explain the constraint violation. Ask for a corrected output. Then only pass clean, validated data to the deterministic system behind it. The AI side can be flexible. The system of record cannot.
 
