@@ -1,22 +1,24 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
-import articlesData from '../../data/donjon-blog.json';
-import { filterVisibleDonjonBlogArticles } from '../../lib/donjon-blog';
+import { getMergedDonjonBlogArticles } from '../../lib/donjon-blog';
 
 const categoryUrl = 'https://www.ledger.com/blog/category/donjon';
 
-const articles = filterVisibleDonjonBlogArticles(Array.isArray(articlesData) ? articlesData : []);
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, '')}`;
+
+const articles = await getMergedDonjonBlogArticles(withBase);
 const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
 
-const parseDate = (value) => {
+const parseDate = (value: string | null) => {
   if (!value) return null;
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return null;
   return parsed;
 };
 
-const formatDateText = (value) => {
+const formatDateText = (value: string | null) => {
   const parsed = parseDate(value);
   if (!parsed) return '';
   return new Intl.DateTimeFormat('en-US', {
@@ -26,7 +28,7 @@ const formatDateText = (value) => {
   }).format(parsed);
 };
 
-const isRecentArticle = (value) => {
+const isRecentArticle = (value: string | null) => {
   const parsed = parseDate(value);
   if (!parsed) return false;
   const parsedMs = parsed.getTime();
@@ -36,11 +38,11 @@ const isRecentArticle = (value) => {
 
 <Base
   title="Our blog"
-  description="Articles from Ledger's Donjon security research team, curated from the Ledger corporate blog."
+  description="Security research from the Donjon team — on this site and on the Ledger corporate blog."
 >
   <Hero
     title="Our blog"
-    subtitle="Find our latest security research and analyses from the Donjon team."
+    subtitle="On-site articles and curated posts from the Donjon team on the Ledger corporate blog."
     size="sm"
   />
 
@@ -66,9 +68,15 @@ const isRecentArticle = (value) => {
         <div class="articles">
           {articles.map((article) => {
             const isNew = isRecentArticle(article.date);
+            const isExternal = article.openInNewTab;
             return (
               <article class="articles__card">
-                <a href={article.url} target="_blank" rel="noopener noreferrer" class="articles__link">
+                <a
+                  href={article.href}
+                  class="articles__link"
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                >
                   <div class="articles__meta">
                     {article.date && (
                       <time class="articles__date" datetime={article.date}>
@@ -76,18 +84,28 @@ const isRecentArticle = (value) => {
                       </time>
                     )}
                     {isNew && <span class="articles__badge">New</span>}
+                    {!isExternal && <span class="articles__badge articles__badge--local">Donjon</span>}
                   </div>
                   <h3 class="articles__title">{article.title}</h3>
                   {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
-                  <span class="articles__cta" aria-label="Opens on Ledger corporate blog">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                      <path d="M14 3h7v7" />
-                      <path d="M10 14L21 3" />
-                      <path d="M21 14v7h-7" />
-                      <path d="M3 10V3h7" />
-                      <path d="M3 21h7" />
-                      <path d="M3 21l11-11" />
-                    </svg>
+                  <span
+                    class="articles__cta"
+                    aria-label={isExternal ? 'Opens on Ledger corporate blog' : 'Read on donjon.ledger.com'}
+                  >
+                    {isExternal ? (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M14 3h7v7" />
+                        <path d="M10 14L21 3" />
+                        <path d="M21 14v7h-7" />
+                        <path d="M3 10V3h7" />
+                        <path d="M3 21h7" />
+                        <path d="M3 21l11-11" />
+                      </svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    )}
                   </span>
                 </a>
               </article>
@@ -189,6 +207,7 @@ const isRecentArticle = (value) => {
     align-items: center;
     justify-content: flex-start;
     gap: var(--space-3);
+    flex-wrap: wrap;
   }
 
   .articles__date {
@@ -211,6 +230,15 @@ const isRecentArticle = (value) => {
     border-radius: var(--radius-full);
     padding: var(--space-1) var(--space-2);
     box-shadow: 0 0 12px rgba(106, 55, 148, 0.4);
+
+    &--local {
+      background: var(--color-accent-glow);
+      color: var(--color-accent-primary);
+      border-color: var(--color-border);
+      box-shadow: none;
+      text-transform: none;
+      letter-spacing: normal;
+    }
   }
 
   .articles__title {
