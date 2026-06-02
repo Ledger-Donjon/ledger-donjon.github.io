@@ -79,6 +79,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
             <ul>
               <li>For embedded app vulnerabilities, the PoC <strong>must</strong> demonstrate exploitation through APDUs sent to the device. This can be reproduced using either the <a href="https://github.com/LedgerHQ/speculos">Speculos</a> emulator and the <a href="https://github.com/LedgerHQ/ragger">Ragger</a> Python testing framework or an actual device.</li>
               <li>For display / clear signing issues, the PoC must show that incorrect or misleading information is rendered <strong>on the device screen</strong> without any warning to the user.</li>
+              <li>For embedded app vulnerabilities, the issue must be reproducible on the <strong>latest version released by Ledger</strong>.</li>
             </ul>
             
             <h4>In-Scope Apps</h4>
@@ -128,6 +129,11 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
             <p>We are interested in vulnerabilities in Ledger Wallet (Desktop and Mobile) that could lead to loss of user funds, compromise of sensitive data, or bypass of security controls. We are looking for real security impact, not cosmetic or theoretical issues.</p>
             <p class="program-card__note">Ledger Wallet is <strong>not</strong> considered a source of truth for validating transactions — this is the role of the signer (the hardware device). Transaction display discrepancies in Ledger Wallet that are correctly displayed or flagged by the device are not in scope.</p>
             
+            <h4>Proof-of-Concept Requirements</h4>
+            <ul>
+              <li>Vulnerabilities must be reproducible on the <strong>latest build available on the official store</strong> (App Store / Google Play / desktop download page).</li>
+            </ul>
+
             <h4>In-Scope Vulnerabilities</h4>
             <ul>
               <li>Unauthorized transaction crafting or signing bypass via Ledger Wallet</li>
