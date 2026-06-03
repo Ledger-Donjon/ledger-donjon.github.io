@@ -32,6 +32,46 @@ const prefixMarkdownBase = () => (tree) => {
   visit(tree);
 };
 
+// Wrap standalone images that have alt text into <figure>/<figcaption>.
+// Targets the common Markdown pattern: <p><img alt="caption" src="…"></p>
+const rehypeImageFigure = () => (tree) => {
+  const walk = (node) => {
+    if (node?.children) {
+      for (let i = 0; i < node.children.length; i++) {
+        const child = node.children[i];
+        if (
+          child.type === 'element' &&
+          child.tagName === 'p' &&
+          child.children?.length === 1 &&
+          child.children[0].type === 'element' &&
+          child.children[0].tagName === 'img'
+        ) {
+          const img = child.children[0];
+          const alt = img.properties?.alt;
+          if (alt) {
+            node.children[i] = {
+              type: 'element',
+              tagName: 'figure',
+              properties: {},
+              children: [
+                img,
+                {
+                  type: 'element',
+                  tagName: 'figcaption',
+                  properties: {},
+                  children: [{ type: 'text', value: alt }],
+                },
+              ],
+            };
+          }
+        }
+        walk(child);
+      }
+    }
+  };
+  walk(tree);
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: site,
@@ -47,7 +87,7 @@ export default defineConfig({
     assets: '_astro'
   },
   markdown: {
-    rehypePlugins: [prefixMarkdownBase],
+    rehypePlugins: [rehypeImageFigure, prefixMarkdownBase],
     shikiConfig: {
       theme: 'github-dark',
       wrap: true
