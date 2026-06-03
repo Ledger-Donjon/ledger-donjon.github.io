@@ -7,12 +7,14 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  bodyClass?: string;
 }
 
 const { 
   title, 
   description = 'Security research at Ledger. The whispers from the Donjon.',
-  image = `${import.meta.env.BASE_URL}ledgerdonjon_banner.png`
+  image = `${import.meta.env.BASE_URL}ledgerdonjon_banner.png`,
+  bodyClass,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -51,7 +53,7 @@ const socialImageURL = new URL(image, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
-  <body>
+  <body class={bodyClass}>
     <Header />
     <main>
       <slot />
