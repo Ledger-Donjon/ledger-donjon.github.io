@@ -2,8 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
-import articlesData from '../data/donjon-blog.json';
-import { filterVisibleDonjonBlogArticles } from '../lib/donjon-blog';
+import { getMergedDonjonBlogArticles } from '../lib/donjon-blog';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
@@ -18,18 +17,11 @@ const latestBulletins = allLsb
   })
   .slice(0, 3);
 
-const articles = filterVisibleDonjonBlogArticles(Array.isArray(articlesData) ? articlesData : []);
-const latestArticles = articles
-  .map((article) => ({
-    ...article,
-    parsedDate: article?.date ? new Date(article.date) : null,
-  }))
-  .sort((a, b) => {
-    const dateA = a.parsedDate?.getTime() ?? 0;
-    const dateB = b.parsedDate?.getTime() ?? 0;
-    return dateB - dateA;
-  })
-  .slice(0, 3);
+const mergedArticles = await getMergedDonjonBlogArticles(withBase);
+const latestArticles = mergedArticles.slice(0, 3).map((article) => ({
+  ...article,
+  parsedDate: article.date ? new Date(article.date) : null,
+}));
 
 const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
 ---
@@ -153,12 +145,12 @@ const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
             return (
               <Card
                 title={article.title}
-                href={article.url}
+                href={article.href}
                 description={article.excerpt}
                 date={article.parsedDate ?? undefined}
                 badges={badges}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={article.openInNewTab ? '_blank' : undefined}
+                rel={article.openInNewTab ? 'noopener noreferrer' : undefined}
               />
             );
           })}
