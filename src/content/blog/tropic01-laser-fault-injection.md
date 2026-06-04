@@ -1,7 +1,7 @@
 ---
 title: "Laser Fault Injection on the TROPIC01 Open-Source Secure Element"
 date: 2026-06-03
-excerpt: "We used laser fault injection to bypass Ed25519 signature verification on the <mark>TROPIC01 open-source secure element</mark>, achieving arbitrary firmware execution — and explored why its hardware-backed secret storage held up."
+excerpt: "We used laser fault injection to bypass Ed25519 signature verification on the <mark>TROPIC01 open-source secure element</mark>, achieving arbitrary firmware execution."
 draft: false
 ---
 
