@@ -31,6 +31,7 @@ const socialImageURL = new URL(image, Astro.site);
     <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32x32.png`} />
     <link rel="icon" type="image/png" sizes="16x16" href={`${base}favicon-16x16.png`} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title="Ledger Donjon Blog" href={`${base}blog/rss.xml`} />
     
     <title>{title} | Ledger Donjon</title>
     <meta name="description" content={description} />

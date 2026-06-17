@@ -49,6 +49,14 @@ const isRecentArticle = (value: string | null) => {
   <section class="content">
     <div class="container">
       <div class="content__header">
+        <a class="content__rss" href={withBase('/blog/rss.xml')}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M4 11a9 9 0 0 1 9 9" />
+            <path d="M4 4a16 16 0 0 1 16 16" />
+            <circle cx="5" cy="19" r="1" fill="currentColor" stroke="none" />
+          </svg>
+          Subscribe (RSS)
+        </a>
         <a class="content__cta" href={categoryUrl} target="_blank" rel="noopener noreferrer">
           View all our articles on corporate blog
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -124,14 +132,33 @@ const isRecentArticle = (value: string | null) => {
 
   .content__header {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
     gap: var(--space-6);
     margin-bottom: var(--space-10);
 
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: flex-start;
+    }
+  }
+
+  .content__rss {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-accent-primary);
+      background: var(--color-accent-glow);
+      text-decoration: none;
     }
   }
 
