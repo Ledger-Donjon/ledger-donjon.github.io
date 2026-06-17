@@ -13,14 +13,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.0.0",
-    "@astrojs/sitemap": "^3.2.0"
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.7"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "sass": "^1.83.0",
     "typescript": "^5.7.0"
   },
-  "keywords": ["ledger", "donjon", "security", "hardware-wallet"],
+  "keywords": [
+    "ledger",
+    "donjon",
+    "security",
+    "hardware-wallet"
+  ],
   "author": "Ledger Donjon",
   "license": "MIT",
   "homepage": "https://donjon.ledger.com"
