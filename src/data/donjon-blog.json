@@ -144,60 +144,6 @@
     "excerpt": "On the security model of software wallets"
   },
   {
-    "title": "Kaspersky Password Manager: All your passwords belong to us",
-    "url": "https://www.ledger.com/blog/kaspersky-password-manager",
-    "date": "2021-07-06T00:00:00.000Z",
-    "excerpt": "Kaspersky Password Manager: All your passwords belong to us..."
-  },
-  {
-    "title": "A Compact Electromagnetic Fault Injection Setup",
-    "url": "https://www.ledger.com/blog/compact-em",
-    "date": "2021-01-26T00:00:00.000Z",
-    "excerpt": "A Compact Electromagnetic Fault Injection Setup"
-  },
-  {
-    "title": "The Making of picoHSM Challenge",
-    "url": "https://www.ledger.com/blog/picohsm",
-    "date": "2020-12-15T00:00:00.000Z",
-    "excerpt": "The Making of picoHSM Challenge"
-  },
-  {
-    "title": "Discovering SMPC through CTF Challenges",
-    "url": "https://www.ledger.com/blog/ctf-smpc-signature",
-    "date": "2020-12-10T00:00:00.000Z",
-    "excerpt": "Discovering SMPC through CTF Challenges"
-  },
-  {
-    "title": "Exploiting Smart Contracts in CTF Challenges",
-    "url": "https://www.ledger.com/blog/ctf-smart-contracts",
-    "date": "2020-12-10T00:00:00.000Z",
-    "excerpt": "Exploiting Smart Contracts in CTF Challenges"
-  },
-  {
-    "title": "Ghostbuster: Spectre exploitation in real life",
-    "url": "https://www.ledger.com/blog/ghostbuster",
-    "date": "2020-11-25T00:00:00.000Z",
-    "excerpt": "Ghostbuster: Spectre exploitation in real life"
-  },
-  {
-    "title": "CTF 2020: Capture the Fortress",
-    "url": "https://www.ledger.com/blog/capture-the-fortress",
-    "date": "2020-10-21T00:00:00.000Z",
-    "excerpt": "CTF 2020: Capture the Fortress"
-  },
-  {
-    "title": "Follow-up on PIN verification against side-channel attack: KeepKey Hardware Wallet…",
-    "url": "https://www.ledger.com/blog/keepkey-side-channel-attack",
-    "date": "2020-05-18T00:00:00.000Z",
-    "excerpt": "Follow-up on PIN verification against side-channel attack: KeepKe..."
-  },
-  {
-    "title": "Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets",
-    "url": "https://www.ledger.com/blog/coldcard-pin-code",
-    "date": "2020-05-18T00:00:00.000Z",
-    "excerpt": "Lit by Laser: PIN Code Recovery on Coldcard Mk2 Wallets..."
-  },
-  {
     "title": "Ledger’s CTF 2018 and side-channels",
     "url": "https://www.ledger.com/blog/ctf-rainbow",
     "date": "2019-09-10T00:00:00.000Z",
@@ -250,11 +196,5 @@
     "url": "https://www.ledger.com/blog/rainbow",
     "date": "2019-02-14T00:00:00.000Z",
     "excerpt": "Rainbow"
-  },
-  {
-    "title": "Introducing Ledger Donjon",
-    "url": "https://www.ledger.com/blog/introducing-ledger-donjon",
-    "date": "2018-12-11T00:00:00.000Z",
-    "excerpt": "Introducing Ledger Donjon"
   }
 ]
