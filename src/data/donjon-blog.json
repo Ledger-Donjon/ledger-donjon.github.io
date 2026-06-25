@@ -90,60 +90,6 @@
     "excerpt": "App Streaming: a New Development Paradigm for Environments with C..."
   },
   {
-    "title": "New PIN screen on Ledger Nano products",
-    "url": "https://www.ledger.com/blog/new-pin-screen",
-    "date": "2023-01-19T00:00:00.000Z",
-    "excerpt": "New PIN screen on Ledger Nano products"
-  },
-  {
-    "title": "Integrating fault injection in development workflows",
-    "url": "https://www.ledger.com/blog/fault-injection-simulation",
-    "date": "2022-08-10T00:00:00.000Z",
-    "excerpt": "Integrating fault injection in development workflows..."
-  },
-  {
-    "title": "Mounting a low-cost laser bench",
-    "url": "https://www.ledger.com/blog/laser-bench-low-price",
-    "date": "2022-07-13T00:00:00.000Z",
-    "excerpt": "Mounting a low-cost laser bench"
-  },
-  {
-    "title": "Black-box attacks on white-box ECDSA",
-    "url": "https://www.ledger.com/blog/whitebox_ecdsa",
-    "date": "2022-07-07T00:00:00.000Z",
-    "excerpt": "Black-box attacks on white-box ECDSA"
-  },
-  {
-    "title": "Donjon CTF 2021: Capture the Fortress!",
-    "url": "https://www.ledger.com/donjon-ctf-2021-capture-the-fortress",
-    "date": "2021-11-25T00:00:00.000Z",
-    "excerpt": "Donjon CTF 2021: Capture the Fortress!"
-  },
-  {
-    "title": "On the security of Booba’s music video and NFTs",
-    "url": "https://www.ledger.com/blog/booba_nft",
-    "date": "2021-11-22T00:00:00.000Z",
-    "excerpt": "On the security of Booba’s music video and NFTs..."
-  },
-  {
-    "title": "Remote laser faults injection during pandemic",
-    "url": "https://www.ledger.com/blog/laser-improvements",
-    "date": "2021-09-16T00:00:00.000Z",
-    "excerpt": "Remote laser faults injection during pandemic"
-  },
-  {
-    "title": "Protecting SSH keys with TPM 2.0, now available on Debian",
-    "url": "https://www.ledger.com/blog/ssh-with-tpm",
-    "date": "2021-09-02T00:00:00.000Z",
-    "excerpt": "Protecting SSH keys with TPM 2.0, now available on Debian..."
-  },
-  {
-    "title": "On the security model of software wallets",
-    "url": "https://www.ledger.com/blog/software-wallets",
-    "date": "2021-07-29T00:00:00.000Z",
-    "excerpt": "On the security model of software wallets"
-  },
-  {
     "title": "Kaspersky Password Manager: All your passwords belong to us",
     "url": "https://www.ledger.com/blog/kaspersky-password-manager",
     "date": "2021-07-06T00:00:00.000Z",
