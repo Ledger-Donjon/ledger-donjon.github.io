@@ -25,6 +25,15 @@ const prefixMarkdownBase = () => (tree) => {
         node.properties.src = withBase(node.properties.src);
       }
     }
+    // Raw HTML embedded in Markdown (e.g. <figure><img src="/…">) is passed
+    // through as `raw`/`html` nodes and never becomes an `element`, so rewrite
+    // its absolute src/href attributes directly on the HTML string.
+    if ((node?.type === 'raw' || node?.type === 'html') && typeof node.value === 'string') {
+      node.value = node.value.replace(
+        /\b(src|href)=("|')(\/[^"']*)\2/g,
+        (match, attr, quote, url) => `${attr}=${quote}${withBase(url)}${quote}`
+      );
+    }
     if (node?.children?.length) {
       node.children.forEach(visit);
     }
@@ -72,6 +81,25 @@ const rehypeImageFigure = () => (tree) => {
   walk(tree);
 };
 
+// Tag inline <code> that contains hex values with a data attribute for styling.
+const rehypeHexCode = () => (tree) => {
+  const hexPattern = /^(0x[0-9a-fA-F]+|[0-9a-fA-F]{4,})$/;
+  const walk = (node) => {
+    if (
+      node?.type === 'element' &&
+      node.tagName === 'code' &&
+      node.children?.length === 1 &&
+      node.children[0].type === 'text' &&
+      hexPattern.test(node.children[0].value.trim())
+    ) {
+      node.properties = node.properties || {};
+      node.properties.dataHex = '';
+    }
+    node?.children?.forEach(walk);
+  };
+  walk(tree);
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: site,
@@ -87,7 +115,7 @@ export default defineConfig({
     assets: '_astro'
   },
   markdown: {
-    rehypePlugins: [rehypeImageFigure, prefixMarkdownBase],
+    rehypePlugins: [rehypeImageFigure, rehypeHexCode, prefixMarkdownBase],
     shikiConfig: {
       theme: 'github-dark',
       wrap: true
