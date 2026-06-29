@@ -34,6 +34,8 @@ const isRecentArticle = (value: string | null) => {
   const parsedMs = parsed.getTime();
   return Date.now() >= parsedMs && Date.now() - parsedMs < recentCutoffMs;
 };
+
+const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
 ---
 
 <Base
@@ -95,7 +97,7 @@ const isRecentArticle = (value: string | null) => {
                     {!isExternal && <span class="articles__badge articles__badge--local">Donjon</span>}
                   </div>
                   <h3 class="articles__title">{article.title}</h3>
-                  {article.excerpt && <p class="articles__excerpt">{article.excerpt}</p>}
+                  {article.excerpt && <p class="articles__excerpt">{stripHtml(article.excerpt)}</p>}
                   <span
                     class="articles__cta"
                     aria-label={isExternal ? 'Opens on Ledger corporate blog' : 'Read on donjon.ledger.com'}
