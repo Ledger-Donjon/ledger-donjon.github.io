@@ -149,16 +149,21 @@ const isRecentArticle = (value: string | null) => {
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
     font-weight: 600;
-    color: var(--color-accent-primary);
-    border: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: white;
+    background: var(--color-accent-primary);
+    border: none;
     border-radius: var(--radius-full);
     text-decoration: none;
     transition: all var(--transition-fast);
+    box-shadow: 0 0 12px rgba(255, 83, 0, 0.3);
 
     &:hover {
-      border-color: var(--color-accent-primary);
-      background: var(--color-accent-glow);
+      background: #e64a00;
+      box-shadow: 0 0 20px rgba(255, 83, 0, 0.5);
+      transform: translateY(-1px);
       text-decoration: none;
+      color: white;
     }
   }
 

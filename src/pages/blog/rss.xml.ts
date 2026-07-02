@@ -12,7 +12,6 @@ export async function GET(context: APIContext) {
     title: 'Ledger Donjon Blog',
     description: 'Security research from the Donjon team at Ledger.',
     site: context.site ?? 'https://donjon.ledger.com',
-    stylesheet: `${import.meta.env.BASE_URL}rss/styles.xsl`,
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.excerpt,
