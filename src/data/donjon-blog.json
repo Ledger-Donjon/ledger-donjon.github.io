@@ -6,6 +6,12 @@
     "excerpt": "The Hidden Risk of Side-Channel Attacks on Post Quantum Cryptogra..."
   },
   {
+    "title": "Revenge of the Atoms",
+    "url": "https://www.ledger.com/blog-revenge-atoms",
+    "date": "2026-03-13T00:00:00.000Z",
+    "excerpt": "We are witnessing the collision of two tectonic shifts, Blockchain and AI, that will fundamentally redefine the concept of trust. If you aren’t paying attention, you aren’t building for the future"
+  },
+  {
     "title": "Quantum Computing’s Threat to Blockchain: The Enduring Need for Secure…",
     "url": "https://www.ledger.com/blog-quantum-computing-threat-to-blockchain",
     "date": "2026-02-26T00:00:00.000Z",
@@ -250,11 +256,5 @@
     "url": "https://www.ledger.com/blog/rainbow",
     "date": "2019-02-14T00:00:00.000Z",
     "excerpt": "Rainbow"
-  },
-  {
-    "title": "Introducing Ledger Donjon",
-    "url": "https://www.ledger.com/blog/introducing-ledger-donjon",
-    "date": "2018-12-11T00:00:00.000Z",
-    "excerpt": "Introducing Ledger Donjon"
   }
 ]
