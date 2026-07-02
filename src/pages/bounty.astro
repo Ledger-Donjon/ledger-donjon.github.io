@@ -23,9 +23,19 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
       
       <div class="contact-box">
         <p>
-          If you believe that you have discovered such a vulnerability, please report it at 
-          <strong>bounty -at- ledger.fr</strong> 
-          (<a href={withBase('/ledger-bounty.asc')}>GPG key</a> if necessary).
+          If you believe that you have discovered such a vulnerability, please submit it through
+          our vulnerability report form.
+        </p>
+        <button type="button" class="report-button js-bounty-report-trigger">
+          Report a vulnerability
+        </button>
+        <p class="contact-box__note">
+          The form opens in a Jira dialog and does not require a Jira account.
+        </p>
+        <p class="contact-box__note">
+          For especially sensitive exploit details or confidential material, you may encrypt those
+          details with our <a href={withBase('/ledger-bounty.asc')}>GPG key</a> before attaching
+          them to your report, or mention in the form that encrypted details are available on request.
         </p>
         <p>
           The Ledger Security Team will work with you to investigate, resolve the issue promptly 
@@ -193,9 +203,12 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
         </div>
         
         <p>
-          All communications between you and Ledger should go through <strong>bounty -at- ledger.fr</strong>. 
-          Please use our <a href={withBase('/ledger-bounty.asc')}>GPG key</a> as necessary.
+          All communications between you and Ledger should go through our vulnerability report form.
         </p>
+
+        <button type="button" class="report-button report-button--secondary js-bounty-report-trigger">
+          Open the report form
+        </button>
         
         <p>The Ledger Security Team will be in touch, usually within 24 hours.</p>
         
@@ -257,7 +270,7 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           <li>Be kind</li>
           <li>Be respectful and professional in your communications and behavior</li>
           <li>Hate speech, profanity, or any aggressive threats will not be tolerated</li>
-          <li>Only contact the Ledger Security Team through the email address mentioned above</li>
+          <li>Only contact the Ledger Security Team through the official submission channels mentioned above</li>
           <li>Do not send repeated, unsolicited, or follow-up messages pressuring for a response or reward</li>
           <li>Do not submit multiple reports for the same issue or flood our inbox with bulk submissions</li>
         </ul>
@@ -281,6 +294,26 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    window.ATL_JQ_PAGE_PROPS = {
+      triggerFunction: function(showCollectorDialog) {
+        var triggers = document.querySelectorAll('.js-bounty-report-trigger');
+
+        triggers.forEach(function(trigger) {
+          trigger.addEventListener('click', function(event) {
+            event.preventDefault();
+            showCollectorDialog();
+          });
+        });
+      }
+    };
+  </script>
+  <script
+    is:inline
+    type="text/javascript"
+    src="https://ledgerhq.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/-s1g255/b/1/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-GB&collectorId=5bcd8ec9"
+  ></script>
 </Base>
 
 <style lang="scss">
@@ -328,6 +361,41 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
     
     p:last-child {
       margin-bottom: 0;
+    }
+    
+    &__note {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-3);
+    }
+  }
+
+  .report-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ledger-orange);
+    border: 0;
+    border-radius: var(--radius-lg);
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    
+    &:hover {
+      background: var(--color-ledger-orange-hover);
+      transform: translateY(-1px);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid var(--color-text-primary);
+      outline-offset: 3px;
+    }
+    
+    &--secondary {
+      margin-bottom: var(--space-4);
     }
   }
   
