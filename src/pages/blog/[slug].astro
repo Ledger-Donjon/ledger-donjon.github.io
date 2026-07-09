@@ -16,6 +16,8 @@ export async function getStaticPaths() {
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, '')}`;
+const resolveSocialImage = (img?: string) =>
+  img && (/^https?:\/\//.test(img) ? img : withBase(img));
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
@@ -27,7 +29,12 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(entry.data.date);
 ---
 
-<Base title={entry.data.title} description={entry.data.excerpt} bodyClass="clean-bg">
+<Base
+  title={entry.data.title}
+  description={entry.data.excerpt}
+  image={resolveSocialImage(entry.data.image)}
+  bodyClass="clean-bg"
+>
   <article class="blog-post">
     <div class="container">
       <nav class="blog-post__nav">
