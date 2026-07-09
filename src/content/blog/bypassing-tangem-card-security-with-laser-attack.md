@@ -2,6 +2,7 @@
 title: "Bypassing Tangem Card Security with a Laser Attack"
 date: 2026-07-09
 excerpt: "After uncovering a <a href='https://www.ledger.com/tangem-genuine-check-bypass-on-android-application'>genuine check bypass on the Tangem Android application</a> and a <a href='https://www.ledger.com/blog-brute-force-attack-tangem'>brute-force attack on the card's authentication protocol</a>, the Ledger Donjon turned its attention to the card itself with more advanced tools and sophisticated techniques. What we found is a critical vulnerability that lets an attacker with physical access to a single <mark>Tangem card</mark> reset its password and steal all associated funds."
+image: /blog/bypassing-tangem-card-security-with-laser-attack/die-backside-ir.png
 draft: false
 ---
 
