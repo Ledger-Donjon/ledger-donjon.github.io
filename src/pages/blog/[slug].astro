@@ -72,33 +72,9 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       </footer>
     </div>
   </article>
-
-  <dialog class="lightbox" id="lightbox">
-    <img class="lightbox__img" />
-    <button class="lightbox__close" aria-label="Close lightbox">&times;</button>
-  </dialog>
 </Base>
 
 <script>
-  // Lightbox
-  const dialog = document.getElementById('lightbox') as HTMLDialogElement;
-  const dialogImg = dialog?.querySelector('.lightbox__img') as HTMLImageElement;
-  const closeBtn = dialog?.querySelector('.lightbox__close') as HTMLButtonElement;
-
-  document.querySelectorAll('.prose img').forEach((img) => {
-    (img as HTMLElement).style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      dialogImg.src = (img as HTMLImageElement).src;
-      dialogImg.alt = (img as HTMLImageElement).alt;
-      dialog.showModal();
-    });
-  });
-
-  closeBtn?.addEventListener('click', () => dialog.close());
-  dialog?.addEventListener('click', (e) => {
-    if (e.target === dialog) dialog.close();
-  });
-
   // Abstract section wrapper
   const prose = document.querySelector('.prose');
   if (prose) {
@@ -232,66 +208,6 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       color: var(--color-accent-primary);
       border-color: var(--color-accent-primary);
       text-decoration: none;
-    }
-  }
-</style>
-
-<style lang="scss" is:global>
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    padding: var(--space-6);
-    overflow: hidden;
-
-    &::backdrop {
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(6px);
-    }
-  }
-
-  .lightbox__img {
-    display: block;
-    max-width: 90vw;
-    max-height: 85vh;
-    object-fit: contain;
-    border-radius: var(--radius-lg);
-    border: none;
-    box-shadow: none;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
-  .lightbox__close {
-    position: fixed;
-    top: var(--space-4);
-    right: var(--space-4);
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-full);
-    color: var(--color-text-secondary);
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-fast);
-    z-index: 1;
-
-    &:hover {
-      color: var(--color-text-primary);
-      background: rgba(255, 255, 255, 0.1);
     }
   }
 </style>
