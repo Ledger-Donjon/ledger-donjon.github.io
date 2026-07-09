@@ -17,9 +17,12 @@ const latestBulletins = allLsb
   })
   .slice(0, 3);
 
+const stripHtml = (html) => html.replace(/<[^>]*>/g, '');
+
 const mergedArticles = await getMergedDonjonBlogArticles(withBase);
 const latestArticles = mergedArticles.slice(0, 3).map((article) => ({
   ...article,
+  excerpt: article.excerpt ? stripHtml(article.excerpt) : article.excerpt,
   parsedDate: article.date ? new Date(article.date) : null,
 }));
 
