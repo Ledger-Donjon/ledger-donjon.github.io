@@ -26,6 +26,10 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
           If you believe that you have discovered such a vulnerability, please submit it through
           our vulnerability report form.
         </p>
+        <p class="contact-box__phishing-note">
+          <strong>Found a phishing site impersonating Ledger?</strong> That's not a bug bounty —
+          please report it directly to <a href="mailto:phishing@ledger.fr">phishing@ledger.fr</a>.
+        </p>
         <button type="button" class="report-button js-bounty-report-trigger">
           Report a vulnerability
         </button>
@@ -402,6 +406,15 @@ const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
       font-size: var(--text-sm);
       color: var(--color-text-tertiary);
       margin-top: var(--space-3);
+    }
+
+    &__phishing-note {
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-4);
+      background: rgba(255, 83, 0, 0.06);
+      border-left: 3px solid var(--color-ledger-orange);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-4);
     }
   }
 
