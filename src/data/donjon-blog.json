@@ -1,9 +1,21 @@
 [
   {
+    "title": "Meet Cerberus: How the Ledger Donjon Built an AI Security…",
+    "url": "https://www.ledger.com/blog-cerberus-donjon-ai-harness",
+    "date": "2026-09-04T00:00:00.000Z",
+    "excerpt": "Meet Cerberus: How the Ledger Donjon Built an AI Security Harness..."
+  },
+  {
     "title": "The Hidden Risk of Side-Channel Attacks on Post Quantum Cryptography",
     "url": "https://www.ledger.com/blog-risk-side-channel-attacks-post-quantum-cryptography",
     "date": "2026-04-29T00:00:00.000Z",
     "excerpt": "The Hidden Risk of Side-Channel Attacks on Post Quantum Cryptogra..."
+  },
+  {
+    "title": "Revenge of the Atoms",
+    "url": "https://www.ledger.com/blog-revenge-atoms",
+    "date": "2026-03-13T00:00:00.000Z",
+    "excerpt": "We are witnessing the collision of two tectonic shifts, Blockchain and AI, that will fundamentally redefine the concept of trust. If you aren’t paying attention, you aren’t building for the future"
   },
   {
     "title": "Quantum Computing’s Threat to Blockchain: The Enduring Need for Secure…",
