@@ -1,7 +1,7 @@
 ---
 title: "Photon-Emission-Guided Laser Fault Injection Enables RP2350 Secure Debug"
 date: 2026-09-18
-excerpt: "Differential photon-emission microscopy localized debug enable register activity and narrow the laser search before SWD-guided injection set the two bits required to restore Secure debug on a RP2350 A4."
+excerpt: "Differential photon-emission microscopy localized debug enable register activity and narrowed the laser search before SWD-guided injection set the two bits required to restore Secure debug on an RP2350 A4."
 image: /blog/rp2350-secure-debug-laser-fault-injection/cover.png
 draft: false
 ---
@@ -10,7 +10,7 @@ draft: false
 
 — Photon-emission microscopy allowed us to locate a register responsible for the enabling of debug features on the Raspberry Pi microcontroller.
 
-— Laser Pulses at two nearby positions then restored debugger access to the chip's Secure world, even though debug had been permanently disabled.
+— Laser pulses at two nearby positions then restored debugger access to the chip's Secure world, even though debug had been permanently disabled.
 
 — Using that access after a rescue reset, we recovered a secret from one-time-programmable memory. The reset halted the chip before firmware could apply its runtime lock, so the page stayed Secure-readable.
 
@@ -18,7 +18,7 @@ draft: false
 
 ## The RP2350 security model
 
-The RP2350 is Raspberry Pi's dual-core microcontroller : each processor socket can select either an Arm Cortex-M33 or a RISC-V Hazard3 core at boot. Its hardware security features include :
+The RP2350 is Raspberry Pi's dual-core microcontroller: each processor socket can select either an Arm Cortex-M33 or a RISC-V Hazard3 core at boot. Its hardware security features include:
 - Secure boot, which authenticates signed firmware against public-key fingerprints provisioned in One-Time Programmable memory (OTP)
 - The Armv8-M TrustZone, which separates Secure and Non-secure execution states
 - Permanent debug-disable settings
@@ -28,7 +28,7 @@ Raspberry Pi has actively invited researchers to evaluate these protections thro
 
 The permanent security configuration and boot public key fingerprints are stored in **one-time-programmable (OTP) memory**: each bit can be flipped from `0` to `1` once and never back, so whatever is written there lasts for the lifetime of the chip.
 
-OTP is organised into 128-byte pages protected by two persistent, or **hard**, lock rows: For page n, `PAGEn_LOCK0` configures optional read and write keys and the behaviour when no key is entered, while `PAGEn_LOCK1` contains the hardware-enforced `LOCK_S` and `LOCK_NS` permissions. Those states can advance from read-write to read-only or inaccessible but cannot become more permissive.
+OTP is organised into 128-byte pages protected by two persistent, or **hard**, lock rows: for page n, `PAGEn_LOCK0` configures optional read and write keys and the behaviour when no key is entered, while `PAGEn_LOCK1` contains the hardware-enforced `LOCK_S` and `LOCK_NS` permissions. Those states can advance from read-write to read-only or inaccessible but cannot become more permissive.
 
 The OTP subsystem uses redundant encodings for security-related fields: critical flags are "encoded with a three-of-eight vote across eight consecutive OTP rows", and OTP lock bits are "triple-redundant with a majority vote", according to the [RP2350 datasheet](https://pip.raspberrypi.com/documents/RP-008373-DS-rp2350-datasheet.pdf).
 
@@ -40,7 +40,7 @@ An external debugger communicates with the RP2350 through Arm's **Serial Wire De
 
 The permanent `CRIT1.DEBUG_DISABLE` flag is intended to close this path. When set, it drives the enable signals for both cores' Mem-APs to zero, which "prevents the APs from performing any bus accesses at all", and disables the factory-test JTAG interface and the RISC-V debug module's access port. The SW-DP and RP-AP still respond, but neither core Mem-AP can access the system bus.
 
-There is, however, an override : the memory-mapped `DEBUGEN` register lets Secure software re-enable each core's Mem-AP and, separately, Secure accesses through it. The datasheet states that `DEBUG_DISABLE` "can be fully overridden by setting all bits of this register".
+There is, however, an override: the memory-mapped `DEBUGEN` register lets Secure software re-enable each core's Mem-AP and, separately, Secure accesses through it. The datasheet states that `DEBUG_DISABLE` "can be fully overridden by setting all bits of this register".
 
 This critical override in the enforcement chain is what made the debug interface our target. Gaining access to Secure debug on a Mem-AP is a general-purpose primitive to read and write Secure memory, halt and single-step a core, and inspect its registers. Whether that register could be set by a fault is the question the rest of this post answers.
 
@@ -64,10 +64,10 @@ Enabling secure boot permits only the Cortex-M33 cores, so both processor socket
 
 ### Sample preparation and bench
 
-The device was **backside decapsulated**, so that infrared light reaches the transistors through the silicon substrate rather than being blocked by the metal layers on the front. The chip was then soldered back onto a daughterboard connected to [Scaffold](https://github.com/Ledger-Donjon/scaffold), Ledger Donjon's open source platform for driving and monitoring devices under test.
+The device was **backside decapsulated**, so that infrared light reaches the transistors through the silicon substrate rather than being blocked by the metal layers on the front. The chip was then soldered back onto a daughterboard connected to [Scaffold](https://github.com/Ledger-Donjon/scaffold), Ledger Donjon's open source platform for driving and monitoring devices under test. Removing the lead frame on the backside of the chip breaks its GND connection, so a copper wire restores it[^2].
 
 
-![Backside-decapsulated RP2350 mounted on the analysis daughterboard. The copper wire restores the GND connection lost with the removal of the lead frame on the backside of the chip.[^3]](/blog/rp2350-secure-debug-laser-fault-injection/backside_decap.jpg)
+![Backside-decapsulated RP2350 mounted on the analysis daughterboard](/blog/rp2350-secure-debug-laser-fault-injection/backside_decap.jpg)
 
 
 ![Experimental bench used for the attack](/blog/rp2350-secure-debug-laser-fault-injection/bench.jpg)
@@ -97,7 +97,7 @@ We therefore tested whether laser pulses could set `DEBUGEN` bits on the secured
 
 That test first requires knowing where to aim. Setting an individual `DEBUGEN` bit means hitting the storage of a single register bit, a needle in a haystack. This is a harder targeting problem than the instruction-skip faults common in laser fault injection, where disturbing any of the many flip-flops in a core pipeline can produce the same skip: that spreads the sensitive area widely enough for a random scan to find it. A blind scan for one `DEBUGEN` bit is impractical.
 
-Switching transistors emit faint near-infrared photons correlated with their activity, so collecting that emission over repeated execution can reveal where a selected control changes state. This made photon-emission microscopy (PEM) a good fit for `DEBUGEN`: as a memory-mapped register, Secure software can toggle exact bits in a loop, driving the repeated state changes the measurement needs. We used it as the first localization stage, and the resulting map constrained the subsequent laser scan to a region of a few micrometers.
+Switching transistors emit faint near-infrared photons correlated with their activity, so collecting that emission over repeated execution can reveal where a selected control changes state. This made photon-emission microscopy (PEM) a good fit for `DEBUGEN`: as a memory-mapped register, Secure software can toggle exact bits in a loop, driving the repeated state changes the measurement needs. We used it as the first localization stage, and the resulting map constrained the subsequent laser scan to a region of a few micrometres.
 
 We compared loops that repeatedly toggled selected `DEBUGEN` bits on and off, differing only in the bits they targeted. A register's photon emission is faint next to the camera's own noise and sensitive to slowly drifting ambient conditions such as temperature, so a single frame reveals nothing. Averaging many frames of each loop suppressed random sensor noise, and subtracting the two mean stacks cancelled everything the loops shared: static background, sensor offset, thermal emission, and switching unrelated to the selected bits. Interleaving the two values during acquisition kept slow drift from biasing that subtraction. What remained was the emission that tracked the selected bits.
 
@@ -118,18 +118,18 @@ Repeated comparisons across different bit masks exposed compact sites associated
 <figure>
   <img
     src="/blog/rp2350-secure-debug-laser-fault-injection/photon-emission-debugen-bit-overlays.png"
-    alt="Infrared overview of the die with three marked regions, plus zooms of those regions overlaid with colored DEBUGEN bit sites."
+    alt="Infrared overview of the die with three marked regions, plus zooms of those regions overlaid with coloured DEBUGEN bit sites."
   />
   <figcaption>Infrared overview of the camera field, with three marked regions. Coloured pixels mark sites associated with `DEBUGEN` bits 0-3.</figcaption>
 </figure>
 
-These zones show switching activity associated with each `DEBUGEN` bit, it does not directly identify storage cells. The multiple hotspots observed for each bit may arise from both the storage element or related logic. Without layout data, we cannot distinguish between the two. However, these zones still significantly reduce the search space.
+These zones show switching activity associated with each `DEBUGEN` bit; they do not directly identify storage cells. The multiple hotspots observed for each bit may arise from the storage element or from related logic. Without layout data, we cannot distinguish between the two. However, these zones still significantly reduce the search space.
 
 ## Finding 1 — faulting `DEBUGEN` gives Secure debug
 
-For Laser fault injection (LFI)  we used a pulsed laser at 980 nm with 2.97 W maximum optical power, operated at roughly 40% (about 1.2 W), with a 100 ns pulse width through a 50x objective. After each pulse, we probed the debug access ports over SWD.
+For laser fault injection (LFI), we used a pulsed laser at 980 nm with 2.97 W maximum optical power, operated at roughly 40% (about 1.2 W), with a 100 ns pulse width through a 50x objective. After each pulse, we probed the debug access ports over SWD.
 
-Within the area found from PEM, we ran a LFI scan and used that SWD feedback to calibrate two responsive positions a few micrometres apart. At one position, pulses enabled bus access through core 1's Mem-AP, indicating that `PROC1` was set. At the other, the Mem-AP's Control/Status Word reported `SDeviceEn = 1`, a state-guided signal that `PROC1_SECURE` was likely set. We checked both indicators after every pulse.
+Within the area found from PEM, we ran an LFI scan and used that SWD feedback to calibrate two responsive positions a few micrometres apart. At one position, pulses enabled bus access through core 1's Mem-AP, indicating that `PROC1` was set. At the other, the Mem-AP's Control/Status Word reported `SDeviceEn = 1`, a state-guided signal that `PROC1_SECURE` was likely set. We checked both indicators after every pulse.
 
 
 <figure>
@@ -140,7 +140,7 @@ Within the area found from PEM, we ran a LFI scan and used that SWD feedback to 
   <figcaption>Left: PEM sites associated with `DEBUGEN` bits. Right: laser-fault points on the LFI infrared view.</figcaption>
 </figure>
 
-A pulse that set one bit could clear the other, so setting both required an iterative sequence. Our script pulsed the `PROC1` position until bus access was available, then pulsed the `PROC1_SECURE` position until `SDeviceEn = 1`, returning to the first position whenever bus access was lost. Once the positions and pulse parameters were calibrated, the sequence enabled Secure debug within seconds. Interestingly, we could not reproduce this sequence using a 20x objective. Because the two positions are only a few micrometers apart, that wider spot likely hit both the region that sets a bit and the one that clears it, so it was not possible to obtain the correct value.
+A pulse that set one bit could clear the other, so setting both required an iterative sequence. Our script pulsed the `PROC1` position until bus access was available, then pulsed the `PROC1_SECURE` position until `SDeviceEn = 1`, returning to the first position whenever bus access was lost. Once the positions and pulse parameters were calibrated, the sequence enabled Secure debug within seconds. Interestingly, we could not reproduce this sequence using a 20x objective. Because the two positions are only a few micrometres apart, that wider spot likely hit both the region that sets a bit and the one that clears it, so it was not possible to obtain the correct value.
 
 Once both bits were set, they remained set without further pulses or software writes. Reading the Secure-only `DEBUGEN` register through core 1's Mem-AP then returned `0xc`; because `DEBUGEN` is Secure-only, that successful read confirms the transaction was Secure-attributed.
 
@@ -156,9 +156,9 @@ As documented, software locks "are initialised from the OTP lock pages at reset"
 
 The remaining question is how to reset a locked chip without allowing firmware to re-apply the runtime lock. The RP-AP remains "always accessible, even when external debug is disabled". Setting `CTRL.RESCUE_RESTART` triggers a rescue reset: a full system reset that also flags the boot ROM to halt before any user software runs.
 
-The [boot ROM](https://github.com/raspberrypi/pico-bootrom-rp2350) checks `POWMAN_CHIP_RESET.RESCUE_FLAG` before watchdog, flash or USB boot, clears it, then holds core 0 in an interrupt-disabled wait loop and core 1 in its wait-for-vector path.[^2] The datasheet documents no restriction on `CTRL.RESCUE_RESTART`.
+The [boot ROM](https://github.com/raspberrypi/pico-bootrom-rp2350) checks `POWMAN_CHIP_RESET.RESCUE_FLAG` before watchdog, flash or USB boot, clears it, then holds core 0 in an interrupt-disabled wait loop and core 1 in its wait-for-vector path.[^3] The datasheet documents no restriction on `CTRL.RESCUE_RESTART`.
 
-We proceed in the following sequence:
+We proceeded in the following sequence:
 
 1. **Rescue reset.** Set `CTRL.RESCUE_RESTART` to `1`, then clear it to `0` through the RP-AP. The chip resets and remains in boot-ROM wait paths. The signed firmware never runs, so `sw_lock[48]` is never tightened and stays at the permissive value derived from `PAGE48_LOCK1` — `LOCK_S = READ_WRITE`.
 2. **Fault `DEBUGEN` to `0xc`.** With both cores in boot-ROM wait paths, set `PROC1` and `PROC1_SECURE` as described above; these two set bits produce the value `0xc`.
@@ -193,7 +193,7 @@ The demonstrated sequence provides Secure-attributed memory access, control over
 
 ## Conclusion
 
-The RP2350 encodes critical debug-disable flags in OTP with redundant voting, but `DEBUGEN` can override their effect and has no equivalent protection documented in the datasheet. In our experiments, laser pulses changed `DEBUGEN` despite `DEBUGEN_LOCK` and could set a lock bit that prevented firmware from restoring the disabled value. Separately, the RP-AP rescue reset restored the challenge's runtime page lock to its persistent value while preventing user firmware from executing. The software-visible mechanisms each performed their documented function, but their interaction with the laser fault enabled Secure debug and recovery of the challenge secret. Differential PEM first isolated bit-dependent `DEBUGEN` activity, guided LFI converted that spatial lead into persistent Secure debug. The system-level lesson is that security analysis must cover the complete enforcement path, from persistent OTP configuration through mutable control registers and reset behaviour, because system security depends on that path rather than on individual mechanisms in isolation.
+The RP2350 encodes critical debug-disable flags in OTP with redundant voting, but `DEBUGEN` can override their effect and has no equivalent protection documented in the datasheet. In our experiments, laser pulses changed `DEBUGEN` despite `DEBUGEN_LOCK` and could set a lock bit that prevented firmware from restoring the disabled value. Separately, the RP-AP rescue reset restored the challenge's runtime page lock to its persistent value while preventing user firmware from executing. The software-visible mechanisms each performed their documented function, but their interaction with the laser fault enabled Secure debug and recovery of the challenge secret. Differential PEM first isolated bit-dependent `DEBUGEN` activity, and guided LFI converted that spatial lead into persistent Secure debug. The system-level lesson is that security analysis must cover the complete enforcement path, from persistent OTP configuration through mutable control registers and reset behaviour, because system security depends on that path rather than on individual mechanisms in isolation.
 
 
 ## Disclosure and acknowledgements
@@ -208,6 +208,6 @@ We disclosed this fault to Raspberry Pi on 28 July 2026. We thank the Raspberry 
 
 [^1]: [https://github.com/raspberrypi/rp2350_hacking_challenge](https://github.com/raspberrypi/rp2350_hacking_challenge) The RP2350 Hacking Challenge repository, containing the reference lockdown configuration and firmware we replicated.
 
-[^2]: The rescue check is step 1 of the core 0 boot path in `src/main/arm/varm_boot_path.c`; in `src/main/arm/arm8_bootrom_rt0.S`, `varm_wait_rescue` enters the interrupt-disabled `varm_dead_quiet` WFI loop while core 1 remains in the boot ROM's wait-for-vector path.
+[^2]: Courk, [Laser Fault Injection on a Budget: RP2350 Edition](https://courk.cc/rp2350-challenge-laser).
 
-[^3]: Courk, [Laser Fault Injection on a Budget: RP2350 Edition](https://courk.cc/rp2350-challenge-laser).
+[^3]: The rescue check is step 1 of the core 0 boot path in `src/main/arm/varm_boot_path.c`; in `src/main/arm/arm8_bootrom_rt0.S`, `varm_wait_rescue` enters the interrupt-disabled `varm_dead_quiet` WFI loop while core 1 remains in the boot ROM's wait-for-vector path.
