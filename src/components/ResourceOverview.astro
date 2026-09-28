@@ -1,0 +1,62 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = 'Overview' } = Astro.props;
+---
+
+<div class="resource-overview">
+  <span class="resource-overview__label">{label}</span>
+  <div class="resource-overview__content">
+    <slot />
+  </div>
+</div>
+
+<style lang="scss">
+  .resource-overview {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .resource-overview__label {
+    padding-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-primary);
+  }
+
+  .resource-overview__content {
+    max-width: 52rem;
+
+    :global(p) {
+      margin: 0;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.65;
+      color: var(--color-text-lede);
+    }
+
+    :global(p + p) {
+      margin-top: var(--space-4);
+    }
+
+    :global(a) {
+      color: var(--color-accent-primary);
+      text-decoration-color: rgba(255, 97, 56, 0.45);
+      text-underline-offset: 0.2em;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .resource-overview {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+  }
+</style>

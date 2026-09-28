@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import ResourceOverview from '../components/ResourceOverview.astro';
+import ResourceSectionHeader from '../components/ResourceSectionHeader.astro';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
@@ -63,70 +65,75 @@ const hallOfFame = [
     size="sm" 
   />
   
-  <section class="content">
+  <section class="resource-page">
     <div class="container">
-      <p class="intro">
-        Ledger thanks the following security researchers for having contributed to the
-        security of Ledger products through the Devices Bug Bounty program.
-      </p>
-      
-      <div class="timeline">
-        {hallOfFame.map((yearGroup) => (
-          <div class="timeline-year">
-            <div class="timeline-year__marker">
-              <span class="timeline-year__label">{yearGroup.year}</span>
-            </div>
-            <div class="timeline-year__content">
-              <ul class="researcher-list">
-                {yearGroup.researchers.map((researcher) => (
-                  <li class="researcher">
-                    <span class="researcher__name">{researcher.name}</span>
-                    {researcher.org && (
-                      <span class="researcher__org">
-                        {researcher.url ? (
-                          <a href={researcher.url} target="_blank" rel="noopener noreferrer">
-                            {researcher.org}
-                          </a>
-                        ) : (
-                          researcher.org
-                        )}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <div class="cta-section">
-        <h2>Want to be featured here?</h2>
+      <ResourceOverview>
         <p>
-          Discover vulnerabilities in Ledger products and get recognized for your contribution 
-          to the security of the crypto ecosystem.
+          Ledger thanks the security researchers who have contributed to the security of Ledger
+          products through the Devices Bug Bounty program.
         </p>
-        <a href={withBase('/bounty/')} class="btn-primary">
-          Join the Bug Bounty Program
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
+      </ResourceOverview>
+
+      <section class="resource-section">
+        <ResourceSectionHeader number="01" label="Acknowledgements" title="Recognized researchers">
+          <p>
+            A record of responsible disclosures that helped make Ledger products more secure.
+          </p>
+        </ResourceSectionHeader>
+
+        <div class="timeline">
+          {hallOfFame.map((yearGroup) => (
+            <div class="timeline-year">
+              <div class="timeline-year__marker">
+                <span class="timeline-year__label">{yearGroup.year}</span>
+              </div>
+              <div class="timeline-year__content">
+                <ul class="researcher-list">
+                  {yearGroup.researchers.map((researcher) => (
+                    <li class="researcher">
+                      <span class="researcher__name">{researcher.name}</span>
+                      {researcher.org && (
+                        <span class="researcher__org">
+                          {researcher.url ? (
+                            <a href={researcher.url} target="_blank" rel="noopener noreferrer">
+                              {researcher.org}
+                            </a>
+                          ) : (
+                            researcher.org
+                          )}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="cta-section">
+          <div>
+            <h2>Want to be featured here?</h2>
+            <p>
+              Discover vulnerabilities in Ledger products and get recognized for your contribution
+              to the security of the crypto ecosystem.
+            </p>
+          </div>
+          <a href={withBase('/bounty/')} class="btn-primary">
+            Join the Bug Bounty Program
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M4 10h11M11 6l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      </section>
     </div>
   </section>
 </Base>
 
 <style lang="scss">
-  .content {
-    padding: var(--space-12) 0;
-  }
-  
-  .intro {
-    font-size: var(--text-lg);
-    color: var(--color-text-secondary);
-    max-width: 700px;
-    margin-bottom: var(--space-12);
+  .resource-page {
+    padding: clamp(4rem, 8vw, 7rem) 0;
   }
   
   .timeline {
@@ -140,7 +147,7 @@ const hallOfFame = [
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(to bottom, var(--color-accent-primary), var(--color-border));
+      background: var(--color-border);
       
       @media (max-width: 640px) {
         left: 30px;
@@ -180,11 +187,11 @@ const hallOfFame = [
         position: absolute;
         left: 60px;
         top: 8px;
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         background: var(--color-bg-primary);
-        border: 3px solid var(--color-accent-primary);
-        border-radius: 50%;
+        border: 2px solid var(--color-accent-primary);
+        border-radius: 0;
         transform: translateX(-50%);
       }
     }
@@ -218,14 +225,16 @@ const hallOfFame = [
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
-    background: var(--color-bg-secondary);
+    background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-left: 2px solid var(--color-accent-primary);
+    border-radius: 0;
     transition: all var(--transition-fast);
     
     &:hover {
       border-color: var(--color-border-hover);
-      background: var(--color-bg-tertiary);
+      border-left-color: var(--color-accent-primary);
+      background: var(--color-bg-hover);
     }
     
     &__name {
@@ -255,39 +264,83 @@ const hallOfFame = [
   .cta-section {
     margin-top: var(--space-16);
     padding: var(--space-10);
-    background: var(--color-bg-secondary);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-8);
+    background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    text-align: center;
-    max-width: 600px;
+    border-top: 2px solid var(--color-accent-primary);
+    border-radius: 0;
+    max-width: 800px;
     
     h2 {
-      font-size: var(--text-2xl);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
       margin-bottom: var(--space-3);
     }
     
     p {
+      max-width: 34rem;
       color: var(--color-text-secondary);
-      margin-bottom: var(--space-6);
+      margin: 0;
     }
   }
   
   .btn-primary {
+    min-height: 3rem;
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-3) var(--space-5);
+    padding: 0.25rem var(--space-5);
     background: var(--color-ledger-orange);
-    color: white;
+    color: var(--color-bg-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
     font-weight: 600;
-    border-radius: var(--radius-lg);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 0;
     transition: all var(--transition-fast);
     text-decoration: none;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 1.5;
+      transition: transform var(--transition-fast);
+    }
     
     &:hover {
       background: var(--color-ledger-orange-hover);
+      color: var(--color-bg-primary);
       text-decoration: none;
-      transform: translateY(-1px);
+
+      svg {
+        transform: translateX(0.2rem);
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    .cta-section {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      padding: var(--space-6);
+    }
+
+    .btn-primary {
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn-primary {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

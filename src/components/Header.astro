@@ -49,14 +49,14 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background: rgba(10, 14, 20, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-translucent);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border-subtle);
     
     &__container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: var(--space-4) var(--space-6);
+      padding: 1.05rem var(--space-6);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -69,16 +69,18 @@ const currentPath = Astro.url.pathname;
       flex-shrink: 0;
       
       &-img {
-        height: 32px;
+        display: block;
+        height: 2rem;
         width: auto;
-        filter: invert(1) hue-rotate(180deg);
+        border-radius: 0;
+        filter: var(--logo-filter);
       }
     }
     
     &__nav {
       @media (max-width: 960px) {
         position: fixed;
-        top: 65px;
+        top: var(--header-height, 66px);
         left: 0;
         right: 0;
         bottom: 0;
@@ -86,6 +88,7 @@ const currentPath = Astro.url.pathname;
         background-color: var(--color-bg-primary);
         background-image: none;
         padding: var(--space-6);
+        border-top: 1px solid var(--color-border);
         z-index: var(--z-sticky);
         isolation: isolate;
         transform: translateX(100%);
@@ -124,8 +127,8 @@ const currentPath = Astro.url.pathname;
         z-index: 1;
         background-color: var(--color-bg-primary);
         background-image: none;
-        border-radius: var(--radius-lg);
-        padding: var(--space-2);
+        border-radius: 0;
+        padding: var(--space-3) 0;
         flex-direction: column;
         align-items: stretch;
         gap: var(--space-2);
@@ -133,26 +136,54 @@ const currentPath = Astro.url.pathname;
     }
     
     &__nav-link {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
-      font-size: var(--text-sm);
+      justify-content: center;
+      gap: 0.2rem;
+      padding: 0.55rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
       font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--color-text-secondary);
-      border-radius: var(--radius-md);
+      border-radius: 0;
       transition: all var(--transition-fast);
       text-decoration: none;
+
+      &::before,
+      &::after {
+        position: absolute;
+        opacity: 0;
+        color: var(--color-accent-primary);
+      }
+
+      &::before {
+        left: 0;
+        content: '[';
+      }
+
+      &::after {
+        right: 0;
+        content: ']';
+      }
       
       &:hover {
         color: var(--color-text-primary);
-        background: var(--color-bg-hover);
+        background: transparent;
         text-decoration: none;
+
+        &::before,
+        &::after {
+          opacity: 1;
+        }
       }
       
       &.is-active {
-        color: var(--color-accent-primary);
-        background: var(--color-accent-glow);
+        color: var(--color-text-primary);
+        background: transparent;
+        box-shadow: inset 0 -1px 0 var(--color-accent-primary);
       }
       
       &--external svg {
@@ -167,6 +198,19 @@ const currentPath = Astro.url.pathname;
       @media (max-width: 960px) {
         padding: var(--space-4);
         font-size: var(--text-base);
+        justify-content: flex-start;
+        border-bottom: 1px solid var(--color-border);
+
+        &::before {
+          position: static;
+          content: '→';
+          opacity: 1;
+          color: var(--color-accent-primary);
+        }
+
+        &::after {
+          content: none;
+        }
       }
     }
     
@@ -177,9 +221,9 @@ const currentPath = Astro.url.pathname;
       gap: 5px;
       width: 32px;
       height: 32px;
-      background: var(--color-bg-secondary);
+      background: transparent;
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      border-radius: 0;
       cursor: pointer;
       padding: 4px;
       
@@ -209,7 +253,31 @@ const currentPath = Astro.url.pathname;
       }
     }
   }
+
+  @media (max-width: 720px) {
+    .header__container {
+      padding-inline: var(--space-4);
+    }
+
+    .header__logo-img {
+      height: 1.75rem;
+    }
+  }
 </style>
+
+<script is:inline>
+  (() => {
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    const publish = () =>
+      document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+
+    publish();
+    if ('ResizeObserver' in window) new ResizeObserver(publish).observe(header);
+    else window.addEventListener('resize', publish);
+  })();
+</script>
 
 <script>
   const toggle = document.querySelector('.header__toggle');

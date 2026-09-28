@@ -1,185 +1,397 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+
+const focusAreas = [
+  {
+    number: '01',
+    title: 'Protect the product',
+    description: 'Evaluate Ledger devices and software before weaknesses can affect users.',
+  },
+  {
+    number: '02',
+    title: 'Strengthen the ecosystem',
+    description: 'Apply our research beyond Ledger when it can improve security across the industry.',
+  },
+  {
+    number: '03',
+    title: 'Share what helps',
+    description: 'Publish research and release attack tooling that moves the security community forward.',
+  },
+];
+
+const expertise = [
+  {
+    number: '01',
+    title: 'Software Security',
+    description:
+      'We study firmware and applications from source code to machine code, looking for the paths an attacker would take.',
+    disciplines: ['Firmware analysis', 'Reverse engineering', 'Vulnerability research'],
+  },
+  {
+    number: '02',
+    title: 'Hardware Security',
+    description:
+      'We evaluate devices at the physical layer, where implementation details become observable and exploitable.',
+    disciplines: ['Side-channel analysis', 'Fault injection', 'Chip-level assessment'],
+  },
+  {
+    number: '03',
+    title: 'Cryptography',
+    description:
+      'We assess protocols and implementations to make sure strong primitives remain strong in real products.',
+    disciplines: ['Protocol analysis', 'Implementation review', 'Algorithm assessment'],
+  },
+];
 ---
 
 <Base title="About" description="Ledger Donjon is the security research team at Ledger. Learn about our mission and expertise.">
-  <Hero title="About the Donjon" size="sm" />
-  
-  <section class="content">
+  <Hero
+    title="Inside the Donjon"
+    subtitle="The security research team at Ledger, working across software, hardware, and cryptography."
+    size="sm"
+  />
+
+  <section class="about-section mission">
     <div class="container">
-      <p class="lead">
-        Ledger Donjon is the security research team at Ledger.
-      </p>
-      
-      <div class="intro-text">
+      <SectionLabel number="01" label="Mission" />
+
+      <div class="mission__intro">
+        <h2>We make Ledger products harder to break.</h2>
+        <div class="mission__copy">
+          <p>
+            The Donjon's core mission is to improve the security of Ledger products through
+            hands-on, attacker-minded research.
+          </p>
+          <p>
+            We also contribute to the wider security ecosystem and undertake selected external
+            security audits and consultancy.
+          </p>
+        </div>
+      </div>
+
+      <div class="focus-grid">
+        {focusAreas.map((area) => (
+          <article class="focus">
+            <span class="focus__number">{area.number}</span>
+            <h3>{area.title}</h3>
+            <p>{area.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section capabilities">
+    <div class="container">
+      <SectionLabel number="02" label="Capabilities" />
+
+      <div class="capabilities__intro">
+        <h2>From source code to silicon.</h2>
         <p>
-          Its main mission is to improve the security of Ledger's products. From time to time, 
-          the team also works on improving the security of the ecosystem.
-        </p>
-        
-        <p>
-          Punctually, the Donjon runs external security audit/consultancy.
+          Product security crosses boundaries. Our work combines disciplines so an issue cannot
+          hide in the gap between software, electronics, and cryptography.
         </p>
       </div>
-      
-      <h2>Fields of Expertise</h2>
-      
+
       <div class="expertise-grid">
-        <div class="expertise-card">
-          <div class="expertise-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
+        {expertise.map((area) => (
+          <article class="expertise">
+            <span class="expertise__number">{area.number}</span>
+            <div class="expertise__body">
+              <h3>{area.title}</h3>
+              <p>{area.description}</p>
+            </div>
+            <ul class="expertise__disciplines" aria-label={`${area.title} disciplines`}>
+              {area.disciplines.map((discipline) => <li>{discipline}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section open-source">
+    <div class="container">
+      <SectionLabel number="03" label="Open source" />
+
+      <div class="open-source__content">
+        <h2>Tools should travel further than the lab.</h2>
+        <div class="open-source__copy">
+          <p>
+            We release much of our internal attack tooling so other researchers can reproduce,
+            improve, and build on our work.
+          </p>
+          <div class="open-source__actions">
+            <a href={withBase('/tools-suite/')} class="action action--solid">
+              Explore the tools
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4 10h11M11 6l4 4-4 4" />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/ledger-donjon"
+              class="action action--line"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4 16L16 4M8 4h8v8" />
+              </svg>
+            </a>
           </div>
-          <h3>Software Security</h3>
-          <p>Firmware analysis, reverse engineering, vulnerability research, and secure development practices.</p>
-        </div>
-        
-        <div class="expertise-card">
-          <div class="expertise-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-            </svg>
-          </div>
-          <h3>Hardware Security</h3>
-          <p>Side-channel attacks, fault injection, chip decapsulation, and physical security assessment.</p>
-        </div>
-        
-        <div class="expertise-card">
-          <div class="expertise-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            </svg>
-          </div>
-          <h3>Cryptography</h3>
-          <p>Protocol analysis, implementation review, and cryptographic algorithm assessment.</p>
+          <span class="open-source__note">Pull requests are welcome.</span>
         </div>
       </div>
-      
-      <h2>Open Source</h2>
-      
-      <div class="intro-text">
-        <p>
-          The Donjon believes in open-source. We open-source most of our internal attack tools 
-          to help the security community.
-        </p>
-      </div>
-      
-      <a href="https://github.com/ledger-donjon" class="github-link" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-        </svg>
-        Visit Ledger Donjon on GitHub
-      </a>
-      
-      <p class="cta-text">Pull requests are welcome!</p>
     </div>
   </section>
 </Base>
 
 <style lang="scss">
-  .content {
-    padding: var(--space-12) 0;
+  .about-section {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    scroll-margin-top: var(--header-height, 72px);
   }
-  
-  .lead {
-    font-size: var(--text-xl);
-    color: var(--color-text-primary);
-    margin-bottom: var(--space-6);
-  }
-  
-  .intro-text {
-    max-width: 700px;
-    margin-bottom: var(--space-8);
-    
-    p {
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-4);
-    }
-  }
-  
-  h2 {
-    font-size: var(--text-2xl);
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  .expertise-grid {
+
+  .mission__intro,
+  .capabilities__intro,
+  .open-source__content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    margin: var(--space-8) 0;
-    
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .expertise-card {
-    padding: var(--space-6);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-normal);
-    
-    &:hover {
-      border-color: var(--color-accent-primary);
-      box-shadow: var(--shadow-glow);
-    }
-    
-    h3 {
-      font-size: var(--text-lg);
-      margin-bottom: var(--space-2);
-    }
-    
-    p {
-      font-size: var(--text-sm);
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.55fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 6rem);
+
+    h2 {
+      max-width: 11ch;
       margin: 0;
+      font-size: clamp(3rem, 6.5vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
     }
   }
-  
-  .expertise-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent-glow);
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-4);
-    
-    svg {
-      width: 24px;
-      height: 24px;
-      color: var(--color-accent-primary);
+
+  .mission__copy,
+  .open-source__copy {
+    padding-left: clamp(1.5rem, 3vw, 3rem);
+    border-left: 1px solid var(--color-border);
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+
+      + p {
+        margin-top: var(--space-4);
+      }
     }
   }
-  
-  .github-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-6);
-    background: var(--color-bg-tertiary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    color: var(--color-text-primary);
-    font-weight: 500;
-    transition: all var(--transition-fast);
-    text-decoration: none;
-    
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .focus {
+    min-height: 14rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-normal);
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+
     &:hover {
       background: var(--color-bg-hover);
-      border-color: var(--color-text-tertiary);
-      text-decoration: none;
+    }
+
+    h3 {
+      max-width: 12ch;
+      margin: var(--space-8) 0 var(--space-3);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+    }
+
+    p {
+      max-width: 29rem;
+      margin: 0;
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-text-secondary);
     }
   }
-  
-  .cta-text {
-    font-size: var(--text-sm);
-    color: var(--color-text-tertiary);
+
+  .focus__number,
+  .expertise__number {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    color: var(--color-accent-primary);
+  }
+
+  .capabilities__intro {
+    margin-bottom: clamp(3.5rem, 7vw, 6rem);
+
+    p {
+      max-width: 34rem;
+      margin: 0;
+      padding-left: clamp(1.5rem, 3vw, 3rem);
+      border-left: 1px solid var(--color-border);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 2px solid var(--color-accent-primary);
+  }
+
+  .expertise {
+    min-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: transparent;
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-normal);
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+
+    &:hover {
+      background: var(--color-bg-hover);
+    }
+  }
+
+  .expertise__body {
+    margin-top: var(--space-10);
+
+    h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+    }
+
+    p {
+      max-width: 31rem;
+      margin: var(--space-4) 0 0;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .expertise__disciplines {
+    margin: auto 0 0;
+    padding: var(--space-6) 0 0;
+    border-top: 1px solid var(--color-border);
+    list-style: none;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.04em;
+      color: var(--color-text-tertiary);
+
+      + li {
+        margin-top: var(--space-2);
+      }
+
+      &::before {
+        content: '—';
+        color: var(--color-accent-primary);
+      }
+    }
+  }
+
+  .open-source__content {
+    align-items: center;
+  }
+
+  .open-source__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .open-source__note {
+    display: block;
     margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 900px) {
+    .mission__intro,
+    .capabilities__intro,
+    .open-source__content {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-8);
+    }
+
+    .mission__copy,
+    .open-source__copy {
+      max-width: 44rem;
+    }
+
+    .expertise-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .expertise {
+      min-height: 20rem;
+
+      &:not(:last-child) {
+        border-right: 0;
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    .focus-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .focus {
+      min-height: 12rem;
+
+      &:not(:last-child) {
+        border-right: 0;
+      }
+    }
+
+    .mission__copy,
+    .capabilities__intro p,
+    .open-source__copy {
+      padding-top: var(--space-6);
+      padding-left: 0;
+      border-top: 1px solid var(--color-border);
+      border-left: 0;
+    }
   }
 </style>
