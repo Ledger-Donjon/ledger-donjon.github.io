@@ -1,0 +1,128 @@
+<button
+  class="article-theme-toggle"
+  type="button"
+  data-article-theme-toggle
+  aria-label="Switch to light theme"
+  title="Switch to light theme"
+  hidden
+>
+  <svg class="article-theme-toggle__icon article-theme-toggle__icon--sun" viewBox="0 0 20 20" aria-hidden="true">
+    <circle cx="10" cy="10" r="3.25" />
+    <path d="M10 1.75v2M10 16.25v2M1.75 10h2M16.25 10h2M4.17 4.17l1.42 1.42M14.41 14.41l1.42 1.42M15.83 4.17l-1.42 1.42M5.59 14.41l-1.42 1.42" />
+  </svg>
+  <svg class="article-theme-toggle__icon article-theme-toggle__icon--moon" viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M16.75 12.14A7 7 0 0 1 7.86 3.25a7 7 0 1 0 8.89 8.89Z" />
+  </svg>
+  <span class="article-theme-toggle__label article-theme-toggle__label--light">Light</span>
+  <span class="article-theme-toggle__label article-theme-toggle__label--dark">Dark</span>
+</button>
+
+<style lang="scss">
+  .article-theme-toggle {
+    min-height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: 0.25rem var(--space-3);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      background var(--transition-fast),
+      border-color var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-accent-primary);
+      color: var(--color-text-primary);
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .article-theme-toggle__icon {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: var(--color-accent-primary);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .article-theme-toggle__icon--moon,
+  .article-theme-toggle__label--dark {
+    display: none;
+  }
+
+  :global(html[data-article-theme='light']) {
+    .article-theme-toggle__icon--sun,
+    .article-theme-toggle__label--light {
+      display: none;
+    }
+
+    .article-theme-toggle__icon--moon,
+    .article-theme-toggle__label--dark {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .article-theme-toggle {
+      width: 2.25rem;
+      padding-inline: 0;
+    }
+
+    .article-theme-toggle__label {
+      display: none;
+    }
+
+    :global(html[data-article-theme='light']) .article-theme-toggle__label {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { ARTICLE_THEME_STORAGE_KEY as storageKey } from '../lib/article-theme';
+
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-article-theme-toggle]');
+
+  const updateToggle = () => {
+    if (!toggle) return;
+
+    const nextTheme = root.dataset.articleTheme === 'light' ? 'dark' : 'light';
+    const label = `Switch to ${nextTheme} theme`;
+    toggle.setAttribute('aria-label', label);
+    toggle.setAttribute('title', label);
+  };
+
+  if (toggle) {
+    toggle.hidden = false;
+    updateToggle();
+
+    toggle.addEventListener('click', () => {
+      const nextTheme = root.dataset.articleTheme === 'light' ? 'dark' : 'light';
+      root.dataset.articleTheme = nextTheme;
+
+      try {
+        localStorage.setItem(storageKey, nextTheme);
+      } catch {
+        // The theme still applies for this page when storage is unavailable.
+      }
+
+      updateToggle();
+    });
+  }
+</script>

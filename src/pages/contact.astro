@@ -1,153 +1,365 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import SectionLabel from '../components/SectionLabel.astro';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 ---
 
 <Base title="Contact" description="Get in touch with the Ledger Donjon security research team.">
-  <Hero title="Contact Us" size="sm" />
-  
-  <section class="content">
+  <Hero
+    title="Contact the Donjon"
+    subtitle="Research collaboration, security consultancy, or a conversation about our work."
+    size="sm"
+  />
+
+  <section class="contact">
     <div class="container">
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h2>Email</h2>
-          <p>For general inquiries, research collaboration, or security consultancy:</p>
-          <a href="mailto:donjon@ledger.fr" class="contact-link">
-            donjon@ledger.fr
-          </a>
-        </div>
-        
-        <div class="contact-card">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </div>
-          <h2>X (Twitter)</h2>
-          <p>Follow us for the latest security research updates. Our DMs are open!</p>
-          <a href="https://x.com/donjonledger" class="contact-link" target="_blank" rel="noopener noreferrer">
-            @donjonledger
-          </a>
-        </div>
-        
-        <div class="contact-card contact-card--highlight">
-          <div class="contact-icon contact-icon--warning">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-            </svg>
-          </div>
-          <h2>Security Vulnerabilities</h2>
-          <p>
-            If you believe you have found a security vulnerability on Ledger's products, 
-            please visit our dedicated bounty program page.
-          </p>
-          <a href={withBase('/bounty/')} class="btn-primary">
-            Bug Bounty Program
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
+      <SectionLabel number="01" label="Contact channels" />
+
+      <div class="contact__intro">
+        <h2>Start a conversation.</h2>
+        <p>
+          Reach the team directly for research collaborations, speaking opportunities, or security
+          consultancy. For product vulnerabilities, use the dedicated disclosure channel below.
+        </p>
       </div>
+
+      <div class="channels">
+        <a
+          href="mailto:donjon@ledger.fr"
+          class="channel"
+          aria-label="Email the Ledger Donjon team at donjon@ledger.fr"
+        >
+          <span class="channel__number">01</span>
+          <div class="channel__body">
+            <span class="channel__label">Email</span>
+            <h3>donjon@ledger.fr</h3>
+            <p>General inquiries, research collaboration, and security consultancy.</p>
+          </div>
+          <span class="channel__action">
+            Write to us
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M4 10h11M11 6l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href="https://x.com/donjonledger"
+          class="channel"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow Ledger Donjon on X"
+        >
+          <span class="channel__number">02</span>
+          <div class="channel__body">
+            <span class="channel__label">X / Twitter</span>
+            <h3>@donjonledger</h3>
+            <p>Follow our latest security research and public updates. Our DMs are open!</p>
+          </div>
+          <span class="channel__action">
+            Follow Donjon
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M4 16L16 4M8 4h8v8" />
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      <aside class="disclosure" aria-labelledby="disclosure-title">
+        <SectionLabel number="02" label="Responsible disclosure" />
+
+        <div class="disclosure__content">
+          <h2 id="disclosure-title">Found a vulnerability?</h2>
+          <p>
+            Reports affecting a Ledger device, wallet application, or web service should go through
+            our bug bounty program so the security team can triage them securely.
+          </p>
+
+          <a href={withBase('/bounty/')} class="disclosure__action">
+            Report a vulnerability
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M4 10h11M11 6l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      </aside>
     </div>
   </section>
 </Base>
 
 <style lang="scss">
-  .content {
-    padding: var(--space-12) 0;
+  .contact {
+    padding: clamp(4rem, 8vw, 7rem) 0;
   }
-  
-  .contact-grid {
+
+  .contact__intro {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-6);
-    max-width: 1000px;
-  }
-  
-  .contact-card {
-    padding: var(--space-8);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.55fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+
     h2 {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-3);
+      max-width: 10ch;
+      margin: 0;
+      font-size: clamp(3rem, 6.5vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
     }
-    
+
     p {
-      font-size: var(--text-sm);
-      margin-bottom: var(--space-4);
-    }
-    
-    &--highlight {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
-      border-color: var(--color-ledger-orange);
+      max-width: 35rem;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
     }
   }
-  
-  .contact-icon {
-    width: 56px;
-    height: 56px;
-    display: flex;
+
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--color-border);
+  }
+
+  .channel {
+    position: relative;
+    min-height: 18rem;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    gap: 0 var(--space-5);
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    background: transparent;
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-normal);
+
+    &:first-child {
+      border-right: 1px solid var(--color-border);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--color-accent-primary);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--transition-normal);
+    }
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+      background: var(--color-bg-hover);
+
+      &::before {
+        transform: scaleY(1);
+      }
+
+      .channel__action svg {
+        transform: translateX(0.25rem);
+      }
+    }
+
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+  }
+
+  .channel__number,
+  .channel__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .channel__number {
+    color: var(--color-accent-primary);
+  }
+
+  .channel__label {
+    display: block;
+    margin-bottom: var(--space-3);
+    color: var(--color-text-tertiary);
+  }
+
+  .channel__body {
+    h3 {
+      margin: 0;
+      overflow-wrap: anywhere;
+      font-size: clamp(1.8rem, 3.2vw, 3.3rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+    }
+
+    p {
+      max-width: 29rem;
+      margin: var(--space-4) 0 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .channel__action {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: var(--color-accent-primary);
+      stroke-width: 1.5;
+      transition: transform var(--transition-fast);
+    }
+  }
+
+  .disclosure {
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-top: var(--space-8);
+  }
+
+  .disclosure__content {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.75fr) minmax(20rem, 1fr) auto;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+
+    h2 {
+      max-width: 9ch;
+      margin: 0;
+      font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.055em;
+      line-height: 0.98;
+    }
+
+    p {
+      margin: 0;
+      padding-left: clamp(1.5rem, 3vw, 3rem);
+      border-left: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .disclosure__action {
+    min-height: 3rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-accent-glow);
-    border-radius: var(--radius-xl);
-    margin-bottom: var(--space-5);
-    
+    gap: var(--space-4);
+    padding: 0.25rem var(--space-5);
+    border: 1px solid var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
     svg {
-      width: 28px;
-      height: 28px;
-      color: var(--color-accent-primary);
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: var(--color-accent-primary);
+      stroke-width: 1.5;
+      transition: transform var(--transition-fast);
     }
-    
-    &--warning {
-      background: rgba(255, 83, 0, 0.15);
-      
+
+    &:hover {
+      background: var(--color-accent-primary);
+      color: var(--color-bg-primary);
+      text-decoration: none;
+
       svg {
-        color: var(--color-ledger-orange);
+        stroke: currentcolor;
+        transform: translateX(0.25rem);
       }
     }
   }
-  
-  .contact-link {
-    display: inline-block;
-    font-size: var(--text-lg);
-    font-weight: 600;
-    color: var(--color-accent-primary);
-    
-    &:hover {
-      text-decoration: underline;
+
+  @media (max-width: 900px) {
+    .contact__intro {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-6);
+    }
+
+    .disclosure__content {
+      grid-template-columns: minmax(13rem, 0.6fr) minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+
+    .disclosure__action {
+      grid-column: 2;
+      justify-self: start;
     }
   }
-  
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-5);
-    background: var(--color-ledger-orange);
-    color: white;
-    font-weight: 600;
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-fast);
-    text-decoration: none;
-    
-    &:hover {
-      background: var(--color-ledger-orange-hover);
-      text-decoration: none;
-      transform: translateY(-1px);
+
+  @media (max-width: 720px) {
+    .channels {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .channel {
+      min-height: 16rem;
+
+      &:first-child {
+        border-right: 0;
+      }
+    }
+
+    .disclosure__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+    }
+
+    .disclosure__content p {
+      padding-top: var(--space-5);
+      padding-left: 0;
+      border-top: 1px solid var(--color-border);
+      border-left: 0;
+    }
+
+    .disclosure__action {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .channel {
+      grid-template-columns: 2rem minmax(0, 1fr);
+      padding-inline: 0;
+    }
+
+    .disclosure__action {
+      width: 100%;
     }
   }
 </style>

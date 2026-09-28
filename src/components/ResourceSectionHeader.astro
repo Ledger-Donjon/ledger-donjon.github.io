@@ -1,0 +1,63 @@
+---
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+  number: string;
+  label: string;
+  title: string;
+}
+
+const { number, label, title } = Astro.props;
+---
+
+<header class="resource-heading">
+  <SectionLabel number={number} label={label} />
+
+  <div class="resource-heading__content">
+    <h2>{title}</h2>
+    <div class="resource-heading__description">
+      <slot />
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+  .resource-heading {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .resource-heading__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.5fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 6rem);
+
+    h2 {
+      max-width: 13ch;
+      margin: 0;
+      font-size: clamp(2.75rem, 5.5vw, 5.75rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 0.96;
+    }
+  }
+
+  .resource-heading__description {
+    max-width: 35rem;
+
+    :global(p) {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .resource-heading__content {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-5);
+    }
+  }
+</style>

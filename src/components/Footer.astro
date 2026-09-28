@@ -119,10 +119,10 @@ const links = {
 
 <style lang="scss">
   .footer {
-    margin-top: var(--space-24);
+    margin-top: 0;
     padding: var(--space-16) 0 var(--space-8);
-    background: var(--color-bg-secondary);
-    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border-subtle);
     
     &__container {
       max-width: var(--max-width);
@@ -146,10 +146,12 @@ const links = {
     }
     
     &__logo {
+      display: block;
       height: 28px;
       width: auto;
       margin-bottom: var(--space-4);
-      filter: invert(1) hue-rotate(180deg);
+      border-radius: 0;
+      filter: var(--logo-filter);
     }
     
     &__tagline {
@@ -171,12 +173,13 @@ const links = {
     
     &__column {
       h4 {
-        font-size: var(--text-sm);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
         font-weight: 600;
+        letter-spacing: 0.1em;
         color: var(--color-text-primary);
         margin-bottom: var(--space-4);
         text-transform: uppercase;
-        letter-spacing: 0.05em;
       }
       
       ul {
@@ -193,12 +196,12 @@ const links = {
         display: inline-flex;
         align-items: center;
         gap: var(--space-1);
-        font-size: var(--text-sm);
+        font-size: 0.82rem;
         color: var(--color-text-secondary);
         transition: color var(--transition-fast);
         
         &:hover {
-          color: var(--color-accent-primary);
+          color: var(--color-text-primary);
           text-decoration: none;
         }
         
@@ -219,8 +222,9 @@ const links = {
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-lg);
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: 0;
       color: var(--color-text-secondary);
       transition: all var(--transition-fast);
       
@@ -230,8 +234,10 @@ const links = {
       }
       
       &:hover {
-        background: var(--color-accent-glow);
+        background: var(--color-bg-hover);
+        border-color: var(--color-accent-primary);
         color: var(--color-accent-primary);
+        text-decoration: none;
       }
     }
     
@@ -267,6 +273,12 @@ const links = {
           color: var(--color-text-secondary);
         }
       }
+    }
+  }
+
+  @media (max-width: 720px) {
+    .footer__container {
+      padding-inline: var(--space-4);
     }
   }
 </style>

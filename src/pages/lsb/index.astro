@@ -1,7 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
-import Card from '../../components/Card.astro';
+import ResourceOverview from '../../components/ResourceOverview.astro';
+import ResourceSectionHeader from '../../components/ResourceSectionHeader.astro';
 import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
@@ -27,73 +28,81 @@ const bulletins = allLsb
     size="sm"
   />
   
-  <section class="content">
+  <section class="resource-page">
     <div class="container">
-      <p class="intro">
-        Ledger believes in better security through openness. If you believe that you have discovered 
-        a vulnerability, please report it through the <a href={withBase('/bounty/')}>bug bounty program</a>.
-      </p>
-      
-      <div class="bulletins-table">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bulletins.map(({ bulletin, id, date }) => {
-              return (
-                <tr>
-                  <td>
-                    <span class="bulletin-id">LSB {id}</span>
-                  </td>
-                  <td>
-                    <a href={withBase(`/lsb/${id}/`)} class="bulletin-link">
-                      {bulletin.data.title}
-                      {bulletin.data.summary && (
-                        <span class="bulletin-summary">{bulletin.data.summary}</span>
-                      )}
-                    </a>
-                  </td>
-                  <td>
-                    {date && <time class="bulletin-date">{date}</time>}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      
-      <p class="note">
-        Note: these security bulletins are inspired by 
-        <a href="https://www.qubes-os.org/security/bulletins/" target="_blank" rel="noopener">Qubes Security Bulletins</a> 
-        but aren't related in any way.
-      </p>
+      <ResourceOverview>
+        <p>
+          Ledger believes in better security through openness. If you believe that you have
+          discovered a vulnerability, please report it through the
+          <a href={withBase('/bounty/')}>bug bounty program</a>.
+        </p>
+      </ResourceOverview>
+
+      <section class="resource-section">
+        <ResourceSectionHeader number="01" label="Archive" title="Ledger security bulletins">
+          <p>
+            Browse technical details of past security issues, their potential impact, and the
+            patches or workarounds available.
+          </p>
+        </ResourceSectionHeader>
+
+        <div class="bulletins-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bulletins.map(({ bulletin, id, date }) => {
+                return (
+                  <tr>
+                    <td>
+                      <span class="bulletin-id">LSB {id}</span>
+                    </td>
+                    <td>
+                      <a href={withBase(`/lsb/${id}/`)} class="bulletin-link">
+                        {bulletin.data.title}
+                        {bulletin.data.summary && (
+                          <span class="bulletin-summary">{bulletin.data.summary}</span>
+                        )}
+                      </a>
+                    </td>
+                    <td>
+                      {date && <time class="bulletin-date">{date}</time>}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note">
+          Note: these security bulletins are inspired by
+          <a href="https://www.qubes-os.org/security/bulletins/" target="_blank" rel="noopener">
+            Qubes Security Bulletins
+          </a>
+          but aren't related in any way.
+        </p>
+      </section>
     </div>
   </section>
 </Base>
 
 <style lang="scss">
-  .content {
-    padding: var(--space-12) 0;
-  }
-  
-  .intro {
-    font-size: var(--text-lg);
-    color: var(--color-text-secondary);
-    max-width: 700px;
-    margin-bottom: var(--space-10);
+  .resource-page {
+    padding: clamp(4rem, 8vw, 7rem) 0;
   }
   
   .bulletins-table {
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+    background: transparent;
+    border-top: 2px solid var(--color-accent-primary);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    overflow-x: auto;
     
     table {
       margin: 0;
@@ -101,11 +110,11 @@ const bulletins = allLsb
     
     th {
       text-align: left;
-      font-size: var(--text-sm);
+      font-size: var(--text-xs);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
       color: var(--color-text-tertiary);
-      background: var(--color-bg-tertiary);
+      background: transparent;
       
       &:first-child {
         width: 120px;
@@ -132,8 +141,8 @@ const bulletins = allLsb
     font-weight: 600;
     font-family: var(--font-mono);
     color: var(--color-accent-primary);
-    background: var(--color-accent-glow);
-    border-radius: var(--radius-sm);
+    background: transparent;
+    border-radius: 0;
   }
   
   .bulletin-link {
@@ -141,6 +150,7 @@ const bulletins = allLsb
     flex-direction: column;
     gap: var(--space-1);
     color: var(--color-text-primary);
+    font-size: 1.05rem;
     font-weight: 500;
     
     &:hover {
@@ -156,7 +166,8 @@ const bulletins = allLsb
   }
 
   .bulletin-date {
-    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
     color: var(--color-text-secondary);
     white-space: nowrap;
   }

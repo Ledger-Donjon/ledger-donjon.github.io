@@ -1,655 +1,1035 @@
 ---
 import Base from '../layouts/Base.astro';
-import Card from '../components/Card.astro';
+import SectionLabel from '../components/SectionLabel.astro';
 import { getCollection } from 'astro:content';
 import { getMergedDonjonBlogArticles } from '../lib/donjon-blog';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 
-// Get latest security bulletins
-const allLsb = await getCollection('lsb');
-const latestBulletins = allLsb
-  .sort((a, b) => {
-    const numA = parseInt(a.id.replace('.md', ''));
-    const numB = parseInt(b.id.replace('.md', ''));
-    return numB - numA;
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+const formatDate = (date) => {
+  const parts = Object.fromEntries(
+    dateFormatter.formatToParts(date).map((part) => [part.type, part.value]),
+  );
+  return `${parts.day} ${parts.month.replace('.', '').slice(0, 3)} ${parts.year}`;
+};
+
+const parseBulletinDate = (body) => {
+  const firstLine = body
+    .split('\n')
+    .map((line) => line.trim())
+    .find((line) => line.length > 0);
+  const match = firstLine?.match(/^(\d{1,2}\s+[A-Za-z]+\s+\d{4})/);
+  if (!match) return null;
+  const parsed = new Date(match[1]);
+  if (Number.isNaN(parsed.getTime())) return null;
+  // Normalise to UTC midnight so the datetime attribute matches the visible date.
+  return new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), parsed.getDate()));
+};
+
+const latestBulletins = (await getCollection('lsb'))
+  .map((bulletin) => {
+    const number = bulletin.id.replace('.md', '');
+    return {
+      ref: `LSB ${number}`,
+      title: bulletin.data.summary || bulletin.data.title,
+      href: withBase(`/lsb/${number}/`),
+      date: parseBulletinDate(bulletin.body ?? ''),
+      number: parseInt(number, 10),
+    };
   })
-  .slice(0, 3);
+  .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0) || b.number - a.number)
+  .slice(0, 5);
 
-const stripHtml = (html) => html.replace(/<[^>]*>/g, '');
+const latestArticles = (await getMergedDonjonBlogArticles(withBase))
+  .map((article) => ({
+    title: article.title,
+    href: article.href,
+    date: article.date ? new Date(article.date) : null,
+    external: article.openInNewTab,
+  }))
+  .slice(0, 5);
 
-const mergedArticles = await getMergedDonjonBlogArticles(withBase);
-const latestArticles = mergedArticles.slice(0, 3).map((article) => ({
-  ...article,
-  excerpt: article.excerpt ? stripHtml(article.excerpt) : article.excerpt,
-  parsedDate: article.date ? new Date(article.date) : null,
-}));
-
-const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
+const directory = [
+  {
+    href: withBase('/lsb/'),
+    title: 'Security Bulletins',
+    description:
+      'Technical write-ups of past security issues affecting Ledger products, their impact, and the versions that fix them.',
+  },
+  {
+    href: withBase('/threat-model/'),
+    title: 'Threat Model',
+    description:
+      'The security objectives of Ledger devices, the attackers they are designed to resist, and the mechanisms that enforce them.',
+  },
+  {
+    href: withBase('/tools-suite/'),
+    title: 'Tools Suite',
+    description:
+      'Open-source security research tools for hardware and software analysis.',
+  },
+  {
+    href: withBase('/about/'),
+    title: 'About the Team',
+    description:
+      'Who we are, how we work with vendors on coordinated disclosure, and how to get in touch with us.',
+  },
+];
 ---
 
-<Base title="Home" description="The security research team at Ledger. Protecting your crypto assets through cutting-edge security research.">
-  <section class="hero">
-    <div class="hero__container">
-      <div class="hero__content">
-        <div class="hero__badge">Security Research</div>
-        <h1 class="hero__title">
-          <span class="text-gradient">Donjon</span> @ Ledger
-        </h1>
-        <p class="hero__subtitle">
-          We are the security research team at Ledger, dedicated to protecting your digital assets 
-          through cutting-edge security research, vulnerability discovery, and open-source tools.
-        </p>
-        <div class="hero__actions">
-          <a href={withBase('/bounty/')} class="btn btn--primary btn--with-icon">
-            Bug Bounty Program
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href={withBase('/about/')} class="btn btn--secondary btn--with-icon">
-            About Us
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href={withBase('/blog/')} class="btn btn--primary btn--blog btn--with-icon">
-            Read the Donjon Blog
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="hero__visual" aria-hidden="true">
-        <div class="hero__grid"></div>
-        <div class="hero__orb hero__orb--1"></div>
-        <div class="hero__orb hero__orb--2"></div>
-        <div class="hero__shield">
-          <img src={withBase('/img/donjon-shield.gif')} alt="Donjon Shield" />
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="features">
-    <div class="container">
-      <div class="features__grid">
-        <a href={withBase('/lsb/')} class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-          </div>
-          <h3>Security Bulletins</h3>
-          <p>Technical details of past security issues, their impact, and available patches.</p>
-        </a>
-        
-        <a href={withBase('/threat-model/')} class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-          </div>
-          <h3>Threat Model</h3>
-          <p>Comprehensive documentation of security objectives and mechanisms.</p>
-        </a>
-        
-        <a href={withBase('/tools-suite/')} class="feature-card">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3>Tools Suite</h3>
-          <p>Open-source security research tools for hardware and software analysis.</p>
-        </a>
-        
-        <a href={withBase('/bounty/')} class="feature-card feature-card--highlight">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3>Bug Bounty</h3>
-          <p>Report vulnerabilities and earn rewards for helping secure Ledger products.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-  
-  <section class="blog-highlights">
-    <div class="container">
-      <div class="section-header">
-        <h2>Latest Blog Posts</h2>
-        <a href={withBase('/blog/')} class="section-link">
-          View all posts
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
+<Base
+  title="Home"
+  description="The security research team at Ledger. Protecting your crypto assets through cutting-edge security research."
+>
+  <div class="lab-page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero__grid">
+        <div class="hero__copy">
+          <h1 id="hero-title" class="hero__title">
+            <span class="hero__donjon">Donjon</span><br />
+            <span class="hero__ledger">@ Ledger</span>
+          </h1>
 
-      {latestArticles.length === 0 ? (
-        <div class="blog-highlights__fallback">
-          No Donjon blog posts are available yet.
-        </div>
-      ) : (
-        <div class="blog-highlights__grid">
-          {latestArticles.map((article) => {
-            const isNew = article.parsedDate
-              ? Date.now() >= article.parsedDate.getTime() &&
-                Date.now() - article.parsedDate.getTime() < recentCutoffMs
-              : false;
-            const badges = isNew ? [{ text: 'New', tone: 'violet' }] : [];
+          <p class="hero__lede">
+            We are the security research team at Ledger, dedicated to protecting your digital
+            assets through cutting-edge security research, vulnerability discovery, and open-source
+            tools.
+          </p>
 
-            return (
-              <Card
-                title={article.title}
-                href={article.href}
-                description={article.excerpt}
-                date={article.parsedDate ?? undefined}
-                badges={badges}
-                target={article.openInNewTab ? '_blank' : undefined}
-                rel={article.openInNewTab ? 'noopener noreferrer' : undefined}
-              />
-            );
-          })}
+          <div class="hero__actions">
+            <a href={withBase('/blog/')} class="action action--solid">
+              Read the Blog
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4 10h11M11 6l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
         </div>
-      )}
-    </div>
-  </section>
 
-  <section class="bulletins">
-    <div class="container">
-      <div class="section-header">
-        <h2>Latest Security Bulletins</h2>
-        <a href={withBase('/lsb/')} class="section-link">
-          View all bulletins
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-      
-      <div class="bulletins__grid">
-        {latestBulletins.map((bulletin) => (
-          <Card
-            title={bulletin.data.title}
-            href={withBase(`/lsb/${bulletin.id.replace('.md', '')}/`)}
-            description={bulletin.data.summary}
-            badge={`LSB ${bulletin.id.replace('.md', '')}`}
+        <div class="hero__brand-mark" aria-hidden="true">
+          <img
+            src={withBase('/img/donjon-shield-static.gif')}
+            alt=""
+            width="240"
+            height="300"
           />
-        ))}
+        </div>
       </div>
-    </div>
-  </section>
-  
-  <section class="cta">
-    <div class="container">
-      <div class="cta__card">
-        <h2>Found a vulnerability?</h2>
-        <p>
-          We reward security researchers who help us protect our users. 
-          Join our bug bounty program and get recognized in our Hall of Fame.
-        </p>
-        <div class="cta__actions">
-          <a href={withBase('/bounty/')} class="btn btn--primary">
-            Submit a Report
-          </a>
-          <a href={withBase('/hall-of-fame/')} class="btn btn--ghost">
-            Hall of Fame
+
+      <aside class="disclose" aria-labelledby="disclose-title">
+        <div class="shell disclose__inner">
+          <div class="disclose__heading">
+            <p id="disclose-title" class="disclose__label">Responsible disclosure</p>
+            <span aria-hidden="true"></span>
+          </div>
+
+          <div class="disclose__content">
+            <h2>Found a vulnerability?</h2>
+
+            <div class="disclose__copy">
+              <p>
+                We reward security researchers who help us protect our users. Join our bug bounty
+                program and get recognized in our Hall of Fame.
+              </p>
+            </div>
+
+            <div class="disclose__actions">
+              <a class="disclose__report" href={withBase('/bounty/')}>
+                Report a vulnerability
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M4 10h11M11 6l4 4-4 4" />
+                </svg>
+              </a>
+              <a class="disclose__honours" href={withBase('/hall-of-fame/')}>Hall of Fame →</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="hero__rail">
+        <div class="shell hero__rail-inner">
+          <a href="#work" class="hero__scroll">
+            Explore Donjon
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 3v13M6 12l4 4 4-4" />
+            </svg>
           </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="work" class="section archive">
+      <div class="shell">
+        <SectionLabel number="01" label="Directory" />
+
+        <div class="section-heading section-heading--solo">
+          <h2>Explore Donjon</h2>
+        </div>
+
+        <ol class="directory">
+          {directory.map((item, index) => (
+            <li>
+              <a class="case-file" href={item.href}>
+                <span class="case-file__number">{String(index + 1).padStart(2, '0')}</span>
+                <div class="case-file__body">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+                <span class="case-file__open">
+                  Explore
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M4 10h11M11 6l4 4-4 4" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section field-log">
+      <div class="shell">
+        <SectionLabel number="02" label="Updates" />
+
+        <div class="section-heading section-heading--solo section-heading--log">
+          <h2>Latest Publications</h2>
+        </div>
+
+        <div class="logs">
+          <article class="log">
+            <header class="log__header">
+              <h3>Blog</h3>
+              <a href={withBase('/blog/')} class="micro-link">All blog posts <span>→</span></a>
+            </header>
+
+            {latestArticles.length === 0 ? (
+              <p class="log__empty">No blog posts are available yet.</p>
+            ) : (
+              <ol class="log__entries">
+                {latestArticles.map((entry) => (
+                  <li>
+                    <a
+                      href={entry.href}
+                      target={entry.external ? '_blank' : undefined}
+                      rel={entry.external ? 'noopener noreferrer' : undefined}
+                    >
+                      <time datetime={entry.date?.toISOString()}>
+                        {entry.date ? formatDate(entry.date) : '—'}
+                      </time>
+                      <span class="log__title">
+                        {entry.title}
+                        {entry.external && <span class="log__external" aria-hidden="true">↗</span>}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </article>
+
+          <article class="log log--bulletins">
+            <header class="log__header">
+              <h3>Security Bulletins</h3>
+              <a href={withBase('/lsb/')} class="micro-link">All security bulletins <span>→</span></a>
+            </header>
+
+            {latestBulletins.length === 0 ? (
+              <p class="log__empty">No security bulletins are available yet.</p>
+            ) : (
+              <ol class="log__entries">
+                {latestBulletins.map((entry) => (
+                  <li>
+                    <a href={entry.href}>
+                      <time datetime={entry.date?.toISOString()}>
+                        {entry.date ? formatDate(entry.date) : '—'}
+                      </time>
+                      <span class="log__ref">{entry.ref}</span>
+                      <span class="log__title">{entry.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 </Base>
 
 <style lang="scss">
-  .hero {
-    padding: var(--space-16) 0 var(--space-24);
-    position: relative;
+  .lab-page {
+    --lab-bg: #080a09;
+    --lab-surface: #0d100e;
+    --lab-ink: #f1f1e9;
+    --lab-muted: #9ba19b;
+    --lab-dim: #858b85;
+    --lab-line: #292e2a;
+    --lab-accent: #ff6138;
     overflow: hidden;
-    
-    &__container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--space-6);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-12);
-      align-items: center;
-      
-      @media (max-width: 960px) {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+  }
+
+  .shell {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-6);
+
+    @media (max-width: 720px) {
+      padding-inline: 1rem;
     }
-    
-    &__content {
+  }
+
+  .hero {
+    position: relative;
+    min-height: calc(100vh - var(--header-height, 72px));
+    min-height: calc(100svh - var(--header-height, 72px));
+    display: flex;
+    flex-direction: column;
+    background: var(--lab-bg);
+
+    &__grid {
       position: relative;
       z-index: 1;
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(390px, 0.74fr);
+      align-items: center;
+      gap: clamp(2.5rem, 5vw, 6rem);
+      padding-top: clamp(3.25rem, 6vh, 5rem);
+      padding-bottom: clamp(3.25rem, 6vh, 5rem);
     }
-    
-    &__badge {
-      display: inline-block;
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--text-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-accent-secondary);
-      background: var(--color-accent-secondary-glow);
-      border-radius: var(--radius-full);
-      margin-bottom: var(--space-6);
+
+    &__copy {
+      max-width: 830px;
+      animation: hero-enter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
     }
-    
+
     &__title {
-      font-size: var(--text-6xl);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: var(--space-6);
-      
-      @media (max-width: 768px) {
-        font-size: var(--text-4xl);
+      max-width: 8ch;
+      margin: 0;
+      font-size: clamp(4rem, 7.5vw, 8.6rem);
+      font-weight: 500;
+      letter-spacing: -0.07em;
+      line-height: 0.88;
+      text-wrap: balance;
+      color: var(--lab-ink);
+
+      .hero__donjon {
+        color: var(--lab-accent);
+      }
+
+      .hero__ledger {
+        color: var(--lab-ink);
       }
     }
-    
-    &__subtitle {
-      font-size: var(--text-xl);
-      color: var(--color-text-secondary);
-      line-height: var(--leading-relaxed);
-      margin-bottom: var(--space-8);
-      max-width: 540px;
-      
-      @media (max-width: 960px) {
-        margin: 0 auto var(--space-8);
-      }
+
+    &__lede {
+      max-width: 43rem;
+      margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
+      font-size: clamp(1.08rem, 1.45vw, 1.35rem);
+      line-height: 1.55;
+      color: var(--color-text-lede);
     }
-    
+
     &__actions {
       display: flex;
-      gap: var(--space-4);
       flex-wrap: wrap;
-      
-      @media (max-width: 960px) {
-        justify-content: center;
-      }
-      
-      @media (max-width: 480px) {
-        flex-direction: column;
-      }
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
     }
-    
-    &__visual {
+
+    &__rail {
       position: relative;
-      height: 400px;
-      
-      @media (max-width: 960px) {
-        display: none;
-      }
-    }
-    
-    &__grid {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 500px;
-      height: 500px;
-      transform: translate(-50%, -50%) perspective(500px) rotateX(60deg) rotateZ(-15deg);
-      background-image: 
-        linear-gradient(var(--color-border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.4;
-      mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-    }
-    
-    &__orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      
-      &--1 {
-        top: 20%;
-        right: 20%;
-        width: 200px;
-        height: 200px;
-        background: var(--color-accent-glow);
-      }
-      
-      &--2 {
-        bottom: 20%;
-        left: 20%;
-        width: 150px;
-        height: 150px;
-        background: var(--color-accent-secondary-glow);
-      }
-    }
-    
-    &__shield {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 240px;
-      height: 280px;
-      animation: float 6s ease-in-out infinite;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: drop-shadow(0 0 30px var(--color-accent-glow));
-      }
-    }
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50% { transform: translate(-50%, -50%) translateY(-20px); }
-  }
-  
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    font-weight: 600;
-    min-height: 48px;
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-fast);
-    text-decoration: none;
-    border: 1px solid transparent;
-    
-    &:focus-visible {
-      outline: 3px solid color-mix(in srgb, var(--color-ledger-orange) 55%, white);
-      outline-offset: 2px;
-    }
-    
-    &--primary {
-      background: linear-gradient(135deg, var(--color-ledger-orange), var(--color-ledger-orange-hover));
-      color: white;
-      box-shadow: 0 12px 24px rgba(255, 83, 0, 0.2);
-      
-      &:hover {
-        background: linear-gradient(135deg, var(--color-ledger-orange-hover), var(--color-ledger-orange));
-        transform: translateY(-2px);
-        text-decoration: none;
-      }
-    }
-    
-    &--secondary {
-      background: var(--color-bg-secondary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
-      
-      &:hover {
-        background: var(--color-bg-hover);
-        border-color: var(--color-border-hover);
-        transform: translateY(-2px);
-        text-decoration: none;
-      }
-    }
-    
-    &--ghost {
-      background: transparent;
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
-      
-      &:hover {
-        background: var(--color-bg-tertiary);
-        text-decoration: none;
-      }
+      z-index: 2;
+      background: var(--lab-bg);
     }
 
-    &--blog {
-      padding: var(--space-3) var(--space-7);
-      font-size: var(--text-base);
-      box-shadow: 0 16px 34px rgba(255, 83, 0, 0.28);
+    &__rail-inner {
+      min-height: 4.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-      &:hover {
-        transform: translateY(-3px);
-      }
-    }
-    
-    &--with-icon {
-      svg {
-        transition: transform var(--transition-fast);
-      }
-      
-      &:hover svg {
-        transform: translateX(3px);
-      }
-    }
-  }
-  
-  .features {
-    padding: var(--space-16) 0;
-    background: var(--color-bg-secondary);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-6);
-      
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
-  
-  .feature-card {
-    padding: var(--space-6);
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    
-    &:hover {
-      border-color: var(--color-border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+    &__scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lab-muted);
       text-decoration: none;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+        stroke: var(--lab-accent);
+        stroke-width: 1.5;
+      }
+
+      &:hover {
+        color: var(--lab-ink);
+        text-decoration: none;
+      }
     }
-    
-    &--highlight {
-      background: linear-gradient(135deg, rgba(106, 55, 148, 0.15), transparent);
-      border-color: rgba(106, 55, 148, 0.4);
-      
-      .feature-card__icon {
-        background: rgba(106, 55, 148, 0.2);
-        
+  }
+
+  .disclose {
+    position: relative;
+    z-index: 2;
+    background: var(--lab-bg);
+
+    &__inner {
+      padding-block: clamp(1.75rem, 3vw, 3rem);
+    }
+
+    &__heading {
+      display: grid;
+      grid-template-columns: max-content minmax(2rem, 1fr);
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+
+      > span {
+        height: 1px;
+        background: var(--lab-line);
+      }
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: minmax(15rem, 0.75fr) minmax(22rem, 1fr) auto;
+      align-items: center;
+      gap: clamp(2rem, 5vw, 5rem);
+
+      h2 {
+        max-width: 9ch;
+        margin: 0;
+        font-size: clamp(2rem, 3.5vw, 3.6rem);
+        font-weight: 500;
+        letter-spacing: -0.045em;
+        line-height: 1;
+      }
+    }
+
+    &__label {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lab-accent);
+    }
+
+    &__copy {
+      padding-left: clamp(1.5rem, 3vw, 3rem);
+      border-left: 1px solid var(--lab-line);
+
+      p {
+        max-width: 48ch;
+        margin: 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        line-height: 1.45;
+        color: #d7dbd5;
+      }
+
+      span {
+        display: block;
+        max-width: 54ch;
+        margin-top: 0.45rem;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: var(--lab-muted);
+      }
+    }
+
+    &__actions {
+      display: grid;
+      justify-items: start;
+      gap: 0.75rem;
+    }
+
+    &__report {
+      min-height: 2.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.2rem 1rem;
+      border: 1px solid var(--lab-accent);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lab-ink);
+      text-decoration: none;
+      white-space: nowrap;
+      transition:
+        color 180ms ease,
+        background 180ms ease;
+
+      svg {
+        width: 0.95rem;
+        height: 0.95rem;
+        fill: none;
+        stroke: var(--lab-accent);
+        stroke-width: 1.5;
+        transition: transform 180ms ease;
+      }
+
+      &:hover {
+        background: var(--lab-accent);
+        color: #090a09;
+        text-decoration: none;
+
         svg {
-          color: var(--color-ledger-purple);
+          stroke: currentcolor;
+          transform: translateX(0.2rem);
         }
       }
     }
-    
-    &__icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--color-accent-glow);
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--space-4);
-      
-      svg {
-        width: 24px;
-        height: 24px;
-        color: var(--color-accent-primary);
+
+    &__honours {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lab-muted);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--lab-ink);
+        text-decoration: none;
       }
-    }
-    
-    h3 {
-      font-size: var(--text-lg);
-      margin-bottom: var(--space-2);
-      color: var(--color-text-primary);
-    }
-    
-    p {
-      font-size: var(--text-sm);
-      color: var(--color-text-secondary);
-      margin: 0;
-      line-height: var(--leading-relaxed);
     }
   }
-  
-  .blog-highlights {
-    padding: var(--space-20) 0;
-    background: var(--color-bg-secondary);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
 
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
+  .hero__brand-mark {
+    width: min(100%, 28rem);
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    animation: brand-enter 850ms 120ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
 
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
+    img {
+      display: block;
+      width: clamp(11rem, 21vw, 16rem);
+      height: auto;
+      border-radius: 0;
+    }
+  }
+
+  .section {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    scroll-margin-top: var(--header-height, 72px);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.45fr);
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: clamp(2.5rem, 4vw, 3.75rem);
+
+    h2 {
+      margin: 0;
+      font-size: clamp(3rem, 6.5vw, 7.5rem);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+
+    p {
+      max-width: 31rem;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--lab-muted);
+    }
+
+    &--solo {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &--log {
+      h2 {
+        font-size: clamp(3rem, 5.2vw, 6rem);
+      }
+    }
+  }
+
+  .archive {
+    background: var(--lab-bg);
+  }
+
+  .directory {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--lab-line);
+    list-style: none;
+
+    > li {
+      margin: 0;
+      border-bottom: 1px solid var(--lab-line);
+
+      &:nth-child(odd) {
+        border-right: 1px solid var(--lab-line);
+      }
+    }
+  }
+
+  .case-file {
+    position: relative;
+    min-height: 17.5rem;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    gap: 0 1.5rem;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    transition: background 250ms ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: var(--lab-accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 250ms ease;
+    }
+
+    &:hover {
+      background: #0e120f;
+      color: inherit;
+      text-decoration: none;
+
+      &::before {
+        transform: scaleY(1);
       }
 
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr;
+      .case-file__open svg {
+        transform: translateX(0.3rem);
       }
     }
 
-    &__fallback {
-      padding: var(--space-6);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-      background: var(--color-bg-primary);
-      color: var(--color-text-secondary);
+    &:focus-visible {
+      outline: 2px solid var(--lab-accent);
+      outline-offset: -2px;
     }
 
-    :global(.card__date) {
+    &__number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--lab-accent);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: clamp(2rem, 3.4vw, 3.8rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+    }
+
+    p {
+      max-width: 30rem;
+      margin: 1.25rem 0 0;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--lab-muted);
+    }
+
+    &__open {
+      grid-column: 2;
       display: inline-flex;
       align-items: center;
-      width: fit-content;
-      padding: var(--space-1) var(--space-2);
-      border-radius: var(--radius-full);
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-secondary);
-      border: 1px solid var(--color-border);
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lab-ink);
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+        fill: none;
+        stroke: var(--lab-accent);
+        stroke-width: 1.5;
+        transition: transform 180ms ease;
+      }
+    }
+  }
+
+  .field-log {
+    background: var(--lab-bg);
+  }
+
+  .logs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .log {
+    border-top: 2px solid var(--lab-accent);
+
+    &--bulletins {
+      border-top-color: #aab2aa;
+
+      .log__entries a {
+        grid-template-columns: 7rem 5rem minmax(0, 1fr);
+      }
     }
 
-    :global(.card__badge--violet) {
-      background: linear-gradient(135deg, var(--color-ledger-purple), #4f1b7a);
-      color: white;
-      box-shadow: 0 0 16px rgba(106, 55, 148, 0.6);
-      border: 1px solid rgba(106, 55, 148, 0.6);
-    }
-  }
-
-  .bulletins {
-    padding: var(--space-20) 0;
-    
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
-      
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
-  
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-8);
-    
-    h2 {
-      font-size: var(--text-3xl);
-    }
-    
-    @media (max-width: 640px) {
-      flex-direction: column;
-      gap: var(--space-4);
-      text-align: center;
-    }
-  }
-  
-  .section-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--color-accent-primary);
-    font-weight: 500;
-    
-    svg {
-      transition: transform var(--transition-fast);
-    }
-    
-    &:hover svg {
-      transform: translateX(4px);
-    }
-  }
-  
-  .cta {
-    padding: var(--space-16) 0;
-    
-    &__card {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: var(--space-12);
-      background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      text-align: center;
-      
-      h2 {
-        font-size: var(--text-3xl);
-        margin-bottom: var(--space-4);
-      }
-      
-      p {
-        font-size: var(--text-lg);
-        color: var(--color-text-secondary);
-        margin-bottom: var(--space-8);
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-    
-    &__actions {
+    &__header {
+      min-height: 6.5rem;
       display: flex;
-      gap: var(--space-4);
-      justify-content: center;
-      
-      @media (max-width: 480px) {
-        flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 1.25rem 0 2rem;
+      border-bottom: 1px solid var(--lab-line);
+
+      h3 {
+        margin: 0;
+        font-size: clamp(1.45rem, 2vw, 2rem);
+        font-weight: 500;
+        letter-spacing: -0.03em;
+      }
+    }
+
+    &__entries {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin: 0;
+        border-bottom: 1px solid var(--lab-line);
+      }
+
+      a {
+        display: grid;
+        grid-template-columns: 7rem minmax(0, 1fr);
+        gap: 1rem;
+        align-items: baseline;
+        min-height: 5.5rem;
+        padding: 1.25rem 0;
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          color: inherit;
+          text-decoration: none;
+          background: #111512;
+
+          .log__title {
+            color: var(--lab-accent);
+          }
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--lab-accent);
+          outline-offset: -2px;
+        }
+      }
+
+      time {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        color: var(--lab-dim);
+      }
+    }
+
+    &__ref {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      color: var(--lab-accent);
+    }
+
+    &__title {
+      max-width: 38rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #d6d9d4;
+      transition: color 180ms ease;
+    }
+
+    &__external {
+      margin-left: 0.35rem;
+      font-family: var(--font-mono);
+      color: var(--lab-dim);
+    }
+
+    &__empty {
+      margin: 0;
+      padding: 2rem 0;
+      color: var(--lab-muted);
+    }
+  }
+
+  .micro-link {
+    flex: 0 0 auto;
+    padding-top: 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lab-muted);
+    text-decoration: none;
+
+    span {
+      color: var(--lab-accent);
+    }
+
+    &:hover {
+      color: var(--lab-ink);
+      text-decoration: none;
+    }
+  }
+
+  @keyframes brand-enter {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .hero {
+      &__grid {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 0.72fr);
+        gap: 3rem;
+      }
+
+      &__title {
+        font-size: clamp(4rem, 7.7vw, 6.5rem);
+      }
+    }
+
+    .disclose {
+      &__content {
+        grid-template-columns: minmax(13rem, 0.55fr) minmax(0, 1fr);
+        gap: 1.25rem 2rem;
+      }
+
+      &__actions {
+        grid-column: 2;
+        display: flex;
+        align-items: center;
       }
     }
   }
-  
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+
+  @media (max-width: 900px) {
+    .hero {
+      &__grid {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+        gap: clamp(1.5rem, 4vw, 3rem);
+        padding-block: 3.25rem;
+      }
+
+      &__copy {
+        max-width: 760px;
+      }
+
+      &__title {
+        font-size: clamp(4rem, 13vw, 7.5rem);
+      }
+
+      &__lede {
+        max-width: 38rem;
+      }
+
+      &__rail-inner {
+        overflow-x: auto;
+      }
+    }
+
+    .hero__brand-mark {
+      display: grid;
+      width: auto;
+      justify-self: end;
+      place-items: end;
+      margin-top: -0.75rem;
+
+      img {
+        width: clamp(8rem, 20vw, 11rem);
+      }
+    }
+
+    .section-heading {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .section-heading p {
+      max-width: 40rem;
+    }
+
+    .case-file {
+      min-height: 16.5rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      &__grid {
+        padding-top: 2.75rem;
+      }
+
+      &__title {
+        font-size: clamp(3.45rem, 16vw, 5.6rem);
+        letter-spacing: -0.075em;
+      }
+
+      &__lede {
+        font-size: 1rem;
+      }
+
+      &__rail-inner {
+        min-height: 3.8rem;
+      }
+    }
+
+    .hero__brand-mark {
+      margin-top: -1rem;
+
+      img {
+        width: clamp(7rem, 30vw, 9rem);
+      }
+    }
+
+    .disclose {
+      &__content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+      }
+
+      &__copy {
+        padding-top: 1.25rem;
+        padding-left: 0;
+        border-top: 1px solid var(--lab-line);
+        border-left: 0;
+      }
+
+      &__actions {
+        grid-column: 1;
+      }
+    }
+
+    .section {
+      padding-block: 4rem;
+    }
+
+    .directory {
+      grid-template-columns: 1fr;
+
+      > li:nth-child(odd) {
+        border-right: 0;
+      }
+    }
+
+    .case-file {
+      min-height: 15.5rem;
+    }
+
+    .logs {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      &__actions {
+        align-items: stretch;
+      }
+    }
+
+    .disclose {
+      &__actions {
+        display: grid;
+        justify-items: stretch;
+      }
+
+      &__report {
+        width: 100%;
+      }
+    }
+
+    .case-file {
+      grid-template-columns: 2rem minmax(0, 1fr);
+      padding-inline: 0;
+
+      h3 {
+        font-size: 2rem;
+      }
+    }
+
+    .log {
+      &__header {
+        gap: 1rem;
+      }
+
+      &__entries a {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+      }
+
+      &--bulletins .log__entries a {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      &--bulletins .log__title {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__copy,
+    .hero__brand-mark {
+      animation: none;
+    }
   }
 </style>

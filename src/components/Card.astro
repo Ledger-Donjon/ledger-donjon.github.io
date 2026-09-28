@@ -58,16 +58,17 @@ const badgeItems = badges?.length
 
 <style lang="scss">
   .card {
-    background: var(--color-bg-secondary);
+    background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-top: 2px solid var(--color-accent-primary);
+    border-radius: 0;
     overflow: hidden;
     transition: all var(--transition-normal);
     
     &:hover {
       border-color: var(--color-border-hover);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-      transform: translateY(-2px);
+      border-top-color: var(--color-accent-primary);
+      background: var(--color-bg-hover);
     }
     
     &__link {
@@ -90,6 +91,7 @@ const badgeItems = badges?.length
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 0;
         transition: transform var(--transition-slow);
       }
     }
@@ -116,24 +118,27 @@ const badgeItems = badges?.length
       display: inline-block;
       width: fit-content;
       padding: var(--space-1) var(--space-3);
-      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--color-accent-primary);
       background: var(--color-accent-glow);
-      border-radius: var(--radius-full);
+      border-radius: 0;
     }
 
     &__badge--violet {
-      color: var(--color-ledger-purple);
-      background: rgba(106, 55, 148, 0.2);
-      box-shadow: 0 0 12px rgba(106, 55, 148, 0.35);
+      color: var(--color-text-secondary);
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border-hover);
+      box-shadow: none;
     }
     
     &__title {
-      font-size: var(--text-lg);
-      font-weight: 600;
+      font-size: var(--text-xl);
+      font-weight: 500;
+      letter-spacing: -0.025em;
       color: var(--color-text-primary);
       line-height: var(--leading-tight);
       margin: 0;
@@ -151,7 +156,9 @@ const badgeItems = badges?.length
     }
     
     &__date {
+      font-family: var(--font-mono);
       font-size: var(--text-xs);
+      letter-spacing: 0.04em;
       color: var(--color-text-tertiary);
     }
     

@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import DetailPageLayout from '../../components/DetailPageLayout.astro';
+import ArticleThemeToggle from '../../components/ArticleThemeToggle.astro';
+import DocumentOutline from '../../components/DocumentOutline.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -20,7 +23,7 @@ const resolveSocialImage = (img?: string) =>
   img && (/^https?:\/\//.test(img) ? img : withBase(img));
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -33,50 +36,45 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   title={entry.data.title}
   description={entry.data.excerpt}
   image={resolveSocialImage(entry.data.image)}
-  bodyClass="clean-bg"
+  enableArticleTheme
 >
-  <article class="blog-post">
-    <div class="container">
-      <nav class="blog-post__nav">
-        <a href={withBase('/blog/')} class="blog-post__back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          All posts
-        </a>
-      </nav>
+  <DetailPageLayout
+    title={entry.data.title}
+    backHref={withBase('/blog/')}
+    backLabel="All blog posts"
+  >
+    <ArticleThemeToggle slot="actions" />
 
-      <header class="blog-post__header">
-        <div class="blog-post__meta">
-          <time class="blog-post__date" datetime={entry.data.date.toISOString()}>
-            {formattedDate}
-          </time>
-          <span class="blog-post__separator" aria-hidden="true"></span>
-          <span class="blog-post__label">Donjon blog</span>
-        </div>
-        <h1 class="blog-post__title">{entry.data.title}</h1>
-        <p class="blog-post__excerpt" set:html={entry.data.excerpt} />
-      </header>
+    <Fragment slot="meta">
+      <time class="detail-meta__date" datetime={entry.data.date.toISOString()}>
+        {formattedDate}
+      </time>
+      <span class="detail-meta__separator" aria-hidden="true"></span>
+      <span>Donjon blog</span>
+    </Fragment>
 
-      <div class="blog-post__body prose">
-        <Content />
-      </div>
+    <Fragment slot="lede">
+      <p set:html={entry.data.excerpt} />
+    </Fragment>
 
-      <footer class="blog-post__footer">
-        <a href={withBase('/blog/')} class="blog-post__back-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Back to blog
-        </a>
-      </footer>
-    </div>
-  </article>
+    <DocumentOutline slot="outline" headings={headings} />
+
+    <Content />
+
+    <Fragment slot="footer">
+      <a href={withBase('/blog/')} class="detail-action">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M16 10H5M9 6l-4 4 4 4" />
+        </svg>
+        All blog posts
+      </a>
+    </Fragment>
+  </DetailPageLayout>
 </Base>
 
 <script>
   // Abstract section wrapper
-  const prose = document.querySelector('.prose');
+  const prose = document.querySelector('.detail-page__body.prose');
   if (prose) {
     const headings = prose.querySelectorAll('h2');
     for (const h2 of headings) {
@@ -92,122 +90,3 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     }
   }
 </script>
-
-<style lang="scss">
-  .blog-post {
-    padding: var(--space-7) 0 var(--space-14);
-  }
-
-  .blog-post__nav {
-    max-width: var(--max-width-prose);
-    margin-inline: auto;
-    margin-bottom: var(--space-6);
-  }
-
-  .blog-post__back {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text-tertiary);
-    transition: color var(--transition-fast);
-
-    &:hover {
-      color: var(--color-accent-primary);
-      text-decoration: none;
-    }
-  }
-
-  .blog-post__header {
-    max-width: var(--max-width-prose);
-    margin-inline: auto;
-    margin-bottom: var(--space-7);
-    padding-bottom: var(--space-5);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .blog-post__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .blog-post__date {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-accent-primary);
-  }
-
-  .blog-post__separator {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--color-text-tertiary);
-  }
-
-  .blog-post__label {
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .blog-post__title {
-    font-size: var(--text-5xl);
-    line-height: 1.15;
-    margin-bottom: var(--space-4);
-    letter-spacing: -0.02em;
-
-    @media (max-width: 768px) {
-      font-size: var(--text-3xl);
-    }
-  }
-
-  .blog-post__excerpt {
-    font-size: var(--text-xl);
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-    margin: 0;
-
-    :global(mark) {
-      background: transparent;
-      color: var(--color-accent-primary);
-      font-weight: 600;
-    }
-  }
-
-  .blog-post__body {
-    max-width: var(--max-width-prose);
-  }
-
-  .blog-post__footer {
-    max-width: var(--max-width-prose);
-    margin-inline: auto;
-    margin-top: var(--space-8);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .blog-post__back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-5);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-fast);
-
-    &:hover {
-      color: var(--color-accent-primary);
-      border-color: var(--color-accent-primary);
-      text-decoration: none;
-    }
-  }
-</style>
