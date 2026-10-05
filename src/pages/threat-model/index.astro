@@ -64,7 +64,7 @@ const securityMechanisms = [
       </ResourceOverview>
       
       <section class="resource-section">
-        <ResourceSectionHeader number="01" label="Objectives" title="Security objectives">
+        <ResourceSectionHeader title="Security objectives">
           <p>
             The main security objective of Ledger signers is to provide physical and logical
             security to users' funds.
@@ -73,31 +73,26 @@ const securityMechanisms = [
         
         <div class="objectives-grid">
           <div class="objective-card">
-            <div class="objective-card__number">1</div>
             <h3>Seed & Key Confidentiality</h3>
             <p>Guarantee the confidentiality of user seeds and private keys.</p>
           </div>
           
           <div class="objective-card">
-            <div class="objective-card__number">2</div>
             <h3>User Consent</h3>
             <p>Ensure the use of digital assets is performed under user consent, preventing attackers from misleading users.</p>
           </div>
           
           <div class="objective-card">
-            <div class="objective-card__number">3</div>
             <h3>Genuineness</h3>
             <p>Provide a mechanism allowing users to verify that their device is genuine.</p>
           </div>
           
           <div class="objective-card">
-            <div class="objective-card__number">4</div>
             <h3>Privacy</h3>
             <p>Protect users' privacy and prevent unique identification of users.</p>
           </div>
           
           <div class="objective-card">
-            <div class="objective-card__number">5</div>
             <h3>Firmware Protection</h3>
             <p>Protect the confidentiality of the firmware and the IP of the Secure Element.</p>
           </div>
@@ -105,7 +100,7 @@ const securityMechanisms = [
       </section>
       
       <section class="resource-section">
-        <ResourceSectionHeader number="02" label="System model" title="Definitions">
+        <ResourceSectionHeader title="Definitions">
           <p>
             The roles, components, and trust boundaries used throughout the Ledger signer threat model.
           </p>
@@ -154,7 +149,7 @@ const securityMechanisms = [
       </section>
       
       <section class="resource-section" id="security-mechanisms">
-        <ResourceSectionHeader number="03" label="Mechanisms" title="Security mechanisms">
+        <ResourceSectionHeader title="Security mechanisms">
           <p>
             Several security mechanisms are implemented at different levels. Select a mechanism to
             learn how it supports the security objectives.
@@ -222,14 +217,16 @@ const securityMechanisms = [
     }
   }
   
-  .objectives-grid {
+  .objectives-grid,
+  .roles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--space-4);
     margin-top: var(--space-6);
   }
   
-  .objective-card {
+  .objective-card,
+  .role-card {
     padding: var(--space-5);
     background: transparent;
     border: 1px solid var(--color-border);
@@ -243,51 +240,17 @@ const securityMechanisms = [
       border-top-color: var(--color-accent-primary);
     }
     
-    &__number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      font-size: var(--text-sm);
-      font-weight: 700;
-      font-family: var(--font-mono);
-      color: var(--color-accent-primary);
-      background: transparent;
-      border-radius: 0;
-      margin-bottom: var(--space-3);
-    }
-    
-    h3 {
-      font-size: var(--text-base);
-      margin: 0 0 var(--space-2);
-      color: var(--color-text-primary);
-    }
-    
-    p {
-      font-size: var(--text-sm);
-      color: var(--color-text-tertiary);
-      margin: 0;
-    }
-  }
-  
-  .roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-4);
-    margin-top: var(--space-4);
-  }
-  
-  .role-card {
-    padding: var(--space-4);
-    background: transparent;
-    border: 1px solid var(--color-border);
-    border-top: 2px solid var(--color-accent-primary);
-    border-radius: 0;
-    
+    h3,
     h4 {
-      font-size: var(--text-sm);
-      margin-bottom: var(--space-1);
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 0 var(--space-2);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-primary);
     }
     
     p {

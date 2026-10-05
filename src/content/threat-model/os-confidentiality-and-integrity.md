@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Confidentiality and Integrity
+title: Confidentiality and Integrity
 ---
 
 The confidentiality and integrity of the OS are also important mostly for IP (Intellectual Property) reasons. Using a Secure Element, Ledger must protect the IP of the Secure Element vendor, some parts being under NDA (Non-Disclosure Agreement).

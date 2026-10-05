@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - App Isolation
+title: App Isolation
 ---
 
 One of the main features of Ledger signers is that anyone can load its own app on the Secure Element. Each app is isolated from each other thanks to BOLOS, the Operating System. That essentially means that:

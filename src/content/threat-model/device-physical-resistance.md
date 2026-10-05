@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Physical Resistance
+title: Physical Resistance
 ---
 
 Once an attacker gains physical access to a device (for instance by stealing it), a wide range of attacks become possible. It is thus important to build protections to prevent access to the device secrets. For instance, the number of PIN tries should be limited, otherwise an attacker could try every combination possible. That’s why hardware wallets usually wipe the device memory after a low threshold is reached.

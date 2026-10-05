@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Confidentiality of Seed and Private Keys
+title: Confidentiality of Seed and Private Keys
 ---
 
 Even if the device is genuine and the random generator of high quality, a hardware wallet which stores its seed unencrypted on an SD card cannot be considered as secure because the seed can be retrieved trivially.
