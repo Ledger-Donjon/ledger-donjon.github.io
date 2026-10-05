@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Random Number Generation
+title: Random Number Generation
 ---
 
 One of the main security features of Ledger signers is the capability to generate high quality randomness. The master seed, which is generated from random numbers during the setup of a wallet, is used to derive almost every secret of a wallet. Having a low quality randomness has terrible consequences because it allows attackers, in the worst case, to recreate the seed without any specific knowledge. For instance, some [Android wallets were cleared out](https://bitcoinmagazine.com/articles/critical-vulnerability-found-in-android-wallets-1376273924) in 2013 because of a bug in the random generator of Android itself. It is thus especially important to guarantee a high quality randomness.

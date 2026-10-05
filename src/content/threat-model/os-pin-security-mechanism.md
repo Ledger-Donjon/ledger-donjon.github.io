@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - PIN Security Mechanism
+title: PIN Security Mechanism
 ---
 
 An attacker with a physical access to a device (e.g. stolen device) might get a full control over the device, meaning that sensitive operations can be processed.

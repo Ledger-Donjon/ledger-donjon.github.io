@@ -1,18 +1,13 @@
 ---
-import SectionLabel from './SectionLabel.astro';
 
 interface Props {
-  number: string;
-  label: string;
   title: string;
 }
 
-const { number, label, title } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <header class="resource-heading">
-  <SectionLabel number={number} label={label} />
-
   <div class="resource-heading__content">
     <h2>{title}</h2>
     <div class="resource-heading__description">

@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Genuineness
+title: Genuineness
 ---
 
 The ability to prove the genuineness of the device's secure element is one of the main security features, from both hardware and firmware points of view. The hardware wallet must include a secure mechanism for this, and it is of utmost importance. Otherwise, an attacker could replace a genuine device with a fake, backdoored one (through supply chain or evil maid attacks, for instance). In this case, they would be able to access the crypto assets afterward.

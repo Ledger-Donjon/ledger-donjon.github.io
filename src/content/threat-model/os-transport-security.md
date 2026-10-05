@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Transport Security
+title: Transport Security
 ---
 
 USB is the standard way to communicate with Ledger signers while the Ledger Nano X, Nano Gen5, Stax and Flex also feature Bluetooth Low Energy (BLE) connectivity.

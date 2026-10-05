@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - User Consent
+title: User Consent
 ---
 
 The device security design is strengthened by the end user. As soon as a

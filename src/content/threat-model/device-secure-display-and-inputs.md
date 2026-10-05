@@ -1,6 +1,6 @@
 ---
 layout: threat-model
-title: Threat Model - Secure Display and Inputs
+title: Secure Display and Inputs
 ---
 
 Smartphones and personal computers aren't designed to provide a high level of security. If an attacker gains access to the system, there is no way to tell whether what's displayed on the screen is actually modified by a malware. Users cannot also prevent keystrokes from being recorded or injected.
