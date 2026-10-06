@@ -5,8 +5,7 @@ on:
     types: [opened, synchronize, reopened, closed]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: pr-preview-${{ github.ref }}

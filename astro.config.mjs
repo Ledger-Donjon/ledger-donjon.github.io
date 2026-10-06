@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { legacyRedirects } from './src/data/legacy-redirects.ts';
 
 // Support PR preview deployments with custom base path.
 const base = process.env.PREVIEW_BASE || '/';
@@ -31,7 +32,7 @@ const prefixMarkdownBase = () => (tree) => {
     if ((node?.type === 'raw' || node?.type === 'html') && typeof node.value === 'string') {
       node.value = node.value.replace(
         /\b(src|href)=("|')(\/[^"']*)\2/g,
-        (match, attr, quote, url) => `${attr}=${quote}${withBase(url)}${quote}`
+        (_match, attr, quote, url) => `${attr}=${quote}${withBase(url)}${quote}`
       );
     }
     if (node?.children?.length) {
@@ -43,6 +44,8 @@ const prefixMarkdownBase = () => (tree) => {
 
 // Wrap standalone images that have alt text into <figure>/<figcaption>.
 // Targets the common Markdown pattern: <p><img alt="caption" src="…"></p>
+// The caption repeats the alt text, so it is hidden from assistive technology
+// to avoid it being announced twice.
 const rehypeImageFigure = () => (tree) => {
   const walk = (node) => {
     if (node?.children) {
@@ -67,7 +70,7 @@ const rehypeImageFigure = () => (tree) => {
                 {
                   type: 'element',
                   tagName: 'figcaption',
-                  properties: {},
+                  properties: { ariaHidden: 'true' },
                   children: [{ type: 'text', value: alt }],
                 },
               ],
@@ -100,6 +103,12 @@ const rehypeHexCode = () => (tree) => {
   walk(tree);
 };
 
+// Legacy redirect stubs are noindex, so keep them out of the sitemap.
+const redirectPaths = new Set(
+  legacyRedirects.map(({ from }) => `${base}${from.replace(/^\/+/, '')}/`)
+);
+const isNotRedirect = (page) => !redirectPaths.has(new URL(page).pathname);
+
 // https://astro.build/config
 export default defineConfig({
   site: site,
@@ -110,7 +119,7 @@ export default defineConfig({
       entrypoint: 'astro/assets/services/noop'
     }
   },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: isNotRedirect })],
   build: {
     assets: '_astro'
   },

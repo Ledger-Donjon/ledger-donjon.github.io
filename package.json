@@ -10,6 +10,7 @@
     "prebuild": "node scripts/fetch-donjon-blog.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
     "astro": "astro"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "esbuild": "^0.28.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "sass": "^1.83.0",
     "typescript": "^5.7.0"
   },

@@ -3,16 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import ResourceOverview from '../../components/ResourceOverview.astro';
 import ResourceSectionHeader from '../../components/ResourceSectionHeader.astro';
-import { getCollection } from 'astro:content';
+import { withBase } from '../../lib/url';
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
-const allPages = await getCollection('threat-model');
-
-// Organize pages by category
-const devicePages = allPages.filter(p => p.id.startsWith('device-'));
-const osPages = allPages.filter(p => p.id.startsWith('os-'));
-const appPages = allPages.filter(p => p.id.startsWith('app-'));
 
 const securityMechanisms = [
   {

@@ -1,6 +1,5 @@
 ---
-const base = import.meta.env.BASE_URL;
-const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+import { withBase } from '../lib/url';
 
 const navigation = [
   { name: 'Bounty', href: withBase('/bounty/') },
@@ -13,21 +12,24 @@ const navigation = [
 ];
 
 const currentPath = Astro.url.pathname;
+const ariaCurrent = (href: string) =>
+  currentPath === href ? 'page' : currentPath.startsWith(href) ? 'true' : undefined;
 ---
 
 <header class="header">
   <div class="header__container">
-    <a href={base} class="header__logo" aria-label="Ledger Donjon Home">
+    <a href={withBase('/')} class="header__logo" aria-label="Ledger Donjon Home">
       <img src={withBase('/ledgerdonjon_banner.png')} alt="Ledger Donjon" class="header__logo-img" />
     </a>
     
-    <nav class="header__nav" aria-label="Main navigation">
+    <nav id="main-navigation" class="header__nav" aria-label="Main navigation">
       <ul class="header__nav-list">
         {navigation.map((item) => (
           <li>
             <a 
               href={item.href} 
               class:list={['header__nav-link', { 'is-active': currentPath.startsWith(item.href) }]}
+              aria-current={ariaCurrent(item.href)}
             >
               {item.name}
             </a>
@@ -36,7 +38,13 @@ const currentPath = Astro.url.pathname;
       </ul>
     </nav>
     
-    <button class="header__toggle" aria-label="Toggle menu" aria-expanded="false">
+    <button
+      class="header__toggle"
+      type="button"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -80,7 +88,7 @@ const currentPath = Astro.url.pathname;
     &__nav {
       @media (max-width: 960px) {
         position: fixed;
-        top: var(--header-height, 66px);
+        top: var(--header-height);
         left: 0;
         right: 0;
         bottom: 0;
@@ -280,12 +288,22 @@ const currentPath = Astro.url.pathname;
 </script>
 
 <script>
-  const toggle = document.querySelector('.header__toggle');
+  const toggle = document.querySelector<HTMLButtonElement>('.header__toggle');
   const nav = document.querySelector('.header__nav');
-  
-  toggle?.addEventListener('click', () => {
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', (!isExpanded).toString());
-    nav?.classList.toggle('is-open');
+
+  const isOpen = () => toggle?.getAttribute('aria-expanded') === 'true';
+
+  const setOpen = (open: boolean) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    nav?.classList.toggle('is-open', open);
+  };
+
+  toggle?.addEventListener('click', () => setOpen(!isOpen()));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen()) {
+      setOpen(false);
+      toggle?.focus();
+    }
   });
 </script>

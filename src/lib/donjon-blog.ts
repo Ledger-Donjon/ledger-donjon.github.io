@@ -1,6 +1,8 @@
 import { getCollection } from 'astro:content';
 import hiddenData from '../data/donjon-blog-hidden.json';
 import externalArticlesData from '../data/donjon-blog.json';
+import { filterVisibleDonjonBlogArticles, toHiddenDonjonBlogUrls } from './donjon-blog-hidden.mjs';
+import { withBase } from './url';
 
 export type DonjonBlogArticle = {
   title: string;
@@ -19,8 +21,6 @@ export type DonjonBlogListItem = {
   slug?: string;
 };
 
-type HiddenEntry = string | { url: string; note?: string };
-
 const toIsoDate = (value: Date | string | null | undefined): string | null => {
   if (!value) return null;
   const parsed = value instanceof Date ? value : new Date(value);
@@ -34,31 +34,10 @@ const parseListDate = (value: string | null): number => {
   return Number.isNaN(parsed) ? 0 : parsed;
 };
 
-export const normalizeDonjonBlogUrl = (url: string): string =>
-  url.replace(/\/$/, '').trim().toLowerCase();
-
-export const getHiddenDonjonBlogUrls = (): Set<string> => {
-  const entries = (Array.isArray(hiddenData) ? hiddenData : []) as HiddenEntry[];
-  return new Set(
-    entries
-      .map((entry) => (typeof entry === 'string' ? entry : entry?.url))
-      .filter((url): url is string => Boolean(url))
-      .map(normalizeDonjonBlogUrl),
-  );
-};
-
-/** Corporate blog articles (excludes entries in donjon-blog-hidden.json). */
-export const filterVisibleDonjonBlogArticles = <T extends { url: string }>(
-  articles: T[],
-): T[] => {
-  const hidden = getHiddenDonjonBlogUrls();
-  if (hidden.size === 0) return articles;
-  return articles.filter((article) => !hidden.has(normalizeDonjonBlogUrl(article.url)));
-};
-
 export const getExternalDonjonBlogPosts = (): DonjonBlogListItem[] => {
   const articles = Array.isArray(externalArticlesData) ? externalArticlesData : [];
-  return filterVisibleDonjonBlogArticles(articles).map((article) => ({
+  const hiddenUrls = toHiddenDonjonBlogUrls(hiddenData);
+  return filterVisibleDonjonBlogArticles(articles, hiddenUrls).map((article) => ({
     title: article.title,
     date: toIsoDate(article.date ?? null),
     excerpt: article.excerpt ?? '',
@@ -68,16 +47,14 @@ export const getExternalDonjonBlogPosts = (): DonjonBlogListItem[] => {
   }));
 };
 
-export const getLocalDonjonBlogPosts = async (
-  withBase: (path: string) => string,
-): Promise<DonjonBlogListItem[]> => {
+export const getLocalDonjonBlogPosts = async (): Promise<DonjonBlogListItem[]> => {
   const entries = await getCollection('blog');
   const includeDrafts = !import.meta.env.PROD;
 
   return entries
     .filter((entry) => includeDrafts || !entry.data.draft)
     .map((entry) => {
-      const slug = entry.id.replace(/\.md$/, '');
+      const slug = entry.id;
       return {
         title: entry.data.title,
         date: toIsoDate(entry.data.date),
@@ -90,10 +67,8 @@ export const getLocalDonjonBlogPosts = async (
     });
 };
 
-export const getMergedDonjonBlogArticles = async (
-  withBase: (path: string) => string,
-): Promise<DonjonBlogListItem[]> => {
-  const local = await getLocalDonjonBlogPosts(withBase);
+export const getMergedDonjonBlogArticles = async (): Promise<DonjonBlogListItem[]> => {
+  const local = await getLocalDonjonBlogPosts();
   const external = getExternalDonjonBlogPosts();
   const merged = [...local, ...external];
 

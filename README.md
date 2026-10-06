@@ -6,7 +6,7 @@ The official website for **Ledger Donjon**, the security research team at Ledger
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build/) v5
+- **Framework**: [Astro](https://astro.build/) v6
 - **Styling**: SCSS with CSS Custom Properties
 - **Hosting**: GitHub Pages
 - **Deployment**: GitHub Actions
@@ -32,6 +32,9 @@ npm run build
 
 # Preview production build
 npm run preview
+
+# Type-check the project (also runs in CI)
+npm run check
 ```
 
 The development server runs at `http://localhost:4321`.

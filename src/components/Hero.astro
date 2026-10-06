@@ -9,7 +9,7 @@ const { title, subtitle, size = 'lg' } = Astro.props;
 ---
 
 <section class:list={['hero', `hero--${size}`]}>
-  <div class="hero__container">
+  <div class="container hero__container">
     <div class="hero__content">
       <h1 class="hero__title">{title}</h1>
       {subtitle && <p class="hero__subtitle">{subtitle}</p>}
@@ -33,15 +33,8 @@ const { title, subtitle, size = 'lg' } = Astro.props;
     }
     
     &__container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--space-6);
       position: relative;
       z-index: 1;
-
-      @media (max-width: 720px) {
-        padding-inline: var(--space-4);
-      }
     }
 
     &__content {

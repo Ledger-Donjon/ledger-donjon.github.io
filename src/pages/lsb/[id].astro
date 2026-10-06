@@ -2,28 +2,23 @@
 import Base from '../../layouts/Base.astro';
 import DetailPageLayout from '../../components/DetailPageLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/url';
 
 export async function getStaticPaths() {
   const bulletins = await getCollection('lsb');
   return bulletins.map((bulletin) => ({
-    params: { id: bulletin.id.replace('.md', '') },
+    params: { id: bulletin.id },
     props: { bulletin },
   }));
 }
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const { bulletin } = Astro.props;
 const { Content } = await render(bulletin);
-const id = bulletin.id.replace('.md', '');
+const { id } = bulletin;
 
 // Get adjacent bulletins for navigation
 const allBulletins = await getCollection('lsb');
-const sortedBulletins = allBulletins.sort((a, b) => {
-  const numA = parseInt(a.id.replace('.md', ''));
-  const numB = parseInt(b.id.replace('.md', ''));
-  return numA - numB;
-});
+const sortedBulletins = allBulletins.sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10));
 
 const currentIndex = sortedBulletins.findIndex(b => b.id === bulletin.id);
 const prevBulletin = currentIndex > 0 ? sortedBulletins[currentIndex - 1] : null;
@@ -55,7 +50,7 @@ const nextBulletin = currentIndex < sortedBulletins.length - 1 ? sortedBulletins
       <nav class="detail-pager" aria-label="Security bulletin navigation">
         {prevBulletin && (
           <a
-            href={withBase(`/lsb/${prevBulletin.id.replace('.md', '')}/`)}
+            href={withBase(`/lsb/${prevBulletin.id}/`)}
             class="detail-pager__link"
           >
             <span class="detail-pager__label">
@@ -64,12 +59,12 @@ const nextBulletin = currentIndex < sortedBulletins.length - 1 ? sortedBulletins
               </svg>
               Previous
             </span>
-            <span class="detail-pager__title">LSB {prevBulletin.id.replace('.md', '')}</span>
+            <span class="detail-pager__title">LSB {prevBulletin.id}</span>
           </a>
         )}
         {nextBulletin && (
           <a
-            href={withBase(`/lsb/${nextBulletin.id.replace('.md', '')}/`)}
+            href={withBase(`/lsb/${nextBulletin.id}/`)}
             class="detail-pager__link detail-pager__link--next"
           >
             <span class="detail-pager__label">
@@ -78,7 +73,7 @@ const nextBulletin = currentIndex < sortedBulletins.length - 1 ? sortedBulletins
                 <path d="M4 10h11M11 6l4 4-4 4" />
               </svg>
             </span>
-            <span class="detail-pager__title">LSB {nextBulletin.id.replace('.md', '')}</span>
+            <span class="detail-pager__title">LSB {nextBulletin.id}</span>
           </a>
         )}
       </nav>

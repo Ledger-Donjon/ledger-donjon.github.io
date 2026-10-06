@@ -4,13 +4,11 @@ import Hero from '../../components/Hero.astro';
 import ResourceOverview from '../../components/ResourceOverview.astro';
 import ResourceSectionHeader from '../../components/ResourceSectionHeader.astro';
 import { getMergedDonjonBlogArticles } from '../../lib/donjon-blog';
+import { withBase } from '../../lib/url';
 
 const categoryUrl = 'https://www.ledger.com/blog/category/donjon';
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => `${base}${path.replace(/^\/+/, '')}`;
-
-const articles = await getMergedDonjonBlogArticles(withBase);
+const articles = await getMergedDonjonBlogArticles();
 const recentCutoffMs = 90 * 24 * 60 * 60 * 1000;
 
 const parseDate = (value: string | null) => {
@@ -67,15 +65,15 @@ const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
         </ResourceSectionHeader>
 
         <div class="content__header">
-          <a class="content__rss" href={withBase('/blog/rss.xml')}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
+          <a class="action action--solid" href={withBase('/blog/rss.xml')}>
+            <svg class="action__icon--lead" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M4 11a9 9 0 0 1 9 9" />
               <path d="M4 4a16 16 0 0 1 16 16" />
               <circle cx="5" cy="19" r="1" fill="currentColor" stroke="none" />
             </svg>
             Subscribe (RSS)
           </a>
-          <a class="content__cta" href={categoryUrl} target="_blank" rel="noopener noreferrer">
+          <a class="action action--line" href={categoryUrl} target="_blank" rel="noopener noreferrer">
             Ledger corporate blog
             <svg viewBox="0 0 20 20" aria-hidden="true">
               <path d="M4 16L16 4M8 4h8v8" />
@@ -154,78 +152,6 @@ const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: flex-start;
-    }
-  }
-
-  .content__rss {
-    min-height: 3rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-3);
-    padding: 0.25rem var(--space-5);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: var(--text-xs);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-bg-primary);
-    background: var(--color-accent-primary);
-    border: 1px solid var(--color-accent-primary);
-    border-radius: 0;
-    text-decoration: none;
-    transition: all var(--transition-fast);
-    box-shadow: none;
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-      fill: none;
-      stroke: currentcolor;
-      stroke-width: 1.5;
-    }
-
-    &:hover {
-      background: var(--color-ledger-orange-hover);
-      box-shadow: none;
-      text-decoration: none;
-      color: var(--color-bg-primary);
-    }
-  }
-
-  .content__cta {
-    min-height: 3rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-3);
-    padding: 0.25rem var(--space-5);
-    border: 1px solid var(--color-border);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    font-weight: 500;
-    text-decoration: none;
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-      fill: none;
-      stroke: var(--color-accent-primary);
-      stroke-width: 1.5;
-      transition: transform var(--transition-fast);
-    }
-
-    &:hover {
-      color: var(--color-text-primary);
-      border-color: var(--color-accent-primary);
-      text-decoration: none;
-    }
-
-    &:hover svg {
-      transform: translateX(4px);
     }
   }
 

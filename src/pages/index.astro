@@ -2,9 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { getMergedDonjonBlogArticles } from '../lib/donjon-blog';
-
-const base = import.meta.env.BASE_URL;
-const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
+import { withBase } from '../lib/url';
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
@@ -13,14 +11,14 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   timeZone: 'UTC',
 });
 
-const formatDate = (date) => {
+const formatDate = (date: Date) => {
   const parts = Object.fromEntries(
     dateFormatter.formatToParts(date).map((part) => [part.type, part.value]),
   );
   return `${parts.day} ${parts.month.replace('.', '').slice(0, 3)} ${parts.year}`;
 };
 
-const parseBulletinDate = (body) => {
+const parseBulletinDate = (body: string) => {
   const firstLine = body
     .split('\n')
     .map((line) => line.trim())
@@ -35,7 +33,7 @@ const parseBulletinDate = (body) => {
 
 const latestBulletins = (await getCollection('lsb'))
   .map((bulletin) => {
-    const number = bulletin.id.replace('.md', '');
+    const number = bulletin.id;
     return {
       ref: `LSB ${number}`,
       title: bulletin.data.summary || bulletin.data.title,
@@ -47,7 +45,7 @@ const latestBulletins = (await getCollection('lsb'))
   .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0) || b.number - a.number)
   .slice(0, 5);
 
-const latestArticles = (await getMergedDonjonBlogArticles(withBase))
+const latestArticles = (await getMergedDonjonBlogArticles())
   .map((article) => ({
     title: article.title,
     href: article.href,
@@ -90,7 +88,7 @@ const directory = [
 >
   <div class="lab-page">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="shell hero__grid">
+      <div class="container hero__grid">
         <div class="hero__copy">
           <h1 id="hero-title" class="hero__title">
             <span class="hero__donjon">Donjon</span><br />
@@ -124,7 +122,7 @@ const directory = [
       </div>
 
       <aside class="disclose" aria-labelledby="disclose-title">
-        <div class="shell disclose__inner">
+        <div class="container disclose__inner">
           <div class="disclose__content">
             <h2 id="disclose-title">Found a vulnerability?</h2>
 
@@ -136,7 +134,7 @@ const directory = [
             </div>
 
             <div class="disclose__actions">
-              <a class="disclose__report" href={withBase('/bounty/')}>
+              <a class="action action--outline disclose__report" href={withBase('/bounty/')}>
                 Report a vulnerability
                 <svg viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M4 10h11M11 6l4 4-4 4" />
@@ -149,7 +147,7 @@ const directory = [
       </aside>
 
       <div class="hero__rail">
-        <div class="shell hero__rail-inner">
+        <div class="container hero__rail-inner">
           <a href="#work" class="hero__scroll">
             Discover our work
             <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -161,7 +159,7 @@ const directory = [
     </section>
 
     <section id="work" class="section archive">
-      <div class="shell">
+      <div class="container">
         <div class="section-heading section-heading--solo">
           <h2>Discover our work</h2>
         </div>
@@ -188,7 +186,7 @@ const directory = [
     </section>
 
     <section class="section field-log">
-      <div class="shell">
+      <div class="container">
         <div class="section-heading section-heading--solo section-heading--log">
           <h2>Latest Publications</h2>
         </div>
@@ -257,36 +255,18 @@ const directory = [
 
 <style lang="scss">
   .lab-page {
-    --lab-bg: #080a09;
-    --lab-surface: #0d100e;
-    --lab-ink: #f1f1e9;
-    --lab-muted: #9ba19b;
-    --lab-dim: #858b85;
-    --lab-line: #292e2a;
-    --lab-accent: #ff6138;
     overflow: hidden;
-    background: var(--lab-bg);
-    color: var(--lab-ink);
-  }
-
-  .shell {
-    width: 100%;
-    max-width: var(--max-width);
-    margin-inline: auto;
-    padding-inline: var(--space-6);
-
-    @media (max-width: 720px) {
-      padding-inline: 1rem;
-    }
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
   }
 
   .hero {
     position: relative;
-    min-height: calc(100vh - var(--header-height, 72px));
-    min-height: calc(100svh - var(--header-height, 72px));
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
-    background: var(--lab-bg);
+    background: var(--color-bg-primary);
 
     &__grid {
       position: relative;
@@ -313,14 +293,14 @@ const directory = [
       letter-spacing: -0.07em;
       line-height: 0.88;
       text-wrap: balance;
-      color: var(--lab-ink);
+      color: var(--color-text-primary);
 
       .hero__donjon {
-        color: var(--lab-accent);
+        color: var(--color-accent-primary);
       }
 
       .hero__ledger {
-        color: var(--lab-ink);
+        color: var(--color-text-primary);
       }
     }
 
@@ -343,7 +323,7 @@ const directory = [
     &__rail {
       position: relative;
       z-index: 2;
-      background: var(--lab-bg);
+      background: var(--color-bg-primary);
     }
 
     &__rail-inner {
@@ -362,18 +342,18 @@ const directory = [
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--lab-muted);
+      color: var(--color-text-secondary);
       text-decoration: none;
 
       svg {
         width: 1rem;
         height: 1rem;
-        stroke: var(--lab-accent);
+        stroke: var(--color-accent-primary);
         stroke-width: 1.5;
       }
 
       &:hover {
-        color: var(--lab-ink);
+        color: var(--color-text-primary);
         text-decoration: none;
       }
     }
@@ -382,7 +362,7 @@ const directory = [
   .disclose {
     position: relative;
     z-index: 2;
-    background: var(--lab-bg);
+    background: var(--color-bg-primary);
 
     &__inner {
       padding-block: clamp(1.75rem, 3vw, 3rem);
@@ -406,7 +386,7 @@ const directory = [
 
     &__copy {
       padding-left: clamp(1.5rem, 3vw, 3rem);
-      border-left: 1px solid var(--lab-line);
+      border-left: 1px solid var(--color-border);
 
       p {
         max-width: 48ch;
@@ -414,16 +394,7 @@ const directory = [
         font-size: 0.9rem;
         font-weight: 500;
         line-height: 1.45;
-        color: #d7dbd5;
-      }
-
-      span {
-        display: block;
-        max-width: 54ch;
-        margin-top: 0.45rem;
-        font-size: 0.8rem;
-        line-height: 1.5;
-        color: var(--lab-muted);
+        color: var(--color-text-lede);
       }
     }
 
@@ -434,44 +405,7 @@ const directory = [
     }
 
     &__report {
-      min-height: 2.8rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 0.2rem 1rem;
-      border: 1px solid var(--lab-accent);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--lab-ink);
-      text-decoration: none;
       white-space: nowrap;
-      transition:
-        color 180ms ease,
-        background 180ms ease;
-
-      svg {
-        width: 0.95rem;
-        height: 0.95rem;
-        fill: none;
-        stroke: var(--lab-accent);
-        stroke-width: 1.5;
-        transition: transform 180ms ease;
-      }
-
-      &:hover {
-        background: var(--lab-accent);
-        color: #090a09;
-        text-decoration: none;
-
-        svg {
-          stroke: currentcolor;
-          transform: translateX(0.2rem);
-        }
-      }
     }
 
     &__honours {
@@ -479,11 +413,11 @@ const directory = [
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--lab-muted);
+      color: var(--color-text-secondary);
       text-decoration: none;
 
       &:hover {
-        color: var(--lab-ink);
+        color: var(--color-text-primary);
         text-decoration: none;
       }
     }
@@ -506,7 +440,7 @@ const directory = [
 
   .section {
     padding: clamp(4.5rem, 8vw, 7rem) 0;
-    scroll-margin-top: var(--header-height, 72px);
+    scroll-margin-top: var(--header-height);
   }
 
   .section-heading {
@@ -529,7 +463,7 @@ const directory = [
       margin: 0;
       font-size: 1rem;
       line-height: 1.65;
-      color: var(--lab-muted);
+      color: var(--color-text-secondary);
     }
 
     &--solo {
@@ -544,7 +478,7 @@ const directory = [
   }
 
   .archive {
-    background: var(--lab-bg);
+    background: var(--color-bg-primary);
   }
 
   .directory {
@@ -552,15 +486,15 @@ const directory = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--lab-line);
+    border-top: 1px solid var(--color-border);
     list-style: none;
 
     > li {
       margin: 0;
-      border-bottom: 1px solid var(--lab-line);
+      border-bottom: 1px solid var(--color-border);
 
       &:nth-child(odd) {
-        border-right: 1px solid var(--lab-line);
+        border-right: 1px solid var(--color-border);
       }
     }
   }
@@ -583,14 +517,14 @@ const directory = [
       bottom: 0;
       left: 0;
       width: 3px;
-      background: var(--lab-accent);
+      background: var(--color-accent-primary);
       transform: scaleY(0);
       transform-origin: bottom;
       transition: transform 250ms ease;
     }
 
     &:hover {
-      background: #0e120f;
+      background: var(--color-bg-hover);
       color: inherit;
       text-decoration: none;
 
@@ -604,7 +538,7 @@ const directory = [
     }
 
     &:focus-visible {
-      outline: 2px solid var(--lab-accent);
+      outline: 2px solid var(--color-accent-primary);
       outline-offset: -2px;
     }
 
@@ -620,7 +554,7 @@ const directory = [
       margin: 1.25rem 0 0;
       font-size: 0.95rem;
       line-height: 1.65;
-      color: var(--lab-muted);
+      color: var(--color-text-secondary);
     }
 
     &__open {
@@ -632,13 +566,13 @@ const directory = [
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--lab-ink);
+      color: var(--color-text-primary);
 
       svg {
         width: 1rem;
         height: 1rem;
         fill: none;
-        stroke: var(--lab-accent);
+        stroke: var(--color-accent-primary);
         stroke-width: 1.5;
         transition: transform 180ms ease;
       }
@@ -646,7 +580,7 @@ const directory = [
   }
 
   .field-log {
-    background: var(--lab-bg);
+    background: var(--color-bg-primary);
   }
 
   .logs {
@@ -656,10 +590,10 @@ const directory = [
   }
 
   .log {
-    border-top: 2px solid var(--lab-accent);
+    border-top: 2px solid var(--color-accent-primary);
 
     &--bulletins {
-      border-top-color: #aab2aa;
+      border-top-color: var(--color-text-secondary);
 
       .log__entries a {
         grid-template-columns: 7rem 5rem minmax(0, 1fr);
@@ -673,7 +607,7 @@ const directory = [
       justify-content: space-between;
       gap: 2rem;
       padding: 1.25rem 0 2rem;
-      border-bottom: 1px solid var(--lab-line);
+      border-bottom: 1px solid var(--color-border);
 
       h3 {
         margin: 0;
@@ -690,7 +624,7 @@ const directory = [
 
       li {
         margin: 0;
-        border-bottom: 1px solid var(--lab-line);
+        border-bottom: 1px solid var(--color-border);
       }
 
       a {
@@ -706,15 +640,15 @@ const directory = [
         &:hover {
           color: inherit;
           text-decoration: none;
-          background: #111512;
+          background: var(--color-bg-hover);
 
           .log__title {
-            color: var(--lab-accent);
+            color: var(--color-accent-primary);
           }
         }
 
         &:focus-visible {
-          outline: 2px solid var(--lab-accent);
+          outline: 2px solid var(--color-accent-primary);
           outline-offset: -2px;
         }
       }
@@ -724,7 +658,7 @@ const directory = [
         font-size: 0.75rem;
         letter-spacing: 0.04em;
         white-space: nowrap;
-        color: var(--lab-dim);
+        color: var(--color-text-tertiary);
       }
     }
 
@@ -733,7 +667,7 @@ const directory = [
       font-size: 0.75rem;
       letter-spacing: 0.05em;
       white-space: nowrap;
-      color: var(--lab-accent);
+      color: var(--color-accent-primary);
     }
 
     &__title {
@@ -741,20 +675,20 @@ const directory = [
       font-size: 0.95rem;
       font-weight: 500;
       line-height: 1.45;
-      color: #d6d9d4;
+      color: var(--color-text-lede);
       transition: color 180ms ease;
     }
 
     &__external {
       margin-left: 0.35rem;
       font-family: var(--font-mono);
-      color: var(--lab-dim);
+      color: var(--color-text-tertiary);
     }
 
     &__empty {
       margin: 0;
       padding: 2rem 0;
-      color: var(--lab-muted);
+      color: var(--color-text-secondary);
     }
   }
 
@@ -765,15 +699,15 @@ const directory = [
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--lab-muted);
+    color: var(--color-text-secondary);
     text-decoration: none;
 
     span {
-      color: var(--lab-accent);
+      color: var(--color-accent-primary);
     }
 
     &:hover {
-      color: var(--lab-ink);
+      color: var(--color-text-primary);
       text-decoration: none;
     }
   }
@@ -905,7 +839,7 @@ const directory = [
       &__copy {
         padding-top: 1.25rem;
         padding-left: 0;
-        border-top: 1px solid var(--lab-line);
+        border-top: 1px solid var(--color-border);
         border-left: 0;
       }
 
@@ -943,15 +877,9 @@ const directory = [
       }
     }
 
-    .disclose {
-      &__actions {
-        display: grid;
-        justify-items: stretch;
-      }
-
-      &__report {
-        width: 100%;
-      }
+    .disclose__actions {
+      display: grid;
+      justify-items: stretch;
     }
 
     .case-file {

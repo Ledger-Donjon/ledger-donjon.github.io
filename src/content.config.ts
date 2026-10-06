@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const lsb = defineCollection({
@@ -6,7 +7,6 @@ const lsb = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string().optional(),
-    layout: z.string().optional(),
   }),
 });
 
@@ -14,16 +14,6 @@ const threatModel = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/threat-model' }),
   schema: z.object({
     title: z.string(),
-    layout: z.string().optional(),
-  }),
-});
-
-const pages = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
-  schema: z.object({
-    title: z.string(),
-    permalink: z.string().optional(),
-    layout: z.string().optional(),
   }),
 });
 
@@ -43,6 +33,5 @@ const blog = defineCollection({
 export const collections = {
   lsb,
   'threat-model': threatModel,
-  pages,
   blog,
 };

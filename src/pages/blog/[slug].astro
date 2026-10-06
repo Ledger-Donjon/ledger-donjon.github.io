@@ -4,6 +4,7 @@ import DetailPageLayout from '../../components/DetailPageLayout.astro';
 import ArticleThemeToggle from '../../components/ArticleThemeToggle.astro';
 import DocumentOutline from '../../components/DocumentOutline.astro';
 import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/url';
 
 export async function getStaticPaths() {
   const entries = await getCollection('blog');
@@ -12,13 +13,11 @@ export async function getStaticPaths() {
   return entries
     .filter((entry) => includeDrafts || !entry.data.draft)
     .map((entry) => ({
-      params: { slug: entry.id.replace(/\.md$/, '') },
+      params: { slug: entry.id },
       props: { entry },
     }));
 }
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => `${base}${path.replace(/^\/+/, '')}`;
 const resolveSocialImage = (img?: string) =>
   img && (/^https?:\/\//.test(img) ? img : withBase(img));
 
@@ -62,8 +61,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     <Content />
 
     <Fragment slot="footer">
-      <a href={withBase('/blog/')} class="detail-action">
-        <svg viewBox="0 0 20 20" aria-hidden="true">
+      <a href={withBase('/blog/')} class="action action--line">
+        <svg class="action__icon--lead" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M16 10H5M9 6l-4 4 4 4" />
         </svg>
         All blog posts
@@ -71,22 +70,3 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </Fragment>
   </DetailPageLayout>
 </Base>
-
-<script>
-  // Abstract section wrapper
-  const prose = document.querySelector('.detail-page__body.prose');
-  if (prose) {
-    const headings = prose.querySelectorAll('h2');
-    for (const h2 of headings) {
-      if (h2.textContent?.trim() !== 'Abstract') continue;
-      const wrapper = document.createElement('section');
-      wrapper.className = 'abstract';
-      h2.before(wrapper);
-      wrapper.appendChild(h2);
-      while (wrapper.nextElementSibling && !/^H[1-6]$/.test(wrapper.nextElementSibling.tagName)) {
-        wrapper.appendChild(wrapper.nextElementSibling);
-      }
-      break;
-    }
-  }
-</script>
