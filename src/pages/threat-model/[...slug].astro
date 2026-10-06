@@ -2,19 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import DetailPageLayout from '../../components/DetailPageLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/url';
 
 export async function getStaticPaths() {
   const pages = await getCollection('threat-model');
-  return pages
-    .filter(page => !page.id.endsWith('.png'))
-    .map((page) => ({
-      params: { slug: page.id.replace('.md', '') },
-      props: { page },
-    }));
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
 }
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path) => `${base}${path.replace(/^\/+/, '')}`;
 const { page } = Astro.props;
 const { Content } = await render(page);
 ---
@@ -35,8 +32,8 @@ const { Content } = await render(page);
     <Content />
 
     <Fragment slot="footer">
-      <a href={withBase('/threat-model/#security-mechanisms')} class="detail-action">
-        <svg viewBox="0 0 20 20" aria-hidden="true">
+      <a href={withBase('/threat-model/#security-mechanisms')} class="action action--line">
+        <svg class="action__icon--lead" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M16 10H5M9 6l-4 4 4 4" />
         </svg>
         All security mechanisms

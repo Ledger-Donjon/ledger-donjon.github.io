@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   filterVisibleDonjonBlogArticles,
-  readHiddenDonjonBlogUrls,
-} from './donjon-blog-hidden.mjs';
+  toHiddenDonjonBlogUrls,
+} from '../src/lib/donjon-blog-hidden.mjs';
 
 const CATEGORY_URL = 'https://www.ledger.com/blog/category/donjon';
 const PROXY_PREFIX = 'https://r.jina.ai/http://';
@@ -18,6 +18,7 @@ const toProxyUrl = (url) => `${PROXY_PREFIX}${url.replace(/^https?:\/\//, '')}`;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const outputPath = path.resolve(__dirname, '..', 'src', 'data', 'donjon-blog.json');
+const hiddenPath = path.resolve(__dirname, '..', 'src', 'data', 'donjon-blog-hidden.json');
 
 const parseDateValue = (value) => {
   if (!value) return null;
@@ -192,6 +193,14 @@ const readExisting = async () => {
     return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     return [];
+  }
+};
+
+const readHiddenDonjonBlogUrls = async () => {
+  try {
+    return toHiddenDonjonBlogUrls(JSON.parse(await readFile(hiddenPath, 'utf8')));
+  } catch {
+    return new Set();
   }
 };
 
