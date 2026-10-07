@@ -177,4 +177,66 @@ const bulletins = allLsb
     color: var(--color-text-tertiary);
     font-style: italic;
   }
+
+  /* Stack each bulletin so the title gets the full width instead of a squeezed column */
+  @media (max-width: 640px) {
+    .bulletins-table {
+      overflow-x: visible;
+
+      table,
+      tbody {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+          'id date'
+          'title title';
+        align-items: baseline;
+        gap: var(--space-2) var(--space-3);
+        padding: var(--space-4) 0;
+        border-bottom: 1px solid var(--color-border);
+
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      td {
+        padding: 0;
+        border-bottom: 0;
+
+        &:nth-child(1) {
+          grid-area: id;
+        }
+
+        &:nth-child(2) {
+          grid-area: title;
+        }
+
+        &:nth-child(3) {
+          grid-area: date;
+          justify-self: end;
+        }
+      }
+
+      tr:hover td {
+        background: transparent;
+      }
+    }
+
+    .bulletin-id {
+      padding: 0;
+    }
+
+    .bulletin-link {
+      line-height: 1.35;
+    }
+  }
 </style>
