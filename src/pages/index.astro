@@ -752,22 +752,39 @@ const directory = [
   @media (max-width: 900px) {
     .hero {
       &__grid {
-        grid-template-columns: minmax(0, 1fr);
-        align-items: start;
-        gap: clamp(1.5rem, 4vw, 3rem);
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+          'title mark'
+          'lede lede'
+          'actions actions';
+        align-items: center;
+        gap: 0 clamp(1rem, 4vw, 3rem);
         padding-block: 3.25rem;
       }
 
+      /* Flatten the copy so the title and the logo can share a row */
       &__copy {
-        max-width: 760px;
+        display: contents;
+      }
+
+      &__title,
+      &__lede,
+      &__actions {
+        animation: hero-enter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
       }
 
       &__title {
+        grid-area: title;
         font-size: clamp(4rem, 13vw, 7.5rem);
       }
 
       &__lede {
+        grid-area: lede;
         max-width: 38rem;
+      }
+
+      &__actions {
+        grid-area: actions;
       }
 
       &__rail-inner {
@@ -776,11 +793,9 @@ const directory = [
     }
 
     .hero__brand-mark {
-      display: grid;
+      grid-area: mark;
       width: auto;
       justify-self: end;
-      place-items: end;
-      margin-top: -0.75rem;
 
       img {
         width: clamp(8rem, 20vw, 11rem);
@@ -809,7 +824,7 @@ const directory = [
       }
 
       &__title {
-        font-size: clamp(3.45rem, 16vw, 5.6rem);
+        font-size: clamp(2.75rem, 16vw, 5.6rem);
         letter-spacing: -0.075em;
       }
 
@@ -823,10 +838,8 @@ const directory = [
     }
 
     .hero__brand-mark {
-      margin-top: -1rem;
-
       img {
-        width: clamp(7rem, 30vw, 9rem);
+        width: clamp(4.5rem, 22vw, 9rem);
       }
     }
 
@@ -912,6 +925,9 @@ const directory = [
 
   @media (prefers-reduced-motion: reduce) {
     .hero__copy,
+    .hero__title,
+    .hero__lede,
+    .hero__actions,
     .hero__brand-mark {
       animation: none;
     }
