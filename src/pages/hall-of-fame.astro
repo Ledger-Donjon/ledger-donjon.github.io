@@ -148,7 +148,7 @@ const hallOfFame = [
       background: var(--color-border);
       
       @media (max-width: 640px) {
-        left: 30px;
+        left: 5px;
       }
     }
   }
@@ -159,7 +159,7 @@ const hallOfFame = [
     margin-bottom: var(--space-10);
     
     @media (max-width: 640px) {
-      gap: var(--space-6);
+      gap: var(--space-4);
     }
     
     &__marker {
@@ -172,12 +172,9 @@ const hallOfFame = [
       position: relative;
       
       @media (max-width: 640px) {
-        width: 60px;
-        padding-right: var(--space-4);
-
-        &::after {
-          left: 30px;
-        }
+        width: auto;
+        justify-content: flex-start;
+        padding: 0 0 0 var(--space-6);
       }
       
       &::after {
@@ -191,6 +188,10 @@ const hallOfFame = [
         border: 2px solid var(--color-accent-primary);
         border-radius: 0;
         transform: translateX(-50%);
+
+        @media (max-width: 640px) {
+          left: 6px;
+        }
       }
     }
     
@@ -201,6 +202,10 @@ const hallOfFame = [
       color: var(--color-accent-primary);
       font-family: var(--font-mono);
       transform: translateX(25px);
+
+      @media (max-width: 640px) {
+        transform: none;
+      }
     }
     
     &__content {
