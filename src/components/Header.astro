@@ -219,6 +219,7 @@ const ariaCurrent = (href: string) =>
     }
     
     &__toggle {
+      position: relative;
       display: none;
       flex-direction: column;
       justify-content: center;
@@ -230,6 +231,13 @@ const ariaCurrent = (href: string) =>
       border-radius: 0;
       cursor: pointer;
       padding: 4px;
+
+      /* Extend the tap area to 44px without enlarging the visible button */
+      &::after {
+        content: '';
+        position: absolute;
+        inset: -7px;
+      }
       
       span {
         display: block;
