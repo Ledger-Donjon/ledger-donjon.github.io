@@ -202,6 +202,16 @@ const links = {
           opacity: 0.5;
         }
       }
+
+      @media (pointer: coarse) {
+        li {
+          margin-bottom: 0;
+        }
+
+        a {
+          padding-block: 0.75rem;
+        }
+      }
     }
     
     &__social {
@@ -264,6 +274,10 @@ const links = {
         
         &:hover {
           color: var(--color-text-secondary);
+        }
+
+        @media (pointer: coarse) {
+          padding: 0.75rem 0.5rem;
         }
       }
     }
