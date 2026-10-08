@@ -593,6 +593,13 @@ import { withBase } from '../lib/url';
   h3:hover .anchor-link {
     opacity: 1;
   }
+
+  /* Hover-only: unreachable on touch screens, where it can also wrap onto an empty line */
+  @media (hover: none) {
+    .anchor-link {
+      display: none;
+    }
+  }
   
   .disclaimer {
     font-size: var(--text-sm);
