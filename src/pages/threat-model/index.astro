@@ -33,6 +33,24 @@ const securityMechanisms = [
     ]
   }
 ];
+
+// Mirrors the architecture images, redrawn vertically when the figure is too narrow to read them
+const architectures = [
+  {
+    image: withBase('/threat-model/architecture_nanox.png'),
+    alt: 'Ledger Nano X Architecture',
+    caption: 'Nano S Plus / Nano X Architecture',
+    connectivity: ['USB', 'BLE'],
+    peripherals: ['Screen', 'Buttons'],
+  },
+  {
+    image: withBase('/threat-model/architecture_stax.png'),
+    alt: 'Ledger Stax Architecture',
+    caption: 'Stax / Flex Architecture',
+    connectivity: ['NFC', 'USB', 'BLE'],
+    peripherals: ['Display', 'Touch'],
+  },
+];
 ---
 
 <Base 
@@ -129,14 +147,31 @@ const securityMechanisms = [
         <p>Current product models include Nano S Plus, Nano X, Nano Gen5, Stax, and Flex.</p>
         
         <div class="architecture-images">
-          <figure>
-            <img src={withBase('/threat-model/architecture_nanox.png')} alt="Ledger Nano X Architecture" loading="lazy" />
-            <figcaption>Nano S Plus / Nano X Architecture</figcaption>
-          </figure>
-          <figure>
-            <img src={withBase('/threat-model/architecture_stax.png')} alt="Ledger Stax Architecture" loading="lazy" />
-            <figcaption>Stax / Flex Architecture</figcaption>
-          </figure>
+          {architectures.map((architecture) => (
+            <figure>
+              <img src={architecture.image} alt={architecture.alt} loading="lazy" />
+              <div class="arch-diagram" role="img" aria-label={architecture.alt}>
+                <ul class="arch-diagram__ports">
+                  {architecture.connectivity.map((port) => <li>{port}</li>)}
+                </ul>
+                <svg class="arch-diagram__link" viewBox="0 0 12 28" aria-hidden="true">
+                  <path d="M6 3v22M2 7l4-4 4 4M2 21l4 4 4-4" />
+                </svg>
+                <div class="arch-diagram__chip">MCU</div>
+                <svg class="arch-diagram__link" viewBox="0 0 12 28" aria-hidden="true">
+                  <path d="M6 3v22M2 7l4-4 4 4M2 21l4 4 4-4" />
+                </svg>
+                <div class="arch-diagram__chip">SE</div>
+                <svg class="arch-diagram__link" viewBox="0 0 12 28" aria-hidden="true">
+                  <path d="M6 3v22M2 7l4-4 4 4M2 21l4 4 4-4" />
+                </svg>
+                <ul class="arch-diagram__ports">
+                  {architecture.peripherals.map((peripheral) => <li>{peripheral}</li>)}
+                </ul>
+              </div>
+              <figcaption>{architecture.caption}</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
       
@@ -259,24 +294,88 @@ const securityMechanisms = [
     margin-top: var(--space-6);
     
     figure {
+      container-type: inline-size;
       margin: 0;
       padding: var(--space-4);
       background: var(--color-bg-secondary);
       border: 1px solid var(--color-border);
       border-radius: 0;
-      
+
       img {
         width: 100%;
         height: auto;
         border-radius: 0;
       }
-      
+
       figcaption {
         margin-top: var(--space-3);
         font-size: var(--text-sm);
         color: var(--color-text-tertiary);
         text-align: center;
       }
+    }
+  }
+
+  .arch-diagram {
+    display: none;
+
+    &__ports {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin: 0;
+        padding: 0.35rem 0.65rem;
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        border: 1px solid var(--color-border);
+      }
+    }
+
+    &__link {
+      width: 0.75rem;
+      height: 1.75rem;
+      fill: none;
+      stroke: var(--color-text-tertiary);
+      stroke-width: 1.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    &__chip {
+      width: min(100%, 12rem);
+      padding: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: center;
+      color: var(--color-text-primary);
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border-hover);
+    }
+  }
+
+  /* Below this width the image labels shrink under ~8px: draw the architecture vertically instead */
+  @container (max-width: 500px) {
+    .architecture-images figure img {
+      display: none;
+    }
+
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) 0;
     }
   }
   
