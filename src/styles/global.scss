@@ -324,9 +324,24 @@ img {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--color-text-secondary);
+  /* Wrap long URLs, addresses and hashes instead of letting them overflow narrow screens */
+  overflow-wrap: break-word;
 
   > * + * {
     margin-top: var(--space-4);
+  }
+
+  /* Wide tables scroll sideways on narrow screens instead of being cut off */
+  @media (max-width: 720px) {
+    table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    /* Keep columns of tables too wide to fit readable, now that they scroll */
+    table:has(th:nth-child(4)) :is(th, td) {
+      min-width: 8rem;
+    }
   }
 
   h2, h3, h4 {
